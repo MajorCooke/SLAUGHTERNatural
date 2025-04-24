@@ -1,0 +1,1209 @@
+/////3D Skyboxes
+
+brightmap Texture XLIGHTAB	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAG	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAO	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAR	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAT	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAW	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAX	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAY	{	map "Textures/WHITE.png"	}
+brightmap Texture XLIGHTAZ	{	map "Textures/WHITE.png"	}
+
+
+hardwareshader sprite COLNZ1 	{ Shader "shaders/hologram.shader" Speed 1.0 }
+hardwareshader sprite COLNZ2Z8 	{ Shader "shaders/hologram.shader" Speed 1.0 }
+hardwareshader sprite COLNZ3Z7 	{ Shader "shaders/hologram.shader" Speed 1.0 }
+hardwareshader sprite COLNZ4Z6 	{ Shader "shaders/hologram.shader" Speed 1.0 }
+hardwareshader sprite COLNZ5 	{ Shader "shaders/hologram.shader" Speed 1.0 }
+
+Glow
+{
+	Flats
+	{
+		FRGRN1
+		FRGRN2
+		WWUKAGE
+		WWUKAGE2
+		FIREBLU1
+		FIREBLU2
+		NUKAGE1
+		NUKAGE2
+		NUKAGE3
+		LAVA1
+		LAVA2
+		LAVA3
+		LAVA4
+		WHELFIRE
+		WCIBFIRE
+		WCIBFNC
+		
+		DRHLF_01
+		DRHLF_02
+		DRHLF_03
+		DRHLF_04
+		DRHLF_05
+		DRHLF_06
+		DRHLF_07
+		DRHLF_08
+		DRHLF_09
+		
+		FIREBLU01
+		FIREBLU02
+		FIREBLU03
+		FIREBLU04
+		FIREBLU05
+		FIREBLU06
+		FIREBLU07
+		FIREBLU08
+		FIREBLU09
+	}
+}
+
+skybox SKYB
+{
+	SEA_N
+	SEA_E
+	SEA_S
+	SEA_W
+	SEA_T
+	SEA_B
+} 
+
+Skybox NOLL
+{
+	NULL_N
+	NULL_E
+	NULL_S
+	NULL_W
+	NULL_T
+	NULL_B
+}
+
+Skybox DAYSKY
+{
+	MIRA_S
+	MIRA_E
+	MIRA_N
+	MIRA_W
+	MIRA_T
+	MIRA_B
+}
+
+/////Dust
+Skybox DUSTSKY
+{
+	MIRB_N
+	MIRB_W
+	MIRB_S
+	MIRB_E
+	MIRB_T
+	MIRB_B
+}
+
+/////Calm
+Skybox CALM
+{
+	CALM_S
+	CALM_E
+	CALM_N
+	CALM_W
+	CALM_T
+	CALM_B
+}
+
+Skybox MORNING // Morning skybox
+{
+	MORN_BK
+	MORN_RT
+	MORN_FT
+	MORN_LF
+	MORN_UP
+	MORN_DN
+}
+/*
+Skybox DAYSKY2 // Secondary day sky for not-so-high areas.
+{
+
+}
+
+SkyBox DUSKSKY // Nearing the end of day
+{
+}
+*/
+SkyBox OHHELLNO // AW HELL NO! BAD THINGS ABOUND!!! Usually associated with bosses
+{
+	bad_bk
+	bad_rt
+	bad_ft
+	bad_lf
+	bad_up
+	bad_dn
+}
+//------------------------------------------------------------------------------
+// Shaders by Gutawer
+HardwareShader PostProcess scene 
+{
+    Name "RadialBlurShader"
+    Shader "shaders/RadialBlur.frag" 330
+    Uniform int blurSize
+}
+
+HardwareShader PostProcess scene 
+{
+    Name "ZoomShader"
+    Shader "shaders/Zoom.frag" 330
+    Uniform int blurSize
+}
+
+HardwareShader Sprite SMILB0
+{
+	Shader "shaders/Smile.fp"
+	Speed 1
+}
+
+//Sparks
+
+Pointlight WhiteSparkFlare
+{
+Color 1.0 1.0 1.0
+Size 12
+}
+
+Pointlight RedSparkFlare
+{
+Color 0.4 0.0 0.0
+Size 12
+}
+
+Pointlight OrangeSparkFlare
+{
+Color 0.8 0.4 0.0
+Size 12
+}
+
+Pointlight YellowSparkFlare
+{
+Color 1.0 1.0 0.0
+Size 12
+}
+
+Pointlight GreenSparkFlare
+{
+Color 0.0 1.0 0.0
+Size 12
+}
+
+Pointlight BlueSparkFlare
+{
+Color 0.0 0.0 0.8
+Size 12
+}
+
+Pointlight PurpleSparkFlare
+{
+Color 0.5 0.0 0.5
+Size 12
+}
+
+Object SparkFlare_W1 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W2 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W3 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W4 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W5 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W6 { Frame SPKW { Light WhiteSparkFlare } }
+
+Object SparkFlare_R1 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R2 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R3 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R4 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R5 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R6 { Frame SPKR { Light RedSparkFlare } }
+
+Object SparkFlare_O1 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O2 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O3 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O4 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O5 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O6 { Frame SPKO { Light OrangeSparkFlare } }
+
+Object SparkFlare_Y1 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y2 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y3 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y4 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y5 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y6 { Frame SPKY { Light YellowSparkFlare } }
+
+Object SparkFlare_G1 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G2 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G3 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G4 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G5 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G6 { Frame SPKG { Light GreenSparkFlare } }
+
+Object SparkFlare_B1 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B2 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B3 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B4 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B5 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B6 { Frame SPKB { Light BlueSparkFlare } }
+
+Object SparkFlare_P1 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P2 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P3 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P4 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P5 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P6 { Frame SPKP { Light PurpleSparkFlare } }
+
+
+
+//Portal
+
+flickerlight2 TPortNormal
+{
+    color 0.5 0.5 0.7
+    size 40
+    secondarySize 56
+    interval 0.01
+    offset 0 32 0
+}
+
+flickerlight2 TPortZap
+{
+    color 0.45 0.45 0.9
+    size 88
+    secondarySize 128
+    interval 0.01
+    offset 0 32 0
+}
+
+
+
+//Torch
+
+Pointlight SmallRedTorch
+{
+Color 0.8 0.2 0.0
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallBlueTorch
+{
+Color 0.4 0.4 1.0
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallGreenTorch
+{
+Color 0.4 1.0 0.4
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallYellowTorch
+{
+Color 0.7 0.7 0.0
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallBloodTorch
+{
+Color 1.0 0.0 0.0
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallPurpleTorch
+{
+Color 0.8 0.0 0.8
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallWhiteTorch
+{
+Color 1.0 1.0 1.0
+Size 48
+Offset 0 8 0
+}
+
+Pointlight SmallCyanTorch
+{
+Color 0.0 1.0 1.0
+Size 48
+Offset 0 8 0
+}
+
+
+Pointlight LargeRedTorch
+{
+Color 0.8 0.2 0.0
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeBlueTorch
+{
+Color 0.4 0.4 1.0
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeGreenTorch
+{
+Color 0.4 1.0 0.4
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeYellowTorch
+{
+Color 0.7 0.7 0.7
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeBloodTorch
+{
+Color 1.0 0.0 0.0
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargePurpleTorch
+{
+Color 0.8 0.0 0.8
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeWhiteTorch
+{
+Color 1.0 1.0 1.0
+Size 48
+Offset 0 16 0
+}
+
+Pointlight LargeCyanTorch
+{
+Color 0.0 1.0 1.0
+Size 48
+Offset 0 16 0
+}
+
+Object SHRedTorchSmallLight { Frame TNT1 { Light SmallRedTorch } }
+Object SHBlueTorchSmallLight { Frame TNT1 { Light SmallBlueTorch } }
+Object SHGreenTorchSmallLight { Frame TNT1 { Light SmallGreenTorch } }
+Object SHYellowTorchSmallLight { Frame TNT1 { Light SmallYellowTorch } }
+Object SHBloodTorchSmallLight { Frame TNT1 { Light SmallBloodTorch } }
+Object SHPurpleTorchSmallLight { Frame TNT1 { Light SmallPurpleTorch } }
+Object SHWhiteTorchSmallLight { Frame TNT1 { Light SmallWhiteTorch } }
+Object SHCyanTorchSmallLight { Frame TNT1 { Light SmallCyanTorch } }
+
+Object SHRedTorchLargeLight { Frame TNT1 { Light SmallRedTorch } }
+Object SHBlueTorchLargeLight { Frame TNT1 { Light SmallBlueTorch } }
+Object SHGreenTorchLargeLight { Frame TNT1 { Light SmallGreenTorch } }
+Object SHYellowTorchLargeLight { Frame TNT1 { Light SmallYellowTorch } }
+Object SHBloodTorchLargeLight { Frame TNT1 { Light SmallBloodTorch } }
+Object SHPurpleTorchLargeLight { Frame TNT1 { Light SmallPurpleTorch } }
+Object SHWhiteTorchLargeLight { Frame TNT1 { Light SmallWhiteTorch } }
+Object SHCyanTorchLargeLight { Frame TNT1 { Light SmallCyanTorch } }
+
+
+flickerlight2 BARRELFLAME
+{
+    color 1.0 0.9 0.0
+    size 40
+    secondarySize 46
+    interval 0.1
+    offset 0 0 0
+}
+
+object BarrelFlames
+{
+    frame OILF { light BARRELFLAME }
+}
+
+object OilDrum
+{
+    frame OILDB { light ROCKET_X1 }
+    frame OILDC { light ROCKET_X2 }
+    frame OILDD { light ROCKET_X3 }
+}
+
+////Green
+PointLight UAC1
+{
+	color 0.0 1.0 0.0
+    size 26
+}
+
+Object UACHolo1
+{
+FRAME UAC1 { light UAC1 }
+}
+Object UACHolo2
+{
+FRAME UAC1 { light UAC1 }
+}
+////Cyan
+PointLight UAC2
+{
+	color 0.0 0.3 0.5
+    size 26
+}
+
+Object UACHolo3
+{
+FRAME UAC2 { light UAC2 }
+}
+Object UACHolo4
+{
+FRAME UAC2 { light UAC2 }
+}
+////Orange
+PointLight UAC3
+{
+	color 0.5 0.3 0.0
+    size 26
+}
+
+Object UACHolo5
+{
+FRAME UAC3 { light UAC3 }
+}
+Object UACHolo6
+{
+FRAME UAC3 { light UAC3 }
+}
+
+pointlight BRONZELAMP
+{
+    color 0.8 0.8 1.0
+    size 56
+    offset 0 44 0
+}
+
+object BronzeColumn1
+{
+    frame BLMP { light BRONZELAMP }
+}
+
+object BronzeColumn2
+{
+    frame BLMP { light BRONZELAMP }
+}
+
+object BronzeColumn3
+{
+    frame BLMP { light BRONZELAMP }
+}
+
+
+pointlight TLIGHT1
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 72 0
+}
+
+pointlight TLIGHT2
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 44 0
+}
+
+pointlight TLIGHT3
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 50 0
+}
+
+object TLamp1
+{
+    frame LAMTA { light TLIGHT1 }
+}
+
+object TLamp2
+{
+    frame LAMTB { light TLIGHT2 }
+}
+
+object TLamp3
+{
+    frame LAMTC { light TLIGHT3 }
+}
+
+PulseLight BIGLANTERN
+{
+    color 1.0 1.0 0.8
+    size 64
+    secondarySize 66
+    interval 0.4
+    offset 0 10 0
+}
+
+PulseLight SMALLLANTERN
+{
+    color 1.0 1.0 0.8
+    size 56
+    secondarySize 58
+    interval 0.4
+    offset 0 7 0
+}
+
+PointLight BLACKCHANDELIER
+{
+    color 0.9 0.9 0.3
+    size 48
+    offset 0 14 0
+}
+
+//BLUE
+pointlight BLUESTROBE
+{
+    color 0.0 0.0 0.4
+    size 48
+}
+
+object StrobeRayBlue
+{
+    frame BAL1C { light BLUESTROBE }
+}
+object StrobeLightBlue
+{
+    frame STRB { light BLUESTROBE }
+}
+
+
+//GREEN
+pointlight GREENSTROBE
+{
+    color 0.0 0.4 0.0
+    size 48
+}
+
+object StrobeRayGreen
+{
+    frame BAL1C { light GREENSTROBE }
+}
+object StrobeLightGreen
+{
+    frame STRG { light GREENSTROBE }
+}
+
+
+//RED
+pointlight REDSTROBE
+{
+    color 0.4 0.0 0.0
+    size 48
+}
+
+object StrobeRayRed
+{
+    frame BAL1C { light REDSTROBE }
+}
+object StrobeLightRed
+{
+    frame STRR { light REDSTROBE }
+}
+
+
+//YELLOW
+pointlight YELLOWSTROBE
+{
+    color 0.4 0.2 0.0
+    size 48
+}
+
+object StrobeRayYellow
+{
+    frame BAL1C { light YELLOWSTROBE }
+}
+object StrobeLightYellow
+{
+    frame STRY { light YELLOWSTROBE }
+}
+
+
+
+
+// Floor lamps
+
+pointlight NewCol
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 44 0
+}
+
+object NewColumnBase
+{
+    frame COLBA { light NewCol }
+}
+
+
+pointlight BlueCol
+{
+    color 0.0 0.0 1.0
+    size 56
+    offset 0 44 0
+}
+
+object BlueColumn
+{
+    frame COLBA { light BlueCol }
+}
+
+pointlight CyanCol
+{
+    color 0.0 1.0 1.0
+    size 56
+    offset 0 44 0
+}
+
+object CyanColumn
+{
+    frame COLCA { light CyanCol }
+}
+
+pointlight GreenCol
+{
+    color 0.0 1.0 0.0
+    size 56
+    offset 0 44 0
+}
+
+object GreenColumn
+{
+    frame COLGA { light GreenCol }
+}
+
+pointlight OrangeCol
+{
+    color 0.5 0.5 0.0
+    size 56
+    offset 0 44 0
+}
+
+object OrangeColumn
+{
+    frame COLOA { light OrangeCol }
+}
+
+pointlight PurpleCol
+{
+    color 0.5 0.0 0.5
+    size 56
+    offset 0 44 0
+}
+
+object PurpleColumn
+{
+    frame COLPA { light PurpleCol }
+}
+
+pointlight WhiteCol
+{
+    color 1.0 1.0 1.0
+    size 56
+    offset 0 44 0
+}
+
+object WhiteColumn
+{
+    frame COLWA { light WhiteCol }
+}
+
+pointlight RedCol
+{
+    color 1.0 0.0 0.0
+    size 56
+    offset 0 44 0
+}
+
+object RedColum
+{
+    frame COLRA { light RedCol }
+}
+
+
+
+
+
+
+
+
+
+
+pointlight TallCol
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 80 0
+}
+
+object TallColumn
+{
+    frame TCOLA { light TallCol }
+}
+
+
+pointlight TallBlueCol
+{
+    color 0.0 0.0 1.0
+    size 56
+    offset 0 80 0
+}
+
+object TallBlueColumn
+{
+    frame TCLBA { light TallBlueCol }
+}
+
+pointlight TallCyanCol
+{
+    color 0.0 1.0 1.0
+    size 56
+    offset 0 80 0
+}
+
+object TallCyanColumn
+{
+    frame TCLCA { light TallCyanCol }
+}
+
+pointlight TallGreenCol
+{
+    color 0.0 1.0 0.0
+    size 56
+    offset 0 80 0
+}
+
+object TallGreenColum
+{
+    frame TCLGA { light TallGreenCol }
+}
+
+pointlight TallOrangeCol
+{
+    color 0.5 0.5 0.0
+    size 56
+    offset 0 80 0
+}
+
+object TallOrangeColumn
+{
+    frame TCLOA { light TallOrangeCol }
+}
+
+pointlight TallPurpleCol
+{
+    color 0.5 0.0 0.5
+    size 56
+    offset 0 80 0
+}
+
+object TallPurpleColumn
+{
+    frame TCLPA { light TallPurpleCol }
+}
+
+pointlight TallWhiteCol
+{
+    color 1.0 1.0 1.0
+    size 56
+    offset 0 80 0
+}
+
+object TallWhiteColumn
+{
+    frame TCLWA { light TallWhiteCol }
+}
+
+pointlight TallRedCol
+{
+    color 1.0 0.0 0.0
+    size 56
+    offset 0 80 0
+}
+
+object TallRedColum
+{
+    frame TCLRA { light TallRedCol }
+}
+
+
+
+
+
+
+
+
+
+pointlight ShortCol
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 16 0
+}
+
+object ShortColumn
+{
+    frame SCOLA { light ShortCol }
+}
+
+
+pointlight ShortBlueCol
+{
+    color 0.0 0.0 1.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortBlueColumn
+{
+    frame SCLBA { light ShortBlueCol }
+}
+
+pointlight ShortCyanCol
+{
+    color 0.0 1.0 1.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortCyanColumn
+{
+    frame SCLCA { light ShortCyanCol }
+}
+
+pointlight ShortGreenCol
+{
+    color 0.0 1.0 0.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortGreenColum
+{
+    frame SCLGA { light ShortGreenCol }
+}
+
+pointlight ShortOrangeCol
+{
+    color 0.5 0.5 0.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortOrangeColumn
+{
+    frame SCLOA { light ShortOrangeCol }
+}
+
+pointlight ShortPurpleCol
+{
+    color 0.5 0.0 0.5
+    size 56
+    offset 0 16 0
+}
+
+object ShortPurpleColumn
+{
+    frame SCLPA { light ShortPurpleCol }
+}
+
+pointlight ShortWhiteCol
+{
+    color 1.0 1.0 1.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortWhiteColumn
+{
+    frame SCLWA { light ShortWhiteCol }
+}
+
+pointlight ShortRedCol
+{
+    color 1.0 0.0 0.0
+    size 56
+    offset 0 16 0
+}
+
+object ShortRedColum
+{
+    frame SCLRA { light ShortRedCol }
+}
+
+
+
+
+
+
+
+
+
+
+pointlight RaCorpse1
+{
+    color 0.0 1.0 0.0
+    size 30
+    offset 0 20 0
+}
+
+pointlight RaCorpse2
+{
+    color 0.0 1.0 0.0
+    size 30
+    offset 0 20 0
+}
+
+
+pointlight RaCorpse3
+{
+    color 0.0 1.0 0.0
+    size 30
+    offset 0 20 0
+}
+
+pointlight RaCorpse4
+{
+    color 0.0 1.0 0.0
+    size 30
+    offset 0 20 0
+}
+object RadioactiveCorpse1
+{
+    frame ZOCRA0 { light RaCorpse1 }
+}
+
+object RadioactiveCorpse2
+{
+    frame ZOCRB0 { light RaCorpse2 }
+}
+
+object RadioactiveCorpse3
+{
+    frame ZOCRC0 { light RaCorpse3 }
+}
+
+object RadioactiveCorpse4
+{
+    frame ZOCRD0 { light RaCorpse4 }
+}
+
+
+
+
+/*
+PulseLight RaiseBeamLight
+{
+    color 0.0 1.0 1.0
+    size 20
+    secondarySize 64
+    interval 4.0
+    offset 0 0 0
+}
+
+object RaiseBeam
+{
+    frame NRDLA0 { light RaiseBeamLight }
+}
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////MONSTERS//////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//Smile
+
+Pointlight SmileGlow
+{
+Color 1.0 1.0 1.0
+Size 255
+Subtractive 1
+Offset 0 128 0
+DontLightSelf 1
+}
+
+Pointlight SmileDarkLargeGlow
+{
+Color 1.0 1.0 1.0
+Size 255
+Subtractive 1
+Offset 0 128 0
+DontLightSelf 1
+}
+
+Pulselight SmileDarkGlow
+{
+Color 1.0 1.0 1.0
+Size 30
+SecondarySize 0
+Interval 2.15
+Subtractive 1
+Offset 0 0 0
+DontLightSelf 1
+}
+
+Object SLNSmile { Frame SMIL { Light SmileGlow } }
+Object SLNSmile { Frame TNT1 { Light SmileGlow } }
+//Object SmileDark { Frame TNT1 { Light SmileDarkGlow } }
+/*
+BrightMap Texture DRCOMPSM
+{
+	Map DRCOMPSB
+	DisableFullBright
+}
+*/
+BrightMap Sprite EINTA1
+{
+Map EINTA1
+DisableFullBright
+}
+
+BrightMap Sprite EINTA2A8
+{
+Map EINTA2A8
+DisableFullBright
+}
+
+BrightMap Sprite EINTA3A7
+{
+Map EINTA3A7
+DisableFullBright
+}
+
+BrightMap Sprite EINTB1
+{
+Map EINTB1
+DisableFullBright
+}
+
+BrightMap Sprite EINTB2B8
+{
+Map EINTB2B8
+DisableFullBright
+}
+
+BrightMap Sprite EINTB3B7
+{
+Map EINTB3B7
+DisableFullBright
+}
+
+BrightMap Sprite EINTC1
+{
+Map EINTC1
+DisableFullBright
+}
+
+BrightMap Sprite EINTC2C8
+{
+Map EINTC2C8
+DisableFullBright
+}
+
+BrightMap Sprite EINTC3C7
+{
+Map EINTC3C7
+DisableFullBright
+}
+
+BrightMap Sprite EINTC4C6
+{
+Map EINTC4C6
+DisableFullBright
+}
+
+BrightMap Sprite EINTD1
+{
+Map EINTD1
+DisableFullBright
+}
+
+BrightMap Sprite EINTD2D8
+{
+Map EINTD2D8
+DisableFullBright
+}
+
+BrightMap Sprite EINTD3D7
+{
+Map EINTD3D7
+DisableFullBright
+}
+
+BrightMap Sprite EINTE1
+{
+Map EINTE1
+DisableFullBright
+}
+
+BrightMap Sprite EINTE2E8
+{
+Map EINTE2E8
+DisableFullBright
+}
+
+BrightMap Sprite EINTE3E7
+{
+Map EINTE3E7
+DisableFullBright
+}
+
+BrightMap Sprite EINTF1
+{
+Map EINTF1
+DisableFullBright
+}
+
+BrightMap Sprite EINTF2F8
+{
+Map EINTF2F8
+DisableFullBright
+}
+
+BrightMap Sprite EINTF3F7
+{
+Map EINTF3F7
+DisableFullBright
+}
+
+BrightMap Sprite EINTG1
+{
+Map EINTG1
+DisableFullBright
+}
+
+BrightMap Sprite EINTG2G8
+{
+Map EINTG2G8
+DisableFullBright
+}
+
+BrightMap Sprite EINTG3G7
+{
+Map EINTG3G7
+DisableFullBright
+}
+
+
+
+BrightMap Sprite DERKA0
+{
+Map DERKA0
+DisableFullBright
+}

@@ -1,0 +1,18 @@
+/*------------------------------------------------------------------------------
+Vanish
+
+A floating cacodemon mouth that tries to devour victims getting to close to it.
+The rest of the body is completely invisible and hides any invisible portions
+occluded. Moving around makes it grow bored and start to wander away. Hold still
+and it'll start coming after you.
+------------------------------------------------------------------------------*/
+
+Class SLNVanish : SLNMonster
+{
+	Default
+	{
+		Tag "Vanish";
+		Species "Terrorfiend";
+		Obituary "%o Vanished into the maw of the void.";
+	}
+}

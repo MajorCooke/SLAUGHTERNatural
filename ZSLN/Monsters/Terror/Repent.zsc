@@ -1,0 +1,20 @@
+/*------------------------------------------------------------------------------
+Repent
+
+A robed figure that summons other Hellfire Terrorfiends. These summons can only
+deliver one blow before fading into obscurity. Because of this, it may be easier
+to focus fire on the Repent, as it's the only means of attack it has. It moves
+very sporadically and summons more often the closer its target is, but at the
+same time continuously attempts to keep its distance. Killing it will remove its
+spawns.
+------------------------------------------------------------------------------*/
+
+Class SLNRepent : SLNMonster
+{
+	Default
+	{
+		Tag "Repent";
+		Species "Terrorfiend";
+		Obituary "%o Repented for their sins.";
+	}
+}

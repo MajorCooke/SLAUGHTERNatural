@@ -1,0 +1,113 @@
+/*==============================================================================
+
+
+==============================================================================*/
+class Hide_HUD : Inventory
+{
+	Default
+	{
+		+INVENTORY.KEEPDEPLETED
+		+INVENTORY.QUIET
+		Inventory.InterhubAmount 0;
+	}
+}
+
+extend class SLNEvent
+{
+	private ui bool BarSwapped;
+	private ui BaseStatusBar orig;
+	private ui SLNStatusBar rep;
+	
+	private ui void SwapSBars(bool revert = false)
+	{
+		if (!rep)	
+		{
+			rep = new('SLNStatusBar');
+			rep.Event = self;
+			rep.AttachToPlayer(players[consoleplayer]);
+			rep.Init();
+		}
+	}
+	
+	// Reminder to self: UITick and RenderOverlay are currently disabled,
+	// uncomment them in EventHandler.txt to get them to work.
+	
+	private ui void DoUITick()
+	{
+		if (rep) rep.Tick();
+	}
+	
+	private ui void DoDraw(double fractic)
+	{
+		if (rep) rep.Draw(0, fractic);
+	}
+	
+	
+	
+	
+	/*
+	override void PostUITick()
+	{
+		DoPostUITick();
+	}
+	
+	private void DoPostUITick()
+	{
+		
+	}
+	*/
+	override void InterfaceProcess(ConsoleEvent e)
+	{
+		if (e.Name == 'SLNSwapBars')
+		{
+			if (e.Args[0] < 1 || !(StatusBar is 'SLNStatusBar'))
+				SwapSBars();
+		}
+	}
+}
+
+Class SLNStatusBar : BaseStatusBar
+{
+	internal readonly bool Setup;
+	internal readonly BaseStatusBar SBar;
+	internal readonly SLNEvent Event;
+	transient HUDFont mSmallFont;
+	transient HUDFont mBigFont;
+	transient CVar fogcheck;
+	transient double sw, sh; // screen width/height * 0.5;
+	
+	override void Init()
+	{	
+		Font fnt = Font.FindFont("SMALLFONT");
+		mSmallFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), 1);
+		fnt = Font.FindFont("BIGFONT");
+		mBigFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), 1);
+		fogcheck = Cvar.GetCvar('gl_fogmode', CPlayer);
+		ScreenSizeChanged();
+		Super.Init();
+	}
+	
+	override void ScreenSizeChanged()
+	{
+		sw = Screen.GetWidth() * 0.5;
+		sh = Screen.GetHeight() * 0.5;
+	}
+	/*
+	override void Draw(int state, double TicFrac)
+	{	
+		if (fogcheck && fogcheck.GetInt() < 1)
+		{
+			Screen.Dim(Color(0,0,0), 1.0, 0, 0, Screen.GetWidth(), Screen.GetHeight());
+			DrawString(mBigFont, "Enable fog to continue.\nAny will do.\nOptions -> Display Options -> Hardware Settings", 
+				(0,0), DI_TEXT_ALIGN_CENTER|DI_ITEM_CENTER, scale: (0.5, 0.5));
+		}
+	}
+	
+	override void Tick()
+	{
+		if (!fogcheck)
+			fogcheck = Cvar.GetCvar('gl_fogmode', CPlayer);
+		Super.Tick();
+	}
+	*/
+}

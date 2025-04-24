@@ -1,0 +1,704 @@
+//==============================================================================
+// Lightning Technical Works
+// 
+// WARNING: THIS MAY BE CONFUSING. DO NOT TOUCH ANYTHING IF YOU DON'T KNOW
+// WHAT YOU'RE DOING.
+//==============================================================================
+
+Class LightningRegion : Actor
+{
+	//$Category Lightning
+	Default
+	{
+		+NOINTERACTION
+		+NOTONAUTOMAP
+		RenderStyle "None";
+		Radius 64;
+		Height 8;
+	}
+	
+	override void BeginPlay()
+	{
+		ChangeStatNum(STAT_SNWEATHER);
+		Super.BeginPlay();
+	}
+	override void Deactivate(Actor activator)
+	{
+		bDORMANT = false;
+		
+		let it = ThinkerIterator.Create("SkyLightningGenerator", STAT_SNWEATHER);
+		SkyLightningGenerator mo;
+		while (mo = SkyLightningGenerator(it.Next(true)))
+		{
+			if (mo)
+				mo.UpdateRegions();
+		}
+	}
+	override void Activate(Actor activator)
+	{
+		bDORMANT = true;
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A -1 NoDelay
+		{
+			Vector3 p = pos;
+			p.z = ceilingz - (height + 1);
+			SetOrigin(p, false);
+		}
+		Stop;
+	}
+}
+//$GZDB_Skip
+extend class SkyLightningGenerator
+{
+	bool Immediate;
+	protected Vector3 StartPos;
+	protected Array<Actor> reg;
+	protected Array<Actor> regactive; // Non-DORMANT
+	bool InSky, MoveToCenter, NoRegions, UseLineDist;
+	uint TicMin, TicMax;
+	uint DistMin, DistMax;
+	Class<SNLightning> LightningClass;
+	Property Immediate: Immediate;
+	Property UseLineDist: UseLineDist;
+	Property TicMin: TicMin;
+	Property TicMax: TicMax;
+	Property DistMin: DistMin;
+	Property DistMax: DistMax;
+	Property MoveToCenter: MoveToCenter;
+	Property InSky: InSky;
+	Property NoRegions: NoRegions;
+	Property LightningClass: LightningClass;
+	Default
+	{
+		+NOINTERACTION
+		+NOTONAUTOMAP
+		RenderStyle "None";
+		Radius 1;
+		Height 1;
+	}
+	
+	override void BeginPlay()
+	{
+		ChangeStatNum(STAT_SNWEATHER);
+		Super.BeginPlay();
+	}
+	
+	override void PostBeginPlay()
+	{
+		double ceilpos = ceilingz - 5.0;
+		
+		if (InSky)
+		{
+			Vector3 p = pos;
+			p.z = ceilingz - 5.0;
+			SetOrigin(p, false);
+		}
+		
+		if (MoveToCenter)
+		{
+			Actor puff[2];
+			
+			for (int i = 0; i < 2; i++)
+			{
+				puff[0] = LineAttack( i		 * 90, 32766, 0, 0, 'None', "SNLightningPuff", LAF_NOINTERACT);
+				puff[1] = LineAttack((i + 2) * 90, 32766, 0, 0, 'None', "SNLightningPuff", LAF_NOINTERACT);
+				if (puff[0] && puff[1])
+				{
+					Vector3 dist = (puff[0].pos + puff[1].pos) * 0.5;
+					if (InSky)	dist.z = ceilpos;
+					SetOrigin(dist, false);
+					
+					double check = Distance2DSquared(puff[0]);
+					if (check < DistMin)	DistMin = 0;
+					if (check < DistMax)	DistMax = check - (5 ** 2);
+				}
+				puff[0].Destroy();
+				puff[1].Destroy();
+			}
+		}
+		StartPos = pos;
+		if (!NoRegions)	UpdateRegions();
+		Super.PostBeginPlay();
+	}
+	
+	// 
+	void UpdateRegions()
+	{
+		reg.Clear();
+		regactive.Clear();
+		let it = ThinkerIterator.Create("LightningRegion", STAT_SNWEATHER);
+		Actor mo;
+		while (mo = Actor(it.Next(true)))
+		{
+			if (!tid || !mo.tid || tid == mo.tid)
+			{
+				reg.Push(mo);
+				
+				if (!mo.bDORMANT)
+					regactive.Push(mo);
+			}
+		}
+	}
+	
+	double CheckDistanceToSurface(Actor region = null)
+	{
+		if (UseLineDist)
+		{
+			if (!region)	region = self;
+			Actor puff = region.LineAttack(random(0,359), DistMax, 0, 0, 'None', "SNLightningPuff", LAF_NOINTERACT);
+			if (puff)
+			{
+				double dist = region.Distance2D(puff);
+				puff.Destroy();
+				//return Clamp(random(0, dist - 20), DistMin, DistMax);
+				return dist;
+			}
+		}
+		return frandom(DistMin, DistMax);
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay
+		{
+			StateLabel next = null;
+			if (Immediate)
+			{
+				UpdateRegions();
+				next = "Burst";
+			}
+			return ResolveState("Burst");
+		}
+	Active:
+		TNT1 A 0 UpdateRegions();
+	Timer:
+		TNT1 A 1 A_SetTics(random(TicMin,TicMax));
+	Burst:
+		TNT1 A 0
+		{
+			StateLabel next = null;
+			// If only in the skybox, just spawn it normally.
+			// Gather those that aren't dormant from the list of them all.
+			
+			double dist = 0.0; 
+			
+			if (!NoRegions && regactive.Size() > 0)
+			{
+				// Now check to see who's available.
+				int rng = regactive.Size();
+				Actor region = null;
+				if (rng > 0)
+				{
+					rng--;
+					region = regactive[random(0,rng)];
+				}
+				
+				dist = CheckDistanceToSurface(region);
+				if (region)	region.A_SpawnItemEx(LightningClass,dist,0,random(-5,5),0,0,0,random(0,359),SXF_NOCHECKPOSITION);
+				else			   A_SpawnItemEx(LightningClass,dist,0,random(-5,5),0,0,0,random(0,359),SXF_NOCHECKPOSITION);
+			}
+			else
+			{
+				dist = CheckDistanceToSurface();
+				A_SpawnItemEx(LightningClass,dist,0,random(-5,5),0,0,0,random(0,359),SXF_NOCHECKPOSITION);
+			}
+			
+			if (Immediate)
+				next = "WaitingToDie";
+				
+			return ResolveState(next);
+		}
+		Goto Timer;
+	WaitingToDie:
+		TNT1 A 35;
+		Stop;
+	Inactive:
+		TNT1 A -1;
+		Loop;
+	}
+}
+
+//==============================================================================
+// 
+//==============================================================================
+
+extend class SNLightning
+{
+	const Red = 	"LNBR";
+	const Green = 	"LNBG";
+	const Blue = 	"LNBB";
+	const White = 	"LNBW";
+	
+	Vector3 StartPos, Pos1, Pos2;
+	Actor 	Puff[2];
+	private Actor plr;
+	Class<Actor> EndPuff, StartPuff;
+	Class<Actor> Beam;
+	bool 	RandomAim, IsBranch, DestroyMe, Silent, NoFlash, SightCheck;
+	Name 	SpriteName;
+	
+	//uint: disallow negatives.
+	uint 	FrameMin, FrameMax,
+			ChokeMin, ChokeMax, Choke,
+			StepMin, StepMax, Steps,	
+			DelayMin, DelayMax, Delay, Failsafe,
+			BranchChance, BranchCMax, BranchCount,
+			ScaleTimeMin, ScaleTimeMax, ScaleTime;
+			
+	double 	PitchRandom, AngleRandom, 
+			PitchStart1Min, PitchStart1Max, PitchStart2Min, PitchStart2Max,
+		    AngleStart1Min, AngleStart1Max, AngleStart2Min, AngleStart2Max,
+			LengthMin, LengthMax,
+			CurDistance, MaxDistance, HomingDistance,
+			WidthMin, WidthMax, Width;
+			
+	protected double BranchSize;
+	
+	Property StartPuff:			StartPuff;		
+	Property EndPuff:			EndPuff;		
+	Property Beam:				Beam;			
+	Property RandomAim:			RandomAim;		
+	Property AngleRandom: 		AngleRandom;	
+	Property AngleStart1Min:	AngleStart1Min;
+	Property AngleStart1Max:	AngleStart1Max;	
+	Property AngleStart2Min:	AngleStart2Min;	
+	Property AngleStart2Max:	AngleStart2Max;	
+	Property PitchRandom: 		PitchRandom;	
+	Property PitchStart1Min: 	PitchStart1Min;	
+	Property PitchStart1Max: 	PitchStart1Max;	
+	Property PitchStart2Min: 	PitchStart2Min;	
+	Property PitchStart2Max: 	PitchStart2Max;	
+	Property ChokeMin:			ChokeMin;		
+	Property ChokeMax:			ChokeMax;		
+	Property StepMin:			StepMin;		
+	Property StepMax:			StepMax;		
+	Property DelayMin:			DelayMin;		
+	Property DelayMax:			DelayMax;		
+	Property SpriteName:		SpriteName;		
+	Property FrameMin:			FrameMin;		
+	Property FrameMax:			FrameMax;		
+	Property LengthMin:			LengthMin;		
+	Property LengthMax:			LengthMax;		
+	Property WidthMin:			WidthMin;		
+	Property WidthMax:			WidthMax;		
+	Property MaxDistance:		MaxDistance;	
+	Property HomingDistance:	HomingDistance;	
+	Property Failsafe:			Failsafe;		
+	Property BranchChance:		BranchChance;
+	Property BranchCMax:		BranchCMax;
+	Property BranchCount:		BranchCount;
+	Property BranchSize:		BranchSize;			
+	Property ScaleTimeMin:		ScaleTimeMin;
+	Property ScaleTimeMax:		ScaleTimeMax;
+	Property Silent:			Silent;
+	Property NoFlash:			NoFlash;
+	Property SightCheck:		SightCheck;
+	
+	Default
+	{
+		+NOTONAUTOMAP
+		Renderstyle "None";
+		Radius 1;
+		Height 1;
+		
+		// DO NOT USE THIS VALUE ON CHILDREN.
+		// DO NOT TOUCH THIS VALUE.
+		// DO NOT MODIFY THIS VALUE.
+		SNLightning.BranchSize 1.0;	// DO NOT CHANGE THIS VALUE.
+		
+		// YOU 
+		// HAVE 
+		// BEEN 
+		////////////
+		// WARNED //
+		////////////
+	}
+	override void PostBeginPlay()
+	{
+		StartPos = pos;
+		
+		if (SightCheck)
+			plr = players[0].mo;
+		
+		if (IsBranch)
+		{
+			StartPuff = null;
+			BranchChance = floor(Default.BranchChance * BranchSize);
+		}
+		else // Ensure the sprite/model is valid.
+		{
+			if (!ScaleTime) ScaleTime = random(ScaleTimeMin, ScaleTimeMax);
+			int t = GetSpriteIndex(SpriteName);
+			if (t > -1)
+			{
+				Sprite = t;
+				Frame = random(FrameMin, FrameMax);
+				if ((!Silent || !NoFlash))
+				{
+					let flash = PlayerLightFlasher(Spawn("PlayerLightFlasher",pos));
+					if (flash)
+					{
+						flash.Silent = Silent;
+						flash.NoFlash = NoFlash;
+					}
+				}
+			}
+			else
+			{
+				Sprite = GetSpriteIndex('TNT1');
+				Frame = 0;
+			}
+		}
+		Super.PostBeginPlay();
+	}
+	
+	override void OnDestroy()
+	{
+		if (Puff[0]) Puff[0].Destroy();
+		if (Puff[1]) Puff[1].Destroy();
+	}
+	
+	void CreateLightningTarget(bool UseRandom = true, bool dual = false)
+	{
+		Choke = random(ChokeMin, ChokeMax);
+		
+		double  a1 = 0.0, p1 = 0.0;
+		if (Puff[0])	Puff[0].Destroy();
+		a1 = angle + frandom(AngleStart1Min, AngleStart1Max) + (UseRandom ? frandom(-AngleRandom, AngleRandom) : 0.0);
+		p1 = pitch + frandom(PitchStart1Min, PitchStart1Max) + (UseRandom ? frandom(-PitchRandom, PitchRandom) : 0.0);
+		Puff[0] = LineAttack(a1, 32766, p1, 0, 'None', EndPuff, LAF_NOINTERACT);
+		
+		if (!dual) return;
+		
+		if (Puff[1])	Puff[1].Destroy();
+		a1 = angle + frandom(AngleStart2Min, AngleStart2Max) + (UseRandom ? frandom(-AngleRandom, AngleRandom) : 0.0);
+		p1 = pitch + frandom(PitchStart2Min, PitchStart2Max) + (UseRandom ? frandom(-PitchRandom, PitchRandom) : 0.0);
+		Puff[1] = LineAttack(a1, 32766, p1, 0, 'None', StartPuff, LAF_NOINTERACT);
+	}
+	
+	bool TickLife()
+	{
+		if (!Steps || IsBranch) return false;
+				
+		Failsafe = Default.Failsafe;	// Resets the failsafe back to the defined property value.
+		BranchCount = Default.BranchCount;
+		Steps--;
+		SetOrigin((Puff[1] ? Puff[1].pos : StartPos), false);
+		A_SetTics(Delay);
+		return true;
+	}
+	
+	States
+	{
+	Spawn:
+		---- A 0;
+		---- A 0
+		{
+			if (!EndPuff)
+			{	ThrowAbortException("EndPuff is invalid! Make sure the class is defined!"); return; }
+				
+			if (!Beam)
+			{	ThrowAbortException("Beam is invalid! Make sure the class is defined!"); return; }
+			
+			if (IsBranch)
+			{
+				StartPuff = null;
+				MaxDistance *= BranchSize * 0.5;
+				BranchCount = floor(4 * BranchSize);
+				AngleRandom *= BranchSize;
+				PitchRandom *= BranchSize;
+			}
+			else
+			{	// Setting up. Handle branching.
+				Delay = random(DelayMin,DelayMax);
+				Steps = random(StepMin, StepMax);
+			}
+			CreateLightningTarget(false, (StartPuff != null));
+			if (Puff[1])	SetOrigin(Puff[1].pos, false);
+			Choke = 0;
+		}
+		
+	Stepping:
+		---- A 1
+		{
+			if (DestroyMe)	{ Destroy(); return; }
+			else if (Puff[0] || IsBranch)
+			{
+				if (SightCheck && plr && abs(deltaangle(plr.angle, plr.AngleTo(self))) > 45)
+				{
+					if (IsBranch || !TickLife())	
+						Destroy();
+					return;
+				}
+				
+				Frame = random(FrameMin, FrameMax);
+				CurDistance = 0.0;
+				tracer = Puff[0];
+				double dist = Puff[0] ? Distance3D(Puff[0]) : MaxDistance;
+				double RealLengthMin = LengthMin * 100;
+				double RealLengthMax = LengthMax * 100;
+				
+				Scale.X = frandom(WidthMin, WidthMax);
+				double SX = Scale.X * 100;
+				
+				// Waste no time or energy spawning and destroying needlessly.
+				// Simply skip to spawning the last beams.
+				if (Delay < 1)	Steps = 0;
+				
+				// Loop through
+				while 	(Failsafe && (IsBranch || (Puff[0] && (dist >= RealLengthMax))) && 
+						(CurDistance < MaxDistance))
+				{
+					Failsafe--;
+					Scale.Y = frandom(LengthMin, LengthMax);
+					
+					// Do not randomize if:
+					// 1. The puff is not in FOV
+					// 2. The puff is close enough.
+					// Hence, distclose is used to fail A_JumpIfTargetInLOS.
+					
+					int flags = CLOFF_SKIPOBSTACLES|
+								CLOFF_SKIPTARGET|
+								CLOFF_ALLOWNULL|
+								CLOFF_FROMBASE|
+								CLOFF_JUMP_ON_MISS|
+								CLOFF_NOAIM;
+								
+					bool hitsurface = A_CheckLOF("Null", flags, SX, ptr_target: AAPTR_NULL);
+					
+					if (!IsBranch && (!Choke || hitsurface || 
+						!A_JumpIfTargetInLOS("Null",90,JLOSF_CHECKTRACER,0,HomingDistance)))
+					{
+						Vector2 off = (0, 0);
+						if (HomingDistance >= 1.0)
+						{
+							double deg = (Min(dist, HomingDistance) / HomingDistance) * 90.0;
+							off.x = sin(deg) * frandom(-AngleRandom, AngleRandom);
+							off.y = sin(deg) * frandom(-PitchRandom, PitchRandom);
+						}
+						A_Face(Puff[0], 0, 0, off.x, off.y, FAF_MIDDLE);
+						Choke = random(ChokeMin, ChokeMax);
+					}
+					else
+					{
+						Angle += frandom(-AngleRandom, AngleRandom);
+						Pitch += frandom(-PitchRandom, PitchRandom);
+						Choke--;
+					}
+					
+					// Spawn the main beam.
+					SNLightningBeam bolt = SNLightningBeam(Spawn(Beam,pos));
+					if (bolt)
+					{
+						bolt.Angle = Angle;
+						bolt.Pitch = Pitch;
+						bolt.Scale = Scale;
+						bolt.StepTime = Delay + 1;
+						bolt.IsStep = (Steps);
+						bolt.ScaleTime = ScaleTime;
+						bolt.Sprite = Sprite;
+						bolt.Frame = Frame;
+					}
+					
+					// Hit a wall, floor or ceiling.
+					if (hitsurface && A_CheckLOF("Null", flags, SX, ptr_target: AAPTR_NULL))
+						break;
+					hitsurface = false;
+	
+					// Spawn branches.
+					if (BranchCount && BranchChance && BranchSize > 0.0 && CurDistance > 0.0)
+					{
+						int count = 0;
+						int cc = Min(randompick(1,1,1,1,2),BranchCount);
+						for (int i = 0; i < cc; i++)
+						{
+							if (BranchCMax - random(1,BranchCMax) <= BranchChance)
+							{
+								count++;
+								SNLightning branch = SNLightning(Spawn(GetClass(), pos));
+								if (branch)
+								{
+									branch.IsBranch = true;
+									branch.BranchSize = BranchSize - 0.25;
+									branch.Steps = Steps;
+									branch.ScaleTime = ScaleTime;
+									branch.Puff[0] = Puff[0];
+									branch.Sprite = Sprite;
+									branch.Frame = Frame;
+								}
+							}
+						}
+						BranchCount -= count;
+					}
+					double RealScaleY = Scale.Y * 100;
+					CurDistance += RealScaleY;
+					
+					if (pos.z <= floorz || pos.z > ceilingz) break;
+					
+					A_Warp(AAPTR_DEFAULT, cos(pitch) * RealScaleY, 0, -sin(pitch) * RealScaleY, 0, WARPF_NOCHECKPOSITION);
+					
+					if (!IsBranch)	dist = Distance3D(Puff[0]);
+				}
+				// Either expiration or a branch. A branch should never attempt to spawn more.
+				if (IsBranch || !TickLife())	{ Destroy(); return; }
+				
+				// If enabled, randomize 
+				if (RandomAim)
+				{
+					CreateLightningTarget(true,(StartPuff != null));
+				}
+			}
+			else { Destroy(); return; }
+		}
+		Wait;
+	}
+}
+
+// The puff used for the lightning to hit.
+Class SNLightningPuff : Actor
+{
+	Default
+	{
+		+ALLOWTHRUFLAGS
+		+THRUACTORS
+		+SKYEXPLODE
+		+ALWAYSPUFF
+		+PUFFONACTORS
+		+NOINTERACTION
+		Radius 4;
+		Height 16;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 700;
+		Stop;
+	}
+}
+
+Class SNLightningPuff2 : SNLightningPuff
+{
+	Default
+	{
+		-SKYEXPLODE
+		-ALWAYSPUFF
+		+BLOODLESSIMPACT
+		+NODECAL
+	}
+}
+
+
+
+
+
+// Disabled to prevent warnings.
+Class HTCLightningTrailDistortion : SNNothing {}
+Class HTCLightningTrailDistortionMini : SNNothing {}
+Class HTCLightningTrailDistortionP : SNNothing {}
+Class HTCLightningTrailDistortionMiniP : SNNothing {}
+Class HTCLightning : SkyLightningBurst {}
+Class HTCLightningP : SNNothing {}
+Class HTCLightningMissileArk : SNNothing {}
+Class HTCLightningPP : SNNothing {}
+Class HTCLightningMissileArkPP : SNNothing {}
+Class HTCLightningPPP : SNNothing {}
+Class HTCLightningMissileArkPPP : SNNothing {}
+Class HTCLightningTrailDistortionMiniPEnd : SNNothing {}
+Class HTCLightningSupport : SNNothing {}
+Class HTCLightningTrailDistortionPBig : SNNothing {}
+Class HTCLightningMissileArkSupport : SNNothing {}
+
+Class LightningFlasher : SNNothing {}
+/*
+{
+	Default
+	{
+		RenderStyle "None";
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_Jump(256,1,2,3,4);
+		TNT1 AAAA 1 Light("WhiteBigFlicker1");
+		Stop;
+	}
+}
+*/
+Class PlayerLightFlasher : VisualSpecialEffect
+{
+	Actor plr;
+	int lamt;
+	bool Silent, NoFlash;
+	
+	override void PostBeginPlay()
+	{
+		// Don't even bother since the noise and flash is what it's designed to do.
+		if (Silent && NoFlash)	
+			{ Destroy(); return; }
+		Super.PostBeginPlay();
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 4 NoDelay
+		{
+			plr = players[0].mo;
+			if (plr)
+			{
+				if (!Silent && random(1,256) <= 192)
+				{
+					Sound snd;
+					if (plr.CountInv("IsIndoors"))
+					{
+						static const Sound s[] =
+						{
+							"Thunder/Indoors",
+							"Thunder/Quiet",
+							"Thunder/Quiet"
+						};
+						int t = random(0,s.Size() - 1);
+						snd = s[t];
+					}
+					else
+					{
+						snd = "Thunder/Outdoors";
+					}
+					A_StartSound(snd,5,CHANF_OVERLAP,1,ATTN_NONE);
+				}
+				if (!NoFlash)
+				{
+					lamt = random(5,9);
+					plr.A_Light(lamt);
+				}
+			}
+			else { Destroy(); return; }
+		}
+		TNT1 A 1 
+		{
+			if (plr && lamt > 0)
+			{
+				lamt--;
+				plr.A_Light(lamt);
+			}
+			else { Destroy(); return; }
+		}
+		Wait;
+	}
+}
+
+Class IsIndoors : Inventory
+{
+	Default
+	{
+		Inventory.InterhubAmount 1;
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.UNTOSSABLE
+	}
+}

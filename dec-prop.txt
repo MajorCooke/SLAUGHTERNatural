@@ -1,0 +1,4633 @@
+
+Actor JunkPile1 : SolidProp
+{
+//$Category Urban
+Radius 25
+Height 20
+States
+{
+Spawn:
+	JPIL A -1
+	Stop
+}
+}
+
+Actor JunkPile2 : SolidProp
+{
+//$Category Urban
+Radius 28
+Height 28
+States
+{
+Spawn:
+	JPIL B -1
+	Stop
+}
+}
+
+ACTOR flaskblueA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS A -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskblueB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS G -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskpurpleA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS B -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskpurpleB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS H -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskredA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS C -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskredB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS I -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskgreenA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS D -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskgreenB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS J -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskyellowA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS E -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskyellowB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS K -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskgreyA
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 7
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS F -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskgreyB
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 6
+  Height 17
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    FLKS L -1
+    loop
+   Death:
+    TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR glassblue
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK A -1
+    loop
+   Death:
+    TNT1 AAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+    Stop
+  }
+}
+
+ACTOR glasspurple
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK B -1
+    loop
+   Death:
+    TNT1 AAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR glassred 
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK C -1
+    loop
+   Death:
+    TNT1 AAAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR glassgreen
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK D -1
+    loop
+   Death:
+    TNT1 AAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR glassyellow
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK E -1
+    loop
+   Death:
+    TNT1 AAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR glassgrey
+{
+//$Category Lab
+  mass 1500
+  Health 1
+  Radius 3
+  Height 8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +ACTIVATEMCROSS
+  +DONTGIB
+  +NOICEDEATH
+  RenderStyle Translucent
+  DeathSound "tubes/break"
+  States
+  {
+   Spawn:
+    BEAK F -1
+    loop
+   Death:
+    TNT1 AAAAAA 0 A_SpawnItemEx ("Flaskshard1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    TNT1 A 0 A_Scream
+    Stop
+  }
+}
+
+ACTOR flaskshard1
+{
+  Radius 2
+  Height 4
+  speed 2
+  mass 1
+  RenderStyle Translucent
+  Alpha 0.6
+  +NOBLOCKMAP
+  +MISSILE
+  +NOTELEPORT
+  +DONTSPLASH
+  +NOICEDEATH
+  States
+  {
+  Spawn:
+    TSR1 ABC 4
+    TSR1 D 4
+    TSR1 ABC 4
+    TSR1 D 4 A_Jump (24, "DeathA")
+    TSR1 ABC 4
+    TSR1 D 4
+    TSR1 ABC 4
+    TSR1 D 4 A_Jump (24, "DeatB")
+    Loop
+  DeathA:
+    TSR1 C 5 A_Jump (80, "DeathA2")
+    TNT1 A 1
+    Stop
+  DeathB:
+    TSR1 D 5 A_Jump (80, "DeathB2")
+    TNT1 A 1
+    Stop
+  DeathA2:
+    TSR1 C 3 A_Jump (24, "DeathA2")
+    TNT1 A 1
+    Stop
+  DeathB2:
+    TSR1 D 5 A_Jump (24, "DeathB2")
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR flaskshard2
+{
+  Radius 2
+  Height 4
+  speed 2
+  mass 1
+  RenderStyle Translucent
+  Alpha 0.6
+  +NOBLOCKMAP
+  +MISSILE
+  +NOTELEPORT
+  +DONTSPLASH
+  +NOICEDEATH
+  States
+  {
+  Spawn:
+    TSR2 ADB 4
+    TSR2 C 4
+    TSR2 ADB 4
+    TSR2 C 4 A_Jump (24, "DeathA")
+    TSR2 ADB 4
+    TSR2 C 4
+    TSR2 ADB 4
+    TSR2 C 4 A_Jump (24, "DeathB")
+    Loop
+  DeathA:
+    TSR2 C 5 A_Jump (80, "DeathA2")
+    TNT1 A 1
+    Stop
+  DeathB:
+    TSR2 D 5 A_Jump (80, "DeathB2")
+    TNT1 A 1
+    Stop
+  DeathA2:
+    TSR2 C 3 A_Jump (24, "DeathA2")
+    TNT1 A 1
+    Stop
+  DeathB2:
+    TSR2 D 5 A_Jump (24, "DeathB2")
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR HelmA
+{
+//$Category Military
+  Radius 8
+  Height 10
+  States
+  {
+  Spawn:
+    AHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmB
+{
+//$Category Military
+  Radius 8
+  Height 10
+  States
+  {
+  Spawn:
+    BHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmC
+{
+//$Category Military
+  Radius 8
+  Height 10
+  States
+  {
+  Spawn:
+    CHLM A -1
+    Stop
+  }
+}
+
+ACTOR HelmD 
+{
+//$Category Military
+	Radius 6
+	Height 10
+	States
+	{
+	Spawn:
+		dHLM A -1
+		Stop
+	}
+}
+
+ACTOR Boots 
+{
+//$Category Military
+	Radius 8
+	Height 11
+	States
+	{
+	Spawn:
+		BOOT A -1
+		Stop
+	}
+}
+
+ACTOR UniformA
+{
+//$Category Military
+	Radius 12
+	Height 11
+	States
+	{
+	Spawn:
+		UNIF A -1
+		Stop
+	}
+}
+
+ACTOR UniformB
+{
+	//$Category Military
+	Radius 12
+	Height 11
+	States
+	{
+	Spawn:
+		UNIF B -1
+		Stop
+	}
+}
+
+ACTOR OilDrum
+{
+	//$Category Urban
+	Health 20
+	Radius 10
+	Height 34
+	+SOLID
+	+SHOOTABLE
+	+NOBLOOD
+	+ACTIVATEMCROSS
+	+DONTGIB
+	+NOICEDEATH
+	+OLDRADIUSDMG
+	DeathSound "world/barrelx"
+	Obituary "$OB_BARREL"
+	States
+	{
+	Spawn:
+		OILD A 6
+		Loop
+	Death:
+		OILD A 5 BRIGHT
+		OILD A 5 BRIGHT A_Scream
+		OILD BC 5 BRIGHT
+		OILC CCCCC 0 BRIGHT A_SpawnItemEx ("BarrelFlames", random (0, 40), random (0, 40), 0, 0, 0, 0, random (0, 360)) 
+		OILD D 10 BRIGHT
+		OILD D 1050 BRIGHT A_BarrelDestroy
+		OILD D 5 A_Respawn
+		Wait
+	}
+}
+
+ACTOR BarrelFlames
+{
+	Radius 16
+	Height 24
+	ReactionTime 75
+	damagetype "fire"
+	renderstyle Add
+	Projectile
+	+NODAMAGETHRUST
+	+BLOODLESSIMPACT
+	-NOGRAVITY
+	-DROPOFF
+	-MISSILE
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+
+	States
+	{
+	Spawn:
+		OILS A 0 bright
+		OILS A 4 bright A_PlaySoundEx ("BarrelFire/Loop", "SoundSlot5", 1)
+		OILS A 0 bright A_PlaySoundEx ("BarrelFire/Start", "SoundSlot6")
+		OILS BC 4 bright
+		FireLoop:
+		OILF AB 4 bright
+		OILF C 4 bright
+		Loop
+	Death:
+		OILS CB 4 bright
+		OILS A 4 bright A_StopSoundEx ("SoundSlot5")
+		Stop
+	}
+}
+
+actor EmptyBarrel
+{
+	//$Category Lab
+	radius 8
+	height 29
+	+solid
+	states
+	{
+	spawn:
+		BARR E -1
+		stop
+	}
+}
+  
+actor NukageBarrel
+{
+	//$Category Lab
+	radius 8
+	height 29
+	+solid
+	states
+	{
+	spawn:
+		BARR ABCD 4
+		loop
+	}
+}
+  
+actor HellfireBarrel1
+{
+	//$Category Lab
+	radius 8
+	height 29
+	+solid
+	states
+	{
+	spawn:
+		BARR FG 10
+		loop
+	}
+}
+  
+actor HellfireBarrel2
+{
+	//$Category Lab
+	radius 8
+	height 29
+	+solid
+	states
+	{
+	spawn:
+		BARR HI 10
+		loop
+	}
+}
+  
+  ACTOR TechBarrelGrey : ExplosiveBarrel
+{
+//$Category Lab
+	DeathSound "TechBarrel/Explode"
+	Obituary "%o ceased to exist."
+	States
+	{
+	Spawn:
+		BART A 6
+		Loop
+	Death:
+		BARX A 4 bright A_Explode (128, 192)
+		BARX A 0 bright A_Scream
+		BARX B 4 bright
+		BARX C 4 bright
+		BARX DEF 4 bright
+		TNT1 A 1054 A_BarrelDestroy
+		TNT1 A 5 A_Respawn
+		Wait
+	}
+}
+
+ACTOR TechBarrelTan : TechBarrelGrey
+{
+//$Category Lab
+	States
+	{
+	Spawn:
+		BART B 6
+		Loop
+	}
+}
+
+ACTOR TechBarrelGreen : TechBarrelGrey 
+{
+	//$Category Lab
+	States
+	{
+	Spawn:
+		BART C 6
+		Loop
+	}
+}
+
+////////////Green Holograms
+Actor UACHolo1 
+{
+	//$Category SFX
+	Scale 1.5
+	Renderstyle add
+	+NOGRAVITY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	States
+	{
+	Spawn:
+		UAC1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo2 : UACHolo1 
+{
+//$Category SFX
+	States
+	{
+	Spawn:
+		UAC1 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+////////////Cyan Holograms
+Actor UACHolo3 : UACHolo1 
+{
+//$Category SFX
+	States
+	{
+	Spawn:
+		UAC2 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo4 : UACHolo1 
+{
+//$Category SFX
+	States
+	{
+	Spawn:
+		UAC2 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+////////////Orange Holograms
+Actor UACHolo5 : UACHolo1 
+{
+	//$Category SFX
+	States
+	{
+	Spawn:
+		UAC3 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-16,16), random(-16,16), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo6 : UACHolo1 
+{
+	//$Category SFX
+	States
+	{
+	Spawn:
+		UAC3 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo01 : UACHolo1 
+{
+	//$Category SFX
+	States
+	{
+	Spawn:
+		TNT1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo02 : UACHolo1 
+{
+	//$Category SFX
+	States
+	{
+	Spawn:
+		TNT1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHolo03 : UACHolo1 
+{
+	//$Category SFX
+	States
+	{
+	Spawn:
+		TNT1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS1 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC1 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS2 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC2 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS3 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC3 A 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS4 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC1 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS5 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC2 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner2", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+Actor UACHoloS6 : UACHolo1 
+{
+	//$Category SFX
+	Scale 0.5
+	States
+	{
+	Spawn:
+		UAC3 B 2 BRIGHT A_SpawnItemEx("PlasmaSpawner3", random(-22,22), random(-22,22), random(-4,-12), 0, 0, random(6,8),0,SXF_NOCHECKPOSITION,0,tid)
+		Loop
+	}
+}
+////////////Plasma Particle Spawner
+Actor PlasmaSpawner 
+{
+	//$Category SFX
+	Alpha 0.75
+	RenderStyle Add
+	+NOGRAVITY
+	+DONTSPLASH
+	+NOCLIP
+	-SOLID
+	Projectile
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		PLEM AAAAAAAAAAAAAAAA 1 BRIGHT A_FadeOut(0.09) 
+		stop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+Actor PlasmaSpawner2 : plasmaspawner ////Cyan
+{
+//$Category SFX
+States
+{
+Spawn:
+    PLEM BBBBBBBBBBBBBBBB 1 BRIGHT A_FadeOut(0.09) 
+    stop
+Death:
+    TNT1 A 1
+    stop
+}
+}
+Actor PlasmaSpawner3 : plasmaspawner ////Orange
+{
+//$Category SFX
+States
+{
+Spawn:
+    PLEM CCCCCCCCCCCCCCCC 1 BRIGHT A_FadeOut(0.09) 
+    stop
+Death:
+    TNT1 A 1
+    stop
+}
+}
+
+ACTOR BronzeColumn1 : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    BLMP A -1 bright
+    Stop
+  }
+}
+
+ACTOR BronzeColumn2 : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    BLMP B -1 bright
+    Stop
+  }
+}
+
+ACTOR BronzeColumn3 : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    BLMP C -1 bright
+    Stop
+  }
+}
+
+ACTOR BronzeColumnOff : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    XLMP D -1
+    Stop
+  }
+}
+
+ACTOR ShortColumnBroken : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    RUS2 A -1
+    Stop
+  }
+}
+
+ACTOR TallColumnBroken : SolidProp
+{
+//$Category Light Sources
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    RUS1 A -1
+    Stop
+  }
+}
+
+/*
+Light Column Variations
+By ChronoSeth
+
+Set the first argument on the actor to 1, 2, or 3 to change the light column's behaviour.
+Arg = 1: Flickering light (mostly on)
+Arg = 2: Flickering light (mostly off)
+Arg = 3: Flashing light
+Arg = 4: Off
+*/
+
+
+Actor NewColumnBase : Column //Base definition for below actors, also used for flickering/flashing/dead standard column
+{
+	//$Category Light Sources
+	States
+	{
+		Spawn:
+			COLU B 8 Bright
+		Spawn2:
+			COLU B 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLU B 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLU B 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLU B 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLU B 8
+			COLU B 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLU B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLU C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLU B 8
+			Goto Spawn
+	}
+}
+
+Actor BlueColumn : NewColumnBase 
+{
+	States
+	{
+		Spawn:
+			COLB A 8 Bright
+		Spawn2:
+			COLB A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLB A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLB A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLB B 8
+			COLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLB B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLB C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLB B 8
+			Goto Spawn
+	}
+}
+
+Actor CyanColumn : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLC A 8 Bright
+		Spawn2:
+			COLC A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLC A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLC A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLC B 8
+			COLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLC B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLC C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLC B 8
+			Goto Spawn
+	}
+}
+
+Actor GreenColumn : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLG A 8 Bright
+		Spawn2:
+			COLG A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLG A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLG A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLG B 8
+			COLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLG B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLG C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLG B 8
+			Goto Spawn
+	}
+}
+
+Actor OrangeColumn : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLO A 8 Bright
+		Spawn2:
+			COLO A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLO A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLO A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLO B 8
+			COLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLO B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLO C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLO B 8
+			Goto Spawn
+	}
+}
+
+Actor PurpleColumn : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLP A 8 Bright
+		Spawn2:
+			COLP A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLP A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLP A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLP B 8
+			COLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLP B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLP C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLP B 8
+			Goto Spawn
+	}
+}
+
+Actor WhiteColumn : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLW A 8 Bright
+		Spawn2:
+			COLW A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLW A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLW A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLW B 8
+			COLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLW B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLW C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLW B 8
+			Goto Spawn
+	}
+}
+
+Actor RedColum : NewColumnBase
+{
+	States
+	{
+		Spawn:
+			COLR A 8 Bright
+		Spawn2:
+			COLR A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			COLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			COLR A 0 A_JumpIf (Args[0] == 3, "Flash")
+			COLR A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			COLR B 8
+			COLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			COLR B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			COLR C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			COLR B 8
+			Goto Spawn
+	}
+}
+
+Actor TallColumn : NewColumnBase
+{
+	Height 67
+	States
+	{
+		Spawn:
+			TCOL A 8 Bright
+		Spawn2:
+			TCOL A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCOL A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCOL A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCOL A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCOL B 8
+			TCOL A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCOL B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCOL C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCOL B 8
+			Goto Spawn
+	}
+}
+
+Actor TallBlueColumn : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLB A 8 Bright
+		Spawn2:
+			TCLB A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLB A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLB A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLB B 8
+			TCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLB B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLB C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLB B 8
+			Goto Spawn
+	}
+}
+
+Actor TallCyanColumn : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLC A 8 Bright
+		Spawn2:
+			TCLC A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLC A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLC A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLC B 8
+			TCLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLC B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLC C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLC B 8
+			Goto Spawn
+	}
+}
+
+Actor TallGreenColum : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLG A 8 Bright
+		Spawn2:
+			TCLG A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLG A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLG A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLG B 8
+			TCLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLG B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLG C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLG B 8
+			Goto Spawn
+	}
+}
+
+Actor TallOrangeColumn : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLO A 8 Bright
+		Spawn2:
+			TCLO A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLO A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLO A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLO B 8
+			TCLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLO B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLO C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLO B 8
+			Goto Spawn
+	}
+}
+
+Actor TallPurpleColumn : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLP A 8 Bright
+		Spawn2:
+			TCLP A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLP A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLP A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLP B 8
+			TCLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLP B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLP C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLP B 8
+			Goto Spawn
+	}
+}
+
+Actor TallRedColum : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLR A 8 Bright
+		Spawn2:
+			TCLR A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLR A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLR A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLR B 8
+			TCLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLR B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLR C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLR B 8
+			Goto Spawn
+	}
+}
+
+Actor TallWhiteColumn : TallColumn
+{
+	States
+	{
+		Spawn:
+			TCLW A 8 Bright
+		Spawn2:
+			TCLW A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			TCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			TCLW A 0 A_JumpIf (Args[0] == 3, "Flash")
+			TCLW A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			TCLW B 8
+			TCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			TCLW B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			TCLW C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			TCLW B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortColumn : NewColumnBase
+{
+	Height 23
+	States
+	{
+		Spawn:
+			SCOL A 8 Bright
+		Spawn2:
+			SCOL A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCOL A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCOL A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCOL A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCOL B 8
+			SCOL A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCOL B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCOL C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCOL B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortBlueColumn : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLB A 8 Bright
+		Spawn2:
+			SCLB A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLB A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLB A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLB B 8
+			SCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLB B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLB C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLB B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortBlueColumnP : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLB A 8 Bright
+		Spawn2:
+			SCLB A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLB A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLB A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLB B 8
+			SCLB A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLB B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLB C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLB B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortCyanColumn : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLC A 8 Bright
+		Spawn2:
+			SCLC A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLC A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLC A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLC B 8
+			SCLC A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLC B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLC C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLC B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortGreenColum : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLG A 8 Bright
+		Spawn2:
+			SCLG A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLG A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLG A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLG B 8
+			SCLG A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLG B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLG C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLG B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortOrangeColumn : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLO A 8 Bright
+		Spawn2:
+			SCLO A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLO A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLO A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLO B 8
+			SCLO A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLO B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLO C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLO B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortPurpleColumn : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLP A 8 Bright
+		Spawn2:
+			SCLP A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLP A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLP A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLP B 8
+			SCLP A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLP B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLP C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLP B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortRedColum : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLR A 8 Bright
+		Spawn2:
+			SCLR A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLR A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLR A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLR B 8
+			SCLR A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLR B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLR C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLR B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortWhiteColumn : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLW A 8 Bright
+		Spawn2:
+			SCLW A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLW A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLW A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLW B 8
+			SCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLW B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLW C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLW B 8
+			Goto Spawn
+	}
+}
+
+Actor ShortWhiteColumnR : ShortColumn
+{
+	States
+	{
+		Spawn:
+			SCLW A 8 Bright
+		Spawn2:
+			SCLW A 0 Bright A_JumpIf (Args[0] == 1, "Flicker")
+			SCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			SCLW A 0 A_JumpIf (Args[0] == 3, "Flash")
+			SCLW A 0 A_JumpIf (Args[0] == 4, "Spawn3")
+			Goto Spawn
+		Spawn3:
+			SCLW B 8
+			SCLW A 0 A_JumpIf (Args[0] == 2, "Flicker2")
+			Loop
+		Flicker:
+			SCLW B 1 A_Jump (128, "Spawn")
+			Loop
+		Flicker2:
+			SCLW C 1 Bright A_Jump (128, "Spawn3")
+			Loop
+		Flash:
+			SCLW B 8
+			Goto Spawn
+	}
+}
+
+ACTOR TLamp1
+{
+//$Category Light Sources
+  Radius 16
+  Height 80
+  +SOLID
+  States
+  {
+  Spawn:
+    LAMT A -1 Bright
+    Stop
+  }
+}
+
+ACTOR TLamp2
+{
+//$Category Light Sources
+  Radius 16
+  Height 60
+  +SOLID
+  States
+  {
+  Spawn:
+    LAMT B -1 Bright
+    Stop
+  }
+}
+
+ACTOR TLamp3
+{
+//$Category Light Sources
+  Radius 16
+  Height 70
+  +SOLID
+  States
+  {
+  Spawn:
+    LAMT C -1 Bright
+    Stop
+  }
+}
+
+// Colored sets of various columns/pillars.
+// Duplicates with the standard Doom columns are not provided.
+//
+// The following colors are all in the Doom palette:
+// Green and red are the original colors. Red is very bright.
+// Blue is the cartoonish blue color mostly seen in some Wolf walls.
+// Grey is desaturated.
+// Bicolor is green and a lighter grey.
+// Black is dark grey.
+//
+// The following colors aren't in the Doom palette:
+// Dark red adapts well to palettization. It is less cartoony than bright red.
+// Orange adapts well enough to palettization, but quality loss is visible.
+// Mauve is entirely outside the palette and will just turn grey.
+//
+// For a software-renderer project, it's advised to avoid mauve entirely.
+
+Actor TallColumnBase
+{
+//$Category Gothic
+	Radius 16
+	Height 128
+	+SOLID
+}
+
+Actor SpiralColumnBase
+{
+//$Category Gothic
+	Radius 16
+	Height 72
+	+SOLID
+}
+
+Actor MediumColumnBase
+{
+//$Category Gothic
+	Radius 16
+	Height 52
+	+SOLID
+}
+
+Actor SmallColumnBase
+{
+//$Category Gothic
+	Radius 16
+	Height 40
+	+SOLID
+}
+
+// Fluted A	  J		Green       7
+// Smooth B	  K		Red         8
+// Medium C	  L		Blue        9
+// Small  D	  M		Grey        1 + 2nd col
+// Skull  E   N		Bicolor     2 + 2nd col
+// Heart  F/G O/P	Black		3 + 2nd col
+// Vine   H   Q		Dark Red	4 + 2nd col
+// Spiral I   R		Orange      5 + 2nd col
+// Tan    0 + 2nd  	Mauve       6 + 2nd col
+
+Actor FlutedGreenColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL7 A -1
+		Stop
+	}
+}
+Actor FlutedRedColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL8 A -1
+		Stop
+	}
+}
+Actor FlutedBlueColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 A -1
+		Stop
+	}
+}
+Actor FlutedTanColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 J -1
+		Stop
+	}
+}
+Actor FlutedGreyColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 J -1
+		Stop
+	}
+}
+Actor FlutedBicolorColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 J -1
+		Stop
+	}
+}
+Actor FlutedBlackColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 J -1
+		Stop
+	}
+}
+Actor FlutedDarkRedColumn		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 J -1
+		Stop
+	}
+}
+Actor FlutedOrangeColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 J -1
+		Stop
+	}
+}
+Actor FlutedMauveColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 J -1
+		Stop
+	}
+}
+
+Actor SmoothGreenColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL7 B -1
+		Stop
+	}
+}
+Actor SmoothRedColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL8 B -1
+		Stop
+	}
+}
+Actor SmoothBlueColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 B -1
+		Stop
+	}
+}
+Actor SmoothTanColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 K -1
+		Stop
+	}
+}
+Actor SmoothGreyColumn 			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 K -1
+		Stop
+	}
+}
+Actor SmoothBicolorColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 K -1
+		Stop
+	}
+}
+Actor SmoothBlackColumn			: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 K -1
+		Stop
+	}
+}
+Actor SmoothDarkRedColumn		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 K -1
+		Stop
+	}
+}
+Actor SmoothOrangeColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 K -1
+		Stop
+	}
+}
+Actor SmoothMauveColumn 		: TallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 K -1
+		Stop
+	}
+}
+
+Actor MediumGreenColumn			: RandomSpawner { DropItem "TallGreenColumn" }
+Actor MediumRedColumn			: RandomSpawner { DropItem "TallRedColumn" }
+
+Actor MediumBlueColumn 			: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 C -1
+		Stop
+	}
+}
+Actor MediumTanColumn			: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 L -1
+		Stop
+	}
+}
+Actor MediumGreyColumn 			: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 L -1
+		Stop
+	}
+}
+Actor MediumBicolorColumn 		: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 L -1
+		Stop
+	}
+}
+Actor MediumBlackColumn			: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 L -1
+		Stop
+	}
+}
+Actor MediumDarkRedColumn		: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 L -1
+		Stop
+	}
+}
+Actor MediumOrangeColumn 		: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 L -1
+		Stop
+	}
+}
+Actor MediumMauveColumn 		: MediumColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 L -1
+		Stop
+	}
+}
+
+Actor SmallGreenColumn			: RandomSpawner { DropItem "SmallGreenColumn" }
+Actor SmallRedColumn			: RandomSpawner { DropItem "SmallRedColumn" }
+
+Actor SmallBlueColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 D -1
+		Stop
+	}
+}
+Actor SmallTanColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 M -1
+		Stop
+	}
+}
+Actor SmallGreyColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 M -1
+		Stop
+	}
+}
+Actor SmallBicolorColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 M -1
+		Stop
+	}
+}
+Actor SmallBlackColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 M -1
+		Stop
+	}
+}
+Actor SmallDarkRedColumn		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 M -1
+		Stop
+	}
+}
+Actor SmallOrangeColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 M -1
+		Stop
+	}
+}
+Actor SmallMauveColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 M -1
+		Stop
+	}
+}
+
+Actor SkullGreenColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL7 E -1
+		Stop
+	}
+}
+Actor SkullRedColumn			: RandomSpawner { DropItem "SkullColumn" }
+
+Actor SkullBlueColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 E -1
+		Stop
+	}
+}
+Actor SkullTanColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 N -1
+		Stop
+	}
+}
+Actor SkullGreyColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 N -1
+		Stop
+	}
+}
+Actor SkullBicolorColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 N -1
+		Stop
+	}
+}
+Actor SkullBlackColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 N -1
+		Stop
+	}
+}
+Actor SkullDarkRedColumn		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 N -1
+		Stop
+	}
+}
+Actor SkullOrangeColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 N -1
+		Stop
+	}
+}
+Actor SkullMauveColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 N -1
+		Stop
+	}
+}
+
+Actor HeartGreenColumn			: RandomSpawner { DropItem "HeartColumn" }
+
+Actor HeartRedColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL8 FG 14
+		Loop
+	}
+}
+Actor HeartBlueColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 FG 14
+		Loop
+	}
+}
+Actor HeartTanColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 OP 14
+		Loop
+	}
+}
+Actor HeartGreyColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 OP 14
+		Loop
+	}
+}
+Actor HeartBicolorColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 OP 14
+		Loop
+	}
+}
+Actor HeartBlackColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 OP 14
+		Loop
+	}
+}
+Actor HeartDarkRedColumn		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 OP 14
+		Loop
+	}
+}
+Actor HeartOrangeColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 OP 14
+		Loop
+	}
+}
+Actor HeartMauveColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 OP 14
+		Loop
+	}
+}
+
+Actor VineGreenColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL7 H -1
+		Stop
+	}
+}
+Actor VineRedColumn				: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL8 H -1
+		Stop
+	}
+}
+Actor VineBlueColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 H -1
+		Stop
+	}
+}
+Actor VineTanColumn				: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 Q -1
+		Stop
+	}
+}
+Actor VineGreyColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 Q -1
+		Stop
+	}
+}
+Actor VineBicolorColumn 		: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 Q -1
+		Stop
+	}
+}
+Actor VineBlackColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 Q -1
+		Stop
+	}
+}
+Actor VineDarkRedColumn			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 Q -1
+		Stop
+	}
+}
+Actor VineOrangeColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 Q -1
+		Stop
+	}
+}
+Actor VineMauveColumn 			: SmallColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 Q -1
+		Stop
+	}
+}
+Actor SpiralGreenColumn			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL7 I -1
+		Stop
+	}
+}
+Actor SpiralRedColumn			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL8 I -1
+		Stop
+	}
+}
+Actor SpiralBlueColumn 			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL9 I -1
+		Stop
+	}
+}
+Actor SpiralTanColumn			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL0 R -1
+		Stop
+	}
+}
+Actor SpiralGreyColumn 			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL1 R -1
+		Stop
+	}
+}
+Actor SpiralBicolorColumn 		: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL2 R -1
+		Stop
+	}
+}
+Actor SpiralBlackColumn			: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL3 R -1
+		Stop
+	}
+}
+Actor SpiralDarkRedColumn		: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL4 R -1
+		Stop
+	}
+}
+Actor SpiralOrangeColumn 		: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL5 R -1
+		Stop
+	}
+}
+Actor SpiralMauveColumn 		: SpiralColumnBase
+{
+	States
+	{
+	Spawn:
+		COL6 R -1
+		Stop
+	}
+}
+
+
+
+Actor NTomb1
+{
+//$Category Graveyard
+Radius 15
+Height 68
++SOLID
+States
+{
+Spawn:
+	NTOM A -1
+	Stop
+}
+}
+
+Actor NTomb2
+{
+//$Category Graveyard
+Radius 15
+Height 62
++SOLID
+States
+{
+Spawn:
+	NTOM B -1
+	Stop
+}
+}
+
+Actor NTomb3
+{
+//$Category Graveyard
+Radius 15
+Height 48
++SOLID
+States
+{
+Spawn:
+	NTOM C -1
+	Stop
+}
+}
+
+Actor NTomb4
+{
+//$Category Graveyard
+Radius 15
+Height 43
++SOLID
+States
+{
+Spawn:
+	NTOM D -1
+	Stop
+}
+}
+
+Actor NTomb5
+{
+//$Category Graveyard
+Radius 12
+Height 35
++SOLID
+States
+{
+Spawn:
+	NTOM E -1
+	Stop
+}
+}
+
+ACTOR TechLanternBig
+{
+//$Category Light Sources
+	Radius 10
+	Height 80
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP ABCD 6 Light("BIGLANTERN")
+		Loop
+	}
+}
+
+ACTOR TechLanternSmall
+{
+//$Category Light Sources
+	Radius 6
+	Height 45
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP EFGH 6 Light("SMALLLANTERN")
+		Loop
+	}
+}
+
+ACTOR TechLanternSmallOff
+{
+//$Category Light Sources
+	Radius 6
+	Height 45
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP J 1
+		Loop
+	}
+}
+
+ACTOR BlackCandleChandelier
+{
+//$Category Light Sources
+	Radius 20
+	Height 55
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP I -1 Light("BLACKCHANDELIER")
+		Stop
+	}
+}
+
+Actor StrifeColumn
+{
+//$Category Lab
+  Radius 16
+  Height 120
+  +Solid 
+  States
+  {
+  Spawn:
+    KOLU A -1
+    Stop
+  }
+}
+
+Actor BloodyColumn
+{
+//$Category Lab
+  Radius 16
+  Height 120
+  +Solid
+  States
+  {
+  Spawn:
+    KOLU B -1
+    Stop
+  }
+}
+
+Actor StrifePillar
+{
+//$Category Lab
+  Radius 16
+  Height 65
+  +Solid
+  States
+  {
+  Spawn:
+    KOLU C -1
+    Stop
+  }
+}
+
+Actor BloodyPillar
+{
+//$Category Lab
+  Radius 16
+  Height 65
+  +Solid
+  States
+  {
+  Spawn:
+    KOLU D -1
+    Stop
+  }
+}
+
+Actor StrifelowPillar
+{
+//$Category Lab
+  Radius 16
+  Height 20
+  +Solid
+  States
+  {
+  Spawn:
+    KOLU E -1
+    Stop
+  }
+}
+
+Actor BloodylowPillar
+{
+//$Category Lab
+  Radius 16
+  Height 20
+  +Solid
+  States
+  {
+  Spawn:
+    KOLU F -1
+    Stop
+  }
+}
+
+//CEILING LIGHTS
+
+ACTOR StrobeLightBlue : SwitchableDecoration
+{
+//$Category Light Sources
+  Radius 16
+  Height 16
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    STRB A 0 BRIGHT
+    STRB A 0 BRIGHT A_SpawnItemEx ("StrobeEmitterBlue",0,0,0,0,0,0,0,SXF_SETMASTER,0,tid)
+  Active:
+    STRB DCBA 4 BRIGHT
+	Loop
+  Inactive:
+    STRO A 1
+    Loop
+  }
+}
+
+ACTOR StrobeLightGreen : SwitchableDecoration
+{
+//$Category Light Sources
+  Radius 16
+  Height 16
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    STRG A 0 BRIGHT
+    STRG A 0 BRIGHT A_SpawnItemEx("StrobeEmitterGreen",0,0,0,0,0,0,0,SXF_SETMASTER,0,tid)
+  Active:
+    STRG DCBA 4 BRIGHT
+	Loop
+  Inactive:
+    STRO B 1
+    Loop
+  }
+}
+
+ACTOR StrobeLightRed : SwitchableDecoration
+{
+//$Category Light Sources
+  Radius 16
+  Height 16
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    STRR A 0 BRIGHT
+    STRR A 0 BRIGHT A_SpawnItemEx ("StrobeEmitterRed",0,0,0,0,0,0,0,SXF_SETMASTER,0,tid)
+  Active:
+    STRR DCBA 4 BRIGHT
+	Loop
+  Inactive:
+    STRO C 1
+    Loop
+  }
+}
+
+ACTOR StrobeLightYellow : SwitchableDecoration
+{
+//$Category Light Sources
+  Radius 16
+  Height 16
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    STRY A 0 BRIGHT
+    STRY A 0 BRIGHT A_SpawnItemEx ("StrobeEmitterYellow",0,0,0,0,0,0,0,SXF_SETMASTER,0,tid)
+  Active:
+    STRY DCBA 4 BRIGHT
+	Loop
+  Inactive:
+    STRO D 1
+    Loop
+  }
+}
+
+
+
+//ROTATING EMITTERS
+
+ACTOR StrobeEmitterBlue : SwitchableDecoration
+{
+  Radius 16
+  Height 16
+  Mass 0
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+  Active:
+    TNT1 A 1
+    TNT1 A 0 //A_CheckSight("Active")
+    TNT1 A 0
+    TNT1 A 0 A_CustomMissile ("StrobeRayBlue", 0, 0, 0, 2, -35)
+    TNT1 A 0 A_CustomMissile ("StrobeRayBlue", 0, 0, 180, 2, -35)
+    TNT1 A 0 A_SetAngle(10 + angle)
+    Loop
+  Inactive:
+    TNT1 A 1
+    Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+ACTOR StrobeEmitterGreen : SwitchableDecoration
+{
+  Radius 16
+  Height 16
+  Mass 0
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+  Active:
+    TNT1 A 1
+    TNT1 A 0// A_CheckSight("Active")
+    TNT1 A 0
+    TNT1 A 0 A_CustomMissile ("StrobeRayGreen", 0, 0, 0, 2, -35)
+    TNT1 A 0 A_CustomMissile ("StrobeRayGreen", 0, 0, 180, 2, -35)
+    TNT1 A 0 A_SetAngle(10 + angle)
+    Loop
+  Inactive:
+    TNT1 A 1
+    Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+ACTOR StrobeEmitterRed : SwitchableDecoration
+{
+  Radius 16
+  Height 16
+  Mass 0
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+  Active:
+    TNT1 A 1
+    TNT1 A 0// A_CheckSight("Active")
+    TNT1 A 0
+    TNT1 A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    TNT1 A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    TNT1 A 0 A_SetAngle(10 + angle)
+    Loop
+  Inactive:
+    TNT1 A 1
+    Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+ACTOR StrobeEmitterYellow : SwitchableDecoration
+{
+  Radius 16
+  Height 16
+  Mass 0
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    TNT1 A 0
+  Active:
+    TNT1 A 1
+    TNT1 A 0// A_CheckSight("Active")
+    TNT1 A 0
+    TNT1 A 0 A_CustomMissile ("StrobeRayYellow", 0, 0, 0, 2, -35)
+    TNT1 A 0 A_CustomMissile ("StrobeRayYellow", 0, 0, 180, 2, -35)
+    TNT1 A 0 A_SetAngle(10 + angle)
+    Loop
+  Inactive:
+    TNT1 A 1
+    Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+
+
+//LIGHT RAYS
+
+ACTOR StrobeRayBlue
+{
+  Radius 2
+  Height 2
+  Speed 100
+  Damage 0
+  Mass 0
+  Renderstyle None
+  projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +RIPPER
+  +BLOODLESSIMPACT
+  +PAINLESS
+  +THRUACTORS
+  States
+  {
+  Spawn:
+    BAL1 A 8
+    Loop
+  Death:
+    BAL1 C 2
+    Stop
+  }
+}
+
+ACTOR StrobeRayGreen : StrobeRayBlue
+{
+}
+
+ACTOR StrobeRayRed : StrobeRayBlue
+{
+}
+
+ACTOR StrobeRayYellow : StrobeRayBlue
+{
+}
+
+
+
+
+
+
+
+
+
+// I now have all the Hellfire fuel I'll ever need. The cleansing has begun. The
+// demons aren't the only ones with unbound fury. I will use it now to kill off
+// the tripe infecting the rest of this base, and soon, the entirety of Silkwood.
+#region Gore
+//$Color 4
+
+Actor Head1
+{
+	//Radius 20
+	//Height 4
+	States
+	{
+	Spawn:
+		HED1 A -1
+		Loop
+	}
+}
+
+Actor Head2
+{
+	//Radius 20
+	//Height 4
+	States
+	{
+	Spawn:
+		HED2 A -1
+		Loop
+	}
+}
+
+Actor Head3
+{
+	//Radius 20
+	//Height 4
+	States
+	{
+	Spawn:
+		HED3 A -1
+		Loop
+	}
+}
+
+Actor Head4
+{
+	//Radius 20
+	//Height 4
+	States
+	{
+	Spawn:
+		HED4 A -1
+		Loop
+	}
+}
+
+ACTOR BonePile
+{
+  Radius 24
+  Height 24
+  +SOLID
+  States
+  {
+  Spawn:
+    SBON A -1
+    Stop
+  }
+}
+
+Actor CarcassBrownScientist
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    CRP3 A -1
+    Loop
+  }
+}
+
+ACTOR Cow1Skull1
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW1 A -1
+    Stop
+  }
+}
+
+ACTOR Cow1Skull2
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW1 B -1
+    Stop
+  }
+}
+
+ACTOR Cow1Skull3
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW1 C -1
+    Stop
+  }
+}
+
+ACTOR Cow1Skull4
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW1 D -1
+    Stop
+  }
+}
+
+ACTOR Cow1Skull5
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW1 E -1
+    Stop
+  }
+}
+
+ACTOR Cow2Skull1
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW2 A -1
+    Stop
+  }
+}
+
+ACTOR Cow2Skull2
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW2 B -1
+    Stop
+  }
+}
+
+ACTOR Cow2Skull3
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW2 C -1
+    Stop
+  }
+}
+
+ACTOR Cow2Skull4
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW2 D -1
+    Stop
+  }
+}
+
+ACTOR Cow2Skull5
+{
+  Game Doom
+  Radius 16
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    COW2 E -1
+    Stop
+  }
+}
+
+Actor DeadMaleScientist
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    MSCI N -1
+    Loop
+  }
+}
+
+Actor DeadFemaleScientist
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    FSCI N -1
+    Loop
+  }
+}
+
+ACTOR Bone1
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    BONE A -1
+    Stop
+  }
+}
+
+ACTOR Bone2
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    BONE B -1
+    Stop
+  }
+}
+
+ACTOR BrainMush
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    MUSH A -1
+    Stop
+  }
+}
+
+ACTOR GoreChunk1
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    CHNK A -1
+    Stop
+  }
+}
+
+ACTOR GoreChunk2
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    CHNK B -1
+    Stop
+  }
+}
+
+ACTOR GoreChunk3
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    CHNK C -1
+    Stop
+  }
+}
+
+ACTOR EyeBall
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    EYEB A -1
+    Stop
+  }
+}
+
+ACTOR Organ1
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    ORGN A -1
+    Stop
+  }
+}
+
+ACTOR Organ2
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    ORGN B -1
+    Stop
+  }
+}
+
+ACTOR RibCage
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    RIBC A -1
+    Stop
+  }
+}
+
+ACTOR SpinalCord
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    SPIN A -1
+    Stop
+  }
+}
+
+ACTOR Organs
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    ORGS A -1
+    Stop
+  }
+}
+
+ACTOR Torso
+{
+  Game Doom
+  Radius 16
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    TRSO A -1
+    Stop
+  }
+}
+
+Actor CarcassSoldierHalfCut
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    CRP3 A -1
+    Loop
+  }
+}
+
+actor HangedBloodySkeleton
+{
+    Radius 20
+    Height 60
+    +SPAWNCEILING
+    +NOGRAVITY
+    +SOLID
+	+CEILINGHUGGER
+    States
+    {
+    Spawn:
+       HSKL A 0 A_Jump(60,"DropBlood")
+       HSKL A 50
+       Loop
+    DropBlood:
+       HSKL A 1 A_SpawnItem("SkeletonBloodDrip")
+       Goto Spawn
+    }
+}
+
+actor SkeletonBloodDrip
+{
+    Radius 1
+    Height 1
+    Scale 0.75
+    -NOGRAVITY
+	+DONTSPLASH
+    States
+    {
+    Spawn:
+       BDRP A 1 A_CheckFloor("Disappear")
+       Loop
+    Disappear:
+       TNT1 A 1
+       Stop
+    }
+}
+
+ACTOR HangedMarine1Blocking
+{
+  Game Doom
+  Radius 22
+  Height 54
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR A -1
+    Stop
+  }
+}
+
+ACTOR HangedMarine1
+{
+  Game Doom
+  Radius 22
+  Height 54
+  -SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR A -1
+    Stop
+  }
+}
+
+ACTOR HangedMarine2Blocking
+{
+  Game Doom
+  Radius 22
+  Height 55
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR B -1
+    Stop
+  }
+}
+
+ACTOR HangedMarine2
+{
+  Game Doom
+  Radius 22
+  Height 55
+  -SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR B -1
+    Stop
+  }
+}
+
+ACTOR HangedMarine3Blocking
+{
+  Game Doom
+  Radius 22
+  Height 54
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR C -1
+    Stop
+  }
+}
+
+ACTOR HangedMarine3
+{
+  Game Doom
+  Radius 22
+  Height 54
+  -SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HMAR C -1
+    Stop
+  }
+}
+
+//Hanged Player
+//
+//By Anarchist
+ACTOR HangedPlayer
+{
+	Game Doom
+	Radius 16
+	Height 64
+	+SOLID
+	+NOGRAVITY
+	+SPAWNCEILING
+	States
+	{
+	Spawn:
+		HPLA A -1
+		Stop
+	}
+}
+
+ACTOR CTHangMarineLimb
+{
+  Radius 16
+  Height 68
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANL A -1
+    Stop
+  }
+}
+
+ACTOR CTHangMarineTorso
+{
+  Radius 16
+  Height 52
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANL B -1
+    Stop
+  }
+}
+
+ACTOR LiveHangingMarine
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  +FLOAT
+  States
+  {
+  Spawn:
+    HUSO A 6
+    HUSO B 6
+    HUSO C 6
+    HUSO D 6
+    HUSO E 6
+    HUSO F 6
+    HUSO G 6
+  }
+}
+
+ACTOR DeadHangingMarine
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HUSO H 6
+    Loop
+  }
+}
+
+ACTOR MostlyDeadHangingMarine
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HUSO A 12
+    HUSO B 12
+    HUSO C 12
+    HUSO D 12
+    HUSO E 12
+    HUSO F 12
+    HUSO G 12
+    Loop
+  }
+}
+
+ACTOR LiveHangingMarineBlocking
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +SHOOTABLE
+  +NODAMAGE
+  States
+  {
+  Spawn:
+    HUSO A 6
+    HUSO B 6
+    HUSO C 6
+    HUSO D 6
+    HUSO E 6
+    HUSO F 6
+    HUSO G 6
+    Loop
+  }
+}
+
+ACTOR DeadHangingMarineBlocking
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +NODAMAGE
+  States
+  {
+  Spawn:
+    HUSO H 6
+    Loop
+  }
+}
+
+ACTOR MostlyDeadHangingMarineBlocking
+{
+  Game Doom
+  Radius 16
+  Height 64
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  +NODAMAGE
+  States
+  {
+  Spawn:
+    HUSO A 12
+    HUSO B 12
+    HUSO C 12
+    HUSO D 12
+    HUSO E 12
+    HUSO F 12
+    HUSO G 12
+    Loop
+  }
+}
+
+ACTOR CTHangPlayer1
+{
+  Radius 16
+  Height 88
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANP A -1
+    Stop
+  }
+}
+
+ACTOR CTHangPlayer2
+{
+  Radius 16
+  Height 88
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANP B -1
+    Stop
+  }
+}
+
+Actor CarcassImpaledMarine
+{
+  +Solid
+  Height 48
+  Radius 20
+  States
+  {
+  Spawn:
+    MPL2 A -1
+  }
+}
+
+Actor CarcassImpaledMarine2
+{
+  +Solid
+  Height 48
+  Radius 20
+  States
+  {
+  Spawn:
+    MPLD A -1
+  }
+}
+
+ACTOR ImpaledRocketGuy
+{
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    IMRG A -1
+    Stop
+  }
+}
+
+ACTOR ImpaledScientist
+{
+  Radius 20
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    POLS A -1
+    Stop
+  }
+}
+
+ACTOR ImpaledFScientist
+{
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    POFS A -1
+    Stop
+  }
+}
+
+actor Corp01
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORA A -1
+    Stop
+  }
+}
+
+actor Corp02
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORB A -1
+    Stop
+  }
+}
+
+actor Corp03
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORC A -1
+    Stop
+  }
+}
+
+actor Corp04
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORD A -1
+    Stop
+  }
+}
+
+actor Corp05
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORE A -1
+    Stop
+  }
+}
+
+actor Corp06
+{
+  radius 15
+  height 20
+  states
+  {
+  Spawn:
+    CORF A -1
+    Stop
+  }
+}
+
+ACTOR MarineVictim
+{
+  Game Doom
+  Radius 16
+  Height 48
+  +SOLID
+  Scale 0.7
+  States
+  {
+  Spawn:
+    VCTM A -1
+    Stop
+  }
+}
+
+Actor CarcassShirtlessBeheaded
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    CRP2 A -1
+    Loop
+  }
+}
+
+Actor CarcassShirtlessMarine
+{
+  Radius 32
+  Height 16
+  States
+  {
+  Spawn:
+    CRP1 A -1
+    Loop
+  }
+}
+
+Actor CarcassSittingMarine
+{
++Solid
+Height 32
+Radius 20
+  States
+  {
+  Spawn:
+    SIT1 A -1
+    Loop
+  }
+}
+
+Actor CarcassSittingMaintenance
+{
++Solid
+Height 32
+Radius 20
+  States
+  {
+  Spawn:
+    SIT2 A -1
+    Loop
+  }
+}
+
+ACTOR ChestSkewered1
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLC A -1
+    Stop
+  }
+}
+
+ACTOR ChestSkewered2
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLC B -1
+    Stop
+  }
+}
+
+ACTOR ChestSkewered3
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLC C -1
+    Stop
+  }
+}
+
+//Impaling Spike
+ACTOR ImpalingSpike
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POL7 A -1
+    Stop
+  }
+}
+
+//Chaingunner Head
+ACTOR ImpalingSpike2
+{
+  Radius 16
+  Height 56
+  +SOLID
+  States
+  {
+  Spawn:
+    POL8 A -1
+    Stop
+  }
+}
+
+//Zombieman Head
+ACTOR ImpalingSpike3
+{
+  Radius 16
+  Height 56
+  +SOLID
+  States
+  {
+  Spawn:
+    POL9 A -1
+    Stop
+  }
+}
+
+//Doomguy Head
+ACTOR ImpalingSpike4
+{
+  Radius 16
+  Height 56
+  +SOLID
+  States
+  {
+  Spawn:
+    POLA A -1
+    Stop
+  }
+}
+
+//3 Doomguy Heads
+ACTOR ImpalingSpike5
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLB A -1
+    Stop
+  }
+}
+
+//3 Doomguy Heads, Short
+ACTOR ImpalingSpike6
+{
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    POLC A -1
+    Stop
+  }
+}
+
+//Doomguy torso, one arm
+ACTOR ImpalingSpike7
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLD A -1
+    Stop
+  }
+}
+
+//Doomguy torso, two arms
+ACTOR ImpalingSpike8
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLE A -1
+    Stop
+  }
+}
+
+//Doomguy skewered, twitching
+ACTOR ImpalingSpike9
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLF A 6
+    POLF B 8
+    Loop
+  }
+}
+
+//Doomguy skewered, long arm
+ACTOR ImpalingSpike10
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLG A -1
+    Stop
+  }
+}
+
+//Doomguy skewered, short arm
+ACTOR ImpalingSpike11
+{
+  Radius 16
+  Height 64
+  +SOLID
+  States
+  {
+  Spawn:
+    POLH A -1
+    Stop
+  }
+}
+
+//Pool of Blood with Marine Helmet
+ACTOR MarineHelmetGibs
+{
+  //Radius 20
+  //Height 4
+  +NOBLOCKMAP
+  +MOVEWITHSECTOR
+  States
+  {
+  Spawn:
+    GIB1 A -1
+    Stop
+  }
+}
+
+#endregion
+
+Actor RadioactiveCorpse1
+{//$Category Lab
+  Radius 4
+  Height 1
+  States
+  {
+  Spawn:
+    ZOCR A -1 bright
+    Stop
+  }
+}
+
+Actor RadioactiveCorpse2
+{//$Category Lab
+  Radius 4
+  Height 1
+  States
+  {
+  Spawn:
+    ZOCR B -1 bright
+    Stop
+  }
+}
+
+Actor RadioactiveCorpse3
+{//$Category Lab
+  Radius 4
+  Height 1
+  States
+  {
+  Spawn:
+    ZOCR C -1 bright
+    Stop
+  }
+}
+
+Actor RadioactiveCorpse4
+{//$Category Lab
+  Radius 4
+  Height 1
+  States
+  {
+  Spawn:
+    ZOCR D -1 bright
+    Stop
+  }
+}
+
+
+
+//Imp's Head
+//5056
+
+//Revenant Hand
+//5055
+
+
+
+
+ACTOR ArmourSet
+{
+//$Category Military
+  Radius 0
+  Height 0
+  +SOLID
+  States
+  {
+  Spawn:
+    APAC A -1
+    Stop
+  }
+}
+
+ACTOR HeavyArmour
+{
+//$Category Military
+  Radius 0
+  Height 0
+  +SOLID
+  States
+  {
+  Spawn:
+    HEVA A -1
+    Stop
+  }
+}
+ACTOR TechArmour
+{
+//$Category Military
+  Radius 0
+  Height 0
+  +SOLID
+  States
+  {
+  Spawn:
+    ARM4 A -1
+    Stop
+  }
+}
+
+ACTOR Biosuit
+{
+//$Category Lab
+  Radius 0
+  Height 0
+  +SOLID
+  States
+  {
+  Spawn:
+    BIOS A -1
+    Stop
+  }
+}
+
+ACTOR ShortTorchX replaces ShortRedTorch
+{
+  Radius 16
+  Height 21
+  ProjectilePassHeight -16
+  +SOLID
+  States
+  {
+  Spawn:
+    SMRT ABCD 4
+    Loop
+  }
+}
+
+ACTOR TorchX replaces RedTorch
+{
+  Radius 16
+  Height 52
+  ProjectilePassHeight -16
+  +SOLID
+  States
+  {
+  Spawn:
+    TRED ABCD 4
+    Loop
+  }
+}
+
+ACTOR BurningBarrelX replaces BurningBarrel
+{
+  Radius 16
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    FCAN ABC 4
+    Loop
+  }
+}
+
+ACTOR SmokeEyesStatic
+{
+  Radius 48
+  Height 64
+  Scale 0.75
+  Alpha 1.0
+  +SOLID
+  +FORCEXYBILLBOARD
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    EYES A -1 Bright
+    Stop
+  }
+}
+
+ACTOR SmileStatic
+{
+  Radius 48
+  Height 128
+  Scale 0.5
+  Alpha 1.0
+  +SOLID
+  +FORCEXYBILLBOARD
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    SMIL A -1 Bright
+    Stop
+  }
+}
+
+ACTOR InteractStatic
+{
+  Radius 19
+  Height 48
+  RenderStyle "Add"
+  Alpha 1.0
+  +SOLID
+  States
+  {
+  Spawn:
+    EINC E -1
+    Stop
+  }
+}
+
+ACTOR InteractStatic2
+{
+  Radius 19
+  Height 48
+  RenderStyle "Translucent"
+  Alpha 1.0
+  +SOLID
+  States
+  {
+  Spawn:
+    EINT A -1
+    Stop
+  }
+}
+
+ACTOR PlantPowerBeam : SwitchableDecoration
+{
+  //$Category Power
+  Radius 1
+  Height 1
+  RenderStyle Add
+  +Solid
+  +ForceYBillboard
+  States
+  {
+  Spawn:
+	TNT1 A 0
+  Active:
+    NRDL A 1 Bright
+    Loop
+  Inactive:
+    TNT1 A 1 Bright
+    Loop
+  }
+}
+
+
+
+
+
+
+
+
+
+/*
+ACTOR DerekWharton
+{
+//$Category Boss
+  Radius 16
+  Height 72
+  +SOLID
+  +DONTSPLASH
+  States
+  {
+  Spawn:
+    DERK B -1
+    Stop
+  }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+Actor CIBColumn
+{
+	Radius 16
+	Height 40
+	+SOLID
+	States
+	{
+	Spawn:
+		CIBC A -1
+		Stop
+	}
+}
+
+ACTOR CIBflower
+{
+  Radius 0
+  Height 0
+  States
+  {
+  Spawn:
+	CIBF A -1
+	Stop
+  }
+}

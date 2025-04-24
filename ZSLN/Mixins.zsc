@@ -1,0 +1,7 @@
+// For handling corruption. Whatever's tagged 666 in most maps is the results
+// of chaotic forces beyond mortal comprehension (hellfire) butchering everyone,
+// and/or the madness of 
+mixin Class SLN_666
+{
+	
+}

@@ -1,0 +1,4 @@
+// Temporary until I convert it all to ZScript.
+#include "dec-prop.txt"
+#include "dec-voxl.txt"
+#include "dec--sfx.txt"

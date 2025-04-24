@@ -1,0 +1,73 @@
+[en default]
+
+SLN_MOD_WARNING_WHO = "Major Cooke";
+SLN_MOD_WARNING_1 =
+"I see you're interested in playing with some other mods too. Nice!\n"
+"However there are alterations that will occur to make sure compatibility\n"
+"is maximized.";
+
+SLN_MOD_WARNING_2 =
+"When the game starts, you can check out their specific pages in the Codex,\n"
+"but only mods where compatibilities were added will give information. So,\n"
+"you won't see anything about Damage Indicators, but you will see pages added\n"
+"for mods like Triple M, Ghoul Spawn, DooM Wars: Hell's Forces, etc.";
+
+SLN_MOD_WARNING_3 =
+"MAKE SURE YOU READ THEM. They contain important info on why your items work\n"
+"differently, or monsters may have custom behaviors. This warning will not\n"
+"appear again, so check the codex when adding a gameplay altering mod for\n"
+"warnings and notices.";
+
+SLN_MOD_WARNING_4 =
+"Anyway, good luck and have fun!";
+
+//------------------------------------------------------------------------------
+// Mod codex general
+// These will not appear if there are no other mods installed.
+//------------------------------------------------------------------------------
+
+SLN_MOD_GENERAL_1 =
+"Here you can find all information on what has changed. Click a tab to view "
+"individual elements. Some info that won't be present will be covered below."
+"\n\n"
+"* Leaving the NT-AU maps is disabled due to causing instability and loss of "
+"progress. This will (hopefully) be finished in a later update. Any attempts "
+"to leave may cause crashes. You've been warned!\n"
+"* Custom battles will summoned instead which disables all other systems "
+"so you can focus on the challenge of progression.";
+
+//------------------------------------------------------------------------------
+// Triple M
+//------------------------------------------------------------------------------
+
+SLN_MOD_TRIPLEM_DESC =
+"Triple M adds Minecraft monsters that spawn independently all on their own and "
+"adds an optional element of challenge, keeping the player busy when they might "
+"be wandering around bored otherwise. It also adds the ability to travel to "
+"Minecraft worlds and gain unique rewards, if they survive..."
+"\n\n"
+"Compatibility changes:"
+"\n\n"
+"* Monsters spawn only in reachable places\n"
+"* Monsters won't attack players during cutscenes\n"
+"* Creepers & Blinks hate each other";
+
+//------------------------------------------------------------------------------
+// Ghoul Spawn
+//------------------------------------------------------------------------------
+
+SLN_MOD_GHOULSPAWN_DESC =
+"Ghoul Spawn takes the Ghouls from Ghoul's Forest and Ghouls vs. Humans, bringing "
+"them to players directly. Spawning in from various locations, these dangerous "
+"spirits up the ante quite heavily if underestimated and can result in a swift "
+"and violent demise."
+"\n\n"
+"Compatibility Changes:"
+"\n\n"
+"* Ghouls despawn during cutscenes\n"
+"* Creepers cannot pass through solid terrain\n"
+"* Terrorfiends are immune to slowing\n"
+"* Dolly can be found and used to summon the Yurei (anywhere)\n"
+"* Deceptive Flesh summons Abomination (only where the living are never meant to be)\n"
+"* Auroric Essence can be converted into EHD Upgrade Power when one talent tree "
+"is completely filled out";

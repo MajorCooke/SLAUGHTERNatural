@@ -1,0 +1,189 @@
+S.U.P.E.R. Natural
+
+If any credits are missing, let me know and I'll update accordingly.
+--------------------------------------------------------------------------------
+Graphics:
+
+Font - Jimmy
+Movie Bars - Tormentor667
+Title(s) - Pieruskwurje, Cool Text
+
+
+--------------------------------------------------------------------------------
+Mapping:
+
+All SUPERNatural Maps: 
+
+Start
+Road
+Military Base - Power Off
+Military Base
+Sewer
+Lake
+Mines
+Radio Tower Upper
+Radio Tower Lower
+Power Plant
+
+by Pieruskwurje.
+
+--------------------------------------------------------------------------------
+SFX:
+
+ZOMGFIRE - SolarSnowfall
+Torch Effect - Tormentor667, Keksdose
+Spark Effect - Tormentor667, SolarSnowfall, Ghastly_dragon 
+Fog Effect - Tormentor667, Pieruskwurje, Major Cooke
+Steam Effect - Tormentor667, SolarSnowfall, Ghastly_dragon
+Rain Spawner - Major Cooke
+Rain - Tormentor667, Ghastly_dragon
+Brightmaps - Virtue, Pieruskwurje
+Lightning - Major Cooke
+Lightning Portal Effect - Z86
+Blood Decals - Ghastly_Dragon, Id Software
+Smoke Pillar Thingies - KeksDose
+Additional Lightning Effects - JRift
+Additional SFX - DBThanatos, Major Cooke
+Waterfall Effect: Tormentor667
+
+
+--------------------------------------------------------------------------------
+Decorations:
+
+Car - ???
+Many, Many Trees - Many, Many IWADS
+Hellfire Barrel - Demmon Break Master, Pieruskwurje
+Tech Barrels - Captain Toenail
+Junk Piles - Gothic
+UAC Holograms - Gothic, Tormentor667
+Laboratory Glass - Tormentor667, David Raven
+Marine Stuff - David Raven
+Oil Drum - Captain Toenail
+Bronze Lamps - Captain Toenail
+Column Variants - ChronoSeth
+Roof Lights - Gez
+Strobe Lights - Captain Toenail
+Lamps - Captain Toenail
+Marble Columns - Tormentor 667, Captain Toenail, Gez
+Necrodome Tombstones - Gothic
+Strife BLoody Columns - Yuyu3
+Biosuit - Ghastly_Dragon
+Armour Set - Bravo
+Heavy Armour - Captain Toenail
+Tech Armour - Ghastly_Dragon
+Bloody Heads - Hayabusa
+Bone Pile - Captain Toenail
+Brown Scientist Carcass - Ghastly_Dragon, NMN
+Cow Skulls - Captain Awesome, Lucario
+Dead Scientists - Scalliano, David Raven, The Kins 
+Gore Pack - Captain Aweosme
+Half Cut Soldier - Ghastly _Dragon, NMN
+Hanged Bloody Skeleton - Mr. Green
+Hanged Marines - Captain Toenail
+Hanged Player - Anarchist
+Hanging Marine Meat - Captain Toenail
+Hanging Marines - TODM
+Hanging Marines 2 - Captain Toenail
+Impaled marines - KDIZD Team(?)
+Impaled Rocket Guy - Lucario, The Innocent Crew
+Impaled Scientists - Scalliano
+Marine Corpses - MDK (Hah, I get it.)
+Marine Victim - Captain Awesome, Captain Toenail
+Radioactive Corpses - Yuyu3
+Shirtless Beheaded Marine - Ghastly_Dragon, NMN
+Shirtless Marine Carcass - Ghastly_Dragon, NMN
+Sitting Corpses - Pillow Blaster, NMN
+Skewered Corpses - Captain Toenail
+Skulltag Gore - Skulltag Team
+Broken Lamps - Defcon Razor
+Radio Tower Model - Major Cooke
+
+--------------------------------------------------------------------------------
+Monsters:
+
+Avoid - Eriance, Vader, Pieruskwurje
+Interact - Eriance, Vader, Pieruskwurje
+
+Anthony Wharton - Flybat
+Smile - Go look at Creepypastas for a while.
+Enithyn (Eyes) - ^ ^ ^ ^ ^ [1]
+Avriethin (Tentacles) - ^ ^ ^ ^ ^ [1]
+10VN - Pieruskwurje, JRift Team(?), Jimmy, Eriance, KeksDose, Major Cooke
+ 
+[1] - I don't even know where this one comes from... - M.C.
+--------------------------------------------------------------------------------
+Textures:
+
+Too Much Brown - Tormentor667
+Silver Texture Pack - Nick Baker
+Dark Base - David Gevert
+Mortiser - Nick Baker
+Doom Potpourri - FuzzballFox, Enjay, EarthQuake, CaptainToenail
+DrDoctor's Textures - DrDoctor, Grymmoire, Dusk, Nightfall
+Gothic Textures - Gothic Team
+IDTex - ID Software, Samuel Villarreal, Emil Brundage
+CC4 Textures - CC4 Team?
+Light Beams - Tormentor667
+Lighter Beams - Skillsaw
+Blood Splatter - Ghastly_Dragon, Id Software
+Rain Textures - El Zee, 5hfifty
+Black and Green - Agaures (aka Krumzy)
+Incredibly Useful Doom Edits - Enjay, Nightmare, Malinku, Earthquake
+Slanted texture slopes - Major Cooke
+
+Many Additions - Nick Baker, Vader, Event Horizon, 3D Realms, Monolith, 
+	Valve Software, Sean Johnson, Neoworm, Wildweasel, zrrion the insect, 
+	Sicamore, Pieruskwurje, Cage, Earthquake, Enjay, Esselfortium, Malinku, abbuw,
+	Major Cooke
+
+
+---------------------------------------------------------------------------------
+Music:
+
+INTROMS1 - Intro, Bullet For My Valentine
+INTROMS2 - S.U.P.E.R Natural Theme, Elliott Morse
+10VNMUS1 - 
+
+
+--------------------------------------------------------------------------------
+Sounds:
+
+Jesus not this again...
+Zen Dynamics
+SCP : Containment Breach
+Freesound.org
+Realm667 Sound Repository
+Bouncy
+DUMP 2 (the heartbeat effect)
+
+--------------------------------------------------------------------------------
+Scripting:
+
+General Mapping Scripts: Pieruskwurje
+Smile!: Pieruskwurje, Major Cooke
+Enithyn Static: Pieruskwurje, Major Cooke
+Text On Actor (ACS): Calgari_87, Isle
+Text On Actor (ZScript): Gutawer, Marisa Kirisami, Major Cooke
+Smooth Colour Change - Carlcyber
+Boss Health Bars - Apothem, Enjay
+Movie Bars - Logan MTM
+SFX Toggle, Compass - Ed The Bat
+Dialogue System - Pieruskwurje
+HUD Border Calcuations - bagheadspidey, Carlcyber
+
+--------------------------------------------------------------------------------
+Special Thanks:
+
+Maelstrom 
+- Gave me a cool idea, and so I ruined it, and turned it into this.
+Randy, Graf and Co. 
+- For Ports, baby!
+Id Software, Raven Software, Rogue Entertainment, 3D Realms, Pro Developers, etc. 
+- For Doom, Heretic, and so on and so forth.
+Elliott Morse
+- For not getting credited the first time in Winter's Fury.
+
+--------------------------------------------------------------------------------
+In memory of Tayler Smee.
+4x the man any of us could have ever wanted to be.
+- Pieruskwurje

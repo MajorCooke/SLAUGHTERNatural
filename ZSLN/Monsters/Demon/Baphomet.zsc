@@ -1,0 +1,77 @@
+/*------------------------------------------------------------------------------
+The Big Three
+
+This dimension's Hell is run by a being called Baphomet and his two lieutenants,
+Azmodan and Diablo. The Baphomet began an invasion of Earth out of desire to 
+survive. Likely due to problematic behavior with Dark attempting to absorb the
+Hellfire...
+
+Humanity has been using it as a power source for too long, and now they want it
+back. They'll stop at nothing until it's all gone.
+
+If they are drawn to Hellfire, perhaps you can make use of some UAC equipment to
+draw them out and end them, and the demonic incursions in this region... Provided
+they're not immortal, of course.
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+Diablo
+
+"You should have known better than to think of my lord challengeable, human. You
+brought this on yourself."
+
+A clever demon lord who likes to attack from a distance and avoids close
+encounters. Rains down all varieties of fire and teleports around. 
+------------------------------------------------------------------------------*/
+Class SLNDiablo : SLNBoss
+{
+	Default
+	{
+		Tag "Diablo";
+		Species "Demon";
+		Obituary "You should've heeded my warning, %o. Clearly you underestimated us.";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Azmodan
+
+"PATHETIC HUMAN! I'LL SHOW YOU WHY I AM RAGE INCARNATE!"
+
+A big beefy brawler who will charge headlong into anything for a challenge. Not
+as clever as Diablo, but certainly a lot tougher, if his metal limbs and big
+bulky body weren't anything to go by. Specializes in firestorms and firebombs.
+------------------------------------------------------------------------------*/
+Class SLNAzmodan : SLNBoss
+{
+	Default
+	{
+		Tag "Azmodan";
+		Species "Demon";
+		Obituary "BHAHAHAHA, PATHETIC %o, SO POWERLESS AGAINST US!";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Baphomet
+
+"Creature! You dare think of me at your beck and call!? The price of your 
+arrogance is my wrath!"
+-----
+Ruler of demonkind. Extremely powerful and has all the Hellfire needed to be
+permanently unkillable. Maybe it's time to put that to the test, now that you
+have your own Hellfire reserves...
+
+While around him, he constantly drains Hellfire from you. Attacking him causes
+him to drop it often, allowing you to replenish. He is far more dangerous here
+than he is in Winter's Fury and will annihilate a careless marine.
+------------------------------------------------------------------------------*/
+Class SLNBaphomet : SLNBoss
+{
+	Default
+	{
+		Tag "Baphomet";
+		Species "Demon";
+		Obituary "Hellfire is mine, %o. I will reclaim what your kind has stolen from me.";
+	}
+}

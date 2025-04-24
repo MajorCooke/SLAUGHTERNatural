@@ -1,0 +1,46 @@
+[en default]
+
+SLN_HELLFIRE = "\cgHell\cffire\c*";
+SLN_DARKFIRE = "\ctDark\ckfire\c*";
+
+DARK_INTRO_01 = 
+"Everyone has a story. Sometimes, these stories inspire others who take\n"
+"the story and expand on it through various means. But sometimes, they mean\n"
+"something to us, and us alone... But to others, it may mean nothing at all.";
+
+DARK_INTRO_02 = 
+"The impact of the invasion was felt far and wide,\n"
+"with humanity left reeling. They began to rebuild\n"
+"after a time, and they made use of a mysterious\n"
+"fuel source leaking from the demon portals...\n"
+"$SLN_HELLFIRE.";
+
+DARK_INTRO_03 = 
+"Not only did it help them rebuild faster, they\n"
+"began to experiment with it, using it not just for\n"
+"power... but to also test its application on\n"
+"different specimen, and to see if they can wield\n"
+"it against the demons.";
+
+DARK_INTRO_04 = 
+"Not to mention the bizarre offshoot referred to\n"
+"as $SLN_DARKFIRE, which changed pigments and\n"
+"began having wild effects on subjects, now deemed\n"
+"too dangerous for human application - even if\n"
+"capable of weakening demons.";
+
+DARK_INTRO_05 = 
+"Silkwood Mountain Base, known as NT-AU for short,\n"
+"sits upon one of the biggest stockpiles of $SLN_HELLFIRE.\n"
+"Despite its top secret nature, the demons are drawn to\n"
+"the base like moths to flame...";
+
+DARK_INTRO_06 =
+"Meanwhile, \cdFlynn Taggart\c*, the man who failed Hel's\n"
+"invasion, keeps fighting the good fight against the demons.\n"
+"With him going on a world tour and eliminating the invaders,\n"
+"he went on a mission to clean out an infestation in a jungle\n"
+"base, teleporting to another base that is best left to the unknown.";
+
+DARK_INTRO_10 = 
+"I would know. I was there, after all.";

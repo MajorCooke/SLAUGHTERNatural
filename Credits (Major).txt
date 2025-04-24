@@ -1,0 +1,139 @@
+	SLAUGHTERNatural
+	by Major Cooke
+	
+Note, this is only my credits. See the other credits file for Pieru's.
+
+						================
+						*** THE TEAM ***
+						================
+Major Cooke
+	Lead Developer of SLAUGHTERNatural.
+
+Pieruskwurje
+	Beta tester, resource provider. Created S.U.P.E.R. Natural, and gave me 
+	permission to make this a reality.
+
+Scuba Steve
+	Beta tester, resource provider
+
+						===============
+						*** CREDITS ***
+						===============
+---------------
+*** Coding ***
+---------------
+--- CODE ---
+Gutawer
+	Gutamatics library
+
+Phantombeta
+Raveyard
+RicardoLuis0
+Kodi
+	Various coding help
+	
+ZZYZX
+	Hologram Shader (D4D)
+	
+--- RESOURCES ---
+
+* SOUNDS *
+	Doom Eternal
+		Various
+	Youtube
+		Ducks
+	Legendary Complex Addon
+		Nuke
+	SCP Security Breach
+	Lethal Company Mimic Mod
+		Smile
+
+* SPRITES *
+	Doom Eternal
+		Various
+	muumi
+		Animated skies
+		Alt. portal sprites
+		
+
+Shiny Metagross
+	IQM Models
+	
+FuzzballFox
+	Hellfire/Darkfire textures
+	Custom Text Colors (https://zandronum.com/forum/viewtopic.php?t=3502)
+	
+Doom Eternal
+	Sprites/Sounds
+	
+Elementalism (who credits Cube 2: Sauerbraten)
+	Jungle Trees
+	
+AfterDoom (who credits Sonic Mania)
+Simulacrum.wad (muumi?)
+	Portal Sprites
+	
+muumi's texture pack
+	
+	
+AeridicCore & Shreddy117
+	Duck Model
+
+Legendary Complex Addon
+	Nuke Sound
+	
+SCP Security Breach
+Lethal Company Mimic Mod
+	Smile Sounds
+	
+YouTube
+	Duck sounds
+	
+Doom 3
+Half-Life 2
+DUMP 2 (https://forum.zdoom.org/viewtopic.php?t=51072)
+	Portal Ambiance Sounds
+
+-------------
+*** Music ***
+-------------
+Five Nights At Freddies: Ultimate Custom Night soundtracks
+- Hibernating Evil
+- Sleep No More
+- Where Dreams Die
+- Sonata for the Fallen
+- Last Breath
+- Void
+
+CDMusic - Despair 
+https://www.youtube.com/watch?v=WicAv-qV2Kg
+
+ToxicXEternity - Chaos Battle 
+https://www.youtube.com/watch?v=V6XMjKscgOo
+
+Sinyells (Legna Zeg) - Be Yourself
+https://www.youtube.com/watch?v=a4h5XIQ1xW0
+
+
+
+----------------------
+*** Special Thanks ***
+----------------------
+Pieruskwurje
+	For putting up with my bullshit and giving permission to let this become a
+	thing. I hope you enjoy it, as with you, the readers. <3
+
+Graf Zahl, randi, dpJudas & everyone who contributed
+	GZDoom
+
+dpJudas, Nash, Bridgeburner, Raveyard, RicardoLuis0, Boondorl & contributors
+	VKDoom
+
+For everyone who helped V/G/ZDoom source ports become what they are today.
+This wouldn't be possible without you.
+--------------------------------------------------------------------------------
+In Memory of 
+* Clayton 'iSpookulon' Conroy 
+* TiberiumSoul
+Some of the kindest souls I've ever met.
+- Major Cooke

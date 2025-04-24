@@ -1,0 +1,126 @@
+[en default]
+
+//	GeneralDialogue(str text, int ID, int textcolour, int xpos, int ypos, int holdtime, int specialfunc)
+
+SLN_INTRO_01 = // Maddox
+"Warning. Unidentified personnel detected exiting teleport pad.&&&\n"
+"Response protocol activated: Emergency Lockdown engaged.";
+
+SLN_INTRO_02 = // Flynn
+"^`Uuugh...`^&& My head...";
+SLN_INTRO_03 = 
+"Well,& I'm alive,& at least...&& And on Earth.&& But where the Hell am I?...";
+
+//Using the door, Maddox denies Flynn.
+//-Maddox
+SLN_INTRO_06 = "Access denied.";
+SLN_INTRO_07 = "Await military personnel for identification and prosecution.";
+SLN_INTRO_08 = "Error:& Radio wave interference detected.& Adjusting frequencies...";
+SLN_INTRO_09 = "Interference resolved.&& Contact established successfully.";
+
+SLN_INTRO_09A = //-Colonel
+"Maddox,& unlock the middle door.";
+
+SLN_INTRO_09B = //-Maddox
+"Warning!& Lifting lockdown with UID personnel may jeopardize-";
+
+SLN_INTRO_10 = //-Colonel (Maddox censors him so only Maddox can hear it.)
+"Override.&& `ID`:& Colonel Enterblathnir.& Authorization code:& -...";
+
+SLN_INTRO_11 = //-Maddox
+"`......`&Override code accepted.& Doors unlocked.";
+// Door opens. Holograph of Enterblathnir is on the main computer terminals.
+SLN_INTRO_12 = // Colonel
+"Step inside.";
+
+// Now for the actual cinematic upon entering, and alerts start happening.
+
+SLN_INTRO_13 = //Colonel
+"`...`You're a marine? Maddox, run a bioscan check on him. Name, rank and-";
+
+SLN_INTRO_14 = //Maddox
+"ALERT: Hellfire signatures detected in south exit. Demons incoming.";
+
+SLN_INTRO_15 = // Colonel
+"Damn. All of our men are down here currently mopping up a Hellfire portal...\n"
+"Maddox, request backup ASAP.";
+
+SLN_INTRO_16 = //Maddox
+"Preparing emergency signal broadcast for reinforcements...";
+
+SLN_INTRO_20 = // Flynn
+"Flynn Taggart, commander of TAO Team Gold reporting in, sir.";
+
+//-Colonel turns to face Flynn.
+SLN_INTRO_21 = // Colonel
+"......@Did you just say TAO Te-";
+
+SLN_INTRO_22 = // Maddox
+"!!!DANGER!!!\n"
+"POWER VOLATILE. HELLFIRE PORTAL HAS OPENED IN TUNNELS. DEMONS INCOMING.@\n"
+"ALL UNITS PREPARE COUNTERFORCE. ALL NON-MILITARY PERSONNEL EVACUATE THROUGH\n"
+"FOREST EXIT. \cf^THE BASE IS UNDER ATTACK.^";
+
+SLN_INTRO_23 = // Flynn
+"My equipment was lost mid-teleportation sir. Gateway malfunctioned during the fight.@\n"
+"I'll buy time you need to get here, if you have a spare weapon.";
+
+SLN_INTRO_24 = // Colonel
+"Mmmm... ...I have a spare shotgun and chaingun in my office right behind you.";
+
+SLN_INTRO_25 = // Maddox (opens the door)
+"Office access granted.";
+
+//------------------------------------------------------------------------------
+// Flynn enters and picks a weapon.
+
+SLN_INTRO_26 = // Maddox
+"Error: Platform jammed. Second weapon irretrievable until repaired.";
+
+SLN_INTRO_27 = // Colonel
+"...We just had that repaired yesterday...";
+
+SLN_INTRO_28 =
+"If you are TAO though, having either will be enough. ^Especially^ Gold...\n"
+"Maddox, open the way to the south tunnel, and close the way after him.";
+
+SLN_INTRO_29 = //Maddox opens the way except the last door.
+"Warning. South entry lockdown barrier at 90% integrity and falling.\n"
+"Barrier breach estimation in 5 minutes.";
+
+SLN_INTRO_30 = // Colonel
+"Can't let that happen, or backup and evac will have to take the long way.\n"
+"We'll open the door and let you have fun. Maddox will supply ammo from above.";
+
+SLN_INTRO_31 = // Maddox
+"Supply drones activated. Munitions will drop every 20 seconds.";
+
+SLN_INTRO_32 = // Colonel
+"Once we finish down here, we'll reinforce you as fast as possible. Shouldn't be\n"
+"long at all. Are you ready for this?";
+
+// The gate lowers and all Hel breaks loose.
+SLN_INTRO_33 = // Maddox
+"Preparations complete. Gate unsealed and opening.";
+
+SLN_INTRO_34 = // Colonel
+"Here they come! Hold 'em off, we're nearly done.";
+
+SLN_INTRO_35 = // Flynn
+"Bring it on.";
+
+// During the fight.
+SLN_INTRO_36 = // Colonel (20% complete)
+"We're on our way back, marine. Hold on tight.";
+
+SLN_INTRO_37 = // Maddox (40%)
+"Warning: Volatile energy detected. Portal size increasing.";
+
+SLN_INTRO_38 = // Colonel
+"Double time it, marines! We've got more company!";
+
+SLN_INTRO_39 = // Maddox (60%)
+"Path to the Lake unlocked. ^Here comes the cavalry!^";
+
+//------------------------------------------------------------------------------
+// After the portal

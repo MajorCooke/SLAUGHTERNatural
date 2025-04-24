@@ -1,0 +1,220 @@
+// All other entities from Realm667, etc.
+
+/*------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Ghouls
+by CutmanMike
+Resources from Ghoul's Forest 3 & Ghouls vs Humans.
+
+Evil spirits of the damned have risen from the grave for various reasons. At the
+beckoning of the Yurei, war has erupted between humans and the ghouls, where they
+come out of one specific forest where the Yurei was murdered long ago, and now 
+resides at the heart of it, commanding her minions to massacre every human they
+find without mercy.
+
+Luckily, this Earth has not fallen to the truly remarkably evil act of a child's
+parents murdering their daughter in such a monstrous way... yet.
+
+But the barriers between dimensions can be frail and flicker at times. Perhaps
+that's how the poppy ended up in the house by the lake. You can tell its haunted
+just be holding it - cold to the touch. You know better than to leave it for
+some other fool to toss it to a torch, but perhaps it may be better for you, the
+Slayer, to destroy the dormant threat by striking first.
+
+Luckily, the Yurei is no ally to the demons or the Hellfire monsters who gladly
+war with each other with reckless abandon. Perhaps you can leverage the danger
+of summoning the ghouls to your advantage, destroying each other in the process.
+After all the terrorfiends are the product of a human mind...
+--------------------------------------------------------------------------------
+------------------------------------------------------------------------------*/
+
+// What? She doesn't exist in our world. I would know of it. I fear what will
+// happen if you unchain her and fail to kill her, Flynn. Some things are better
+// left to the unknown.
+// But you may be right. Leaving that lying around for someone to chuck into a
+// fire will bode poorly for this world.
+Class SLNPoppy : CustomInventory
+{
+	Default
+	{
+		Tag "Poppy (Summons the Yurei)";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Sjas
+
+A talented jester during medieval times, and a pretty good one. One day, one of
+his jokes didn't quite land, and so he kept repeating it. The court ordered him
+removed from the stage, when he broke down screaming he would kill them all. 
+And so he was executed, and the raging violence died on his lips.
+
+His screams are his weapon and his sonic shouts are capable of wrecking anyone's
+minds who hear them up close. Keep away, and watch out - he's able to reflect
+projectiles on occasion. Hit him with bullets - particularly shotgun shells. 
+Sjas will vanish in smoke when harmed, coming at the attacker from a different
+angle. When close to death, will charge when line of sight is established.
+
+Weakness: Shells
+------------------------------------------------------------------------------*/
+
+Class SLNSjas : SLNMonster
+{
+	Default
+	{
+		Tag "Sjas";
+		Species "Ghoul";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Jitterskull
+
+In ancient times, giants roamed the land. Communication wasn't at its best, 
+mainly with grunts and groans. Jitter, in life, was a highly revered warrior,
+mighty and powerful while his lopsided brother, Choke, was often shunned and
+unloved by many. Unable to bear this depression any longer, Choke killed himself
+and was buried by his bigger brother. When Jitter's time came, his dying wish
+was honored to be buried next to his brother.
+
+The Yurei resurrected his head as a mindless servant with glowing red eyes. He
+moves via 'jittering' to a new location, but is otherwise dormant. He attacks
+by charging at enemies in sight, and chewing his meals into pieces before
+swallowing them. During this time, he cannot attack, but dealing enough damage
+to him will interrupt him, and he will retaliate.
+
+Weakness: Plasma
+------------------------------------------------------------------------------*/
+
+Class SLNJitterskull : SLNMonster
+{
+	Default
+	{
+		Tag "Jitterskull";
+		Species "Ghoul";
+		Obituary "%o was devoured by the Jitterskull.";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Creeper
+
+The Yurei found a starving baby floating down a river near the forest in a basket
+whose parents had died from a plague. Starving and thirsty, the baby was close
+to death. But the Yurei had no human food to feed it with, instead feeding it
+souls of the humans she killed, twisting and mutating the baby into the malformed
+Creeper. 
+
+Tiny and silent, this ghostly terror 'crawls' along the ground towards its victims.
+It makes very little noise, and the only way to tell is by its raspy breathing.
+When it catches a victim, the Creeper rises up with mind-breaking terror that
+bypasses all physical defenses and attacks their souls directly, instantly scaring
+them out of their bodies and killing them as a result. Yet it won't hesitate to
+crawl some distance away if wounded, during which it cannot attack.
+
+But... What about Hellfire as a protective source? No one knows for sure. Chances
+are though, it could save a man once, if they collect enough energy to weather
+the attack.
+
+Weakness: Bullets
+------------------------------------------------------------------------------*/
+
+Class SLNCreeper : SLNMonster
+{
+	Default
+	{
+		Tag "Creeper";
+		Species "Ghoul";
+		Obituary "%o was scared to death by Creeper.";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Choke
+
+Brother to Jitterskull, Choke was often the outcast of the giants, born as an
+ugly mutant with deformities. Unwanted by humans and giants, he killed himself
+after a time, and was buried by his brother - only to be joined by him when time
+claimed his brother. It was even by pure accident that he was resurrected by the
+Yurei, but she took him into her fold to fight against the humans.
+
+Choke is easily the fastest ghoul, but lacks in health. Unlike his brother, he's
+squishy and quickly nibbles down his opponents. He can also gurgle up a meal and
+launch a powerful blood ball after taking a moment to work it up, where he is
+most vulnerable.
+
+Weakness: Explosives
+------------------------------------------------------------------------------*/
+
+Class SLNChoke : SLNMonster
+{
+	Default
+	{
+		Tag "Choke";
+		Species "Ghoul";
+		Obituary "%o was nibbled to pieces by Choke.";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Frostbite
+
+Spirits of vengeance stir within the chilly winds of the tundras. Whenever a
+victim is murdered, the victim's souls often cry out in pain, sorrow or anger
+at their own deaths. Frostbite rises from the elements upon hearing their pleas,
+to ensure their killer receives a just and chilly demise in turn. When the Yurei
+discovered these spirits while looking for new allies, Frostbite understood her
+desire for revenge, and answered her call to deliver cold death to humanity.
+
+Frostbite has a strong ice breath that can quickly freeze an opponent if they're
+drowned in too much of his gale, along with the ability to chow down on them if
+needed. However, it prefers to keep its distance if possible, and wherever it
+goes, its hair tingles with icicles clattering together rapidly, making it the
+easiest ghoul to alert humans about its presence.
+
+Weakness: Fire, BFG, Hellfire
+------------------------------------------------------------------------------*/
+
+Class SLNFrostbite : SLNMonster
+{
+	Default
+	{
+		Tag "Frostbite";
+		Species "Ghoul";
+		Obituary "%o fell victim to Frostbite's freezing temperature.";
+	}
+}
+
+
+/*------------------------------------------------------------------------------
+The Yurei
+
+A child who was murdered by her parents. She gained unholy and supernatural 
+powers from anger and sorrow, rising up to distribute her vengeance not just 
+against the parents (whom she returned the favor quite messily), she also saw 
+humanity as responsible in general. And so she turned her ire towards them after 
+resurrecting some undead abominations and recruiting others, seeking to do what
+the demons could not. She won't stop until the last human on Earth dies by her hand.
+
+She does not make herself known until her last minion falls, where she warps in
+and slowly closes in on the summoner. When hurt, she moves a small distance
+away and performs various attacks - fireballs, meteors, temp. resurrection, all
+sorts of nasty surprises. Avoid them at all costs, and when she charges, do not
+be in the way! It's the equivalent of failing to hit her before the last fade,
+and will prove fatal with her terrifying shriek.
+
+Kill her to put an end to the ghoul threat once and for all.
+
+Weakness: Hellfire, Holy damage
+------------------------------------------------------------------------------*/
+Class SLNYurei : SLNBoss
+{
+	Array<Actor> Kids;
+	Default
+	{
+		Health 10000;
+		Tag "The Yurei";
+		Species "Ghoul";
+		Obituary "%o is yet another meal for the Yurei.";
+	}
+}

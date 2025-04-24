@@ -1,0 +1,666 @@
+
+// Notes:
+// Some classes are empty inheritances. This is normal. MODELDEF does not care
+// for inheritance AT ALL. This means models must be defined for each actor
+// which shares the same class.
+
+Class SLNModelBase : Actor abstract
+{
+	
+	Default
+	{
+		//$IsDecoration
+		//$Category "Decor"
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOTONAUTOMAP
+	}
+	States
+	{
+	Spawn:
+		ASDF A -1;
+		Stop;
+	}
+}
+
+Class SLNModelBaseAdd : SLNModelBase abstract
+{
+	Default
+	{
+		RenderStyle "Add";
+		+BRIGHT
+	}
+}
+
+//==============================================================================
+// Radio Tower for 5RADIO
+// Original creation (GZDB): Pyroscourge
+// Porting + Coding: Major Cooke
+//==============================================================================
+Class RadioTowerBase : SLNModelBase
+{
+	States
+	{
+	Spawn:
+		RDTW A -1;
+		Stop;
+	}
+}
+
+Class RadioTowerLightBase : RadioTowerBase
+{
+	Default
+	{
+		+BRIGHT
+		RenderStyle "Add";
+	}
+	
+	override void Activate(Actor activator)
+	{
+		bINVISIBLE = false;
+	}
+	
+	override void Deactivate(Actor activator)
+	{
+		bINVISIBLE = true;
+	}
+}
+
+Class RadioTowerMiddle : RadioTowerBase
+{
+	const UpperSpawnOffsetZ = 2112;
+
+	Actor Lights[4];
+	Actor GLLights[16];
+	Actor Trans;
+	Actor Upper;
+	Actor Monitors;
+	
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		
+		Upper = 	Spawn('RadioTowerUpper', pos + (0, 0, 2112));
+		Monitors = 	Spawn('RadioTowerMiddle_Monitors', pos);
+		Trans =		Spawn('RadioTowerMiddle_Trans', pos);
+		Lights[0] = Spawn('RadioTowerMiddle_LightsBottom', pos);
+		Lights[1] = Spawn('RadioTowerMiddle_LightsTopInner', pos);
+		Lights[2] = Spawn('RadioTowerMiddle_LightsTopOuter', pos);
+		Lights[3] = Spawn('RadioTowerMiddle_LightsMiddle', pos);
+		
+		if (Upper)		Upper.Angle = Angle;
+		if (Trans)		Trans.Angle = Angle;
+		if (Monitors)	Monitors.Angle = Angle;
+		
+		for (int i = 0; i < Lights.Size(); i++)
+		{
+			Actor mo = Lights[i];
+			if (mo)
+			{
+				mo.Angle = Angle;
+			}
+		}
+		
+		for (int i = 0; i < GLLights.Size(); i++)
+		{
+			Vector3 s;	s = pos;
+			
+			let lite = PointLightAttenuated(Spawn("PointLightAttenuated", pos));
+			//let lite = PointLight(Spawn("PointLight", pos));
+			if (!lite) continue;
+			
+			lite.Target = self;
+			lite.A_Face(self,0);
+			
+			if (i < 4)
+			{
+				s.XY = Vec2Angle(496, angle + ((i % 4) * 90));
+				s.Z += 153;
+				lite.Args[DynamicLight.LIGHT_RED] = 	0;
+				lite.Args[DynamicLight.LIGHT_GREEN] = 	0;
+				lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+				lite.Args[DynamicLight.LIGHT_SCALE] =	48;
+			}
+			else if (i < 8)
+			{
+				s.XY = Vec2Angle(496, angle + ((i % 4) * 90));
+				s.Z += 2078;
+				lite.Args[DynamicLight.LIGHT_RED] = 	0;
+				lite.Args[DynamicLight.LIGHT_GREEN] = 	0;
+				lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+				lite.Args[DynamicLight.LIGHT_SCALE] =	48;
+			}
+			else if (i < 12)
+			{
+				s.XY = Vec2Angle(252, angle + ((i % 4) * 90));
+				s.Z += 10325 - 9322;
+				lite.Args[DynamicLight.LIGHT_RED] = 	0;
+				lite.Args[DynamicLight.LIGHT_GREEN] = 	200;
+				lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+				lite.Args[DynamicLight.LIGHT_SCALE] =	64;
+			}
+			else
+			{
+				s.XY = Vec2Angle(236, angle + ((i % 4) * 90));
+				s.Z += 11146 - 9322;
+				lite.Args[DynamicLight.LIGHT_RED] = 	125;
+				lite.Args[DynamicLight.LIGHT_GREEN] = 	125;
+				lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+				lite.Args[DynamicLight.LIGHT_SCALE] =	48;
+			}
+			
+			lite.SetOrigin(s, false);
+			GLLights[i] = lite;
+		}
+		
+		if (bDORMANT || (SpawnFlags & MTF_DORMANT))
+		{
+			Deactivate(self);
+		}
+	}
+	
+	void RemoveParts()
+	{
+		for (int i = 0; i < Lights.Size(); i++)		if (Lights[i])		Lights[i].Destroy();
+		for (int i = 0; i < GLLights.Size(); i++)	if (GLLights[i])	GLLights[i].Destroy();
+		
+		if (Trans)		Trans.Destroy();
+		if (Monitors)	Monitors.Destroy();
+		if (Upper) 		Upper.Destroy();
+	}
+	
+	override void Activate(Actor activator)
+	{
+		for (int i = 0; i < Lights.Size(); i++)		if (Lights[i])		Lights[i].Activate(activator);
+		for (int i = 0; i < GLLights.Size(); i++)	if (GLLights[i])	GLLights[i].Activate(activator);
+		
+		if (Monitors) Monitors.Activate(activator);
+		if (Upper) Upper.Activate(activator);
+	}
+	
+	override void Deactivate(Actor activator)
+	{
+		for (int i = 0; i < Lights.Size(); i++)		if (Lights[i])		Lights[i].Deactivate(activator);
+		for (int i = 0; i < GLLights.Size(); i++)	if (GLLights[i])	GLLights[i].Deactivate(activator);
+		
+		if (Monitors) Monitors.Deactivate(activator);
+		if (Upper) Upper.Deactivate(activator);
+	}
+	
+	override void OnDestroy()
+	{
+		RemoveParts();
+		Super.OnDestroy();
+	}
+	
+	States
+	{
+	Spawn:
+		RDTW A -1;
+		Stop;
+	}
+}
+
+Class RadioTowerMiddle_LightsBottom : RadioTowerLightBase	{}
+Class RadioTowerMiddle_LightsTopInner : RadioTowerLightBase	{}
+Class RadioTowerMiddle_LightsTopOuter : RadioTowerLightBase	{}
+
+Class RadioTowerMiddle_Monitors : RadioTowerBase
+{
+	override void Activate (Actor activator)
+	{
+		SetStateLabel("Active");
+	}
+
+	override void Deactivate (Actor activator)
+	{
+		SetStateLabel("Inactive");
+	}
+
+	States
+	{
+	Spawn:
+	Active:
+		RDTW A -1;
+		Stop;
+	Inactive:
+		RDTW B -1;
+		Stop;
+	}
+}
+
+Class RadioTowerMiddle_LightsMiddle : RadioTowerMiddle_Monitors {}
+
+// Translucent warning signs and textures. These must be separate due to 
+// Z-fighting issues.
+
+Class RadioTowerMiddle_Trans : RadioTowerBase
+{
+	Default
+	{
+		RenderStyle "Translucent";
+	}
+	States
+	{
+	Spawn:
+		RDTW A -1;
+		Stop;
+	}
+}
+
+//------------------------------------------------------------------------------
+// Upper Tower Section
+//------------------------------------------------------------------------------
+Class RadioTowerUpper : RadioTowerBase
+{
+	const LightOffX = 490;
+	const LightOffZ = 368;
+	// Debug variables that are just commented out if needed.
+//	const LightOffX = 510;
+//	const LightOffZ = 100;
+//	const LightMove = 268.0;
+//	const TimeOffset = 360.0 / 70.0;
+	Actor AddPiece;
+	Actor Lights;
+	Actor Rings[3];
+	Actor GLLights[8];
+	
+	double Timer;
+	
+	override void Activate(Actor activator)
+	{
+		if (Lights)	Lights.Activate(activator);
+		for (int i = 0; i < GLLights.Size(); i++)
+		{
+			Actor mo = GLLights[i];
+			if (mo)	mo.Activate(activator);
+		}
+		bDORMANT = false;
+	}
+	
+	override void Deactivate(Actor activator)
+	{
+		if (Lights)	Lights.Deactivate(activator);
+		for (int i = 0; i < GLLights.Size(); i++)
+		{
+			Actor mo = GLLights[i];
+			if (mo)	mo.Deactivate(activator);
+		}
+		bDORMANT = true;
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Lights = Spawn('RadioTowerUpper_Lights', pos);
+		Rings[0] = Spawn('RadioTowerUpper_InnerRing', pos);
+		Rings[1] = Spawn('RadioTowerUpper_MiddleRing', pos);
+		Rings[2] = Spawn('RadioTowerUpper_OuterRing', pos);
+		
+		for (int i = 0; i < Rings.Size(); i++)
+		{
+			if (Rings[i])	
+			{
+				Rings[i].Target = self;
+				Rings[i].Angle = Angle;
+			}
+		}
+		
+		//AddPiece = Spawn("RadioTowerUpper_Add", pos, ALLOW_REPLACE);
+		
+		for (int i = 0; i < GLLights.Size(); i++)
+		{
+			if (i < 4)
+			{
+				Vector3 s; 
+				s.XY = Vec2Angle(LightOffX, angle + (i * 90));
+				s.Z = pos.Z + LightOffZ;
+				let lite = PointLightAttenuated(Spawn("PointLightAttenuated", s));
+				if (lite)
+				{
+					lite.Target = self;
+					lite.A_Face(self,0);
+					lite.Args[DynamicLight.LIGHT_RED] = 	0;
+					lite.Args[DynamicLight.LIGHT_GREEN] = 	0;
+					lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+					lite.Args[DynamicLight.LIGHT_SCALE] =	48;
+					
+					GLLights[i] = lite;
+				}
+			}
+			else
+			{
+				Vector3 s; 
+				s.XY = Vec2Angle(25, angle + 45 + (i * 90));
+				s.Z = pos.Z + 2016;
+				let lite = PointLightAttenuated(Spawn("PointLightAttenuated", s));
+				if (lite)
+				{
+					lite.Target = self;
+					lite.A_Face(self,0);
+					lite.Args[DynamicLight.LIGHT_RED] = 	0;
+					lite.Args[DynamicLight.LIGHT_GREEN] = 	200;
+					lite.Args[DynamicLight.LIGHT_BLUE] =	255;
+					lite.Args[DynamicLight.LIGHT_SCALE] =	64;
+					
+					GLLights[i] = lite;
+				}
+			}
+		}
+	}
+	
+	void RemoveParts()
+	{
+		for (int i = 0; i < Rings.Size(); i++)
+			if (Rings[i])		Rings[i].Destroy();
+			
+		for (int i = 0; i < GLLights.Size(); i++)
+			if (GLLights[i])	GLLights[i].Destroy();
+			
+		if (Lights)	Lights.Destroy();
+		if (AddPiece) AddPiece.Destroy();
+	}
+	
+	override void OnDestroy()
+	{
+		RemoveParts();
+		Super.OnDestroy();
+	}
+	
+	Default
+	{
+		Radius 536;
+		Height 1440;
+	}
+}
+
+Class RadioTowerUpper_Lights : RadioTowerLightBase	{}
+Class RadioTowerUpper_Add : RadioTowerUpper_Lights { Default { -BRIGHT } }
+
+Class RadioTowerUpper_Ring : RadioTowerBase
+{
+	const Second = 35.0;
+	const AccelSecond = 360.0 / (Second * 2);
+	const Accel = AccelSecond * 0.5;
+	const Dist = (12610 - 12162);// + 32;
+	double Timer;
+	double Add;
+	Vector3 TPos;
+	Default
+	{
+		+NOTIMEFREEZE
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		
+		Timer = frandom(0.0, 359.9);
+		Add = Accel * frandom(0.8, 1.2);
+		if (Target)
+		{
+			TPos = Target.Pos;
+		}
+	}
+
+	override void Tick()
+	{
+		if (!bNOTIMEFREEZE && IsFrozen())
+			return;
+		Super.Tick();
+		
+		if (Target)
+		{
+			Timer = (Timer + Add) % 360.0;
+			Vector3 lp = TPos;
+			double p = abs(sin(Timer));
+			double DistN = (Timer > 180.0) ? -Dist : Dist;
+			lp.Z = SLN_GMGlobalMaths.LerpDouble(TPos.Z, TPos.Z + DistN, p);
+			prev = pos;
+			SetZ(lp.z);
+			
+		}
+	}
+
+	States
+	{
+	Spawn:
+		RDTW A -1;
+		Stop;
+	}
+}
+
+Class RadioTowerUpper_InnerRing : RadioTowerUpper_Ring {}
+Class RadioTowerUpper_MiddleRing : RadioTowerUpper_Ring {}
+Class RadioTowerUpper_OuterRing : RadioTowerUpper_Ring {}
+
+//==============================================================================
+//==============================================================================
+// 6POWER
+//==============================================================================
+//==============================================================================
+
+// Grass
+Class M6POWER_Grass : SLNModelBase {}
+Class M6POWER_Grass_Top : SLNModelBase {	Default {	RenderRadius 128;	}	}
+Class M6POWER_Grass_Left : SLNModelBase {	Default {	RenderRadius 256;	}	}
+Class M6POWER_Grass_Right : SLNModelBase {	Default {	RenderRadius 256;	}	}
+Class M6POWER_Grass_Mid : SLNModelBase {	Default {	RenderRadius 384;	}	}
+
+// Mountain + Skybox
+Class M6POWER_SB_Corner : SLNModelBase {}
+Class M6POWER_SB_CornerGlow : SLNModelBaseAdd {}
+Class M6POWER_SB_Mid : SLNModelBase {}
+Class M6POWER_SB_MidGlow : SLNModelBaseAdd {}
+Class M6POWER_SB_Mountain : SLNModelBase {}
+Class M6POWER_SB_Sides : SLNModelBase {}
+Class M6POWER_SB_SidesTop : SLNModelBase {}
+
+Class M6Power_CoreLight : SLNModelBase 
+{
+	Default
+	{
+		RenderStyle "Add";
+	}
+	override void Activate(Actor act)
+	{
+		Super.Activate(act);
+		bINVISIBLE = false;
+	}
+	override void Deactivate(Actor act)
+	{
+		Super.Deactivate(act);
+		bINVISIBLE = true;
+	}
+}
+Class M6Power_Core : SLNModelBase 
+{
+	private Actor CLight;
+	
+	Default
+	{
+		Radius 640;
+		Height 256;
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		CLight = Spawn('M6Power_CoreLight', pos);
+		if (bDORMANT) CLight.Deactivate(self);
+	}
+	
+	override void Activate(Actor act)
+	{
+		Super.Activate(act);
+		if (CLight) CLight.Activate(self);
+	}
+	
+	override void Deactivate(Actor act)
+	{
+		Super.Activate(act);
+		if (CLight) CLight.Deactivate(self);
+	}
+	
+	override void OnDestroy()
+	{
+		if (CLight) CLight.Destroy();
+		Super.OnDestroy();
+	}
+	
+	private int Stage;
+	private void SetStage(int num) { Stage = num; }
+	
+	override void Tick()
+	{
+		if (bDESTROYED || IsFrozen())	return;
+		Super.Tick();
+		
+		
+	}
+	
+	States
+	{
+	Spawn:
+	Inactive:
+	Active:
+		ASDF A -1;
+		Stop;
+	Charging:
+		---- A -1 SetStage(1);
+		Goto Spawn;
+	Overcharged:
+		---- A -1 SetStage(2);
+		Goto Spawn;
+	Discharge:
+		---- A -1 SetStage(3);
+		Goto Spawn;
+	}
+}
+
+//==============================================================================
+//==============================================================================
+// Prologue
+//==============================================================================
+//==============================================================================
+
+#region Trees
+//$Color 2
+
+Class RETreeObj : SLNModelBase abstract
+{
+	Default 
+	{	
+		Radius 12;
+		Height 128;
+	}
+}
+
+Class RETree01 : RETreeObj {}
+Class RETree04 : RETreeObj {}
+Class RETree05 : RETreeObj {}
+Class RETree06 : RETreeObj {}
+Class RETree08 : RETreeObj {}
+Class RETree09 : RETreeObj {}
+Class RETree10 : RETreeObj {}
+Class RETree11 : RETreeObj {}
+Class RETree12 : RETreeObj {}
+
+#endregion
+
+Class M2_SB_CornerFrontBase : SLNModelBase abstract
+{
+	private Class<Actor> Extra;
+	property Extra: Extra;
+	
+	private Actor ex;
+	Default
+	{
+		Radius 1024;
+		Height 992;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		ex = Spawn(Extra, pos);
+		if (ex)
+		{
+			ex.Angle = Angle;
+			if (bDORMANT)	Deactivate(self);
+			else			Activate(self);
+		}
+	}
+	
+	override void OnDestroy()
+	{
+		if (ex) ex.Destroy();
+		Super.OnDestroy();
+	}
+	
+	override void Activate(Actor act)
+	{	if (ex) ex.Frame = 0;	}
+	
+	override void Deactivate(Actor act)
+	{	if (ex) ex.Frame = 1;	}
+}
+
+Class M2_SB_CornerFrontL : M2_SB_CornerFrontBase  { Default { M2_SB_CornerFrontBase.Extra "M2_SB_CornerLightL"; }	}
+Class M2_SB_CornerFrontR : M2_SB_CornerFrontBase  { Default { M2_SB_CornerFrontBase.Extra "M2_SB_CornerLightR"; }	}
+
+Class M2_SB_CornerLightBase : SLNModelBase abstract
+{
+	Default
+	{
+		Radius 1024;
+		Height 128;
+	}
+	States
+	{
+	Spawn:
+		ASDF A -1;
+	//	ASDF B -1;
+		Stop;
+	}
+}
+
+Class M2_SB_CornerLightL : M2_SB_CornerLightBase {}
+Class M2_SB_CornerLightR : M2_SB_CornerLightBase {}
+
+Class M2_SB_FrontL : SLNModelBase { Default { Radius 1216; Height 992; }}
+Class M2_SB_FrontR : M2_SB_FrontL {}
+Class M2_SB_LightAdd : SLNModelBase { Default { RenderStyle "Add"; +BRIGHT } }
+Class M2_SB_LightL : SLNModelBase { Default { Radius 112; Height 128;	} }
+Class M2_SB_LightR : M2_SB_LightL {}
+Class M2_SB_Pylon1 : SLNModelBase { Default { Radius 160; Height 840; } }
+Class M2_SB_Pylon2Add : SLNModelBaseAdd {}
+Class M2_SB_Pylon2 : SLNModelBase 
+{
+	Actor ex;
+	Default
+	{
+		Radius 80;
+		Height 200;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		ex = Spawn('M2_SB_Pylon2Add', pos);
+		ex.Angle = Angle;
+	}
+	override void OnDestroy()
+	{
+		if (ex) ex.Destroy();
+		Super.OnDestroy();
+	}
+}
+
+
+Class M2_SB_SideL : SLNModelBase { Default { Radius 224; Height 992; } }
+Class M2_SB_SideR : SLNModelBase { Default { Radius 224; Height 992; } }
+
+Class M2_SB_Mountain1 : SLNModelBase {}
+Class M2_SB_Mountain2 : SLNModelBase {}
+Class M2_SB_Mountain3 : SLNModelBase {}
+Class M2_SB_Mountain4 : SLNModelBase {}
+Class M2_SB_Mountain5 : SLNModelBase {}

@@ -1,0 +1,190 @@
+
+/*
+
+$limit SLN/Portal/Teleport 0
+$limit SLN/Portal/Thunder 0
+$limit SLN/Portal/Warning 0
+$limit SLN/Portal/On1 0
+$limit SLN/Portal/On2 0
+$limit SLN/Portal/Off 0
+$limit SLN/Portal/OffGlobal 0
+*/
+
+Class SLNHellfirePortal : Actor
+{
+	private SLNHellfirePortalV VT;
+	Default
+	{
+		//$Category "Event"
+		//$Sprite PRTLA0
+		//$Color 17
+		Tag "Hellfire Portal";
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+DORMANT
+		+NOTONAUTOMAP
+		RenderStyle "None";
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+	}
+	
+	override void Activate(Actor mo)
+	{
+		if (!bDORMANT)	return;
+		bDORMANT = false;
+		SetStateLabel("Active");
+	}
+	
+	override void Deactivate(Actor mo)
+	{
+		if (bDORMANT)	return;
+		bDORMANT = true;
+		SetStateLabel("Inactive");
+	}
+	
+	private void SpawnFlash(int type)
+	{
+		let fl = SLNPortalFlash(Level.SpawnVisualThinker('SLNPortalFlash'));
+		if (fl)	
+		{
+			fl.pos = pos;
+			fl.SetType(type);
+		}
+		A_StartSound("SLN/Portal/On1",6,CHANF_OVERLAP);
+	}
+	
+	private void SetPortal(int st)
+	{
+		if (!VT) VT = SLNHellfirePortalV(level.SpawnVisualThinker('SLNHellfirePortalV'));
+		
+		if (VT)
+		{
+			VT.pos = pos;
+			VT.SetSizeGoal(st);
+		}
+		A_StartSound("SLN/Portal/On3", 8, CHANF_OVERLAP);
+	}
+	
+	override void OnDestroy()
+	{
+		if (VT) VT.Destroy();
+		Super.OnDestroy();
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A -1 NoDelay
+		{	if (tid != 0)	Activate(self); }
+		Stop;
+	Inactive:
+		TNT1 A 100 SetPortal(0);
+		TNT1 A -1 SpawnFlash(1);
+		Stop;
+	Active:
+		TNT1 A 30 A_StartSound("SLN/Portal/On1", 7, CHANF_OVERLAP);
+		TNT1 A 7 SpawnFlash(0);
+		TNT1 A -1 SetPortal(1);
+		Stop;
+	}
+}
+
+Class SLNPortalFlash : VisualThinker
+{
+	private double RollAdd;
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Scale = (0,0);
+		RollAdd = frandom(3.0, 15.0) * frandompick(-1.0, 1.0);
+		Flags = SPF_FULLBRIGHT|SPF_NOFACECAMERA;
+		costep = 0.0;
+	}
+	
+	void SetType(int type)
+	{
+		if (type == 1)
+		{
+			Flags |= SPF_ROLL; // add flag
+			Roll = frandom(0.0, 45.0);
+			mul = 0.5;
+			Texture = TexMan.CheckForTexture("Graphics/lens_flare_2cross.png");
+		}
+		else
+		{
+			Flags &= ~SPF_ROLL; // remove flag
+			mul = 1.0;
+			Texture = TexMan.CheckForTexture("Graphics/streak_02.png");
+		}
+	}
+	
+	private int age;
+	private double costep, mul;
+	const step = 180.0 / 8.0;
+	override void Tick()
+	{
+		if (IsFrozen()) return;
+		
+		costep += step * mul;
+		if (costep >= 180.0)
+		{	Destroy(); return; }
+		
+		{
+			Roll += RollAdd;
+			double res = cos(costep) * 2.0;
+			Scale = (res, res);
+			Super.Tick();
+		}
+	}
+}
+
+Class SLNHellfirePortalV : VisualThinker
+{
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Scale = (0,0);
+		
+		Flags = SPF_FULLBRIGHT|SPF_NOFACECAMERA|SPF_ROLL;
+		Texture = TexMan.CheckForTexture('PORTA16');
+		UpdateSpriteInfo();
+		UpdateSector();
+		Prev = Pos;
+		PrevRoll = Roll;
+		SetTranslation('SLNPortalRed');
+	}
+	
+	const tickrate = 2;
+	private int ind, timer, size;
+	const scalerate = 90.0 / (35.0 * 3.0);
+	private double Amp, Goal, Mul;
+	
+	void SetSizeGoal(int size, double mult = 1.0)
+	{	
+		Goal = (size > 0) ? 90.0 : 0.0;	
+		Mul = mult;
+	}
+	
+	override void Tick()
+	{
+		if (IsFrozen())	return;
+		if (Prev != Pos)
+			UpdateSector();
+		Prev = Pos;
+		PrevRoll = Roll;
+		
+		// Scaling
+		if (Amp != Goal && Mul > 0.0)
+		{
+			double sr = scalerate * Mul;
+			if (Amp < Goal)		Amp = min(Amp + sr, Goal);
+			else				Amp = max(Amp - sr, Goal);
+			
+			double sc = sin(Amp) * 2.0;
+			Scale = (sc, sc);
+		}
+	}
+}

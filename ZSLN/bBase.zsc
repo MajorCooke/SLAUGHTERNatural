@@ -1,0 +1,393 @@
+Class SLNBase : Actor abstract
+{
+}
+
+Class SolidProp : SLNBase abstract
+{
+	Default
+	{
+		+SOLID
+		+DONTSPLASH
+	}
+}
+
+Class ExitSightChecker : Actor
+{
+	String text;
+	Default
+	{
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOTONAUTOMAP
+		+INVISIBLE
+	}
+	/*
+		// Setup:
+		proj.CacheResolution();
+		proj.CacheFov(players [consoleplayer].fov);
+		proj.OrientForRenderOverlay(event);
+		proj.BeginProjection();
+
+		// Now you can project as much as you like, just like this:
+		proj.ProjectWorldPos(mo.vec3offset(0, 0, mo.height));
+
+		if(proj.IsInFront()) {
+			let draw_pos = proj.ProjectToScreen();
+			
+			Screen.DrawText(
+				smallfont,
+				Font.CR_ICE,
+				draw_pos.x,
+				draw_pos.y,
+				"achachachachach");
+		}
+	*/
+}
+
+/*
+These are used to connect patrol points together and allow for efficient navigation
+for all monsters.
+
+Arguments are TIDs to the things they're connected to.
+*/
+
+Class FFPlan play
+{
+	FFNode end;
+	Array<FFNode> list;
+	private int Index;
+	
+	static FFPlan GetPath(Actor from, Actor to, FFPlan plan = null)
+	{	return FFNode.GetPath(from, to, plan);	}
+	
+	void ResetIndex() { Index = 0; }
+	
+	FFNode GetNext() 
+	{
+		if (Index >= list.Size())
+			return null;
+		while (Index < list.Size())
+		{
+			let mo = list[Index++];
+			if (mo)	return mo;
+		} 
+		return null;
+	}
+	
+	// Shortcut functions.
+	int Size()					{	return list.Size(); }
+	int Find(FFNode node) const	{	return (node) ? list.Find(node) : list.Size();	}
+	void Pop()					{	list.Pop();	}
+	void Push(FFNode node)		{	if (node && list.Find(node) >= list.Size())	list.Push(node);	}
+}
+
+Class FFNode : Actor
+{
+	const STAT_FFNODE = Thinker.STAT_USER_MAX + 1;
+	const SightFlags = 		SF_IGNOREVISIBILITY|SF_IGNOREWATERBOUNDARY;
+	Array<FFNode> Connections;
+	Array<double> Distances;
+	Default
+	{
+		//$Arg0 "TID 1"
+		//$Arg1 "TID 2"
+		//$Arg2 "TID 3"
+		//$Arg3 "TID 4"
+		//$Arg4 "TID 5"
+		//$Arg0Type 14
+		//$Arg1Type 14
+		//$Arg2Type 14
+		//$Arg3Type 14
+		//$Arg4Type 14
+		+THRUACTORS
+		+NOGRAVITY
+		+INVISIBLE
+		+NONSHOOTABLE
+		+NOBLOCKMAP
+		Radius 16;
+		Height 56;
+	}
+	
+	override void BeginPlay()
+	{
+		Super.BeginPlay();
+		ChangeStatNum(STAT_FFNODE);
+	}
+	
+	static FFPlan GetPath(Actor from, Actor to, FFPlan plan = null)
+	{
+		if (!from || !to)
+			return null;
+		
+		FFNode closestfrom = null, closestto = null;
+		double closestdistfrom = double.max, closestdistto = double.max;
+		Array<FFNode> Collection;
+		
+		let it = ThinkerIterator.Create("FFNode", STAT_FFNODE);
+		FFNode mo = null;
+		while (mo = FFNode(it.Next()))
+		{
+			Collection.Push(mo);
+			double dis;
+			
+			dis = from.Distance3DSquared(mo);
+			
+			if (dis < closestdistfrom && mo.CheckSight(from, SightFlags))
+			{
+				closestdistfrom = dis;
+				closestfrom = mo;
+			}
+			
+			dis = to.Distance3DSquared(mo);
+			
+			if (dis < closestdistto && mo.CheckSight(to, SightFlags))
+			{
+				closestdistto = dis;
+				closestto = mo;
+			}
+		}
+		
+		
+		if (plan && plan.end == closestto)
+			return plan;
+			
+		if (!closestfrom || !closestto)
+			return null;
+		
+		// Only one node found so return that.
+		plan = new('FFPlan');
+		plan.end = closestto;
+		if (closestfrom == closestto)
+		{
+			plan.Push(closestto);
+			return plan;
+		}
+		
+		bool planned = closestfrom.Ping(plan);
+		return (planned) ? plan : null;	
+	}
+	
+	protected bool Ping(FFPlan plan)
+	{	
+		// Can't do this without a plan and a goal! Or already pinged.
+		if (!plan || !plan.end || plan.Find(self) != plan.Size())	
+			return false;
+		
+		plan.Push(self);
+		
+		// We found the end. Terminate the rest of the pings.
+		if (self == plan.end)
+			return true;
+			
+		// The end is a neighboring node, so return it.
+		if (Connections.Find(plan.end) != Connections.Size())
+		{
+			plan.Push(plan.end);
+			return true;
+		}
+		
+		// Just have one so ping it.
+		if (Connections.Size() < 2)
+		{
+			let con = Connections[0];
+			if (con && con.Ping(plan))
+				return true;
+			plan.Pop();
+			return false;
+		}
+		A_Face(plan.end);
+		Array<double> angs;
+		foreach (con : Connections)
+		{
+			if (!con || plan.Find(con) != plan.Size())
+			{
+				angs.Push(360);
+				continue;
+			}
+			angs.Push(absangle(Angle, AngleTo(plan.end)));
+		}
+		
+		// Now sort by angle.
+		Array<FFNode> Arranged;
+		Array<double> ArrAngs;
+		Arranged.Copy(Connections);
+		ArrAngs.Copy(angs);
+		int len = Arranged.Size();
+		for (int i = 0; i < len; i++)
+		{
+			for (int j = 0; j < len - i - 1; ++j)
+				if (ArrAngs[j] > ArrAngs[j+1])
+				{
+					double temp = ArrAngs[j];
+					let conn = Arranged[j];
+					
+					ArrAngs[j] = ArrAngs[j+1];
+					ArrAngs[j+1] = temp;
+					Arranged[j] = Arranged[j+1];
+					Arranged[j+1] = conn;
+				}
+		}
+		
+		// Now try to get the next node going from smallest angle diff to largest.
+		foreach (con : Arranged)
+		{
+			// Not already pinged so grab it and return it.
+			if (con && plan.Find(con) >= plan.Size() && con.Ping(plan))
+				return true;
+		}
+		// Dead end.
+		plan.Pop();
+		return false;
+	}
+	
+	private bool setup;
+	override void Tick()
+	{
+		if (!setup)
+		{
+			setup = true;
+			// TO DO: Add support for setting via UDMF properties.
+			for (int i = 0; i < Args.Size(); i++)
+			{
+				if (!Args[i])	continue;
+				
+				let it = level.CreateActorIterator(Args[i], "FFNode");
+				let mp = FFNode(it.Next());
+				if (mp && mp != self) 
+				{
+					Connections.Push(mp);
+					Distances.Push(Distance3DSquared(mp));
+				}
+			}
+		}
+		Super.Tick();
+	}
+}
+
+
+class Node : Actor
+{
+    Array<Node> neighbors;
+    int allNodesIndex;
+    
+    override void PostBeginPlay()
+    {
+        //grab neighbors
+        
+        //...
+        
+        // add to list
+        
+        AStar handler = AStar(EventHandler.Find('AStarHandler'));
+        
+        allNodesIndex = handler.allNodes.Size();
+        
+        handler.allNodes.Push(self);
+    }
+}
+
+class AStar : Thinker
+{
+    Array<Node> allNodes;
+    
+    clearscope double getScore(Map<int, double> scores, Node n)
+    {
+        return (scores.CheckKey(n.allNodesIndex)) ? scores.get(n.allNodesIndex) : double(int.max);
+    }
+    
+    clearscope int BinarySearch(Array<Node> nodes, Map<int, double> fScore, Node item, bool exact = false)
+    {
+        int Count = nodes.Size();
+        
+        double itemScore = getScore(fScore, item);
+        
+        if(Count == 0) return 0;
+        if(Count == 1) return (itemScore < getScore(fScore, nodes[0])) ? 0 : 1;
+
+        int lo = 0;
+        int hi = Count - 1;
+
+        while(lo <= hi)
+        {
+            int mid = lo + ((hi - lo) / 2);
+            
+            double midScore = getScore(fScore, nodes[mid]);
+
+            if(midScore < itemScore)
+            {
+                lo = mid + 1;
+            }
+            else if(itemScore < midScore)
+            {
+                hi = mid - 1;
+            }
+            else
+            {
+                return mid;
+            }
+        }
+        
+        if(exact)
+        {
+            return Count;
+        }
+        else
+        {
+            return (lo == Count || (itemScore < getScore(fScore, nodes[lo]))) ? lo : lo + 1;
+        }
+    }
+    
+    clearscope void ReconstructPath(Map<int, Node> cameFrom, Node current, out Array<Node> path)
+    {
+        path.Clear();
+        path.Push(current);
+        while(current = cameFrom.GetIfExists(current.allNodesIndex))
+        {
+            path.insert(0, current);
+        }
+    }
+    
+    clearscope void AStar(Node start, Node goal, out Array<Node> path)
+    {
+        Array<Node> openSet;
+        openSet.Push(start);
+        Map<int, Node> camefrom;
+        Map<int, double> gScore;
+        Map<int, double> fScore;
+        
+        gScore.insert(start.allNodesIndex, 0);
+        fScore.insert(start.allNodesIndex, start.distance2D(goal));
+        
+        while(openSet.Size() > 0)
+        {
+            current = openSet[0];
+            openSet.remove(0);
+            if(current == goal)
+            {
+                ReconstructPath(cameFrom, current, path);
+                return;
+            }
+            
+            double curent_gScore = getScore(gScore, current);
+            
+            for(neighbor : current.neighbors)
+            {
+                double tentative_gScore = curent_gScore + current.Distance2D(neighbor);
+                
+                if(tentative_gScore < getScore(gScore, neighbor))
+                {
+                    cameFrom.insert(neighbor.allNodesIndex, current);
+                    gScore.insert(neighbor.allNodesIndex, tentative_gScore);
+                    fScore.insert(neighbor.allNodesIndex, tentative_gScore + neighbor.Distance2D(goal));
+                    
+                    int openSetIndex = BinarySearch(openSet, fScore, neighbor, false);
+                    if(openSetIndex >= openSet.Size() || openSet[openSetIndex] != neighbor)
+                    {
+                        openSet.Insert(openSetIndex, neighbor);
+                    }
+                }
+            }
+        }
+    }
+    
+}

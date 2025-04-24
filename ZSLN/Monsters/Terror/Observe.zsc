@@ -1,0 +1,18 @@
+/*------------------------------------------------------------------------------
+Observe
+
+An animated headless body that uses a shield to shine a light on its victims and
+burn them. While it targets the shield, it will gradually slow down its turn rate,
+or perform a pulse burst. The entity is vulnerable only by standing in the light 
+beam, regardless of pre-strike or post-strike.
+------------------------------------------------------------------------------*/
+
+Class SLNObserve : SLNMonster
+{
+	Default
+	{
+		Tag "Observe";
+		Species "Terrorfiend";
+		Obituary "%o Observed his first and last death.";
+	}
+}

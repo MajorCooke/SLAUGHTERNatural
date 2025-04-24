@@ -1,0 +1,111 @@
+//
+
+extend Class SLNEvent
+{
+	
+}
+
+// Red Hellfire
+// Enhances damage, grants ability to damage Terrorfiends, restores all ammo, or
+// casts spells.
+Class SLNHellfire : Inventory
+{
+	Default
+	{
+		+INVENTORY.IGNORESKILL
+		+INVENTORY.KEEPDEPLETED
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.UNTOSSABLE
+		Inventory.Amount 1;
+		Inventory.MaxAmount 10000;
+	}
+}
+
+// Green Hellfire protects against attacks.
+// Can be used to dramatically reduce ally damage when near and provide 
+// regeneration, add permanent extra armor/health, invulnerability for the player
+// or stasis lock for an ally.
+Class SLNDarkfire : Inventory
+{
+	Default
+	{
+		+INVENTORY.IGNORESKILL
+		+INVENTORY.KEEPDEPLETED
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.UNTOSSABLE
+		Inventory.Amount 1;
+		Inventory.MaxAmount 10000;
+	}
+}
+
+Class SLNRegen : PowerRegeneration
+{
+}
+
+/*------------------------------------------------------------------------------
+Upgrades
+
+Key Legend -> Requirement
+None 	Aura
+*	 	Quantum Upgrades
++		Empyrium Star
+--------------------------------------------------------------------------------
+
+--- Utility (*) ---
+Storage (4)
+	Increases capacity of fuels
+
+Efficiency (4)
+	Reduces fuel cost of all operations
+
+--- Hellfire Spells ---
+Fireball Stream (4)
+	Casts a stream of fireballs that seek out enemies
+	* Increases amount of fireballs per cast, reduce cost
+
+Ignition (4)
+	Ignites enemies in a circle and deals damage over time. Enemies that die
+	explode for the remainder of the damage left to burn.
+	* Longer duration
+
+
+
+--- Darkfire ---
+
+
+
+--- Ultimate (+) ---
+Requires Empyrean Stars. Only the STRONGEST of enemies drop these, but they're
+optional. The campaign can be completed without them, they just make life a lot
+easier. So if you're looking for a challenge, don't get them. >=D
+
+Vampirism (1)
+	Heal for 5% attempted damage dealt. 
+	Gives blue armor if health is full.
+	Works on enemies that absorb the damage.
+	
+Best F(r)iends (1)
+	Terrorfiends are friendly. They gain:
+	+1000% health, +300% damage, gain ranged attacks
+	+Follows you to every zone
+	+Brings you items, moves through you, doesn't block your attacks
+	+Invulnerable to allies
+	+Spawns more commonly and directly around you, up to 5
+	+Terrorfiend attacks give Darkfire
+	+Demons spawn Darkfire on death
+	
+Grayfire (1)
+	Hellfire & Darkfire are now one.
+	Motes are all now Grayfire and gives 2x amount.
+	Grayfire cannot be drained by enemies.
+	
+Reconstitution (1)
+	Gain 0.25% Hellfire & Darkfire per second. After defeating a boss, increases
+	by 1% per second for 20 minutes. This effect can stack.
+	
+Affinity For War (1)
+	Attack speed, ammo capacity, and ammo pickup amounts doubled.
+	Ammo capacity is based on backpack amounts.
+
+
+*/

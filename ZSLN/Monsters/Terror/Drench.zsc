@@ -1,0 +1,15 @@
+/*------------------------------------------------------------------------------
+Drench
+
+Serpentine-ish entity that thrashes around, giving off a sound that drowns out
+others and slows its target.
+------------------------------------------------------------------------------*/
+Class SLNDrench : SLNMonster
+{
+	Default
+	{
+		Tag "Drench";
+		Species "Terrorfiend";
+		Obituary "%o became Drenched in the unknown and paid the price.";
+	}
+}

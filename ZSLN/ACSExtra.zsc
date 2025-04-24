@@ -1,0 +1,119 @@
+
+Class SLN_ACS play
+{
+	// Moves CallerTID to endTID over tics duration.
+	// ang & pit: whether to also gradually change angle/pitch to match over time.
+	// if callertid is 0, gets the ptr
+	static void MoveActorTID(int callerTID, int endTID, int tics, int ptr = AAPTR_PLAYER1, bool ang = true, bool pit = true)
+	{
+		Array<Actor> callers;
+		Actor end = null;
+		
+		if (endTID < 1)
+			return;
+		
+		{
+			let it = level.CreateActorIterator(endTID);
+			end = it.Next();
+			if (!end)	return;
+		}
+		
+		
+		if (callertid == 0)
+		{
+			static const int ptrs[] =
+			{
+				AAPTR_PLAYER1,
+				AAPTR_PLAYER2,
+				AAPTR_PLAYER3,
+				AAPTR_PLAYER4,
+				AAPTR_PLAYER5,
+				AAPTR_PLAYER6,
+				AAPTR_PLAYER7,
+				AAPTR_PLAYER8
+			};
+			for (int i = 0; i < ptrs.Size(); i++)
+			{
+				if (ptr == ptrs[i] && 
+					playeringame[i] &&
+					players[i].mo)
+				{
+					callers.Push(players[i].mo);
+					break;
+				}
+			}
+		}
+		else
+		{
+			let it = level.CreateActorIterator(callerTID);
+			Actor mo = null;
+			while (mo = it.Next())
+			{
+				if (mo) callers.Push(mo);
+			}
+		}
+		
+		if (callers.Size() < 1)	return;
+		
+		foreach (ca : callers)
+		{
+			if (ca)
+			{
+				let th = new('SLNMover');
+				th.caller = ca;
+				th.target = end;
+				th.goal = tics;
+				th.ang = ang;
+				th.pit = pit;
+			}
+		}
+	}
+}
+
+
+
+class SLNMover : Thinker
+{
+	Actor caller, target;
+	int goal;
+	bool ang, pit;
+	
+	private double steps, frac;
+	private Vector2 SAP, EAP, DAP;
+	private Vector3 spos;
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		steps = 0.0;
+		goal = max(goal,1);
+		frac = 1.0 / double(goal);
+		if (caller && target)
+		{
+			spos = caller.pos;
+			SAP = (caller.angle, caller.pitch);			
+			EAP = (target.angle, target.pitch);
+			DAP = (Actor.deltaangle(SAP.X, EAP.X), EAP.Y - SAP.Y) * frac;
+			
+		}
+	}
+	
+	override void Tick()
+	{
+		if (level.IsFrozen() || bDESTROYED)
+			return;
+		
+		Super.Tick();
+		
+		if (!caller || !target || steps >= 1.0)
+		{	Destroy(); return;	}
+		
+		steps = min(steps + frac, 1.0);
+		Vector3 npos = SLN_GMVectorUtil.LerpVec3(spos, target.pos, steps);
+		caller.SetOrigin(npos, true);
+		caller.A_SetAngle(SAP.X + DAP.X * steps, SPF_INTERPOLATE);
+		caller.A_SetPitch(SAP.Y + DAP.Y * steps, SPF_INTERPOLATE);
+		caller.vel = (0,0,0);
+		
+	}
+}

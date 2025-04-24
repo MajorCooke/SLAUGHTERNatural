@@ -1,0 +1,16 @@
+/*------------------------------------------------------------------------------
+Blink
+
+A creature that drags metallic limbs behind it. Upon being sighted, will freeze
+briefly and force the target to blink, teleporting away to try again.
+------------------------------------------------------------------------------*/
+
+Class SLNBlink : SLNMonster
+{
+	Default
+	{
+		Tag "Blink";
+		Species "Terrorfiend";
+		Obituary "%o Blinked, missing the chance to live.";
+	}
+}

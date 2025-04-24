@@ -1,0 +1,5077 @@
+// ------------------------------------------------------
+// ------------------ DOOM GAME LIGHTS ------------------
+// ------------------------------------------------------
+
+// ------------------
+// -- Doom Weapons --
+// ------------------
+
+// Bullet puff
+flickerlight BPUFF1
+{
+    color 0.5 0.5 0.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight BPUFF2
+{
+    color 0.5 0.5 0.0
+    size 3
+    secondarySize 4
+    chance 0.8
+}
+
+object BulletPuff
+{
+    frame PUFFA { light BPUFF1 }
+    frame PUFFB { light BPUFF2 }
+}
+
+// Rocket
+pointlight ROCKET
+{
+    color 1.0 0.7 0.0
+    size 56
+}
+
+flickerlight ROCKET_X1
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight ROCKET_X2
+{
+    color 0.5 0.1 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+}
+
+flickerlight ROCKET_X3
+{
+    color 0.3 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+}
+
+object Rocket
+{
+    frame MISLA { light ROCKET    }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+// Plasma
+pointlight PLASMABALL
+{
+    color 0.0 0.1 1.0
+    size 56
+}
+
+flickerlight PLASMA_X1
+{
+    color 0.2 0.2 1.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight PLASMA_X2
+{
+    color 0.2 0.2 0.8
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+flickerlight PLASMA_X3
+{
+    color 0.1 0.1 0.5
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight PLASMA_X4
+{
+    color 0.0 0.0 0.2
+    size 8
+    secondarySize 16
+    chance 0.4
+}
+
+object PlasmaBall
+{
+    frame PLSSA { light PLASMABALL }
+    frame PLSSB { light PLASMABALL }
+
+    frame PLSEA { light PLASMA_X1 }
+    frame PLSEB { light PLASMA_X2 }
+    frame PLSEC { light PLASMA_X2 }
+    frame PLSED { light PLASMA_X3 }
+    frame PLSEE { light PLASMA_X4 }
+}
+
+// BFG
+pointlight BFGBALL
+{
+    color 0.0 1.0 0.0
+    size 80
+}
+
+flickerlight BFGBALL_X1
+{
+    color 0.2 1.0 0.2
+    size 80
+    secondarySize 88
+    chance 0.3
+}
+
+flickerlight BFGBALL_X2
+{
+    color 0.3 1.0 0.3
+    size 104
+    secondarySize 112
+    chance 0.3
+}
+
+flickerlight BFGBALL_X3
+{
+    color 0.5 1.0 0.5
+    size 120
+    secondarySize 128
+    chance 0.3
+}
+
+flickerlight BFGBALL_X4
+{
+    color 0.2 0.7 0.2
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight BFGBALL_X5
+{
+    color 0.1 0.3 0.1
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+object BFGBall
+{
+    frame BFS1A { light BFGBALL }
+    frame BFS1B { light BFGBALL }
+
+    frame BFE1A { light BFGBALL_X1 }
+    frame BFE1B { light BFGBALL_X2 }
+    frame BFE1C { light BFGBALL_X3 }
+    frame BFE1D { light BFGBALL_X1 }
+    frame BFE1E { light BFGBALL_X4 }
+    frame BFE1F { light BFGBALL_X5 }
+
+    frame BFE2A { light BFGBALL    }
+    frame BFE2B { light BFGBALL_X1 }
+    frame BFE2C { light BFGBALL_X4 }
+    frame BFE2D { light BFGBALL_X5 }
+}
+
+
+
+// ----------------------
+// -- Doom Decorations --
+// ----------------------
+
+// Barrel
+pulselight BARREL
+{
+    color 0.0 0.5 0.0
+    size 20
+    secondarySize 21
+    interval 0.5
+    offset 0 36 0
+}
+
+object ExplosiveBarrel
+{
+    frame BAR1  { light BARREL    }
+
+    frame BEXPC { light ROCKET_X1 }
+    frame BEXPD { light ROCKET_X2 }
+    frame BEXPE { light ROCKET_X3 }
+}
+
+// Floor lamp
+pointlight LAMP
+{
+    color 1.0 1.0 0.8
+    size 56
+    offset 0 44 0
+}
+
+object Column
+{
+    frame COLU { light LAMP }
+}
+
+// Short tech lamp
+pulselight SMALLLAMP
+{
+    color 0.8 0.8 1.0
+    size 56
+    secondarySize 58
+    interval 0.4
+    offset 0 44 0
+}
+
+object TechLamp2
+{
+    frame TLP2 { light SMALLLAMP }
+}
+
+// Tall tech lamp
+pulselight BIGLAMP
+{
+    color 0.8 0.8 1.0
+    size 64
+    secondarySize 66
+    interval 0.4
+    offset 0 72 0
+}
+
+object TechLamp
+{
+    frame TLMP { light BIGLAMP }
+}
+
+
+
+
+
+
+
+
+/*
+
+// Small red torch
+flickerlight2 SMALLREDTORCH
+{
+    color 1.0 0.3 0.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHRedTorchFlare
+{
+    frame RFLR { light SMALLREDTORCH }
+}
+
+// Small green torch
+flickerlight2 SMALLGREENTORCH
+{
+    color 0.0 1.0 0.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHGreenTorchFlare
+{
+    frame GFLR { light SMALLGREENTORCH }
+}
+
+// Small blue torch
+flickerlight2 SMALLBLUETORCH
+{
+    color 0.0 0.0 1.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHBlueTorchFlare
+{
+    frame BFLR { light SMALLBLUETORCH }
+}
+
+// Small yellow torch
+flickerlight2 SMALLYELLOWTORCH
+{
+    color 1.0 1.0 0.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHYellowTorchFlare
+{
+    frame YFLR { light SMALLYELLOWTORCH }
+}
+
+// Small blood torch
+flickerlight2 SMALLBLOODTORCH
+{
+    color 0.8 0.2 0.2
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHBloodTorchFlare
+{
+    frame XFLR { light SMALLBLOODTORCH }
+}
+
+// Small white torch
+flickerlight2 SMALLWHITETORCH
+{
+    color 1.0 1.0 1.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHWhiteTorchFlare
+{
+    frame WFLR { light SMALLWHITETORCH }
+}
+
+// Small purple torch
+flickerlight2 SMALLPURPLETORCH
+{
+    color 0.5 0.0 0.5
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHPurpleTorchFlare
+{
+    frame PFLR { light SMALLPURPLETORCH }
+}
+
+// Small cyan torch
+flickerlight2 SMALLCYANTORCH
+{
+    color 0.2 0.8 1.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 0 0
+}
+
+object SHCyanTorchFlare
+{
+    frame CFLR { light SMALLCYANTORCH }
+}
+
+
+
+
+
+
+// Burning barrel
+flickerlight2 FIREBARREL
+{
+    color 1.0 0.9 0.0
+    size 48
+    secondarySize 54
+    interval 0.1
+    offset 0 32 0
+}
+
+object BurningBarrel
+{
+    frame FCAN { light FIREBARREL }
+}
+*/
+
+// Skulls w/candles
+flickerlight2 SKULLCANDLES
+{
+    color 1.0 1.0 0.0
+    size 32
+    secondarySize 34
+    interval 0.1
+    offset 0 24 0
+}
+
+object HeadCandles
+{
+    frame POL3 { light SKULLCANDLES }
+}
+
+// Candle
+pointlight CANDLE
+{
+    color 1.0 1.0 0.0
+    size 16
+    offset 0 16 0
+}
+
+object Candlestick
+{
+    frame CAND { light CANDLE }
+}
+
+// Candelabra
+pointlight CANDELABRA
+{
+    color 1.0 1.0 0.0
+    size 48
+    offset 0 52 0
+}
+
+object Candelabra
+{
+    frame CBRA { light CANDELABRA }
+}
+
+
+
+// ----------------
+// -- Doom Items --
+// ----------------
+
+// Soul Sphere
+pulselight SOULSPHERE
+{
+    color 0.0 0.0 1.0
+    size 40
+    secondarySize 42
+    interval 2.0
+    offset 0 16 0
+}
+
+object SoulSphere
+{
+    frame SOUL { light SOULSPHERE }
+}
+
+// Invulnerability Sphere
+pulselight INVULN
+{
+    color 0.0 1.0 0.0
+    size 40
+    secondarySize 42
+    interval 2.0
+    offset 0 16 0
+}
+
+object InvulnerabilitySphere
+{
+    frame PINV { light INVULN }
+}
+
+// Blur Sphere
+pointlight BLURSPHERE1
+{
+    color 1.0 0.0 0.0
+    size 40
+    offset 0 16 0
+}
+
+pointlight BLURSPHERE2
+{
+    color 0.0 0.0 1.0
+    size 32
+    offset 0 16 0
+}
+
+pointlight BLURSPHERE3
+{
+    color 0.0 0.0 1.0
+    size 24
+    offset 0 16 0
+}
+
+pointlight BLURSPHERE4
+{
+    color 0.0 0.0 1.0
+    size 16
+    offset 0 16 0
+}
+
+pointlight BLURSPHERE5
+{
+    color 0.0 0.0 1.0
+    size 8
+    offset 0 16 0
+}
+
+object BlurSphere
+{
+    frame PINS { light BLURSPHERE1 }
+
+    frame PINSA { light BLURSPHERE2 }
+    frame PINSB { light BLURSPHERE3 }
+    frame PINSC { light BLURSPHERE4 }
+    frame PINSD { light BLURSPHERE5 }
+}
+
+// Health Potion
+pulselight HEALTHPOTION
+{
+    color 0.0 0.0 0.6
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+object HealthBonus
+{
+    frame BON1 { light HEALTHPOTION }
+}
+
+// Armour Helmet
+pulselight ARMORBONUS
+{
+    color 0.0 0.6 0.0
+    size 16
+    secondarySize 14
+    interval 1.0
+}
+
+object ArmorBonus
+{
+    frame BON2 { light ARMORBONUS }
+}
+
+// Blue Keys
+object BlueCard
+{
+    frame BKEY { light HEALTHPOTION }
+}
+
+object BlueSkull
+{
+    frame BSKU { light HEALTHPOTION }
+}
+// Yellow Keys
+pulselight YELLOWKEY
+{
+    color 0.6 0.6 0.0
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+object YellowCard
+{
+    frame YKEY { light YELLOWKEY }
+}
+
+object YellowSkull
+{
+    frame YSKU { light YELLOWKEY }
+}
+// Red Keys
+pulselight REDKEY
+{
+    color 0.6 0.0 0.0
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+object RedCard
+{
+    frame RKEY { light REDKEY }
+}
+
+object RedSkull
+{
+    frame RSKU { light REDKEY }
+}
+// Green armour
+pointlight GREENARMOR1
+{
+    color 0.0 0.6 0.0
+    size 48
+}
+
+pointlight GREENARMOR2
+{
+    color 0.0 0.6 0.0
+    size 32
+}
+
+object GreenArmor
+{
+    frame ARM1A { light GREENARMOR1 }
+    frame ARM1B { light GREENARMOR2 }
+}
+
+// Blue armour
+pointlight BLUEARMOR1
+{
+    color 0.0 0.0 0.6
+    size 48
+}
+
+pointlight BLUEARMOR2
+{
+    color 0.0 0.0 0.6
+    size 32
+}
+
+object BlueArmor
+{
+    frame ARM2A { light BLUEARMOR1 }
+    frame ARM2B { light BLUEARMOR2 }
+}
+
+
+
+// ------------------
+// -- Doom Enemies --
+// ------------------
+
+// Zombies
+flickerlight2 ZOMBIEATK
+{
+    color 1.0 0.8 0.2
+    size 48
+    secondarySize 56
+    interval 1
+    offset 0 40 0
+}
+
+object ZombieMan
+{
+    frame POSSF { light ZOMBIEATK }
+}
+
+object ShotgunGuy
+{
+    frame SPOSF { light ZOMBIEATK }
+}
+
+object ChaingunGuy
+{
+    frame CPOSE { light ZOMBIEATK }
+    frame CPOSF { light ZOMBIEATK }
+}
+
+object DoomPlayer
+{
+    frame PLAYF { light ZOMBIEATK }
+}
+
+
+// Doom Imp Fireball
+pointlight IMPBALL
+{
+    color 1.0 0.5 0.0
+    size 64
+}
+
+// Doom imp fireball explosion
+flickerlight IMPBALL_X1
+{
+    color 0.7 0.2 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight IMPBALL_X2
+{
+    color 0.4 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight IMPBALL_X3
+{
+    color 0.2 0.0 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object DoomImpBall
+{
+    frame BAL1A { light IMPBALL    }
+    frame BAL1B { light IMPBALL    }
+
+    frame BAL1C { light IMPBALL_X1 }
+    frame BAL1D { light IMPBALL_X2 }
+    frame BAL1E { light IMPBALL_X3 }
+}
+
+pointlight SPECTRE
+{
+    color 0.5 0.5 0.5
+    size 48
+    offset 0 24 0
+    subtractive 1
+}
+
+/*
+object Spectre
+{
+    frame SARG { light SPECTRE }
+}
+*/
+
+// Cacodemon fireball
+flickerlight CACOBALL
+{
+    color 1.0 0.2 0.6
+    size 56
+    secondarySize 64
+    chance 0.5
+}
+
+flickerlight CACOBALL_X1
+{
+    color 0.9 0.1 0.4
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight CACOBALL_X2
+{
+    color 0.6 0.0 0.1
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight CACOBALL_X3
+{
+    color 0.3 0.0 0.0
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+object CacodemonBall
+{
+    frame BAL2A { light CACOBALL }
+    frame BAL2B { light CACOBALL }
+
+    frame BAL2C { light CACOBALL_X1 }
+    frame BAL2D { light CACOBALL_X2 }
+    frame BAL2E { light CACOBALL_X3 }
+}
+
+// Baron / Hell Knight fireball
+pointlight BARONBALL
+{
+    color 0.0 1.0 0.0
+    size 64
+}
+
+flickerlight BARONBALL_X1
+{
+    color 0.0 0.7 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight BARONBALL_X2
+{
+    color 0.0 0.4 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight BARONBALL_X3
+{
+    color 0.0 0.2 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object BaronBall
+{
+    frame BAL7A { light BARONBALL    }
+    frame BAL7B { light BARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+// Lost Soul
+flickerlight LOSTSOUL
+{
+    color 1.0 0.3 0.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight LOSTSOUL_X1
+{
+    color 0.8 0.3 0.0
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight LOSTSOUL_X2
+{
+    color 0.6 0.2 0.0
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight LOSTSOUL_X3
+{
+    color 0.4 0.1 0.0
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight LOSTSOUL_X4
+{
+    color 0.2 0.0 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object LostSoul
+{
+    frame SKULA { light LOSTSOUL    }
+    frame SKULB { light LOSTSOUL    }
+    frame SKULC { light LOSTSOUL    }
+    frame SKULD { light LOSTSOUL    }
+    frame SKULE { light LOSTSOUL    }
+    frame SKULF { light LOSTSOUL    }
+    frame SKULG { light LOSTSOUL    }
+
+    frame SKULH { light LOSTSOUL_X1 }
+    frame SKULI { light LOSTSOUL_X2 }
+    frame SKULJ { light LOSTSOUL_X3 }
+    frame SKULK { light LOSTSOUL_X4 }
+}
+
+// Mancubus Fireball
+object FatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+// Arachnotron Fireball
+pointlight ARACHPLAS
+{
+    color 0.6 1.0 0.0
+    size 56
+}
+
+flickerlight ARACHPLAS_X1
+{
+    color 0.4 0.8 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+}
+
+flickerlight ARACHPLAS_X2
+{
+    color 0.6 0.6 0.0
+    size 88
+    secondarySize 96
+    chance 0.3
+}
+
+flickerlight ARACHPLAS_X3
+{
+    color 0.4 0.4 0.0
+    size 48
+    secondarySize 32
+    chance 0.3
+}
+
+flickerlight ARACHPLAS_X4
+{
+    color 0.2 0.2 0.0
+    size 24
+    secondarySize 16
+    chance 0.3
+}
+
+object ArachnotronPlasma
+{
+    frame APLSA { light ARACHPLAS }
+    frame APLSB { light ARACHPLAS }
+
+    frame APBXA { light ARACHPLAS_X1 }
+    frame APBXB { light ARACHPLAS_X2 }
+    frame APBXC { light ARACHPLAS_X2 }
+    frame APBXD { light ARACHPLAS_X3 }
+    frame APBXE { light ARACHPLAS_X4 }
+}
+
+// Revenant tracer
+pointlight TRACER
+{
+    color 1.0 0.3 0.0
+    size 48
+}
+
+flickerlight TRACER_X1
+{
+    color 1.0 0.2 0.0
+    size 64
+    secondarySize 72
+    chance 0.25
+}
+
+flickerlight TRACER_X2
+{
+    color 0.6 0.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight TRACER_X3
+{
+    color 0.3 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+object RevenantTracer
+{
+    frame FATBA { light TRACER    }
+    frame FATBB { light TRACER    }
+
+    frame FBXPA { light TRACER_X1 }
+    frame FBXPB { light TRACER_X2 }
+    frame FBXPC { light TRACER_X3 }
+}
+
+// Arch Vile Fire
+flickerlight ARCHFIRE1
+{
+    color 1.0 1.0 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight ARCHFIRE2
+{
+    color 1.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight ARCHFIRE3
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight ARCHFIRE4
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHFIRE5
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight ARCHFIRE6
+{
+    color 0.6 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight ARCHFIRE7
+{
+    color 0.4 0.4 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight ARCHFIRE8
+{
+    color 0.2 0.2 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object ArchvileFire
+{
+    frame FIREA { light ARCHFIRE1 }
+    frame FIREB { light ARCHFIRE2 }
+    frame FIREC { light ARCHFIRE3 }
+    frame FIRED { light ARCHFIRE4 }
+    frame FIREE { light ARCHFIRE5 }
+    frame FIREF { light ARCHFIRE6 }
+    frame FIREG { light ARCHFIRE7 }
+    frame FIREH { light ARCHFIRE8 }
+}
+
+// Arch-vile
+flickerlight ARCHATK1
+{
+    color 1.0 1.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight ARCHATK2
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight ARCHATK3
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight ARCHATK4
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight ARCHATK5
+{
+    color 1.0 1.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHATK6
+{
+    color 0.7 0.7 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHATK7
+{
+    color 0.3 0.3 0.0
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight ARCHRES
+{
+    color 0.6 0.0 0.0
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object Archvile
+{
+    frame VILEH { light ARCHATK1 }
+    frame VILEI { light ARCHATK2 }
+    frame VILEJ { light ARCHATK3 }
+    frame VILEK { light ARCHATK4 }
+    frame VILEL { light ARCHATK4 }
+    frame VILEM { light ARCHATK4 }
+    frame VILEN { light ARCHATK5 }
+    frame VILEO { light ARCHATK6 }
+    frame VILEP { light ARCHATK7 }
+
+    frame VILE[ { light ARCHRES }
+    frame VILE\ { light ARCHRES }
+    frame VILE] { light ARCHRES }
+}
+
+// ------------------
+// -- Doom Effects --
+// ------------------
+
+// Doom Teleport fog
+flickerlight DTFOG1
+{
+    color 0.4 1.0 0.4
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight DTFOG2
+{
+    color 0.4 1.0 0.4
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight DTFOG3
+{
+    color 0.4 1.0 0.4
+    size 24
+    secondarySize 32
+    chance 0.4
+}
+
+flickerlight DTFOG4
+{
+    color 0.4 1.0 0.4
+    size 10
+    secondarySize 16
+    chance 0.4
+}
+
+object TeleportFog
+{
+    frame TFOGA { light DTFOG1 }
+    frame TFOGB { light DTFOG2 }
+    frame TFOGC { light DTFOG2 }
+    frame TFOGD { light DTFOG2 }
+    frame TFOGE { light DTFOG3 }
+    frame TFOGF { light DTFOG4 }
+    frame TFOGI { light DTFOG4 }
+    frame TFOGJ { light DTFOG3 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+brightmap texture COMPBLU2
+{
+	map WHITE
+}	
+
+brightmap texture COMPBLU6
+{
+	map COMPBLU6
+}	
+
+brightmap texture COMPBLU5
+{
+	map COMPBLU5
+}	
+
+brightmap texture COMPBLU4
+{
+	map COMPBLU4
+}	
+
+brightmap texture COMPBLU3
+{
+	map COMPBLU3
+}	
+
+
+
+
+
+
+
+brightmap texture P_CMPRED
+{
+	map WHITE
+}	
+
+brightmap texture P_CMPGRN
+{
+	map WHITE
+}	
+
+brightmap texture COMP2
+{
+	map comp2
+}	
+
+brightmap texture COMPSTA1
+{
+	map compsta1
+}
+
+brightmap texture COMPSTA2
+{
+	map compsta2
+}
+
+brightmap texture COMPTALL
+{
+	map comptall
+}
+
+brightmap texture COMPUTE1
+{
+	map compute1
+}
+
+brightmap texture COMPUTE2
+{
+	map compute2
+}
+
+brightmap texture COMPUTE3
+{
+	map compute3
+}
+
+brightmap texture DOORYEL
+{
+	map dooryel
+}
+
+brightmap texture DOORRED
+{
+	map dooryel
+}
+
+brightmap texture DOORBLU
+{
+	map dooryel
+}
+
+brightmap texture EXITDOOR
+{
+	map exitdoor
+}
+
+brightmap texture EXITSIGN
+{
+	map exitsign
+}
+
+brightmap texture liteblu1
+{
+	map liteblu1
+}
+
+brightmap texture liteblu2
+{
+	map liteblu2
+}
+
+brightmap texture liteblu3
+{
+	map liteblu3
+}
+
+brightmap texture liteblu4
+{
+	map liteblu4
+}
+
+brightmap texture lite5
+{
+	map liteblu4
+}
+
+brightmap texture lite3
+{
+	map lite3
+}
+
+brightmap texture nuke24
+{
+	map nuke24
+}
+
+brightmap texture nukedege1
+{
+	map nukedge1
+}
+
+brightmap texture nukeslad
+{
+	map nukeslad
+}
+
+brightmap texture planet1
+{
+	map planet1
+}
+
+brightmap texture redwall1
+{
+	map redwall1
+}
+
+brightmap texture sladrip1
+{
+	map sladrip1
+}
+
+brightmap texture sladrip2
+{
+	map sladrip2
+}
+
+brightmap texture sladrip3
+{
+	map sladrip3
+}
+
+brightmap texture sw1brcom
+{
+	map sw1brcom
+}
+
+brightmap texture sw1comm
+{
+	map sw1comm
+}
+
+brightmap texture sw1dirt
+{
+	map sw1dirt
+}
+
+brightmap texture sw1ston1
+{
+	map sw1ston1
+}
+
+brightmap texture sw1stone
+{
+	map sw1stone
+}
+
+brightmap texture sw1strtn
+{
+	map sw1strtn
+}
+
+brightmap texture sw2brcom
+{
+	map sw2brcom
+}
+
+brightmap texture sw2brn2
+{
+	map sw2brn2
+}
+
+brightmap texture sw2brngn
+{
+	map sw2brngn
+}
+
+brightmap texture sw2comm
+{
+	map sw2comm
+}
+
+brightmap texture sw2comp
+{
+	map sw2comp
+}
+
+brightmap texture sw2dirt
+{
+	map sw2dirt
+}
+
+brightmap texture sw2exit
+{
+	map sw2exit
+}
+
+brightmap texture sw2grey
+{
+	map sw2grey
+}
+
+brightmap texture sw2grey1
+{
+	map sw2grey1
+}
+
+brightmap texture sw2metal
+{
+	map sw2metal
+}
+
+brightmap texture sw2slad
+{
+	map sw2slad
+}
+
+brightmap texture sw2ston1
+{
+	map sw2ston1
+}
+
+brightmap texture sw2ston2
+{
+	map sw2slad
+}
+
+brightmap texture sw2stone
+{
+	map sw2stone
+}
+
+brightmap texture sw2strtn
+{
+	map sw2stone
+}
+
+brightmap texture tekwall1
+{
+	map tekwall1
+}
+
+brightmap texture tekwall2
+{
+	map tekwall2
+}
+
+brightmap texture tekwall5
+{
+	map tekwall5
+}
+
+brightmap texture exitston
+{
+	map exitston
+}
+
+brightmap texture fireblu1
+{
+	map fireblu1
+}
+
+brightmap texture fireblu2
+{
+	map fireblu2
+}
+
+brightmap texture firelav2
+{
+	map firelav2
+}
+
+brightmap texture firelav3
+{
+	map firelav2
+}
+
+brightmap texture firelava
+{
+	map firelava
+}
+
+brightmap texture firemag1
+{
+	map firemag1
+}
+
+brightmap texture firemag2
+{
+	map firemag2
+}
+
+brightmap texture firemag3
+{
+	map firemag3
+}
+
+brightmap texture firewala
+{
+	map firewala
+}
+
+brightmap texture firewalb
+{
+	map firewalb
+}
+
+brightmap texture firewall
+{
+	map firewall
+}
+
+brightmap texture litered
+{
+	map litered
+}
+
+brightmap texture nukepois
+{
+	map nukedge1
+}
+
+brightmap texture sladskul
+{
+	map sladskul
+}
+
+brightmap texture sw2blue
+{
+	map sw2blue
+}
+
+brightmap texture sw2garg
+{
+	map sw2garg
+}
+
+brightmap texture sw2gston
+{
+	map sw2gston
+}
+
+brightmap texture sw2hot
+{
+	map sw2hot
+}
+
+brightmap texture sw2lion
+{
+	map sw2lion
+}
+
+brightmap texture sw2satyr
+{
+	map sw2satyr
+}
+
+brightmap texture sw2vine
+{
+	map sw2vine
+}
+
+brightmap texture sw2wood
+{
+	map sw2wood
+}
+
+brightmap texture wood4
+{
+	map wood4
+}
+
+brightmap texture woodgarg
+{
+	map woodgarg
+}
+
+brightmap texture woodskul
+{
+	map woodskul
+}
+
+brightmap flat  CEIL3_4
+{
+	map ceil3_4
+}	
+
+brightmap flat  CEIL3_6
+{
+	map ceil3_6
+}
+
+brightmap flat  CONS1_1
+{
+	map cons1_1
+}	
+
+brightmap flat  CONS1_5
+{
+	map cons1_5
+}
+
+brightmap flat  CONS1_7
+{
+	map cons1_7
+}
+
+brightmap flat  RROCK01
+{
+	map rrock02
+}	
+
+brightmap flat  RROCK02
+{
+	map rrock05
+}	
+
+brightmap flat  RROCK05
+{
+	map rrock05
+}	
+
+brightmap flat  RROCK06
+{
+	map rrock06
+}			
+
+brightmap flat  RROCK07
+{
+	map rrock07
+}	
+
+brightmap flat  RROCK08
+{
+	map rrock08
+}	
+
+brightmap flat  NUKAGE1
+{
+	map nukage1
+}
+
+brightmap flat  NUKAGE2
+{
+	map nukage2
+}
+
+brightmap flat  NUKAGE3
+{
+	map nukage3
+}
+
+brightmap flat  CEIL1_3
+{
+	map ceil1_3
+}
+
+brightmap flat  CEIL1_2
+{
+	map ceil1_2
+}
+
+brightmap flat  FLAT2
+{
+	map flat2
+}
+
+brightmap flat  FLAT22
+{
+	map flat22
+}
+
+brightmap flat  FLOOR1_7
+{
+	map floor1_7
+}
+
+brightmap flat  GRNLITE1
+{
+	map grnlite1
+}
+
+brightmap flat  GATE1
+{
+	map GATE1
+}
+
+brightmap flat  GATE2
+{
+	map GATE2
+}
+
+brightmap flat  GATE3
+{
+	map GATE3
+}
+
+brightmap flat  GATE4
+{
+	map GATE4
+}
+
+brightmap flat  SLIME09
+{
+	map slime09
+}
+
+brightmap flat  SLIME10
+{
+	map slime10
+}
+brightmap flat  SLIME11
+{
+	map slime11
+}
+
+brightmap flat  TLITE6_1
+{
+	map tlite6_4
+}
+
+brightmap flat  TLITE6_4
+{
+	map tlite6_4
+}
+
+brightmap flat  TLITE6_5
+{
+	map tlite6_5
+}
+
+brightmap flat  TLITE6_6
+{
+	map tlite6_6
+}
+
+brightmap flat  lava1
+{
+	map lava1
+}
+
+brightmap flat  lava2
+{
+	map lava2
+}
+
+brightmap flat  lava3
+{
+	map lava3
+}
+
+brightmap flat  lava4
+{
+	map lava4
+}
+
+brightmap sprite CANDA0
+{
+	map canda0
+		disablefullbright
+}
+
+brightmap sprite CBRAA0
+{
+	map cbraa0
+		disablefullbright
+}
+
+brightmap sprite PVISA0
+{
+	map pvisa0
+		disablefullbright
+}
+
+brightmap sprite PVISB0
+{
+	map pvisb0
+		disablefullbright
+}
+
+brightmap sprite PMAPA0
+{
+	map pmapa0
+		disablefullbright
+}
+
+brightmap sprite PMAPB0
+{
+	map pmapb0
+		disablefullbright
+}
+
+brightmap sprite PMAPC0
+{
+	map pmapc0
+		disablefullbright
+}
+
+brightmap sprite PMAPD0
+{
+	map pmapd0
+		disablefullbright
+}
+
+
+brightmap sprite CELLA0
+{
+	map cella0
+}
+
+brightmap sprite CELPA0
+{
+	map celpa0
+}
+
+brightmap sprite TLMPA0
+{
+	map tlmpa0
+		disablefullbright
+}
+
+brightmap sprite TLMPB0
+{
+	map tlmpb0
+		disablefullbright
+}
+
+brightmap sprite TLMPC0
+{
+	map tlmpc0
+		disablefullbright
+}
+
+brightmap sprite TLMPD0
+{
+	map tlmpd0
+		disablefullbright
+}
+
+brightmap sprite TLP2A0
+{
+	map tlp2a0
+		disablefullbright
+}
+
+brightmap sprite TLP2B0
+{
+	map tlp2b0
+		disablefullbright
+}
+
+brightmap sprite TLP2C0
+{
+	map tlp2c0
+		disablefullbright
+}
+
+brightmap sprite TLP2D0
+{
+	map tlp2d0
+		disablefullbright
+}
+
+brightmap sprite HLMPA0
+{
+	map hlmpa0
+		disablefullbright
+}
+
+brightmap sprite HLMPB0
+{
+	map hlmpb0
+		disablefullbright
+}
+
+brightmap sprite HLMPC0
+{
+	map hlmpc0
+		disablefullbright
+}
+
+brightmap sprite HLMPD0
+{
+	map hlmpd0
+		disablefullbright
+}
+
+brightmap sprite HLMPE0
+{
+	map hlmpe0
+		disablefullbright
+}
+
+brightmap sprite HLMPF0
+{
+	map hlmpf0
+		disablefullbright
+}
+
+brightmap sprite HLMPG0
+{
+	map hlmpg0
+		disablefullbright
+}
+
+brightmap sprite HLMPH0
+{
+	map hlmph0
+		disablefullbright
+}
+
+
+
+brightmap sprite LAMTA0
+{
+	map lamta0
+		disablefullbright
+}
+
+brightmap sprite LAMTB0
+{
+	map lamtb0
+		disablefullbright
+}
+
+brightmap sprite LAMTC0
+{
+	map lamtc0
+		disablefullbright
+}
+
+
+
+brightmap sprite BLMPA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite BLMPB0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite BLMPC0
+{
+	map colua0
+		disablefullbright
+}
+
+
+
+brightmap sprite COLUA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLWA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLOA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLRA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLGA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLPA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLBA0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLCA0
+{
+	map colua0
+		disablefullbright
+}
+
+
+
+brightmap sprite TCOLA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLWA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLRA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLGA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLPA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLOA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLBA0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLCA0
+{
+	map tclua0
+		disablefullbright
+}
+
+
+
+
+
+
+
+
+
+
+
+brightmap sprite SCOLA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLWA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLRA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLGA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLPA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLOA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLBA0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLCA0
+{
+	map sclua0
+		disablefullbright
+}
+
+
+
+
+
+
+
+
+
+
+
+brightmap sprite COLUC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLWC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLOC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLRC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLGC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLPC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLBC0
+{
+	map colua0
+		disablefullbright
+}
+
+brightmap sprite COLCC0
+{
+	map colua0
+		disablefullbright
+}
+
+
+
+
+
+
+
+
+brightmap sprite TCOLC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLWC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLRC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLGC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLPC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLOC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLBC0
+{
+	map tclua0
+		disablefullbright
+}
+
+brightmap sprite TCLCC0
+{
+	map tclua0
+		disablefullbright
+}
+
+
+
+
+
+
+
+
+
+
+
+brightmap sprite SCOLC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLWC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLRC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLGC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLPC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLOC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLBC0
+{
+	map sclua0
+		disablefullbright
+}
+
+brightmap sprite SCLCC0
+{
+	map sclua0
+		disablefullbright
+}
+
+
+
+
+
+
+
+
+brightmap sprite STRGA0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRBA0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRRA0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRYA0
+{
+	map strga0
+		disablefullbright
+}
+
+
+
+brightmap sprite STRGB0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRBB0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRRB0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRYB0
+{
+	map strga0
+		disablefullbright
+}
+
+
+
+brightmap sprite STRGC0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRBC0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRRC0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRYC0
+{
+	map strga0
+		disablefullbright
+}
+
+
+
+brightmap sprite STRGD0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRBD0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRRD0
+{
+	map strga0
+		disablefullbright
+}
+
+brightmap sprite STRYD0
+{
+	map strga0
+		disablefullbright
+}
+
+
+
+
+
+
+brightmap sprite PLAYF1
+{
+	map PLAYf1
+	disablefullbright
+}
+
+brightmap sprite PLAYF2F8
+{
+	map PLAYf2f8
+	disablefullbright
+}
+
+brightmap sprite PLAYF3F7
+{
+	map PLAYf3f7
+	disablefullbright
+}
+
+brightmap sprite PLAYF4F6
+{
+	map PLAYf4f6
+	disablefullbright
+}
+
+brightmap sprite PLAYF5
+{
+	map PLAYf5
+	disablefullbright
+}
+
+brightmap sprite SSWVG0
+{
+	map sswvg0
+	disablefullbright
+}
+
+brightmap sprite HEADA1
+{
+	map HEADA1
+	disablefullbright
+}
+
+brightmap sprite HEADA2A8
+{
+	map HEADA2A8
+	disablefullbright
+}
+
+brightmap sprite HEADA3A7
+{
+	map HEADA3A7
+	disablefullbright
+}
+
+brightmap sprite HEADB1
+{
+	map HEADB1
+	disablefullbright
+}
+
+brightmap sprite HEADB2B8
+{
+	map HEADB2B8
+	disablefullbright
+}
+
+brightmap sprite HEADB3B7
+{
+	map HEADB3B7
+	disablefullbright
+}
+
+brightmap sprite HEADB4B6
+{
+	map HEADB4B6
+	disablefullbright
+}
+
+brightmap sprite HEADB5
+{
+	map HEADB5
+	disablefullbright
+}
+
+brightmap sprite HEADC1
+{
+	map HEADC1
+	disablefullbright
+}
+
+brightmap sprite HEADC2C8
+{
+	map HEADC2C8
+	disablefullbright
+}
+
+brightmap sprite HEADC3C7
+{
+	map HEADC3C7
+	disablefullbright
+}
+
+brightmap sprite HEADC4C6
+{
+	map HEADC4C6
+	disablefullbright
+}
+
+brightmap sprite HEADC5
+{
+	map HEADC5
+	disablefullbright
+}
+
+brightmap sprite HEADD1
+{
+	map HEADD1
+	disablefullbright
+}
+
+brightmap sprite HEADD2D8
+{
+	map HEADD2D8
+	disablefullbright
+}
+
+brightmap sprite HEADD3D7
+{
+	map HEADD3D7
+	disablefullbright
+}
+
+brightmap sprite HEADD4D6
+{
+	map HEADD4D6
+	disablefullbright
+}
+
+brightmap sprite HEADD5
+{
+	map HEADD5
+	disablefullbright
+}
+
+brightmap sprite HEADE1
+{
+	map HEADE1
+	disablefullbright
+}
+
+brightmap sprite HEADE2E8
+{
+	map HEADE2E8
+	disablefullbright
+}
+
+brightmap sprite HEADE3E7
+{
+	map HEADE3E7
+	disablefullbright
+}
+
+brightmap sprite HEADF1
+{
+	map HEADF1
+	disablefullbright
+}
+
+brightmap sprite HEADF2F8
+{
+	map HEADF2F8
+	disablefullbright
+}
+
+brightmap sprite HEADF3F7
+{
+	map HEADF3F7
+	disablefullbright
+}
+
+brightmap sprite BON2B0
+{
+	map BON2B0
+	disablefullbright
+}
+
+brightmap sprite BON2c0
+{
+	map BON2c0
+	disablefullbright
+}
+
+brightmap sprite BON2d0
+{
+	map BON2d0
+	disablefullbright
+}
+
+
+
+
+
+brightmap sprite cibla0
+{
+  map cibla0
+  disablefullbright
+}
+
+brightmap sprite cibga0
+{
+  map cibla0
+  disablefullbright
+}
+
+brightmap sprite cibaa0
+{
+  map cibla0
+  disablefullbright
+}
+
+brightmap sprite cibca0
+{
+  map cibca0
+  disablefullbright
+}
+
+brightmap sprite cibfa0
+{
+  map cibfa0
+  disablefullbright
+}
+
+
+
+
+
+brightmap sprite vileg1
+{
+  map vileg1
+  disablefullbright
+}
+
+brightmap sprite vileg2
+{
+  map vileg2
+  disablefullbright
+}
+
+brightmap sprite vileg3
+{
+  map vileg3
+  disablefullbright
+}
+
+brightmap sprite vileg4
+{
+  map vileg4
+  disablefullbright
+}
+
+brightmap sprite vileg5
+{
+  map vileg5
+  disablefullbright
+}
+
+brightmap sprite vileg6
+{
+  map vileg6
+  disablefullbright
+}
+
+brightmap sprite vileg7
+{
+  map vileg7
+  disablefullbright
+}
+
+brightmap sprite vileg8
+{
+  map vileg8
+  disablefullbright
+}
+
+brightmap sprite vileh1
+{
+  map vileh1
+  disablefullbright
+}
+
+brightmap sprite vileh2
+{
+  map vileh2
+  disablefullbright
+}
+
+brightmap sprite vileh3
+{
+  map vileh3
+  disablefullbright
+}
+
+brightmap sprite vileh4
+{
+  map vileh4
+  disablefullbright
+}
+
+brightmap sprite vileh5
+{
+  map vileh5
+  disablefullbright
+}
+
+brightmap sprite vileh6
+{
+  map vileh6
+  disablefullbright
+}
+
+brightmap sprite vileh7
+{
+  map vileh7
+  disablefullbright
+}
+
+brightmap sprite vileh8
+{
+  map vileh8
+  disablefullbright
+}
+
+brightmap sprite vilei1
+{
+  map vilei1
+  disablefullbright
+}
+
+brightmap sprite vilei2
+{
+  map vilei2
+  disablefullbright
+}
+
+brightmap sprite vilei3
+{
+  map vilei3
+  disablefullbright
+}
+
+brightmap sprite vilei4
+{
+  map vilei4
+  disablefullbright
+}
+
+brightmap sprite vilei5
+{
+  map vilei5
+  disablefullbright
+}
+
+brightmap sprite vilei6
+{
+  map vilei6
+  disablefullbright
+}
+
+brightmap sprite vilei7
+{
+  map vilei7
+  disablefullbright
+}
+
+brightmap sprite vilei8
+{
+  map vilei8
+  disablefullbright
+}
+
+brightmap sprite vilej1
+{
+  map vilej1
+  disablefullbright
+}
+
+brightmap sprite vilej2
+{
+  map vilej2
+  disablefullbright
+}
+
+brightmap sprite vilej3
+{
+  map vilej3
+  disablefullbright
+}
+
+brightmap sprite vilej4
+{
+  map vilej4
+  disablefullbright
+}
+
+brightmap sprite vilej5
+{
+  map vilej5
+  disablefullbright
+}
+
+brightmap sprite vilej6
+{
+  map vilej6
+  disablefullbright
+}
+
+brightmap sprite vilej7
+{
+  map vilej7
+  disablefullbright
+}
+
+brightmap sprite vilej8
+{
+  map vilej8
+  disablefullbright
+}
+
+brightmap sprite vilek1
+{
+  map vilek1
+  disablefullbright
+}
+
+brightmap sprite vilek2
+{
+  map vilek2
+  disablefullbright
+}
+
+brightmap sprite vilek3
+{
+  map vilek3
+  disablefullbright
+}
+
+brightmap sprite vilek4
+{
+  map vilek4
+  disablefullbright
+}
+
+brightmap sprite vilek5
+{
+  map vilek5
+  disablefullbright
+}
+
+brightmap sprite vilek6
+{
+  map vilek6
+  disablefullbright
+}
+
+brightmap sprite vilek7
+{
+  map vilek7
+  disablefullbright
+}
+
+brightmap sprite vilek8
+{
+  map vilek8
+  disablefullbright
+}
+
+brightmap sprite vilel1
+{
+  map vilel1
+  disablefullbright
+}
+
+brightmap sprite vilel2
+{
+  map vilel2
+  disablefullbright
+}
+
+brightmap sprite vilel3
+{
+  map vilel3
+  disablefullbright
+}
+
+brightmap sprite vilel4
+{
+  map vilel4
+  disablefullbright
+}
+
+brightmap sprite vilel5
+{
+  map vilel5
+  disablefullbright
+}
+
+brightmap sprite vilel6
+{
+  map vilel6
+  disablefullbright
+}
+
+brightmap sprite vilel7
+{
+  map vilel7
+  disablefullbright
+}
+
+brightmap sprite vilel8
+{
+  map vilel8
+  disablefullbright
+}
+
+brightmap sprite vilem1
+{
+  map vilem1
+  disablefullbright
+}
+
+brightmap sprite vilem2
+{
+  map vilem2
+  disablefullbright
+}
+
+brightmap sprite vilem3
+{
+  map vilem3
+  disablefullbright
+}
+
+brightmap sprite vilem4
+{
+  map vilem4
+  disablefullbright
+}
+
+brightmap sprite vilem5
+{
+  map vilem5
+  disablefullbright
+}
+
+brightmap sprite vilem6
+{
+  map vilem6
+  disablefullbright
+}
+
+brightmap sprite vilem7
+{
+  map vilem7
+  disablefullbright
+}
+
+brightmap sprite vilem8
+{
+  map vilem8
+  disablefullbright
+}
+
+brightmap sprite vilen1
+{
+  map vilen1
+  disablefullbright
+}
+
+brightmap sprite vilen2
+{
+  map vilen2
+  disablefullbright
+}
+
+brightmap sprite vilen3
+{
+  map vilen3
+  disablefullbright
+}
+
+brightmap sprite vilen4
+{
+  map vilen4
+  disablefullbright
+}
+
+brightmap sprite vilen5
+{
+  map vilen5
+  disablefullbright
+}
+
+brightmap sprite vilen6
+{
+  map vilen6
+  disablefullbright
+}
+
+brightmap sprite vilen7
+{
+  map vilen7
+  disablefullbright
+}
+
+brightmap sprite vilen8
+{
+  map vilen8
+  disablefullbright
+}
+
+brightmap sprite vileo1
+{
+  map vileo1
+  disablefullbright
+}
+
+brightmap sprite vileo2
+{
+  map vileo2
+  disablefullbright
+}
+
+brightmap sprite vileo3
+{
+  map vileo3
+  disablefullbright
+}
+
+brightmap sprite vileo4
+{
+  map vileo4
+  disablefullbright
+}
+
+brightmap sprite vileo5
+{
+  map vileo5
+  disablefullbright
+}
+
+brightmap sprite vileo6
+{
+  map vileo6
+  disablefullbright
+}
+
+brightmap sprite vileo7
+{
+  map vileo7
+  disablefullbright
+}
+
+brightmap sprite vileo8
+{
+  map vileo8
+  disablefullbright
+}
+
+brightmap sprite vilep1
+{
+  map vilep1
+  disablefullbright
+}
+
+brightmap sprite vilep2
+{
+  map vilep2
+  disablefullbright
+}
+
+brightmap sprite vilep3
+{
+  map vilep3
+  disablefullbright
+}
+
+brightmap sprite vilep4
+{
+  map vilep4
+  disablefullbright
+}
+
+brightmap sprite vilep5
+{
+  map vilep5
+  disablefullbright
+}
+
+brightmap sprite vilep6
+{
+  map vilep6
+  disablefullbright
+}
+
+brightmap sprite vilep7
+{
+  map vilep7
+  disablefullbright
+}
+
+brightmap sprite vilep8
+{
+  map vilep8
+  disablefullbright
+}
+
+brightmap sprite barra0
+{
+  map barra0
+  disablefullbright
+}
+
+brightmap sprite barrb0
+{
+  map barrb0
+  disablefullbright
+}
+
+brightmap sprite barrc0
+{
+  map barrc0
+  disablefullbright
+}
+
+brightmap sprite barrd0
+{
+  map barrd0
+  disablefullbright
+}
+
+brightmap sprite barrf0
+{
+  map barrf0
+  disablefullbright
+}
+
+brightmap sprite barrg0
+{
+  map barrf0
+  disablefullbright
+}
+
+brightmap sprite barrh0
+{
+  map barrf0
+  disablefullbright
+}
+
+brightmap sprite barri0
+{
+  map barrf0
+  disablefullbright
+}
+
+brightmap texture bigbrik3
+{
+  map bigbrik3
+}
+
+brightmap texture bricklit
+{
+  map bricklit
+}  
+
+brightmap texture bronze4
+{
+  map bigbrik3
+}
+
+brightmap texture bstone3
+{
+  map bstone3
+}
+
+brightmap texture CRACKLe2
+{
+  map CRACKLe2
+}
+
+brightmap texture CRACKLe4
+{
+  map CRACKLe2
+}
+
+brightmap texture metal3
+{
+  map metal3
+}
+
+brightmap texture metal6
+{
+  map metal6
+}
+
+brightmap texture metal7
+{
+  map metal7
+}
+
+brightmap texture panbook
+{
+  map panbook
+}
+
+brightmap texture pipewal1
+{
+  map pipewal1
+}
+
+brightmap texture silver2
+{
+  map silver2
+}
+
+brightmap texture silver3
+{
+  map silver3
+}
+
+brightmap texture spacew3
+{
+  map spacew3
+}
+
+brightmap texture spcdoor1
+{
+  map spcdoor1
+}
+
+brightmap texture spcdoor2
+{
+  map spcdoor1
+}
+
+brightmap texture spcdoor3
+{
+  map spcdoor3
+}
+
+brightmap texture spcdoor4
+{
+  map spcdoor4
+}
+
+brightmap texture sw1met2
+{
+  map sw1met2
+}
+
+brightmap texture sw1starg
+{
+  map sw1brcom
+}
+
+brightmap texture sw1brn1
+{
+  map sw1brcom
+}
+
+brightmap texture sw1brik
+{
+  map sw1brik
+}
+
+brightmap texture sw1wdmet
+{
+  map sw1wdmet
+}
+
+brightmap texture sw2brik
+{
+  map sw1wdmet
+}
+
+brightmap texture sw2brn1
+{
+  map sw2brcom
+}
+
+brightmap texture sw2marb
+{
+  map sw2marb
+}
+
+brightmap texture sw2met2
+{
+  map sw2met2
+}
+
+brightmap texture sw2mod1
+{
+  map sw2mod1
+}
+
+brightmap texture sw2panel
+{
+  map sw2panel
+}
+
+brightmap texture sw2rock
+{
+  map sw2rock
+}
+
+brightmap texture sw2skull
+{
+  map sw2skull
+}
+
+brightmap texture sw2starg
+{
+  map sw2brcom
+}
+
+brightmap texture sw2brn1
+{
+  map sw2brcom
+}
+
+brightmap texture sw2ston6
+{
+  map sw2ston6
+}
+
+brightmap texture sw2tek
+{
+  map sw2tek
+}
+
+brightmap texture sw2wdmet
+{
+  map sw1wdmet
+}
+
+brightmap texture sw2zim
+{
+  map sw2zim
+}
+
+brightmap texture tekbron2
+{
+  map tekbron2
+}
+
+brightmap texture tekgren1
+{
+  map tekgren1
+}
+
+brightmap texture tekgren3
+{
+  map tekgren3
+}
+
+brightmap texture tekgren5
+{
+  map tekgren5
+}
+
+brightmap texture teklite
+{
+  map teklite
+}
+
+brightmap texture teklite2
+{
+  map teklite2
+}
+
+brightmap texture tekwall6
+{
+  map tekwall6
+}
+
+
+
+
+
+//Custom Brightmaps
+
+brightmap texture METALG1
+{
+  map metal6
+}
+
+brightmap texture METALG2
+{
+  map metal7
+}
+
+
+
+brightmap texture GRMETL03
+{
+  map metal3o
+}
+
+brightmap texture GRMETL06
+{
+  map metal6
+}
+
+brightmap texture GRMETL07
+{
+  map metal7
+}
+
+
+
+brightmap texture GBMETL03
+{
+  map metal3o
+}
+
+brightmap texture GBMETL06
+{
+  map metal6
+}
+
+brightmap texture GBMETL07
+{
+  map metal7
+}
+
+
+
+brightmap texture GTMETL03
+{
+  map metal3
+}
+
+brightmap texture GTMETL06
+{
+  map metal6
+}
+
+brightmap texture GTMETL07
+{
+  map metal7
+}
+
+
+
+
+
+brightmap texture N_LTGN03
+{
+	map liteblu4
+}
+
+brightmap texture N_LTOR03
+{
+	map liteblu4
+}
+
+brightmap texture N_LTPR03
+{
+	map liteblu4
+}
+
+brightmap texture N_LTRD03
+{
+	map liteblu4
+}
+
+brightmap texture N_LTYL03
+{
+	map liteblu4
+}
+
+
+
+
+
+brightmap texture N_TLGR01
+{
+  map teklite
+}
+
+brightmap texture N_TLGR02
+{
+  map teklite2
+}
+
+brightmap texture N_TLGZ01
+{
+  map teklite
+}
+
+brightmap texture N_TLGZ02
+{
+  map teklite2
+}
+
+brightmap texture N_TLGB01
+{
+  map teklite
+}
+
+brightmap texture N_TLGB02
+{
+  map teklite2
+}
+
+
+
+
+
+
+brightmap texture METALW
+{
+  map comptall
+}
+
+
+
+
+
+brightmap texture SPCDOORX
+{
+  map spcdoor3
+}
+
+
+
+
+
+brightmap texture N_CM3_5R
+{
+  map B_CM3_5R
+}
+
+brightmap texture N_CM2_6R
+{
+  map B_CM2_6R
+}
+
+brightmap texture N_CM06A
+{
+  map B_CM06A
+}
+
+brightmap texture N_CM06B
+{
+  map B_CM06A
+}
+
+brightmap texture N_CM06C
+{
+  map B_CM06A
+}
+
+brightmap texture N_CM06D
+{
+  map B_CM06A
+}
+
+brightmap texture VADCOM1A
+{
+  map BADCOM1A
+}
+
+brightmap texture VADCOM1B
+{
+  map BADCOM1A
+}
+
+brightmap texture VADCOM1C
+{
+  map BADCOM1A
+}
+
+brightmap texture VADCOM1D
+{
+  map BADCOM1A
+}
+
+
+
+brightmap texture VADELEC1
+{
+  map VADELEC1
+}
+
+brightmap texture VADELEC2
+{
+  map VADELEC2
+}
+
+brightmap texture VADELEC3
+{
+  map VADELEC3
+}
+
+brightmap texture VADELEC4
+{
+  map VADELEC1
+}
+
+brightmap texture VADELEC5
+{
+  map VADELEC2
+}
+
+brightmap texture VADELEC6
+{
+  map VADELEC3
+}
+
+brightmap texture VADELEC7
+{
+  map VADELEC1
+}
+
+brightmap texture VADELEC8
+{
+  map VADELEC2
+}
+
+brightmap texture VADELEC9
+{
+  map VADELEC3
+}
+
+
+
+brightmap texture N_CMON03
+{
+  map B_CMON03
+}
+
+brightmap texture N_CMON02
+{
+  map B_CMON03
+}
+
+brightmap texture N_CMON5A
+{
+  map B_CMON5A
+}
+
+brightmap texture N_CMON5B
+{
+  map B_CMON5B
+}
+
+brightmap texture N_CMON5C
+{
+  map B_CMON5C
+}
+
+brightmap texture N_CMON5D
+{
+  map B_CMON5D
+}
+
+brightmap texture N_CMON06
+{
+  map B_CMON06
+}
+
+brightmap texture N_CMPCPU
+{
+  map B_CMPCPU
+}
+
+brightmap texture N_CM4_1R
+{
+  map B_CM4_1R
+}
+
+brightmap texture N_CM4_2R
+{
+  map B_CM4_2R
+}
+
+
+
+brightmap texture T2LITW02
+{
+  map B2LITW02
+}
+
+brightmap texture T2LITW04
+{
+  map B2LITW04
+}
+
+brightmap texture T2LITW11
+{
+  map B2LITW11
+}
+
+brightmap texture TLIGWL1B
+{
+  map BLIGWL1B
+}
+
+brightmap texture TLIGWL1C
+{
+  map BLIGWL1C
+}
+
+brightmap texture TLIGWL1D
+{
+  map BLIGWL1D
+}
+
+brightmap texture TLIGWL1E
+{
+  map BLIGWL1E
+}
+
+brightmap texture T2SW02B
+{
+  map B2SW02B
+}
+
+brightmap texture TLIGWL1B
+{
+  map BLIGWL1B
+}
+
+brightmap texture TLIGWL1C
+{
+  map BLIGWL1C
+}
+
+brightmap texture TLIGWL1D
+{
+  map BLIGWL1D
+}
+
+brightmap texture TLIGWL1E
+{
+  map BLIGWL1E
+}
+
+brightmap texture TLITWL01
+{
+  map BLITWL01
+}
+
+brightmap texture TLITWL12
+{
+  map BLITWL12
+}
+
+brightmap texture TLITWL13
+{
+  map BLITWL13
+}
+
+
+brightmap texture TLITWL14
+{
+  map BLITWL14
+}
+
+brightmap texture TMOSWL01
+{
+  map BMOSWL01
+}
+
+brightmap texture TMOSWL02
+{
+  map BMOSWL02
+}
+
+brightmap texture TMOSWL03
+{
+  map BMOSWL03
+}
+
+brightmap texture TMOSWL04
+{
+  map BMOSWL04
+}
+
+brightmap texture TPIPWL05
+{
+  map BPIPWL05
+}
+
+brightmap texture TSTPWL23
+{
+  map BSTPWL23
+}
+
+brightmap texture TWINWL01
+{
+  map BWINWL01
+}
+
+brightmap texture TLITWL21
+{
+  map BLITWL12
+}
+
+brightmap texture TLITWL20
+{
+  map BLITWL13
+}
+
+brightmap texture TLITWL18
+{
+  map BLITWL14
+}
+
+brightmap texture TLITWL27
+{
+  map BLITWL12
+}
+
+brightmap texture TLITWL26
+{
+  map BLITWL13
+}
+
+
+brightmap texture TLITWL24
+{
+  map BLITWL14
+}
+
+brightmap texture T2CMP03
+{
+  map B2CMP03
+}
+
+brightmap texture T2CMP06
+{
+  map B2CMP06
+}
+
+brightmap texture T2CMP05
+{
+  map B2CMP06
+}
+
+brightmap texture T2CMP07
+{
+  map B2CMP07
+}
+
+brightmap texture T2CMP02
+{
+  map B2CMP07
+}
+
+brightmap texture T2CMP08
+{
+  map B2CMP08
+}
+
+brightmap texture T2CMP04
+{
+  map B2CMP08
+}
+
+brightmap texture T2CMP09
+{
+  map B2CMP09
+}
+
+brightmap texture T2CMP01
+{
+  map B2CMP09
+}
+
+brightmap flat TMAYFL1
+{
+  map BMAYFL1
+}
+
+brightmap flat T2LITF0
+{
+  map B2LITF0
+}
+
+brightmap flat T2LITF1
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF2
+{
+  map B2LITF2
+}
+
+brightmap flat T2LITF10
+{
+  map B2LITF0
+}
+
+brightmap flat T2LITF11
+{
+  map B2LITF0
+}
+
+brightmap flat T2LITF12
+{
+  map B2LITF0
+}
+
+brightmap flat T2LITF6
+{
+  map B2LITF0
+}
+
+brightmap flat T2LITF13
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF14
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF15
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF9
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF4
+{
+  map B2LITF1
+}
+
+brightmap flat T2LITF3
+{
+  map B2LITF2
+}
+
+brightmap flat T2LITF6
+{
+  map B2LITF2
+}
+
+brightmap flat T2LITF7
+{
+  map B2LITF2
+}
+
+brightmap flat T2LITF8
+{
+  map B2LITF2
+}
+
+brightmap flat TLITFL1
+{
+  map BLITFL1
+}
+
+brightmap flat TLITFL8
+{
+  map BLITFL8
+}
+
+brightmap texture TLITWL94
+{
+  map BLITWL94
+}
+
+
+
+
+
+brightmap texture XLIGHT-W
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-W
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-B
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-B
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-O
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-O
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-Y
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-Y
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-R
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-R
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-X
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-X
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-T
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-T
+{
+  map YLIGHT-W
+}
+
+brightmap texture XLIGHT-G
+{
+  map XLIGHT-W
+}
+
+brightmap texture YLIGHT-G
+{
+  map YLIGHT-W
+}
+
+brightmap texture TFLLWL01
+{
+  map BFLLWL01
+}
+
+brightmap texture TFLLWL02
+{
+  map BFLLWL01
+}
+
+brightmap texture TFLLWL03
+{
+  map BFLLWL01
+}
+
+
+
+
+
+brightmap texture DRCOMP01
+{
+  map BRCOMP01
+}
+
+brightmap texture DRCOMP09
+{
+  map BRCOMP09
+}
+
+brightmap texture DRCOMP08
+{
+  map BRCOMP08
+}
+
+brightmap texture DRCOMP03
+{
+  map BRCOMP03
+}
+
+brightmap texture DRCOMP02
+{
+  map BRCOMP02
+}
+
+brightmap texture DRSILV25
+{
+  map BRSILV25
+}
+
+brightmap texture DRSILV22
+{
+  map SILVER3
+}
+
+brightmap texture DRDOOR21
+{
+  map BRDOOR22
+}
+
+brightmap texture DRDOOR22
+{
+  map BRDOOR22
+}
+
+brightmap texture DRDOOR23
+{
+  map BRDOOR22
+}
+
+brightmap texture DRDOOR24
+{
+  map BRDOOR22
+}
+
+brightmap texture DRHELL04
+{
+  map BRHELL04
+}
+
+brightmap texture DRHELL06
+{
+	map BRHELL06
+}
+
+brightmap texture DRHELL66
+{
+	map BRHELL06
+}
+
+
+
+brightmap texture DRSPIN05
+{
+  map BRSPIN05
+}
+
+brightmap texture DRSPIN06
+{
+  map BRSPIN06
+}
+
+brightmap texture DRSPIN07
+{
+  map BRSPIN07
+}
+
+brightmap texture DRSPIN08
+{
+  map BRSPIN08
+}
+
+brightmap texture DRSPIN09
+{
+  map BRSPIN09
+}
+
+brightmap texture DRSPIN10
+{
+  map BRSPIN10
+}
+
+brightmap texture DRSPIN11
+{
+  map BRSPIN11
+}
+
+brightmap texture DRSPIN12
+{
+  map BRSPIN12
+}
+
+brightmap texture DRSPIN21
+{
+  map BRSPIN21
+}
+
+brightmap texture DRSPIN22
+{
+  map BRSPIN22
+}
+
+brightmap texture DRSPIN23
+{
+  map BRSPIN23
+}
+
+brightmap texture DRSPIN24
+{
+  map BRSPIN24
+}
+
+brightmap texture DRSPIN25
+{
+  map BRSPIN25
+}
+
+brightmap texture DRSPIN26
+{
+  map BRSPIN26
+}
+
+brightmap texture DRSPIN27
+{
+  map BRSPIN27
+}
+
+brightmap texture DRSPIN28
+{
+  map BRSPIN28
+}
+
+brightmap texture DRSPIN13
+{
+  map BRSPIN13
+}
+
+brightmap texture DRSPIN14
+{
+  map BRSPIN14
+}
+
+brightmap texture DRSPIN15
+{
+  map BRSPIN15
+}
+
+brightmap texture DRSPIN16
+{
+  map BRSPIN16
+}
+
+brightmap texture DRSPIN17
+{
+  map BRSPIN17
+}
+
+brightmap texture DRSPIN18
+{
+  map BRSPIN18
+}
+
+brightmap texture DRSPIN19
+{
+  map BRSPIN19
+}
+
+brightmap texture DRSPIN20
+{
+  map BRSPIN20
+}
+
+brightmap texture DRSPIN29
+{
+  map BRSPIN29
+}
+
+brightmap texture DRSPIN30
+{
+  map BRSPIN30
+}
+
+brightmap texture DRSPIN31
+{
+  map BRSPIN31
+}
+
+brightmap texture DRSPIN32
+{
+  map BRSPIN32
+}
+
+brightmap texture DRSPIN33
+{
+  map BRSPIN33
+}
+
+brightmap texture DRSPIN34
+{
+  map BRSPIN34
+}
+
+brightmap texture DRSPIN35
+{
+  map BRSPIN35
+}
+
+brightmap texture DRSPIN36
+{
+  map BRSPIN36
+}
+
+
+
+
+
+brightmap texture PIPEWAL6
+{
+  map PIPEWAL1
+}
+
+brightmap texture DARKB02
+{
+  map BARKB02
+}
+
+
+
+
+
+brightmap texture PLANETS
+{
+  map PLANETS
+}
+
+brightmap texture R_COMP01
+{
+  map R_COMP01
+}
+
+brightmap texture R_COMP03
+{
+  map R_COMP03
+}
+
+brightmap texture R_COMP04
+{
+  map R_COMP04
+}
+
+brightmap texture SHAWNTV1
+{
+  map SHAWNTV1
+}
+
+brightmap texture SHAWNTV2
+{
+  map SHAWNTV2
+}
+
+brightmap texture SHAWNTV3
+{
+  map SHAWNTV3
+}
+
+brightmap texture SHAWNTV4
+{
+  map SHAWNTV4
+}
+
+brightmap texture SHAWNTV5
+{
+  map SHAWNTV5
+}
+
+brightmap texture SHAWNTV6
+{
+  map SHAWNTV6
+}
+
+brightmap texture SHAWNTV7
+{
+  map SHAWNTV7
+}
+
+brightmap texture SHAWNTV8
+{
+  map SHAWNTV8
+}
+
+brightmap texture SHAWNTV9
+{
+  map SHAWNTV9
+}
+
+brightmap texture SHAWNTVX
+{
+  map SHAWNTVX
+}
+
+brightmap texture SHAWNTVY
+{
+  map SHAWNTVX
+}
+
+brightmap texture SHAWNTVZ
+{
+  map SHAWNTVX
+}
+
+brightmap texture X_COMPTV
+{
+  map X_COMPTV
+}
+
+brightmap texture X_MTLADD
+{
+  map X_MTLADD
+}
+
+brightmap texture X_TKDOR1
+{
+  map X_TKDOR1
+}
+
+brightmap texture X_TKWLDR
+{
+  map X_TKWLDR
+}
+
+brightmap texture EXITBLCK
+{
+  map EXITBLCK
+}
+
+
+
+
+
+
+
+brightmap texture X_CMON01
+{
+  map X_CMON01
+}
+
+brightmap texture X_CMON02
+{
+  map X_CMON02
+}
+
+brightmap texture X_CMON03
+{
+  map X_CMON03
+}
+
+
+
+
+
+
+
+brightmap texture R_ABLW3
+{
+  map R_ABLW3
+}
+
+brightmap texture X_LIGHTZ
+{
+  map X_LIGHTZ
+}
+
+brightmap texture X_LIGHTR
+{
+  map X_LIGHTZ
+}
+
+brightmap texture X_LIGHTB
+{
+  map X_LIGHTZ
+}
+
+brightmap texture X_LIGHTG
+{
+  map X_LIGHTZ
+}
+
+brightmap texture X_LIGHZZ
+{
+  map X_LIGHBZ
+}
+
+brightmap texture X_LIGHGG
+{
+  map X_LIGHBZ
+}
+
+brightmap texture X_LIGHRR
+{
+  map X_LIGHBZ
+}
+
+brightmap texture X_LIGHBB
+{
+  map X_LIGHBZ
+}
+
+
+
+
+
+
+
+brightmap texture ZCYNFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZPNKFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZREDFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZYLWFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZORGFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZGRNFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZBLUFULL
+{
+  map ZWHTFULL
+}
+
+brightmap texture ZWHTFULL
+{
+  map ZWHTFULL
+}
+
+
+
+brightmap texture NRDL1
+{
+  map NRDL2
+}
+
+brightmap texture NRDL2
+{
+  map NRDL2
+}
+
+brightmap texture NRDL3
+{
+  map NRDL2
+}
+
+brightmap texture NRDM2
+{
+  map NRDL2
+}
+
+
+
+brightmap texture R_CMON5F
+{
+  map B_CMON5A
+}
+
+brightmap texture R_CMON5A
+{
+  map ZWHTFULL
+}
+
+brightmap texture R_CMON5B
+{
+  map ZWHTFULL
+}
+
+brightmap texture R_CMON5C
+{
+  map ZWHTFULL
+}
+
+brightmap texture R_CMON5D
+{
+  map ZWHTFULL
+}
+
+
+
+brightmap texture X_CGTEK1
+{
+	map X_CGTEK1
+}
+
+brightmap texture X_CGTEK2
+{
+	map X_CGTEK2
+}
+
+brightmap texture X_CBTEK1
+{
+	map X_CGTEK1
+}
+
+brightmap texture X_CBTEK2
+{
+	map X_CGTEK2
+}
+
+brightmap texture X_CRTEK1
+{
+	map X_CGTEK1
+}
+
+brightmap texture X_CRTEK2
+{
+	map X_CGTEK2
+}
+
+
+
+
+//Refinery Textures
+
+brightmap texture COMP94Y
+{
+	map B_CMON06
+}
+
+brightmap texture COMP82Y		
+{
+	map B_CMON03	
+}
+
+brightmap texture MTCOMP1		
+{
+	map COMPTALL
+}
+
+
+
+brightmap texture CGSILV03	
+{
+	map CGSILV03
+}
+
+brightmap texture CGSILV04
+{
+	map CGSILV04
+}
+
+brightmap texture CGSWC01B	
+{
+	map CGSWC01B
+}
+
+brightmap texture CGSWC02B	
+{
+	map CGSWC02B
+}
+
+brightmap texture CGSWC03B	
+{
+	map CGSWC03B
+}
+
+brightmap texture COMPCT07
+{
+	map COMPCT07
+}
+
+brightmap texture COMPCT08
+{
+	map COMPCT08
+}
+
+brightmap texture COMPCT01
+{
+	map COMPCT01
+}
+
+brightmap texture COMPCT02
+{
+	map COMPCT01
+}
+
+brightmap texture COMPCT03
+{
+	map COMPCT01
+}
+
+brightmap texture COMP81
+{
+	map COMP81
+}
+
+brightmap texture N_BRGR04
+{
+	map N_BRGR04
+}
+
+brightmap texture SPCDOOR1
+{
+	map SPCDOOR1
+}
+
+brightmap texture SPCDOOR4
+{
+	map SPCDOOR4
+}
+
+
+
+//Power Plant Textures
+
+brightmap texture P_GRGY10
+{
+  map metal3o
+}
+
+brightmap texture P_GRBY10
+{
+  map metal3o
+}
+
+brightmap texture P_GRRY10
+{
+  map metal3o
+}
+
+brightmap texture P_GRGY16
+{
+  map metal6
+}
+
+brightmap texture P_GRBY16
+{
+  map metal6
+}
+
+brightmap texture P_GRRY16
+{
+  map metal6
+}
+
+brightmap texture P_GRGY17
+{
+  map metal7
+}
+
+brightmap texture P_GRBY17
+{
+  map metal7
+}
+
+brightmap texture P_GRRY17
+{
+  map metal7
+}
+
+
+
+brightmap texture P_GRGY12
+{
+  map P_GRGY12
+}
+
+brightmap texture P_GRRY12
+{
+  map P_GRGY12
+}
+
+brightmap texture P_GRBY12
+{
+  map P_GRBY12
+}
+
+brightmap texture P_GRGY21
+{
+  map B_GRGY21
+}
+
+brightmap texture P_GRRY21
+{
+  map B_GRRY21
+}
+
+brightmap texture P_GRBY21
+{
+  map B_GRBY21
+}
+
+brightmap texture P_GRGY2X
+{
+  map B_GRGY21
+}
+
+brightmap texture P_GRRY2X
+{
+  map B_GRGY21
+}
+
+brightmap texture P_GRBY2X
+{
+  map B_GRGY21
+}
+
+brightmap texture P_GRRY20
+{
+  map P_GRGY20
+}
+
+brightmap texture P_GRGY20
+{
+  map P_GRGY20
+}
+
+brightmap texture P_GRBY20
+{
+  map P_GRGY20
+}
+
+
+
+brightmap texture X_WARNB
+{
+  map B_WARNB
+}
+
+brightmap texture X_WARNR
+{
+  map B_WARNR
+}
+
+brightmap texture X_WARNG
+{
+  map B_WARNG
+}
+
+
+
+brightmap texture PGELECTR
+{
+  map PXELECTR
+}
+
+brightmap texture PBELECTR
+{
+  map PXELECTR
+}
+
+brightmap texture PRELECTR
+{
+  map PXELECTR
+}
+
+
+
+brightmap texture R_COMP11
+{
+  map R_COMP11
+}
+
+brightmap texture R_COMP12
+{
+  map R_COMP12
+}
+
+brightmap texture R_COMP13
+{
+  map R_COMP13
+}
+
+brightmap texture R_COMP14
+{
+  map R_COMP14
+}
+
+brightmap texture R_COMP15
+{
+  map R_COMP15
+}
+
+brightmap texture R_COMP16
+{
+  map R_COMP16
+}
+
+brightmap texture R_COMP17
+{
+  map R_COMP17
+}
+
+brightmap texture R_COMP18
+{
+  map R_COMP18
+}
+
+
+
+
+
+
+brightmap texture COMPCTXA
+{
+  map COMPCTXZ
+}
+
+brightmap texture COMPCTXB
+{
+  map COMPCTXZ
+}
+
+brightmap texture COMPCTXC
+{
+  map COMPCTXZ
+}
+
+brightmap texture COMPCTXD
+{
+  map COMPCTXZ
+}
+
+
+
+
+
+
+
+brightmap texture X_EXITB
+{
+  map B_EXIT
+}
+
+brightmap texture X_EXITR
+{
+  map B_EXIT
+}
+
+brightmap texture X_EXITG
+{
+  map B_EXIT
+}
+
+
+
+
+brightmap texture DRCOMP05
+{
+  map DRCOMP05
+}
+
+
+
+brightmap texture P_FLATLB
+{
+	map flat22
+}
+
+brightmap texture P_FLATLG
+{
+	map flat22
+}
+
+brightmap texture P_FLATLR
+{
+	map flat22
+}
+
+
+
+
+brightmap texture DRSWC09B
+{
+	map DRSWC09B
+}
+
+brightmap texture DRSWC10B
+{
+	map DRSWC09B
+}
+
+brightmap texture DRSWC11B
+{
+	map DRSWC09B
+}
+
+brightmap texture DRSWC12B
+{
+	map DRSWC09B
+}
+
+brightmap texture DRSWC13B
+{
+	map DRSWC09B
+}
+
+brightmap texture DRSWC14B
+{
+	map DRSWC09B
+}
+
+
+
+
+
+brightmap texture lite5
+{
+	map liteblu4	
+}

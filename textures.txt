@@ -1,0 +1,1822 @@
+Sprite RDTWA0, 1, 1 { Patch TNT1A0, 0, 0 }
+Sprite DK1AA0, 1, 1 { Patch TNT1A0, 0, 0 }
+Sprite DK1BA0, 1, 1 {}
+Sprite DK1CA0, 1, 1 {}
+NoTrim SMILB0
+
+//Fire Stuff
+
+sprite FLM1A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+}
+
+sprite FLM2A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+}
+
+sprite FLM3A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+}
+
+sprite FLM4A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+}
+
+sprite FLM5A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+}
+
+sprite FLM6A0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+}
+
+sprite FLM1B0, 128, 128
+{
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{	
+		rotate 90
+	}
+}
+
+sprite FLM2B0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		rotate 90
+	}
+}
+
+sprite FLM3B0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{	
+		rotate 90
+	}
+}
+
+sprite FLM4B0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		rotate 90
+	}
+}
+
+sprite FLM5B0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{	
+		rotate 90
+	}
+}
+
+sprite FLM6B0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		rotate 90
+	}
+}
+
+sprite FLM1C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+
+		rotate 180
+	}
+}
+
+sprite FLM2C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		rotate 180
+	}
+}
+
+sprite FLM3C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		rotate 180
+	}
+}
+
+sprite FLM4C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		rotate 180
+	}
+}
+
+sprite FLM5C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		rotate 180
+	}
+}
+
+sprite FLM6C0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		rotate 180
+	}
+}
+
+sprite FLM1D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM2D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM3D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM4D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM5D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM6D0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		rotate 270
+	}
+}
+
+sprite FLM1E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipX
+	}
+}
+
+sprite FLM2E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{	
+		FlipX
+		rotate 90
+	}
+}
+
+sprite FLM3E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		rotate 90
+	}
+}
+
+sprite FLM4E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		rotate 90
+	}
+}
+
+sprite FLM5E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		rotate 90
+	}
+}
+
+sprite FLM6E0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		rotate 90
+	}
+}
+
+sprite FLM1F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM2F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{	
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM3F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM4F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM5F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM6F0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		rotate 180
+	}
+}
+
+sprite FLM1G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{	
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM2G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM3G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM4G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM5G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM6G0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		rotate 270
+	}
+}
+
+sprite FLM1H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM2H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM3H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM4H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM5H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM6H0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM1I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM2I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM3I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM4I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM5I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM6I0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM1J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM2J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM3J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM4J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM5J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM6J0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipX
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM1K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{	
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM2K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{	
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM3K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM4K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM5K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM6K0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{
+		FlipY
+		rotate 90
+	}
+}
+
+sprite FLM1L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM2L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{	
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM3L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM4L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM5L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM6L0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{	
+		FlipY
+		rotate 180
+	}
+}
+
+sprite FLM1M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM1A0, 0, 0
+	{
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM2M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM2A0, 0, 0
+	{	
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM3M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM3A0, 0, 0
+	{
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM4M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM4A0, 0, 0
+	{
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM5M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM5A0, 0, 0
+	{
+		FlipY
+		rotate 270
+	}
+}
+
+sprite FLM6M0, 128, 128
+{
+
+	Offset 64, 64
+	Patch FLM6A0, 0, 0
+	{	
+		FlipY
+		rotate 270
+	}
+}
+
+
+
+
+
+
+
+
+
+
+//Actual Texture Definitions
+
+texture UACS1A0, 94, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC1A0, 0, 0
+   {
+   }
+}
+
+texture UACS2A0, 94, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC2A0, 0, 0
+   {
+   }
+}
+
+texture UACS3A0, 94, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC3A0, 0, 0
+   {
+   }
+}
+
+texture UACS1B0, 109, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC1B0, 0, 0
+   {
+   }
+}
+
+texture UACS2B0, 109, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC2B0, 0, 0
+   {
+   }
+}
+
+texture UACS3B0, 109, 84
+{
+   XScale 2.0
+   YScale 2.0
+   Patch UAC3B0, 0, 0
+   {
+   }
+}
+
+
+
+
+
+
+texture NRDLBEMM, 64, 512
+{
+   XScale 0.03125
+   YScale 0.03125
+   Patch NRDLBEAM, 0, 0
+   {
+   }
+}
+
+texture NRDLBMMM, 64, 512
+{
+   XScale 0.125
+   YScale 0.25
+   Patch NRDLBEAM, 0, 0
+   {
+   }
+}
+
+Sprite NRDLA0, 64, 512
+{
+	Offset 32, 512
+	XScale 0.125
+    YScale 0.25
+	Patch NRDLBEAS, 0, 0
+	{
+		Style Add 
+	}
+}
+
+texture COMPBLU3, 64, 128
+{
+   Patch COMPBLU2, 0, 0
+}
+
+texture COMPBLU4, 64, 128
+{
+   Patch COMPBLU2, 0, 0
+}
+
+texture COMPBLU5, 64, 128
+{
+   Patch COMPBLU2, 0, 0
+}
+
+texture COMPBLU6, 64, 128
+{
+   Patch COMPBLU2, 0, 0
+}
+
+texture ENVYEYES, 1024, 576
+{
+   XScale 2.0
+   YScale 2.0
+   Patch 10VNEYES, 0, 0
+}
+
+
+
+texture WDWATER, 64, 64
+{
+   Patch WGWATER, 0, 0
+}
+
+texture WDWATER2, 64, 64
+{	Patch WGWATER, 0, 0	}
+texture WDWATER3, 64, 64
+{	Patch WGWATER, 0, 0	}
+texture WGWATER2, 64, 64
+{	Patch WGWATER, 0, 0	}
+texture WGWATER3, 64, 64
+{	Patch WGWATER, 0, 0	}
+
+texture WWUKAGE2, 64, 64
+{   Patch WWUKAGE, 0, 0	}
+
+
+
+
+
+
+
+texture COMPCE31, 96, 96
+{
+   XScale 1.7
+   YScale 1.7
+   Patch COMPCE21, 0, 0
+}
+
+texture COMPCE32, 96, 96
+{
+   XScale 1.7
+   YScale 1.7
+   Patch COMPCE22, 0, 0
+}
+
+
+
+
+
+texture X_MBHG01, 768, 512
+{
+   XScale 4.0
+   YScale 4.0
+   Patch X_MBHG01, 0, 0
+}
+
+// -----------------------------------------------------------------------------
+//
+// Smoke clouds by KeksDose
+//
+// Basically you can color the sprites in whatever way you like here. Just
+// change the Blend parameters.
+//
+// -----------------------------------------------------------------------------
+
+Sprite "SMFUA0", 128, 128
+{
+	Offset 64, 60
+	Patch "Cloud_10", 0, 0
+	{
+		Blend 40, 40, 40, 1
+	}
+}
+
+Sprite "SMFUB0", 128, 128
+{
+	Offset 64, 60
+	Patch "Cloud_11", 0, 0
+	{
+		Blend 40, 40, 40, 1
+	}
+}
+
+Sprite "SMFUC0", 128, 128
+{
+	Offset 55, 64
+	Patch "Cloud_12", 0, 0
+	{
+		Blend 40, 40, 40, 1
+	}
+}
+
+Sprite "SMFUD0", 128, 128
+{
+	Offset 64, 55
+	Patch "Cloud_13", 0, 0
+	{
+		Blend 40, 40, 40, 1
+	}
+}
+
+Texture "DRCOMPA1", 64, 42
+{
+	Patch "N_CM06A", 0, 0
+}
+
+Texture "DRCOMPA2", 64, 42
+{
+	Patch "N_CM06B", 0, 0
+}
+
+Texture "DRCOMPA3", 64, 42
+{
+	Patch "N_CM06C", 0, 0
+}
+
+Texture "DRCOMPA4", 64, 42
+{
+	Patch "N_CM06D", 0, 0
+}
+
+// Smile scare camera
+Texture "DRCOMP91", 64, 64
+{
+	Patch "DRCOMP88", 0, 0
+	Patch "DRCOMPA1", 0, 0
+}
+
+Texture "DRCOMP92", 64, 64
+{
+	Patch "DRCOMP88", 0, 0
+	Patch "DRCOMPA2", 0, 0
+}
+
+Texture "DRCOMP93", 64, 64
+{
+	Patch "DRCOMP88", 0, 0
+	Patch "DRCOMPA3", 0, 0
+}
+
+Texture "DRCOMP94", 64, 64
+{
+	Patch "DRCOMP88", 0, 0
+	Patch "DRCOMPA4", 0, 0
+}
+
+// Lightning beams for models
+Sprite "LtBmBlu2", 256, 64
+{
+	Patch "LTBMBLU1", -224, 0
+	Patch "LTBMBLU1", 32, 0
+}
+
+Sprite "LtBmBlu3", 256, 64
+{
+	Patch "LTBMBLU1", -192, 0
+	Patch "LTBMBLU1", 64, 0
+}
+
+Sprite "LtBmBlu4", 256, 64
+{
+	Patch "LTBMBLU1", -160, 0
+	Patch "LTBMBLU1", 96, 0
+}
+
+Sprite "LtBmBlu5", 256, 64
+{
+	Patch "LTBMBLU1", -128, 0
+	Patch "LTBMBLU1", 128, 0
+}
+
+Sprite "LtBmBlu6", 256, 64
+{
+	Patch "LTBMBLU1", -96, 0
+	Patch "LTBMBLU1", 160, 0
+}
+
+Sprite "LtBmBlu7", 256, 64
+{
+	Patch "LTBMBLU1", -64, 0
+	Patch "LTBMBLU1", 192, 0
+}
+
+Sprite "LtBmBlu8", 256, 64
+{
+	Patch "LTBMBLU1", -32, 0
+	Patch "LTBMBLU1", 224, 0
+}
+
+Sprite "LtBmGrn2", 256, 64
+{
+	Patch "LtBmGrn1", -224, 0
+	Patch "LtBmGrn1", 32, 0
+}
+
+Sprite "LtBmGrn3", 256, 64
+{
+	Patch "LtBmGrn1", -192, 0
+	Patch "LtBmGrn1", 64, 0
+}
+
+Sprite "LtBmGrn4", 256, 64
+{
+	Patch "LtBmGrn1", -160, 0
+	Patch "LtBmGrn1", 96, 0
+}
+
+Sprite "LtBmGrn5", 256, 64
+{
+	Patch "LtBmGrn1", -128, 0
+	Patch "LtBmGrn1", 128, 0
+}
+
+Sprite "LtBmGrn6", 256, 64
+{
+	Patch "LtBmGrn1", -96, 0
+	Patch "LtBmGrn1", 160, 0
+}
+
+Sprite "LtBmGrn7", 256, 64
+{
+	Patch "LtBmGrn1", -64, 0
+	Patch "LtBmGrn1", 192, 0
+}
+
+Sprite "LtBmGrn8", 256, 64
+{
+	Patch "LtBmGrn1", -32, 0
+	Patch "LtBmGrn1", 224, 0
+}
+
+Sprite "LtBmRed2", 256, 64
+{
+	Patch "LtBmRed1", -224, 0
+	Patch "LtBmRed1", 32, 0
+}
+
+Sprite "LtBmRed3", 256, 64
+{
+	Patch "LtBmRed1", -192, 0
+	Patch "LtBmRed1", 64, 0
+}
+
+Sprite "LtBmRed4", 256, 64
+{
+	Patch "LtBmRed1", -160, 0
+	Patch "LtBmRed1", 96, 0
+}
+
+Sprite "LtBmRed5", 256, 64
+{
+	Patch "LtBmRed1", -128, 0
+	Patch "LtBmRed1", 128, 0
+}
+
+Sprite "LtBmRed6", 256, 64
+{
+	Patch "LtBmRed1", -96, 0
+	Patch "LtBmRed1", 160, 0
+}
+
+Sprite "LtBmRed7", 256, 64
+{
+	Patch "LtBmRed1", -64, 0
+	Patch "LtBmRed1", 192, 0
+}
+
+Sprite "LtBmRed8", 256, 64
+{
+	Patch "LtBmRed1", -32, 0
+	Patch "LtBmRed1", 224, 0
+}
+
+Sprite "LtBmWht2", 256, 64
+{
+	Patch "LtBmWht1", -224, 0
+	Patch "LtBmWht1", 32, 0
+}
+
+Sprite "LtBmWht3", 256, 64
+{
+	Patch "LtBmWht1", -192, 0
+	Patch "LtBmWht1", 64, 0
+}
+
+Sprite "LtBmWht4", 256, 64
+{
+	Patch "LtBmWht1", -160, 0
+	Patch "LtBmWht1", 96, 0
+}
+
+Sprite "LtBmWht5", 256, 64
+{
+	Patch "LtBmWht1", -128, 0
+	Patch "LtBmWht1", 128, 0
+}
+
+Sprite "LtBmWht6", 256, 64
+{
+	Patch "LtBmWht1", -96, 0
+	Patch "LtBmWht1", 160, 0
+}
+
+Sprite "LtBmWht7", 256, 64
+{
+	Patch "LtBmWht1", -64, 0
+	Patch "LtBmWht1", 192, 0
+}
+
+Sprite "LtBmWht8", 256, 64
+{
+	Patch "LtBmWht1", -32, 0
+	Patch "LtBmWht1", 224, 0
+}
+//-------------------------------------------------------
+// Blood falls
+//-------------------------------------------------------
+Texture "N_BFAL05", 64, 128
+{
+	Patch "N_BFAL01", 0, 0
+	{
+		Blend "#FF0000"
+	}
+	Patch "N_BFAL01", 0, 0
+	{
+		Blend "#FF0000"
+		Style Add
+	}
+}
+
+Texture "N_BFAL06", 64, 128
+{
+	Patch "N_BFAL02", 0, 0
+	{
+		Blend "#FF0000"
+	}
+	Patch "N_BFAL02", 0, 0
+	{
+		Blend "#FF0000"
+		Style Add
+	}
+}
+
+Texture "N_BFAL07", 64, 128
+{
+	Patch "N_BFAL03", 0, 0
+	{
+		Blend "#FF0000"
+	}
+	Patch "N_BFAL03", 0, 0
+	{
+		Blend "#FF0000"
+		Style Add
+	}
+}
+
+Texture "N_BFAL08", 64, 128
+{
+	Patch "N_BFAL04", 0, 0
+	{
+		Blend "#FF0000"
+	}
+	Patch "N_BFAL04", 0, 0
+	{
+		Blend "#FF0000"
+		Style Add
+	}
+}
+
+// Hellfire/Darkfire + Transitions
+
+Texture "WCIBFNC", 64, 64
+{
+	Patch "WCIBFIRE", 0, 0
+}
+
+Texture "WHELFNG", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+}
+
+Texture "WCIBFNCG", 64, 64
+{
+	Patch "WCIBFIRE", 0, 0
+}
+
+Texture "WCIBFNG", 64, 64
+{
+	Patch "WCIBFIRE", 0, 0
+}
+
+Texture "DRHLF_01", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.10
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_02", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.20
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_03", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.30
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_04", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.40
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_05", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_06", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.60
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_07", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.70
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_08", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.80
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_09", 64, 64
+{
+	Patch "WHELFIRE", 0, 0
+	Patch "WCIBFIRE", 0, 0
+	{
+		Alpha 0.90
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_11", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.10
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_12", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.20
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_13", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.30
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_14", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.40
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_15", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_16", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.60
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_17", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.70
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_18", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.80
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_19", 64, 128
+{
+	Patch "HFFALL1", 0, 0
+	Patch "CFFALL1", 0, 0
+	{
+		Alpha 0.90
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_21", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.10
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_22", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.20
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_23", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.30
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_24", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.40
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_25", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_26", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.60
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_27", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.70
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_28", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.80
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_29", 64, 128
+{
+	Patch "HFFALL2", 0, 0
+	Patch "CFFALL2", 0, 0
+	{
+		Alpha 0.90
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_31", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.10
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_32", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.20
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_33", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.30
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_34", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.40
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_35", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_36", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.60
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_37", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.70
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_38", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.80
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_39", 64, 128
+{
+	Patch "HFFALL3", 0, 0
+	Patch "CFFALL3", 0, 0
+	{
+		Alpha 0.90
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_41", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.10
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_42", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.20
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_43", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.30
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_44", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.40
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_45", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_46", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.60
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_47", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.70
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_48", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.80
+		Style Translucent
+	}
+}
+
+Texture "DRHLF_49", 64, 128
+{
+	Patch "HFFALL4", 0, 0
+	Patch "CFFALL4", 0, 0
+	{
+		Alpha 0.90
+		Style Translucent
+	}
+}
+
+Texture "DRCOM2SM", 64, 64
+{
+	Patch "DRCOMPSM", 0, 0
+	Patch "N_CM06X", 0, 0
+}
+
+Texture XLIGHTAB, 64, 64	{	Patch "XLIGHT-B", 0, 0	{	Style Add	}}
+Texture XLIGHTAG, 64, 64	{	Patch "XLIGHT-G", 0, 0	{	Style Add	}}
+Texture XLIGHTAO, 64, 64	{	Patch "XLIGHT-O", 0, 0	{	Style Add	}}
+Texture XLIGHTAR, 64, 64	{	Patch "XLIGHT-R", 0, 0	{	Style Add	}}
+Texture XLIGHTAT, 64, 64	{	Patch "XLIGHT-T", 0, 0	{	Style Add	}}
+Texture XLIGHTAW, 64, 64	{	Patch "XLIGHT-W", 0, 0	{	Style Add	}}
+Texture XLIGHTAX, 64, 64	{	Patch "XLIGHT-X", 0, 0	{	Style Add	}}
+Texture XLIGHTAY, 64, 64	{	Patch "XLIGHT-Y", 0, 0	{	Style Add	}}
+Texture XLIGHTAZ, 64, 64	{	Patch "XLIGHT-Z", 0, 0	{	Style Add	}}
+
+Texture DRHELL55, 97, 73	{	Patch "DRHELL05", 0, 0 }
+Texture DRHELL66, 97, 73	{	Patch "DRHELL06", 0, 0 }
+
+Sprite ASDFA0, 1, 1	{	Patch TNT1A0, 0, 0 {}}
+Sprite ASDFB0, 1, 1	{	Patch TNT1A0, 0, 0 {}}
+
+Sprite PRTLA0, 256, 256 { Patch "PORTA01", 0, 0 {}	}
+
+Texture URNHELL,	512, 544	{	Patch SKHELL32, 0, 0 {}	}
+Texture URNHELL2,	512, 544	{	Patch SKHELL32, 0, 0 {}	}

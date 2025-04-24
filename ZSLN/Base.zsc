@@ -1,0 +1,85 @@
+Class SLNBase : Actor abstract
+{
+	BlockThingsIterator MakeBTIPos(Vector3 pos, Vector2 RH)
+	{
+		let it = BlockThingsIterator.CreateFromPos(
+			pos.x, pos.y, pos.z - RH.Y, RH.Y + RH.X * 2, RH.X, false);
+		return it;
+	}
+}
+
+Class SolidProp : SLNBase abstract
+{
+	Default
+	{
+		+SOLID
+		+DONTSPLASH
+	}
+}
+
+Class FlashlightToken : Inventory
+{
+	const FLSize = 256;
+	Default
+	{
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.UNTOSSABLE
+		Inventory.InterhubAmount 1;
+	}
+	private bool Active;
+	void ToggleLight(int on = -1, bool force = false)
+	{
+		if (!owner || !owner.player || owner.bKILLED)	return;
+		
+			 if (on >= 1)	Active = true;
+		else if (on == 0)	Active = false;
+		else 				Active = !Active;
+		
+		if (Active)
+			Owner.A_AttachLight("SNFlashlight",DynamicLight.PointLight, Color(255, 255, 255, 255),
+				FLSize, FLSize, DynamicLight.LF_SPOT|DynamicLight.LF_ATTENUATE|DynamicLight.LF_DONTLIGHTSELF,
+				(0, 0, owner.player.viewheight), 0, 20, 30, 180);
+		else
+			Owner.A_RemoveLight("SNFlashlight");
+		
+	}
+	
+	override void Travelled()
+	{
+		if (Active && Owner)
+			ToggleLight(1);
+	}
+}
+
+Class ExitSightChecker : Actor
+{
+	String text;
+	Default
+	{
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOTONAUTOMAP
+		+INVISIBLE
+	}
+	/*
+		// Setup:
+		proj.CacheResolution();
+		proj.CacheFov(players [consoleplayer].fov);
+		proj.OrientForRenderOverlay(event);
+		proj.BeginProjection();
+
+		// Now you can project as much as you like, just like this:
+		proj.ProjectWorldPos(mo.vec3offset(0, 0, mo.height));
+
+		if(proj.IsInFront()) {
+			let draw_pos = proj.ProjectToScreen();
+			
+			Screen.DrawText(
+				smallfont,
+				Font.CR_ICE,
+				draw_pos.x,
+				draw_pos.y,
+				"achachachachach");
+		}
+	*/
+}

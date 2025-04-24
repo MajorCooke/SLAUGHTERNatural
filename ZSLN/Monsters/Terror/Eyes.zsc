@@ -1,0 +1,617 @@
+/*------------------------------------------------------------------------------
+Enythin
+
+"No swimming in the lake."
+
+Staring into the abyss may lead to the abyss staring back at you. Perhaps this
+would explain the unnatural phenomena around the graveyard. Perhaps it's best
+to let sleeping beasts lie...
+
+While present, all ducks within a huge radius are instantly corrupted. These
+can be killed without consequence. Culling them seems to weaken the entity.
+There's more than one form ducks may take when corrupted. Some cannot be
+exposed without taking a dip in the lake.
+
+The only way to damage the boss is while its call is active. Instantly heals
+when Soul Call is deactivated. Bring Hellfire. You'll need it.
+------------------------------------------------------------------------------*/
+Class SLNEnithyn : SLNBoss
+{
+	Default
+	{
+		Tag "Harbinger of Nothing";
+		Obituary "You are like me now, %o. Enithyn and Avreithin of value becomes nothing at all.";
+		BloodColor "Black";
+	}
+	
+	
+}
+
+/*------------------------------------------------------------------------------
+Avriethin
+
+"Do not feed the ducks. They will feed on you instead."
+
+Ducks move in flocks of various sizes. By themselves, they're a threat to
+no one. Whenever humans approach, they'll attempt to skitter away a small
+distance. If alerted via gunfire or they see a non-human threat, they'll
+quack loudly and flee.
+
+Some marines have seen strange visions of them when being around the lake for
+prolonged periods of time. Large splashes of water and black feathers with
+visions of blood briefly flitting along their mind's eye. Some chock it up
+to mere hallucinations, while others endured nightmares about it. Further
+investigation is required.
+------------------------------------------------------------------------------*/
+Class SLNDuckFlock : Actor
+{
+	private bool spawned;
+	private Array<SLNDuck> Members;
+	Default
+	{
+		Monster;
+		-COUNTKILL
+		-SHOOTABLE
+		+NONSHOOTABLE
+		+NODAMAGE
+		+NOPAIN
+		+INVISIBLE
+		+NOTONAUTOMAP
+		+CANTSEEK
+		+NEVERTARGET
+		+DONTMORPH
+		RenderStyle "None";
+	}
+	
+	private void HandleSpawn()
+	{
+		if (spawned)	return;
+		int count = (args[0] < 1) ? random[rng](3,5) : args[0];
+		if (count < 1)	return;
+		
+		spawned = true;
+		for (int i = 0; i < count; i++)
+		{
+			Vector3 p = Vec3Angle(random(5,55), random(0,359));
+			let mo = SLNDuck(Spawn('SLNDuck', p, ALLOW_REPLACE));
+			mo.master = self;
+			Members.Push(mo);
+		}
+	}
+	
+	override bool Morph(Actor a, class<PlayerPawn> pc, class<Actor> m, int dur, EMorphFlags style,
+					class<Actor> f, class<Actor> u)
+	{
+		return false;
+	}
+	
+	override bool MorphMonster(Class<Actor> s, int dur, eMorphFlags style, Class<Actor> e, Class<Actor> x)
+	{
+		return false;
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 1;
+		TNT1 A 1 HandleSpawn();
+	Idle:
+		TNT1 A 35;
+		Wait;
+	}
+}
+
+Class SLNDuck : SLNMonster
+{
+	enum EStatus
+	{
+		ST_IDLE = 0,
+		ST_FLEE,
+		ST_CHASING,
+		ST_LANDING
+	};
+	enum EState
+	{
+		ST_WALK = 0,
+		ST_SWIM,
+		ST_FLY
+	};
+	
+	private bool Corrupted;
+	protected int cstate;
+	protected int cstatus;
+	Default
+	{
+		+PUSHABLE
+		+FORCEYBILLBOARD
+		+BILLBOARDFACECAMERA
+		+NOPAIN
+		+DONTMORPH
+		+FRIGHTENED
+		-COUNTKILL
+		Health 10;
+		Damage 1;
+		Speed 3;
+		XScale 0.3;
+		YScale 0.2;
+		Height 14;
+		Radius 10;
+		PushFactor 0.8;
+		PainChance 0;
+		Tag "Duck";
+		Species "Duck";
+		Obituary "%o fed the ducks.";
+	}
+	
+	override bool Morph(Actor a, class<PlayerPawn> pc, class<Actor> m, int dur, EMorphFlags style, class<Actor> f, class<Actor> u)
+	{	return false;	}
+	override bool MorphMonster(Class<Actor> s, int dur, eMorphFlags style, Class<Actor> e, Class<Actor> x)
+	{	return false;	}
+	
+	private uint8 LookTimer;
+	private bool Panic;
+	override void Tick()
+	{
+		if (IsFrozen())				return;
+		Super.Tick();
+		if (bKILLED || bDESTROYED)	return;
+		
+		
+		if (--LookTimer < 1)
+		{
+			LookTimer = random[rng](15,25);
+			
+			DuckLook();
+		}
+	}
+	
+	void SetCorrupt(bool on)
+	{
+		if (on)
+		{
+			SetTag("Avriethin");
+			Species = "Abyss";
+			bFRIGHTENED = bFRIENDLY = false;
+			bNOFEAR = true;
+		}
+		else
+		{
+			SetTag("Duck");
+			Species = "Duck";
+			bFRIGHTENED = bFRIENDLY = true;
+			bNOFEAR = false;
+		}
+		Corrupted = on;
+	}
+	
+	/*
+		Duck/CallSeries
+		Duck/LowVocal
+		Duck/Pissed
+		Duck/Quack
+		Duck/VocalQuack
+	*/
+	
+	private void Quack(int i, bool overlap = false)
+	{
+		int flags = (overlap) ? CHANF_OVERLAP : 0;
+		Sound snd;
+		Switch(i)
+		{
+			Default:
+			Case 0:	snd = "Duck/LowVocal";	break;
+			Case 1: snd = "Duck/Quack";		break;
+			Case 2: snd = "Duck/CallSeries";	break;
+			Case 3: snd = "Duck/VocalQuack";	break;
+			Case 4: snd = "Duck/Pissed";	break;
+		}
+		A_StartSound(snd, CHAN_VOICE, flags, pitch: frandom[rng](0.9, 1.1));
+	}
+	
+	private void SetFlight(bool on, bool force = false)
+	{
+		if (bDESTROYED || bKILLED || health < 1)	return;
+		
+		if (force)
+		{
+			if (on) SetStateLabel("FlyOn");
+			else	SetStateLabel("FlyOff");
+		}
+		else
+		{
+				 if (on 
+					&& !InStateSequence(CurState, FindState("Flying"))
+					&& !InStateSequence(CurState, FindState("FlyOn")))
+			{
+				SetStateLabel("FlyOn");
+			}
+			else if (!on
+					&& !InStateSequence(CurState, FindState("Descend"))
+					&& !InStateSequence(CurState, FindState("FlyOff")))
+			{
+				SetStateLabel("FlyOff");
+			}
+		}
+	}
+	
+	private void DuckChase()
+	{
+		if (TargetValid(target) || DuckLook())
+		{
+			A_Chase(null, null);
+		}
+		else
+			SetStateLabel("Idle");
+	}
+	
+	private double TargDist;
+	private bool TargetValid(Actor mo = null)
+	{
+		if (!mo) mo = target;
+		return (OkayToSwitchTarget(mo) && Distance3DSquared(mo) <= TargDist);
+	}
+	
+	override bool OkayToSwitchTarget(Actor other)
+	{
+		bool ret = Super.OkayToSwitchTarget(other);
+		return (ret && !other.bINVISIBLE);
+	}
+	
+	private bool DuckLook()
+	{
+		if (TargetValid())
+			return true;
+		
+		A_ClearTarget();
+		TargDist = 0;
+		
+		int drng = random[rng](1,50);
+		double dist = Corrupted ? 1280 : 64;
+		double distsq = dist ** 2;
+		Vector2 RH = (dist, dist * 2);
+		let it = MakeBTIPos(pos, RH);
+		while (it.Next())
+		{
+			let mo = it.thing;
+			if (!OkayToSwitchTarget(mo) || mo.bDORMANT)
+				continue;
+			
+			if (mo is 'PlayerPawn')
+			{
+				target = mo;
+				TargDist = distsq;
+				return true;
+			}
+			
+			if (mo.bISMONSTER)
+			{
+				if (Distance3DSquared(mo) > distsq)
+					continue;
+				if (mo.GetClass() == GetClass()) // duck
+				{
+				//	if (drng != 1 || DuckInFlock(mo))
+						continue; // Ignore ducks part of the same flock
+					
+				}
+				else //not a duck
+				{
+					
+				}
+				target = mo;
+				TargDist = distsq;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private bool DuckInFlock(Actor mo)
+	{
+		return (master && mo.master == master);
+	}
+	
+	private void Swim()
+	{
+		if (TargetValid() || DuckLook())
+		{
+			SetStateLabel("See");
+			return;
+		}
+		A_Wander();
+		if (!GetFloorTerrain().IsLiquid)
+			SetStateLabel("IdleWalk");
+		else if (random[rng](1,50) == 1)
+			SetStateLabel("SwimDive");
+	}
+	private void Waddle()
+	{
+		if (TargetValid())
+		{
+			SetStateLabel("See");
+			return;
+		}
+		else	
+			A_Wander();
+		if (GetFloorTerrain().IsLiquid)
+		{
+			SetStateLabel("IdleSwim");
+			Splash();
+		}
+	}
+	
+	private void Splash()
+	{	HitWater(CurSector, pos, false, false, true);	}
+	
+	private bool CheckOnWater()
+	{
+		if (bNOGRAVITY)	
+			return false;
+		
+		return GetFloorTerrain().IsLiquid;
+	}
+	
+	private void DuckIdle(int type = 0)
+	{
+		if (DuckLook())
+		{
+			SetStateLabel("See");
+			return;
+		}
+		
+		if (!bNOGRAVITY && vel.z != 0.0 && pos.z > floorz + 1)
+			return;
+		if (CheckOnWater() && pos.z <= floorz + 1)
+		{
+			SetStateLabel("IdleSwim");
+			return;
+		}
+		
+		if (type == 0)
+		{
+			int rng = random[rnd](0,30);
+			if (rng > 27)		{	SetStateLabel("IdleWalk"); 	return;	}
+			else if (rng > 24)	{	SetStateLabel("IdleEatIn");	return;	}
+		}
+	}
+		
+	private int IdleTimer;
+	States
+	{
+	Spawn:
+		DUCK A 5;
+	Idle:
+		DUCK A 5 DuckIdle(0);
+		Loop;
+	IdleWalk:
+		DUCK BCDEFG 3 Waddle();
+		DUCK G 0 A_Jump(210, "IdleWalk");
+		Goto Idle;
+	IdleLook:
+	IdleEatIn:
+		DUCK VW random(2,3);
+	IdleEating:
+		DUCK XY random(2,5);
+		DUCK Y 0 A_Jump(240, "IdleEating");
+	IdleEatOut:
+		DUCK WV random(2,3);
+		Goto Idle;
+	IdleSwim:
+		DUCK H 4 Swim();
+		Loop;
+	SwimDive:
+		DUCK I 4 A_Stop();
+		DUCK J 4 Splash();
+		DUCK K 4 A_Stop();
+		DUCK K 3
+		{
+			SpriteOffset.Y += 4;
+			return A_JumpIf(SpriteOffset.Y >= 50, "SwimMove");
+		}
+		Wait;
+	SwimMove:
+		TNT1 A 0 { bNONSHOOTABLE = bCANTLEAVEFLOORPIC = true; }
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Wander();
+	SwimEmerge:
+		DUCK L 3
+		{
+			bNONSHOOTABLE = bCANTLEAVEFLOORPIC = false;
+			SpriteOffset.Y -= 4.0;
+			if (SpriteOffset.Y <= 0.0)
+			{
+				SpriteOffset.Y = 0.0;
+				Splash();
+				SetStateLabel("SwimEmergeDone");
+			}
+		}
+		Wait;
+	SwimEmergeDone:
+		DUCK LMNOP 3;
+		Goto IdleSwim;
+	
+	//--------
+	// Chasing
+	//---------
+	See:
+		---- A 0 A_JumpIf(CheckOnWater(), "SeeSwim");
+		DUCK BCDEFG 2 DuckChase();
+		Loop;
+	SeeSwim:
+		DUCK HHHHHHHHHH 2 DuckChase();
+		Goto See;
+	FlyOn:
+		DUCC ABC 3;
+		DUCC D 3 { bNOGRAVITY = true; }
+	Flying:
+		DUCC EFGH 4 DuckChase();
+	Descend:
+		DUCC E 2 
+		{
+			vel.z = -4.0;
+			return A_JumpIf(pos.z <= floorz, "FlyOff");
+		}
+		Wait;
+	FlyOff:
+		DUCC J 2 { bNOGRAVITY = false; }
+		DUCC KCBA 2;
+		Goto Idle;
+	Death:
+		TNT1 A 35
+		{
+			Quack(4, true);
+			A_SpawnItemEx("SpecialGibSpawner", flags: SXF_NOCHECKPOSITION);
+			A_Fall();
+		}
+		Stop;
+	}
+}
+
+/*=============================================================================
+Tentacles
+
+Some of the ducks either become so far into the corruption, they become a whole
+new monster in their own right.
+So... No swimming in the lake. And don't feed the ducks.
+=============================================================================*/
+Class SLNTentacle : SLNMonster
+{
+	Default
+	{
+		+NONSHOOTABLE
+		-SOLID
+		+FLOORHUGGER
+		+DONTHARMSPECIES
+		+LOOKALLAROUND
+		+CANTLEAVEFLOORPIC
+		+FORCERADIUSDMG
+		+NODAMAGETHRUST
+		+DONTTHRUST
+		+THRUSPECIES
+		+DONTHARMCLASS
+		-COUNTKILL
+		+QUICKTORETALIATE
+		+RANDOMIZE
+		+NOTONAUTOMAP
+		+INVISIBLE
+		Mass 1000000;
+		Health 100;
+		Radius 30;
+		Height 40;
+		Speed 20;
+		GibHealth -30;
+		Scale 1.2;
+		PainChance 0;
+		Obituary "%o fed the ducks.";
+		Tag " ";
+	}
+	
+	override void Die(Actor s, Actor i, int df, Name mod)
+	{	Super.Die(s, i, df, mod); bINVISIBLE = false;	}
+	
+	private void Splash()
+	{	HitWater(CurSector, pos, false, false, true);	}
+	
+	private void TentacleLook()
+	{
+		LastHeard = null;
+		bINVISIBLE = true;
+		Actor mo = cursector.thinglist;
+		while (mo)
+		{
+			if (!mo.bNOINTERACTION
+				&& mo.GetClass() != GetClass()
+				&& OkayToSwitchTarget(mo)
+				&& mo.pos.Z <= pos.z + default.height 
+				)
+			{
+				target = mo;
+				SetStateLabel("See");
+				return;
+			}
+			mo = mo.snext;
+		}
+	}
+	
+	private void TentacleChase(bool sp = false)
+	{
+		bINVISIBLE = true;
+		if (!target || target.bKILLED || 
+			target.cursector != cursector ||
+			target.pos.z > pos.z + height)
+		{
+			A_ClearTarget();
+			SetStateLabel("Idle");
+			return;
+		}
+		A_Chase("Melee", null);
+		
+		if (sp)	Splash();
+	}
+	
+	private void TentacleSwipe()
+	{
+		A_FaceTarget();
+		A_Explode(20, 50, XF_NOTMISSILE, false, 50, damagetype: "Melee");
+	}
+	
+	private void Bleed(int count = 3, double h = 30)
+	{
+		if (count < 1) return;
+		
+		for (int i = 0; i < count; i++)
+		{
+			A_SpawnItemEx("Blood",	random(0, radius * 0.5), 0, random(0, h),
+									random(1,5), 0, random(1,5), random(0,359), 
+									SXF_NOCHECKPOSITION);
+		}
+	}
+	
+	private void ChangeState(bool emerge)
+	{
+		emerged = emerge;
+		bNONSHOOTABLE = !emerge;
+	}
+	
+	private bool emerged;
+	
+	States
+	{
+	Spawn:
+		TNT1 A 10;
+	Idle:
+		TNT1 A 10 TentacleLook();
+		Loop;
+	See:
+		TNT1 AA 3 TentacleChase(false);
+		TNT1 A 3 TentacleChase(true);
+		Loop;
+	Melee:
+		ROSX Q 2 { bINVISIBLE = false; }
+		ROSX P 2 Splash();
+		ROSX ONML 2 ;
+		ROSX ABC 1 ;
+		ROSX D 1
+		{
+			ChangeState(true);
+			TentacleSwipe();
+		}
+		ROSX EF 2;
+	MeleeLoop:
+		ROSX G 2 TentacleSwipe();
+		ROSX HIJ 3 ;
+		ROSX K 2 TentacleSwipe();
+	MeleeEnd:
+		ROSX LMNO 2;
+		ROSX P 2 ChangeState(false);
+		ROSX Q 2;
+		Goto See;
+	Death:
+		ROSX L 0 A_JumpIf(!emerged, "BloodyEnd");
+		ROSX LLLMMMNNNOOOPPPQQQ 1 Bleed(random(2,3), default.height - 15);
+	BloodyEnd:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bleed(random(4,6), 2);
+		Stop;
+	XDeath:
+		TNT1 AAA 0 A_SpawnItemEx("SpecialGibSpawner", 0,0,4,0,0,0,0,SXF_NOCHECKPOSITION);
+		Goto BloodyEnd;
+	}
+}

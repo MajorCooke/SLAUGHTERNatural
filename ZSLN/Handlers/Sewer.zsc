@@ -1,0 +1,68 @@
+enum ESewers
+{
+	SEWER_MINRAGE = 0,
+	SEWER_MAXRAGE = 5
+};
+
+// the algorithm this dungeon uses is from http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/
+// using a source code reference from
+// https://github.com/munificent/hauberk/blob/db360d9efa714efb6d937c31953ef849c7394a39/lib/src/content/dungeon.dart
+//
+// ported by Gutawer, and there's probably some code credited to Marisa Kirisame in here since
+// they did a port which i axed due to having some generation issues and being really hard for me to understand
+
+Class SLNEvent_Sewer : SLNEvent_MapBase
+{
+	Array<SLNSmileSpawn> Kids;
+	SLNSmile Smile;
+	
+	static clearscope SLNEvent_Sewer Fetch()
+	{	return SLNEvent_Sewer(Find('SLNEvent_Sewer'));	}
+	
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		if (e.Thing.bISMONSTER || e.Thing is 'PlayerPawn')
+		{
+			let sm = SLNSmile(e.Thing);
+			if (sm) 
+			{	
+				Smile = sm; 
+				Smile.Sewer = self;
+				return;	
+			}
+			
+			let sp = SLNSmileSpawn(e.Thing);
+			if (sp) {	Kids.Push(sp); return;	}
+			
+			if (Smile)	Smile.AddTarget(e.Thing);
+		}
+	}
+	
+	
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		if (e.Name == 'SmileHard')
+		{
+			if (!smile)
+			{
+				let it = ThinkerIterator.Create("SLNSmile", Thinker.STAT_DEFAULT);
+				SLNSmile sm = null;
+				while (sm = SLNSmile(it.Next()))
+				{
+					if (!sm) continue;
+					smile = sm;
+					break;
+				}
+			}
+			if (smile)
+			{
+				smile.Sewer = self;
+				smile.SetDangerLevel(e.Args[0], e.Args[1]);
+			}
+		}
+	}
+	
+	// No light fixing here. 
+	override void HandleSetup()
+	{	Setup = true;	}
+}

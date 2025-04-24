@@ -1,0 +1,725 @@
+splash dirt
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/dirt
+	NoAlert
+}
+
+splash gravel
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/gravel
+	NoAlert
+}
+
+splash metal
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/metal
+	NoAlert
+}
+
+splash metal2
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/met2
+	NoAlert
+}
+
+splash hard
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/hard
+	NoAlert
+}
+
+splash tile
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/tile
+	NoAlert
+}
+
+splash wood
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/wood
+	NoAlert
+}
+
+splash carpet
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/carpet
+	NoAlert
+}
+
+splash rock
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/rock
+	NoAlert
+}
+
+splash electric
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/elec1
+	NoAlert
+}
+
+
+splash surface
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/tile2
+	NoAlert
+}
+
+
+splash slimy
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/slimy
+	NoAlert
+}
+
+
+splash Water
+{
+	smallclass		WaterSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+
+	baseclass		WaterSplashBase
+	chunkclass		WaterSplash
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+splash Water2
+{
+	smallclass		WaterSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+
+	baseclass		WaterSplashBase
+	chunkclass		WaterSplash
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+splash Blood
+{
+	smallclass		BloodSplash
+	smallclip		10
+	smallsound		world/sludgegloopsmall
+
+	baseclass		BloodSplash
+	chunkclass		BloodSplash
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			world/sludgegloop
+	NoAlert
+}
+
+splash Nuke
+{
+	smallclass		SludgeSplash
+	smallclip		6
+	smallsound		world/lavasizzlesmall
+
+	baseclass		SludgeSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+	NoAlert
+}
+
+splash Lava
+{
+	smallclass		LavaSplash
+	smallclip		12
+	smallsound		world/lavasizzlesmall
+
+	baseclass		LavaSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+	NoAlert
+}
+
+
+splash Lav2
+{
+	smallclass		BloodSplash
+	smallclip		12
+	smallsound		world/lavasizzlesmall
+
+	baseclass		BloodSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+	NoAlert
+}
+
+splash Lav3
+{
+	smallclass		LavaSmoke
+	smallclip		12
+	smallsound		world/lavsiz2
+
+	baseclass		LavaSmoke
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavsiz2
+	NoAlert
+}
+
+splash Slime
+{
+	smallclass		SlimeSplash
+	smallclip		6
+	smallsound		world/sludgegloopsmall
+
+	baseclass		SlimeSplash
+	chunkclass		SlimeChunk
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	1
+	sound			world/sludgegloop
+	NoAlert
+}
+
+splash Grey
+{
+	smallclass		BloodSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+	
+	baseclass		BloodSplashBase
+	chunkclass		SludgeChunk
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+
+splash Sludge
+{
+	smallclass		SludgeSplash
+	smallclip		8
+	smallsound		world/sludgegloopsmall
+
+	baseclass		SludgeSplash
+	chunkclass		SlimeChunk
+	chunkxvelshift	6
+	chunkyvelshift	6
+	chunkzvelshift	6
+	chunkbasezvel	1
+	sound			world/sludgegloop
+	NoAlert
+}
+
+
+
+terrain dirt
+{
+	splash			dirt
+	footclip		0
+}
+
+terrain gravel
+{
+	splash			gravel
+	footclip		0
+}
+
+terrain metal
+{
+	splash			metal
+	footclip		0
+}
+
+terrain metal2
+{
+	splash			metal2
+	footclip		0
+}
+
+terrain tile
+{
+	splash			tile
+	footclip		0
+}
+
+terrain hard
+{
+	splash			hard
+	footclip		0
+}
+
+terrain wood
+{
+	splash			wood
+	footclip		0
+	
+}
+
+terrain carpet
+{
+	splash			carpet
+	footclip		0
+}
+
+terrain rock
+{
+	splash			rock
+	footclip		0
+}
+
+terrain electric
+{
+	splash			electric
+	footclip		0
+}
+
+terrain surface
+{
+	splash			surface
+	footclip		0
+}
+
+terrain slimy
+{
+	splash			slimy
+	footclip		0
+}
+
+
+terrain Water
+{
+	splash			Water
+	footclip		10
+	liquid
+}
+
+terrain Water2
+{
+	splash			Water
+	footclip		0
+	liquid
+}
+
+terrain Waterd2
+{
+	splash			Water
+	footclip		30
+	liquid
+}
+
+terrain Waterd3
+{
+	splash			Water
+	footclip		40
+	liquid
+}
+
+terrain Lava
+{
+	splash			Lava
+	footclip		10
+	liquid
+}
+
+terrain Lav2
+{
+	splash			Lav2
+	footclip		4
+	liquid
+}
+
+terrain Lav3
+{
+	splash			Lav3
+	footclip		0
+	liquid
+}
+
+terrain Blood
+{
+	splash			Blood
+	footclip		10
+	liquid
+}
+
+terrain Nuke
+{
+	splash			Nuke
+	footclip		10
+	liquid
+}
+
+terrain Slime
+{
+	splash			Slime
+	footclip		10
+	liquid
+}
+
+terrain Grey
+{
+	splash			Grey
+	footclip		10
+	liquid
+}
+
+terrain Sludge
+{
+	splash			Sludge
+	footclip		10
+	liquid
+}
+
+
+
+ifdoom
+
+floor XRCK52 dirt
+floor XRCK74 dirt
+floor XRCK76 dirt
+floor XRCK77 dirt
+floor TMAYFL1 dirt
+
+floor XRCK75 gravel
+floor XRCK55 gravel
+floor XRCK55 gravel
+floor XRCK55 gravel
+floor XRCK20 gravel
+floor XRCK99 gravel
+floor XRCK101 gravel
+
+floor SLMTTK01 tile
+floor FLOOR0_3 tile
+floor D2_FLAT1 tile
+floor D2_FLAT4 tile
+floor D2_FLATY tile
+floor D2_FLATX tile
+floor TMLPWL08 tile
+floor TMRBFL06 tile
+floor TMRBFL7 tile
+floor TMRBFL7B tile
+floor TMRBFL7C tile
+floor TMRBFL7D tile
+floor ADEL_P51 tile
+floor FLOOR7_2 tile
+floor BLACK7 tile
+
+floor D2_WALL1 metal
+floor D2_WALL4 metal
+floor D2_FLAT6 metal
+floor D2_FLAT7 metal
+floor SHAWN2 metal
+floor SILVER1 metal
+floor FLAT23 metal
+floor LITE3 metal
+floor N_MTTK25 metal
+floor N_MTTK01 metal
+floor N_MTTK05 metal
+floor N_MTTK09 metal
+floor N_MTTK13 metal
+floor N_MTTK16 metal
+floor N_MTTK32 metal
+floor N_MTTK30 metal
+floor N_MTTK19 metal
+floor D2_FLAT7 metal
+floor D2_FLAT5 metal
+floor GRMETL02 metal
+floor GRMETL09 metal
+floor GRMETL08 metal
+floor NFTMTL01 metal
+floor N_MTSP3F metal
+floor N_MTSP3E metal
+floor METAL2 metal
+floor GBMETL02 metal
+floor GBMETL08 metal
+floor METAL metal
+floor GTMETL09 metal
+floor N_MTSP3I metal
+floor N_MTSP3J metal
+floor SUPP316V metal
+floor N_MTTK63 metal
+floor DRMETA04 metal
+floor DRSILV04 metal
+floor PLAT1 metal
+floor TMIDWL04 metal
+floor TMIDWL03 metal
+floor R_CAB2 metal
+floor R_CAB1 metal
+floor DRSILV07 metal
+floor SHSV19 metal
+
+floor N_MTTK47 metal2
+floor TFLRFL02 metal2
+floor T2GRF01 metal2
+floor TFLRFL04 metal2
+floor TTEKWL01 metal2
+floor TMIDWL02 metal2
+floor DRMETA02 metal2
+floor TFLRFL05 metal2
+floor TFLRFL0 metal2
+floor NTMESH01 metal2
+
+floor CRATOP1 wood
+floor CRATOP2 wood
+floor NFCTOP03 wood
+floor TBRKWL66 wood
+floor TWDTFL02 wood
+floor PANDARKG wood
+floor TWDTFL0 wood
+floor TPWDWL01 wood
+floor TCRTFL05 wood
+floor BWOOD15 wood
+floor TCRTFL0 wood
+
+floor TMAYWL14 hard
+floor TMAYWL06 hard
+floor TMAYWL07 hard
+floor TMAYFL04 hard
+floor TMAYWL09 hard
+floor NFTMET01 hard
+floor FLAT1 hard
+floor COMPSPAN hard
+floor COMPSPAA hard
+floor TMTLWL21 hard
+floor RROCK09 hard
+floor FLOOR4_8 hard
+floor CNCRT2 hard
+floor TASPFL0 hard
+floor TASPFL03 hard
+floor TBRIFL1 hard
+floor CEIL5_2 hard
+floor R_CONC7 hard
+floor BRICK10A hard
+floor N_GRAY36 hard
+floor STO3GY01 hard
+floor P_USEF12 hard
+floor P_USEF11 hard
+floor P_GRGY19 hard
+floor P_GRGY11 hard
+
+floor TEKWLSL1 electric
+floor COMPBLUE electric
+
+floor FLAT5_8 rock
+floor XRCK59 rock
+floor XRCK60 rock
+floor XRCK61 rock
+floor XRCK62 rock
+floor AQUAWALL rock
+floor AQUAGRAT rock
+floor P_GRGY4 rock
+floor N_STNE20 rock
+floor BLACK1 rock
+floor R_BLUWL1 rock
+
+floor XRCK19 lav3
+
+floor CEIL4_2 carpet
+floor CEIL4_1 carpet
+floor FLAT14 carpet
+floor CRTCOV02 carpet
+floor TDCMFL0 carpet
+floor BLACK8 carpet
+floor FLOOR1_1 carpet
+
+floor FLAT20 surface
+floor CEIL5_1 surface
+floor N_SVPP02 surface
+floor T2CMP01 surface
+floor T2CMP03 surface
+floor T2CMP05 surface
+floor T2CMP07 surface
+floor FLAT5_4 surface
+floor FLAT19 surface
+floor TCFLFL0 surface
+floor ADEL_P54 surface
+floor ADEL_P55 surface
+floor ADEL_P58 surface
+
+floor wwater water
+floor wgwater water
+floor wwater2 water2
+floor wdwater water
+floor wgwater2 waterd2
+floor wdwater2 waterd2
+floor wgwater3 waterd3
+floor wdwater3 waterd3
+floor wwukage nuke
+floor wwlime slime
+floor wwlood blood
+
+floor frgrn1 nuke
+floor frgrn2 nuke
+
+floor TWCRFL0 wood
+
+floor d3splt01 slimy
+floor d3splt02 slimy
+floor d3splt03 slimy
+floor d3splt04 slimy
+floor d3splt05 slimy
+floor d3splt06 slimy
+floor d3splt07 slimy
+floor d3splt08 slimy
+floor d3splt09 slimy
+floor d3splt10 slimy
+floor d3splt11 slimy
+floor d3splt12 slimy
+floor d3splt13 slimy
+floor d3splt14 slimy
+floor d3splt15 slimy
+floor d3splt16 slimy
+floor d3splt17 slimy
+floor d3splt18 slimy
+floor d3splt19 slimy
+floor d3splt20 slimy
+floor d3splt21 slimy
+floor d3splt22 slimy
+floor d3splt23 slimy
+
+endif

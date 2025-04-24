@@ -1,0 +1,88 @@
+/*------------------------------------------------------------------------------
+Colonel Enterblathnir
+
+Once corrupted, becomes a force of nature that wields Hellfire to aid in his
+attacks. Extremely dangerous if cornered by him. Fires every gun available in 
+the game, and is tanky as all hell.
+
+When wounded greatly, will make a beeline back for the military base and take
+cover in his office. He cannot be attacked in this place, and will take quite a
+while to heal, usually 10-30 minutes. When he's done, he'll work his way back to
+the player and attack them again, while also obliterating everything in his way.
+
+Use this to your advantage. Lure him towards Hellfire portals and he'll destroy
+them, no sweat - unless already injured. He can dispatch any nightmare in his
+path too, and may cause some... interesting effects for trying to get to you.
+
+What happens when he decides to pursue you into the sewers, but the entrance is
+blocked?
+
+There's only a few ways to kill him for good. But will that do you any good?
+------------------------------------------------------------------------------*/
+
+Class SLNColonel : SLNBoss
+{
+	Default
+	{
+		Health 2000;
+		PainChance 32;
+		SeeSound "Ambient/Gore";
+		ActiveSound "Ambient/Gore";
+		PainSound "*pain50";
+		DeathSound "*death";
+		Tag "Colonel Enterblathnir";
+		Obituary "%o is yet another victim to the Colonel's corruption.";
+	}
+	States
+	{
+	Holo:
+		COLN Z -1
+		{
+			bTHRUACTORS = true;
+			A_UnsetShootable();
+			A_SetRenderStyle(0.8,STYLE_Add);
+		}
+		Wait;
+	Aiming:
+		COLN E -1; // For the script intro.
+		Wait;
+	Spawn:
+		COLN A 8 A_Look();
+		Loop;
+	See:
+		COLN BBBBCCCCDDDDAAAA 2 A_FastChase();
+		Loop;
+	Pain:
+		COLN G 4;
+		COLN G 4 A_Pain;
+		Goto See;
+	Death:
+		COLN H 10;
+		COLN I 10 A_PlayerScream();
+		COLN J 10 A_Fall();
+		COLN KL 10;
+		COLN N -1;
+		Stop;
+	XDeath:
+		COLN O 8;
+		COLN P 8 A_Fall();
+		COLN QRSTUV 8;
+		COLN W -1;
+		Stop;
+	}
+}
+
+Class SLNColonelHologram : Actor
+{
+	Default
+	{
+		+BRIGHT
+		+THRUACTORS
+		+NOGRAVITY
+		+NONSHOOTABLE
+		-SHOOTABLE
+		RenderStyle "Add";
+		Alpha 0.8;
+	}
+	
+}

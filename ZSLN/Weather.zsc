@@ -1,0 +1,520 @@
+#include "./WeatherBase.zsc"
+
+//==============================================================================
+//==============================================================================
+//	Rain
+//==============================================================================
+//==============================================================================
+
+Class SNRain : Actor
+{
+	const Distance = 512.0; // from center -- it follows player like doge.
+	const TryMin = 2;
+	const TryMax = 6;
+	const SpawnZ = 350.0;
+	const FailSafeStart = 30;
+	Default
+	{
+		+NOINTERACTION
+		RenderStyle "None";
+	}
+	
+	override void BeginPlay()
+	{
+		ChangeStatNum(STAT_SNWEATHER);
+		Super.BeginPlay();
+	}
+	
+	States
+	{
+	Inactive:
+		TNT1 A -1;
+	Active:
+	Spawn:
+		TNT1 A 1 NoDelay
+		{
+			if (!target) target = players[0].mo;
+		}
+	Moving:
+		TNT1 A 1
+		{
+			if (!target || !(target is "PlayerPawn")) target = players[0].mo;
+			else
+			{
+				// Using A_Warp because it does a bunch of stuff on the internal side
+				// such as taking care of angle without any unneeded overhead.
+				SetOrigin(target.pos,false);
+				
+				int cap = random(TryMin, TryMax);
+				
+				uint failsafe = FailSafeStart;
+				for (int i = 0; i < cap; i++)
+				{
+					if (!failsafe)
+					{
+						A_SetTics(5);
+						break;
+					}
+					Vector2 check = (pos.x, pos.y);
+					double len = frandom(0.0, Distance);
+					double newang = random(0,359);
+					
+					// Get the angle offset of the spawn position.
+					check = Vec2Angle(len, newang);
+					
+					// Get the sector and get the ceiling texture. If it's the sky,
+					// start doing calculations. Don't bother with 3D sectors having
+					// sky textures because that's an undefined behavior, according
+					// to Graf.
+					Sector s = Level.PointInSector(check);
+					
+					if (s)
+					{
+						if (TexMan.GetName(s.GetTexture(s.ceiling)) == 'F_SKY1')
+						{
+							double F3DHighestFloor, F3DLowestCeiling, Highest, Lowest;
+							
+							Highest = s.HighestCeilingAt(check);
+							Lowest = s.LowestFloorAt(check);
+							F3DHighestFloor = s.NextLowestFloorAt(check.x, check.y, Highest); //, FFCF_NOPORTALS);
+							F3DLowestCeiling = s.NextHighestCeilingAt(check.x, check.y, pos.z, Highest);//, FFCF_NOPORTALS);
+							//double TrueZ = (OverrideZ) ? OverriddenZ : SpawnZ;
+							// If there is no 3D floor between the player and the sky
+							// Or the 3D ceiling is not high enough to block rain
+							//	and the 3D floor is lower than the player's position 
+							//		spawn the rain drop.
+							if ((Highest <= F3DLowestCeiling) ||
+								((Highest > F3DLowestCeiling) &&
+								(F3DHighestFloor <= pos.z + SpawnZ)))
+							{
+								double DropZ = Clamp(pos.z + SpawnZ, Lowest + 4, Highest - 4);
+								Vector3 DropPos = (check.x, check.y, DropZ);
+								Actor drop = Spawn("RainDrop", DropPos);
+								if (drop)	
+								{
+									drop.vel.z = -30.0;
+									failsafe = FailSafeStart;
+								}
+								else
+								{
+									failsafe--;
+									i--;
+								}
+							}
+							else
+							{
+								failsafe--;
+								i--;
+							}
+						}
+					}
+				}
+			}
+		}
+		Wait;
+	}
+}
+
+Class RainDrop : Actor
+{
+	Default
+	{
+		Projectile;
+		+THRUACTORS
+		+DONTSPLASH
+		+FORCEYBILLBOARD
+		Speed 30;
+		Height 2;
+		Radius 2;
+		Gravity 0.7;
+		Renderstyle "Translucent";
+		Alpha 0.9;
+		Scale 1.2;
+	}
+	States
+	{
+	Spawn:
+		RNDR A -1;
+		Loop;
+	Death:
+		RNDR BCDEFGH 3 A_FadeOut(0.15);
+		Stop;
+	}
+}
+
+//==============================================================================
+// Lightning by Major Cooke
+// Also completely redone once more by him.
+//==============================================================================
+
+//==============================================================================
+//==============================================================================
+// Lightning API
+//==============================================================================
+//==============================================================================
+
+/*==============================================================================
+							DEFINITION INSTRUCTIONS
+ 1.	Copy/paste the SkyLightningGenerator and SNLightning classes. 
+		Rename accordingly.
+	
+ 2. 
+		
+--------------------------------------------------------------------------------
+
+							MAP SETUP INSTRUCTIONS
+
+ 1.	
+ 
+--------------------------------------------------------------------------------
+
+ LightningRegion is defined for use in having a place to spawn the lightning.
+ The Lightning Generators will not use DORMANT regions.
+================================================================================
+		SkyLightningGenerator and SNLightning are the base actors.
+================================================================================
+	SkyLightningGenerator properties are as follows:
+	------------------------------------------------
+	LightningClass <Actor>
+		The actor class to spawn. Specified actor is responsible for spawning
+		the bolts and visual effects.
+		
+	MoveToCenter <bool>
+		If true, post spawning, attempts to center itself between the distance 
+		difference of north to south, then east to west.
+		
+	UseLineDist <bool>
+		Checks a hitscan to determine how far offsetted the beam can be spawned.
+		Use this for tight areas where there may be map obstructions, to stop
+		beams from spawning outside of walls.
+		Otherwise, larger regions like the sky should remain off to lessen
+		the amount of calculations performed.
+		
+	InSky <bool>
+		After spawning, sets its Z to the ceiling automatically. Use this for
+		skyboxes
+		
+	Tic(Min/Max) <int>
+		Min/max number of tics to wait before spawning LightningClass.
+		
+	Dist(Min/Max) <double>
+		Min/max distance from the spawner to spawn LightningClass.
+		
+	Immediate <bool>
+		If true, immediately spawns the lightning and destroys itself.
+==============================================================================*/
+
+Class SkyLightningGenerator : SwitchableDecoration
+{
+	Default
+	{
+		//$Category Lightning
+		SkyLightningGenerator.LightningClass "SNLightning";
+		SkyLightningGenerator.MoveToCenter false;			
+		SkyLightningGenerator.UseLineDist false;			
+		SkyLightningGenerator.NoRegions true;				
+		SkyLightningGenerator.InSky true;					
+		SkyLightningGenerator.TicMin 35 * 1;				
+		SkyLightningGenerator.TicMax 35 * 5;				
+		SkyLightningGenerator.DistMin 150;					
+		SkyLightningGenerator.DistMax 650;
+		SkyLightningGenerator.Immediate false;
+	}
+}
+
+//==============================================================================
+/*	Legend:
+		(R) = Property is required.
+	------------------------------------------------------------
+	Property template is:
+	<Property Name> <Variable Acceptance Type [= Default Value]>
+	------------------------------------------------------------
+	SNLightning's properties are the following:
+	-------------------------------------------
+	StartPuff <Actor = "">
+		Beam start position to be spawned by hitscan. If left blank, will use
+		the spawner's position instead.
+		
+(R) EndPuff <Actor = "SNLightningPuff">
+		The impact puff where the beam attempts to stop at. Does not necessarily
+		mean contact is always made.
+		
+(R)	Beam <Actor = "SNLightning">
+		The lightning beam spawner which does the movement and actual effect
+		spawning. 
+	
+	RandomAim <bool = false>
+		If true, chooses a new impact location between steps. Otherwise,
+		only chooses one at the start.
+	
+	(Angle/Pitch)Random <double>
+		The random amount of angle/pitch to add per step outside of 'choking'
+		(see ChokeMin/Max for details).
+		
+	AngleStart1Min
+	AngleStart1Max
+	AngleStart2Min
+	AngleStart2Max
+	PitchStart1Min
+	PitchStart1Max
+	PitchStart2Min
+	PitchStart2Max
+	(Angle/Pitch)Start(1/2)(Min/Max) <double>
+		The base pitch/angle to add upon its own when Beam spawns Start(1) or 
+		End(2) puff(s) respectively.
+		
+	Choke(Min/Max) <int>
+		# of times the beam can 'wander' before 'choking' itself --
+		re-orienting back on track and aiming at the EndPuff.
+		
+	Step(Min/Max) <int>
+		# of times to dedicate to 'sub-beam' spawning.
+		Sub-beams do not scale out and vanish after Delay(Min/Max) tics pass.
+		
+	Delay(Min/Max) <int>
+		# tics sub-beams will stay alive before replacement with the next step.
+		
+(R)	SpriteName <4 character string> 
+		The four characters used to define what sprite to give the beam. 
+		This works like the <Sprite> <Frame> <Duration> setup in an actor's
+		states, but using only the sprite base itself.
+		
+		I.e.
+		Using a player sprite:
+		--> PLAY <-- A 0
+		SNLightning.SpriteName "PLAY";
+		
+(R)	Frame(Min/Max) <int> 
+		The random frame range picked to give the beam. 
+		Frames are appended by the prefix "Fr_".
+		(See Constants.zsc)
+		
+		I.e.
+		SNLightning.FrameMin Fr_A;
+		SNLightning.FrameMax Fr_H;
+		
+	Length(Min/Max) <double>
+		The X scale randomized between min and max for all beams spawned during a step.
+		
+	Width(Min/Max) <double>
+		Y scale equivalent of Length(Min/Max).
+	
+	MaxDistance <double>
+		How far the beam spawner can go before the step ends.
+	
+	HomingDistance <double>
+		When the beam spawner is within this range of the EndPuff, choking is
+		constantly enforced to reach the destination.
+	
+	Failsafe <int = 500>
+		Absolute maximum number of movements the beam spawner can make before
+		forcefully ending it.
+	
+	BranchChance <int = 50>
+	BranchCMax <int = 1000>
+		The basic formula (BranchChance / BranchCMax) for a chance to spawn a branch.
+		BranchChance being 0 means it'll never spawn branches.
+	
+	BranchCount <int>
+		The maximum number of branches one single step can spawn.
+		
+	BranchSize <!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>
+		Do not use/modify. This is set to 1.0 in the base since it cannot be done
+		otherwise.
+		
+		Every new generation of branch will automatically reduce this by 25%,
+		affecting several properties to ensure branch spawning does not go
+		overboard.
+		
+	ScaleTime(Min/Max) <int>
+		Only the final step spawns beams capable of scaling out to nothing.
+		Sets how many tics all final beams will take scale out and vanish.
+	
+	Silent <bool = false>
+		Disables thunder noise if true.
+		
+	NoFlash <bool = false>
+		Does not perform A_Light() on the player if true.
+	
+	SightCheck <bool = false>
+		Checks to see if within the player's FOV (somewhat...) if true.
+==============================================================================*/
+
+Class SNLightning : VisualSpecialEffect 
+{
+	Default
+	{
+		SNLightning.Beam "SNLightningBeam";
+		SNLightning.StartPuff "";
+		SNLightning.EndPuff "SNLightningPuff";
+		SNLightning.RandomAim false;
+		SNLightning.PitchStart1Min 80.0;
+		SNLightning.PitchStart1Max 90.0;
+		SNLightning.PitchRandom 40.0;
+		SNLightning.AngleStart1Min -90.0;
+		SNLightning.AngleStart1Max 90.0;
+		SNLightning.AngleRandom 40.0;
+		SNLightning.ChokeMin 1;
+		SNLightning.ChokeMax 5;
+		SNLightning.StepMin 2;
+		SNLightning.StepMax 4;
+		SNLightning.DelayMin 3;						
+		SNLightning.DelayMax 5;
+		SNLightning.SpriteName White;				// Available: Red, Green, Blue and White.
+		SNLightning.FrameMin Fr_A;
+		SNLightning.FrameMax Fr_H;
+		SNLightning.LengthMin 0.25;
+		SNLightning.LengthMax 1.00;
+		SNLightning.WidthMin 0.25;
+		SNLightning.WidthMax 0.35;
+		SNLightning.MaxDistance 5120;
+		SNLightning.HomingDistance 400;
+		SNLightning.Failsafe 500;
+		SNLightning.BranchChance 20;
+		SNLightning.BranchCMax 1000;
+		SNLightning.BranchCount 8;
+		SNLightning.ScaleTimeMin 24;
+		SNLightning.ScaleTimeMax 48;
+		SNLightning.Silent false;
+		SNLightning.NoFlash false;
+		SNLightning.SightCheck false;
+	}
+}
+
+//==============================================================================
+//==============================================================================
+// Insert derivatives of custom lightning below here
+//==============================================================================
+//==============================================================================
+
+//==============================================================================
+// The bolt itself
+//==============================================================================
+Class SNLightningBeam : VisualSpecialEffect
+{
+	uint StepTime;
+	bool IsStep;
+	double ScaleTime;
+	double ScaleSub;
+	property ScaleTime: ScaleTime;
+	property StepTime:	StepTime;
+	property IsStep:	IsStep;
+	Default
+	{
+		SNLightningBeam.StepTime 4;
+		SNLightningBeam.ScaleTime 24;
+		SNLightningBeam.IsStep false;
+		RenderStyle "Add";
+		XScale 0.05;
+		YScale 1.0;
+		+BRIGHT
+	}
+	
+	override void BeginPlay()
+	{
+		ChangeStatNum(Thinker.STAT_USER);
+		Super.BeginPlay();
+	}
+	override void PostBeginPlay()
+	{
+		pitch += 90;
+		ScaleTime = Max(1.0, ScaleTime);
+		ScaleSub = Scale.X / ScaleTime;
+		Super.PostBeginPlay();
+	}
+	
+	States
+	{
+	Spawn:
+		---- A 1 NoDelay
+		{
+			StateLabel next = 'Scaling';
+			if (IsStep)	
+			{	
+				A_SetTics(StepTime);
+				next = null;
+			}
+			return ResolveState(next);
+		}
+		Stop;
+	Scaling:
+		#### # 1
+		{			
+			Scale.X -= ScaleSub;
+			if (Scale.X <= 0.0)	{ Destroy(); return; }
+		}
+		Wait;
+	// Without someone using these, modeldefs will throw a fit and refuse to start.
+	Precache:
+		LNBR ABCDEFGH 0;
+		LNBG ABCDEFGH 0;
+		LNBB ABCDEFGH 0;
+		LNBW ABCDEFGH 0;
+		Stop;
+	}
+}
+
+//------------------------------------------------------------------------------
+// Burst lightning for special effects when called.
+//------------------------------------------------------------------------------
+
+Class SkyLightningBurst : SkyLightningGenerator
+{
+	Default
+	{
+		SkyLightningGenerator.Immediate true;
+	}
+}
+
+//------------------------------------------------------------------------------
+// Lightning for the tubes inside the BLU power plant.
+//------------------------------------------------------------------------------
+
+Class PowerLightningGenerator : SkyLightningGenerator
+{
+	Default
+	{
+		SkyLightningGenerator.LightningClass "SNLightningBLU";
+		SkyLightningGenerator.TicMin 4;
+		SkyLightningGenerator.TicMax 16;
+		SkyLightningGenerator.DistMin 0;
+		SkyLightningGenerator.DistMax 48;
+		SkyLightningGenerator.NoRegions true;
+		SkyLightningGenerator.InSky false;
+		SkyLightningGenerator.UseLineDist false;
+	}
+}
+
+Class SNLightningBLU : SNLightning
+{
+	Default
+	{
+		SNLightning.StartPuff "SNLightningPuff";
+		SNLightning.ScaleTimeMin 12;
+		SNLightning.ScaleTimeMax 24;
+		SNLightning.Silent true;
+		SNLightning.NoFlash true;
+		SNLightning.StepMin 8;
+		SNLightning.StepMax 16;
+		SNLightning.DelayMin 1;
+		SNLightning.DelayMax 2;
+		SNLightning.SpriteName "LNBB";
+		SNLightning.LengthMin 0.10;
+		SNLightning.LengthMax 0.25;
+		SNLightning.WidthMin 0.15;
+		SNLightning.WidthMax 0.25;
+		SNLightning.BranchCount 0;
+		SNLightning.BranchChance 0;
+		SNLightning.MaxDistance 2048;
+		SNLightning.HomingDistance 100;
+		SNLightning.PitchStart1Min 80.0;
+		SNLightning.PitchStart1Max 90.0;
+		SNLightning.AngleStart1Min 0.0;
+		SNLightning.AngleStart1Max 360.0;
+		SNLightning.PitchStart2Min -90.0;
+		SNLightning.PitchStart2Max -80.0;
+		SNLightning.AngleStart2Min 0.0;
+		SNLightning.AngleStart2Max 360.0;
+		SNLightning.SightCheck true;
+	}
+}

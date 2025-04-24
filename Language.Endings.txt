@@ -1,0 +1,22 @@
+[en default]
+
+SLN_ENDING_NORMAL_01 =
+"Thousands of demon left as corpses behind. Thousands more keep coming.\n"
+"Endless. Restless. Pitiless. Merciless. You can only hope that Enterblathnir\n"
+"and his men can hold out as he claims. The base has significant defensive\n"
+"positions, but that's never stopped a sea of demons from causing so much\n"
+"destruction before.";
+
+SLN_ENDING_NORMAL_02 =
+"You helped them fight off as many as possible. That should give them a chance\n"
+"to pull through. Should anything happen to their base, you could put in the\n"
+"good word and recruit them for TAO training.";
+
+SLN_ENDING_NORMAL_03 =
+"Surely this isn't the end of the story though? You barely explored any of the\n"
+"region. There's so much to learn, with such a huge story to write and so many\n"
+"possibilities. No better time to become a hero, as you already are.";
+
+SLN_ENDING_NORMAL_04 =
+"You've another chance. Another option is available. Test your luck! Break some\n"
+"rules! This time, things WILL be different.";

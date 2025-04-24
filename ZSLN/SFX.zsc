@@ -1,0 +1,352 @@
+//==============================================================================
+//==============================================================================
+//==============================================================================
+// Special Effects
+//
+// Everything found within here has been reworked by Major Cooke. Almost none
+// of the original code remains.
+//==============================================================================
+//==============================================================================
+//==============================================================================
+
+Class VisualSpecialEffect : Actor abstract
+{
+	Default
+	{
+		+NOINTERACTION
+		+NOTELEPORT
+		+FORCEXYBILLBOARD
+		+NOTONAUTOMAP
+	}
+}
+
+Class SLNStaticBeam : VisualSpecialEffect
+{
+	Default
+	{
+		//$Category "SFX"
+		+BRIGHT
+		+FORCEYBILLBOARD
+		RenderStyle "Add";
+		Tag "Static Beam";
+	}
+	States
+	{
+	Spawn:
+		BM00 A -1;
+		Stop;
+	}
+}
+
+Class SNNothing : VisualSpecialEffect
+{
+	Default
+	{
+		+NOINTERACTION
+		+NOSECTOR
+		+INVISIBLE
+		RenderStyle "None";
+	}
+	override void BeginPlay()
+	{
+		Destroy();
+	}
+	override void PostBeginPlay()
+	{
+		Destroy();
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		Stop;
+	}
+}
+
+//////////////////////////////////////
+// FOG originally by TORMENTOR667	//
+// Reworked entirely by Major Cooke //
+//////////////////////////////////////
+
+Class FogCloud_V1 : VisualSpecialEffect
+{
+	const BaseDist = 256;
+	const BDistSq = BaseDist ** 2;
+	const MaxDist = (BaseDist * 10) ** 2;
+	Actor plr;
+	Default
+	{
+		//$Category SFX
+		+NOTONAUTOMAP
+		RenderStyle "Translucent";
+		Alpha 1.0;
+		Scale 3;
+		
+	}
+	States
+	{
+	Spawn:
+		XSMK A 0 NoDelay { plr = players[0].mo; }
+		XSMK A 17
+		{
+			if (plr)
+			{
+				double dist = Distance2DSquared(plr);
+				if (dist < MaxDist)
+				{
+					A_SetTics(1);
+					alpha = ((max(0,dist - BDistSq) / MaxDist));
+				}
+				else
+				{
+					alpha = 1.0;
+				}
+			}
+			else
+			{
+				plr = players[0].mo;
+				alpha = 1.0;
+			}
+		}
+		Wait;
+	}
+}
+
+Class FogCloud_V2 : FogCloud_V1 { Default { Scale 0.75; } }
+Class FogCloud_V3 : FogCloud_V1 { Default { Scale 1.50; } }
+
+//==============================================================================
+// Electrical sparks
+//==============================================================================
+Class TPortLightning : VisualSpecialEffect
+{
+	Default
+	{
+		+ROLLSPRITE
+		RenderStyle "Add";
+		Alpha 0.7;
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		A_SetRoll(frandom(0.0,359.9));
+		Scale.X *= randompick(-1,1);
+	}
+	
+	States
+	{
+	Spawn:
+		BLL1 A 1 bright A_FadeOut(0.15);
+		Wait;
+	}
+}
+
+Class TPortLightningR : TPortLightning	{	Default	{	Scale 2.0;	}	}
+Class TPortLightningP : TPortLightning	{	Default	{	Scale 12.0;	}	}
+
+Class TPortLightningSmall : TPortLightning		{	Default	{	Scale 0.2;	}	}
+Class TPortLightningMedium : TPortLightning		{	Default	{	Scale 0.3;	}	}
+Class TPortLightningLarge : TPortLightning		{	Default	{	Scale 0.4;	}	}
+Class TPortLightningHuge : TPortLightning		{	Default	{	Scale 0.5;	}	}
+
+Class TPortLightningSmallR : TPortLightningR	{	Default	{	Scale 0.4;	}	}
+Class TPortLightningMediumR : TPortLightningR	{	Default	{	Scale 0.6;	}	}
+Class TPortLightningLargeR : TPortLightningR	{	Default	{	Scale 0.8;	}	}
+Class TPortLightningHugeR : TPortLightningR		{	Default	{	Scale 1.0;	}	}
+Class TPortLightningSmallP : TPortLightningP	{	Default	{	Scale 2.4;	}	}
+Class TPortLightningMediumP : TPortLightningP	{	Default	{	Scale 3.6;	}	}
+Class TPortLightningLargeP : TPortLightningP	{	Default	{	Scale 4.8;	}	}
+Class TPortLightningHugeP : TPortLightningP		{	Default	{	Scale 6.0;	}	}
+
+
+
+Class SpecialGibSpawner : Actor
+{
+	Default
+	{
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOTONAUTOMAP
+		+INVISIBLE
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 1 NoDelay
+		{
+			A_StartSound("critstrike",5,CHANF_OVERLAP);
+			A_StartSound("other/gibdeath",6,CHANF_OVERLAP);
+			
+			for (int i = 0; i < 14; i++)
+			{
+				int ch = (i < 4) ? 0 : 192;
+				A_SpawnItemEx("BouncingGib",0,0,0,frandom(0,12),0,random(5,15),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION,ch);
+				A_SpawnItemEx("StickemUpGib",0,0,0,frandom(0,12),0,random(5,15),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION,ch);
+			}
+		}
+		Stop;
+	Simple:
+		TNT1 A 1
+		{
+			A_SpawnItemEx("StickemUpGib",0,0,0,frandom(0,12),0,random(5,15),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+			A_SpawnItemEx("BouncingGib",0,0,0,frandom(0,12),0,random(5,15),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		}
+		Stop;
+	}
+}
+
+Class BouncingGib : Actor
+{
+	Default
+	{
+		Projectile;
+		+THRUACTORS
+		-NOGRAVITY
+		-NOLIFTDROP
+		+BOUNCEONCEILINGS
+		+NOTRIGGER
+		+NOTONAUTOMAP
+		Radius 1;
+		Height 1;
+		Scale 0.5;
+		BounceFactor 0.5;
+		WallBounceFactor 0.8;
+		BounceType "Doom";
+	}
+	States
+	{
+	Spawn:
+		GUMY AB 3 A_SpawnItemEx("GibEntrail",0,0,random(-1,1),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		Loop;
+	Death:
+		TNT1 A 1
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				int ch = (i < 2) ? 0 : 64;
+				A_SpawnItemEx("Blood",random(2,4),0,random(0,2),frandom(4,6),0,random(5,8),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION,ch);				
+			}
+			A_SpawnItemEx("GibBloodPool",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		}
+		Stop;
+	}
+}
+
+Class StickemUpGib : Actor
+{
+	Default
+	{
+		Projectile;
+		+THRUACTORS
+		-NOGRAVITY
+		-NOLIFTDROP
+		+BOUNCEONCEILINGS
+		+NOTONAUTOMAP
+		Scale 0.5;
+		Radius 2;
+		Height 4;
+	}
+	States
+	{
+	Spawn:
+		GUMY AB 3 A_SpawnItemEx("GibEntrail",0,0,random(-1,1),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		Loop;
+	Death:
+		TNT1 A 1 
+		{
+			if (pos.z <= floorz + 1)
+			{
+				for (int i = 0; i < 14; i++)
+				{
+					int ch = (i < 4) ? 0 : 64;
+					A_SpawnItemEx("Blood",random(1,4),0,random(1,4),frandom(4,6),0,random(5,8),random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION, 64);
+				}
+				A_SpawnItemEx("GibBloodPool",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+			}
+			else
+				A_SpawnItemEx("SlidingGib",-1,0,0,0,0,-1,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		}
+		Stop;
+	}
+}
+
+Class GibEntrail : Blood
+{
+	Default
+	{
+		Gravity 0.08;
+		+THRUACTORS
+		+NOBLOCKMAP
+		+NOTONAUTOMAP
+	}
+}
+
+Class SlidingGib : Actor
+{
+	Default
+	{
+		Projectile;
+		+THRUACTORS
+		-NOGRAVITY
+		+FLOORCLIP
+		+NOTONAUTOMAP
+		Radius 1;
+		Height 1;
+		WallBounceFactor 0;
+		BounceFactor 0.1;
+		Gravity 0.6;
+		BounceType "Doom";
+	}
+	States
+	{
+	Spawn:
+		GUMY E 3 
+		{
+			if (pos.z <= floorz)
+			{
+				SetStateLabel("Death");
+				return;
+			}
+		
+			A_SpawnItemEx("GibEntrail",-1,0,frandom(-2,2),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+			A_SpawnItemEx("GibEntrail",-1,0,frandom(-2,2),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION,128);
+			
+		}
+		Loop;
+	Death:
+		TNT1 A 1 A_SpawnItemEx("GibBloodPool",-2,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+		Stop;
+	}
+}
+
+Class GibBloodPool : Actor
+{
+	Default
+	{
+		Projectile;
+		+FLOORCLIP
+		-NOGRAVITY
+		+THRUACTORS
+		+NOEXPLODEFLOOR
+		Radius 1;
+		Height 1;
+	}
+	States
+	{
+	Spawn:
+		POB2 A 0 NoDelay
+		{	
+			A_StartSound("critstrike",5);
+			A_StartSound("other/gibdeath",6);
+		}
+		POB2 A 350 A_Jump(64,"SkinIncluded");
+		POB2 A 1 A_FadeOut(0.05);
+		Wait;
+	SkinIncluded:
+		POB1 A 350;
+		POB1 A 1 A_FadeOut(0.05);
+		Wait;
+	}
+}

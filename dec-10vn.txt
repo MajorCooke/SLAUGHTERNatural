@@ -1,0 +1,1697 @@
+Actor 10VN 
+{
+	var int user_ao1;
+	var int user_ao2;
+	var int user_ao3;
+	Health 99999999
+	Radius 1
+	Height 1
+	+DONTTHRUST
+	Speed 0
+	Monster
+	Renderstyle Add
+	Alpha 1.0
+	Scale 2.5
+	Obituary "Shocking, isn't it?"
+	HitObituary "Eeehaahahahahahaah! Grounded!"
+	+Boss
+	+NoGravity
+	+FloatBob
+	States
+	{
+	Spawn: 
+		TNT1 A 1 A_Look 
+		Loop 
+	See:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("EnvyEyes",0,0,848,0,0,0,0,SXF_NOCHECKPOSITION | SXF_SETMASTER)
+		TNT1 A 0 //A_SpawnItemEx("OrbitProxy",0,0,512,0,0,0,0,SXF_NOCHECKPOSITION | SXF_ABSOLUTEANGLE)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton1", 32, 192, -64, 0, 0, 0, 0, SXF_SETMASTER)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton2", 32, -128, -128, 0, 0, 0, 180, SXF_SETMASTER)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton3", 32, 96, -256, 0, 0, 0, 0, SXF_SETMASTER)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton2", 32, -128, -448, 0, 0, 0, 180, SXF_SETMASTER)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton1", 32, 192, -640, 0, 0, 0, 0, SXF_SETMASTER)
+		TNT1 A 0 A_SpawnItemEx("OrbitPhoton0", 32, -256, -768, 0, 0, 0, 180, SXF_SETMASTER)
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-768,0,0,0,60,SXF_SETMASTER,0) //Greg
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-384,0,0,0,180,SXF_SETMASTER,0) //Craig
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,0,0,0,0,300,SXF_SETMASTER,0) //zztop
+		TNT1 A 0 A_FaceTarget
+		LITC A 1 Bright
+		TNT1 A 0 A_FaceTarget
+		LITC A 1 Bright
+		TNT1 A 0 A_FaceTarget
+		LITC B 1 Bright
+		TNT1 A 0 A_FaceTarget
+		LITC B 1 Bright
+		TNT1 A 0 A_FaceTarget
+		LITC C 1 Bright
+		TNT1 A 0 A_FaceTarget
+		LITC C 1 Bright
+		TNT1 A 0 A_FaceTarget
+		TNT1 A 0 A_Jump(64,"Missile")
+		Goto See+9
+	SeeRotating:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(user_ao1>=1, 2)
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-768,0,0,0,60,SXF_SETMASTER,0)
+		TNT1 A 0
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(user_ao2>=1, 2)
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-384,0,0,0,180,SXF_SETMASTER,0)
+		TNT1 A 0
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(user_ao3>=1, 2)
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,0,0,0,0,300,SXF_SETMASTER,0)
+		TNT1 A 0
+		TNT1 A 0
+		LITC A 1 Bright
+		LITC A 1 Bright
+		LITC B 1 Bright
+		LITC B 1 Bright
+		LITC C 1 Bright
+		LITC C 1 Bright
+		Goto SeeRotating
+	SeeStop1:
+		TNT1 A 0 A_SpawnItemEx("AttackOrb1",368,0,-768,0,0,0,60,SXF_SETMASTER,0)
+		TNT1 A 0 A_SpawnItemEx("OrbDebree",368,0,-768,0,0,0,60,SXF_SETMASTER,0)
+		TNT1 A 0 A_SetUserVar("user_ao1",1)
+		Goto SeeRotating
+	SeeStop2:
+		TNT1 A 0 A_SpawnItemEx("AttackOrb2",368,0,-384,0,0,0,180,SXF_SETMASTER,0)
+		TNT1 A 0 A_SpawnItemEx("OrbDebree",368,0,-384,0,0,0,180,SXF_SETMASTER,0)
+		TNT1 A 0 A_SetUserVar("user_ao2",1)
+		Goto SeeRotating
+	SeeStop3:
+		TNT1 A 0 A_SpawnItemEx("AttackOrb3",368,0,0,0,0,0,300,SXF_SETMASTER,0)
+		TNT1 A 0 A_SpawnItemEx("OrbDebree",368,0,0,0,0,0,300,SXF_SETMASTER,0)
+		TNT1 A 0 A_SetUserVar("user_ao3",1)
+		Goto SeeRotating
+	Missile:
+		TNT1 A 0 ACS_NamedExecute("10VNAttackIni",0)
+		Goto SeeRotating
+	Death: 
+		TNT1 A 0
+		TNT1 A 1 A_RemoveChildren(0)
+		Stop
+	Hysteric:
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-768,0,0,0,60,SXF_SETMASTER,0)
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,-384,0,0,0,180,SXF_SETMASTER,0)
+		TNT1 A 0 A_SpawnItemEx("TPortalBoss",368,0,0,0,0,0,300,SXF_SETMASTER,0)
+		LITC A 1 Bright
+		LITC A 1 Bright
+		LITC B 1 Bright
+		LITC B 1 Bright
+		LITC C 1 Bright
+		LITC C 1 Bright
+		loop
+	} 
+}
+
+
+
+Actor TPortalBoss : SwitchableDecoration
+{
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.50
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		ORBP ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP DCB 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP DCB 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP DCB 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		ORBP ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.0,1)
+		Stop
+	}
+}
+
+Actor TPortMistSpawnerB : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AA 0 A_SpawnItemEx("TPortMistB",Random(-14,14),Random(-14,14),Random(-14,14),0.012*Random(-75,75),0.012*Random(-75,75),0.012*Random(-75,75),0,0,24)
+		stop
+	}
+}
+
+Actor TPortMistB : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.25
+	Scale 0.75
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		loop
+	}
+}
+
+
+Actor AttackOrb1
+{
+    var int user_greg2;
+	Projectile
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.6
+	Speed 0
+	Radius 1
+	Height 1
+	Damage 50
+	DamageType Greg_Crush
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.9,1)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		Goto Spawn+16
+	Death:
+	    TNT1 A 0 A_JumpIf(user_greg2 == 1,"Death2")
+	    TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+	    TNT1 A 0 bright A_Quake(6,15,0,5096)
+		BALZ A 1 bright A_CustomMissile("GregRunnerShort",16,0,40,2,0)
+		BALZ A 0 bright A_CustomMissile("GregRunnerShort",16,0,80,2,0)
+		BALZ C 1 bright A_CustomMissile("GregRunnerShort",16,0,120,2,0)
+		BALZ C 0 bright A_CustomMissile("GregRunnerShort",16,0,160,2,0)
+		BALZ E 1 bright A_CustomMissile("GregRunnerShort",16,0,200,2,0)
+		BALZ E 0 bright A_CustomMissile("GregRunnerShort",16,0,240,2,0)
+		BALZ G 1 bright A_CustomMissile("GregRunnerShort",16,0,280,2,0)
+		BALZ G 0 bright A_CustomMissile("GregRunnerShort",16,0,320,2,0)
+		BALZ G 1 bright A_CustomMissile("GregRunnerShort",16,0,360,2,0)
+		BALZ I 1 bright
+		TNT1 A 0 ACS_NamedExecute("10VNGregUp",0)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		TNT1 A 0 bright A_Quake(6,15,0,5096)
+		BALZ A 1 bright A_CustomMissile("GregRunnerMedium",16,0,40,2,0)
+		BALZ A 0 bright A_CustomMissile("GregRunnerMedium",16,0,80,2,0)
+		BALZ C 1 bright A_CustomMissile("GregRunnerMedium",16,0,120,2,0)
+		BALZ C 0 bright A_CustomMissile("GregRunnerMedium",16,0,160,2,0)
+		BALZ E 1 bright A_CustomMissile("GregRunnerMedium",16,0,200,2,0)
+		BALZ E 0 bright A_CustomMissile("GregRunnerMedium",16,0,240,2,0)
+		BALZ G 1 bright A_CustomMissile("GregRunnerMedium",16,0,280,2,0)
+		BALZ G 0 bright A_CustomMissile("GregRunnerMedium",16,0,320,2,0)
+		BALZ G 1 bright A_CustomMissile("GregRunnerMedium",16,0,360,2,0)
+		BALZ I 1 bright
+		TNT1 A 0 ACS_NamedExecute("10VNGregUp",0)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb0",0,0,0,0)
+		TNT1 A 0 bright A_Quake(6,15,0,5096)
+		TNT1 A 0 bright A_SpawnItemEx("GregDebree",0,0,0,0,0,0,0,0,0)
+		BALZ A 0 bright A_CustomMissile("GregRunnerLong",16,0,40,2,0)
+		BALZ A 0 bright A_CustomMissile("GregRunnerLong",16,0,80,2,0)
+		BALZ C 0 bright A_CustomMissile("GregRunnerLong",16,0,120,2,0)
+		BALZ C 0 bright A_CustomMissile("GregRunnerLong",16,0,160,2,0)
+		BALZ E 0 bright A_CustomMissile("GregRunnerLong",16,0,200,2,0)
+		BALZ E 0 bright A_CustomMissile("GregRunnerLong",16,0,240,2,0)
+		BALZ G 0 bright A_CustomMissile("GregRunnerLong",16,0,280,2,0)
+		BALZ G 0 bright A_CustomMissile("GregRunnerLong",16,0,320,2,0)
+		BALZ G 0 bright A_CustomMissile("GregRunnerLong",16,0,360,2,0)
+		BALZ A 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ B 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ C 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ D 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ E 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ F 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A 50
+		TNT1 A 1
+		stop
+	Death2:
+		TNT1 A 0
+		TNT1 A 0 A_SetUserVar("user_greg2",0)
+		TNT1 A 1 A_SpawnItemEx("GregDebree",0,0,0,0,0,0,0,0,0)
+	Remove:
+		TNT1 A 0
+		stop
+	}
+}
+
+Actor AttackOrb2
+{
+	Projectile
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.6
+	Speed 0
+	Radius 1
+	Height 1
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.9,1)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb1",0,1,0,0)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb1",0,1,0,0)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb1",0,1,0,0)
+		Goto Spawn+16	
+	Death2:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("GregDebree",0,0,0,0,0,0,0,0,0)
+		stop
+	}
+}
+
+Actor AttackOrb3
+{	
+	Projectile
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.6
+	Speed 0
+	Radius 1
+	Height 1
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 35
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 A_SetTranslucent(0.9,1)
+		BALZ ABC 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb2",0,2,0,0)
+		BALZ DEF 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb2",0,2,0,0)
+		BALZ GHI 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		TNT1 A 0 ACS_NamedExecute("10VNAttackOrb2",0,2,0,0)
+		Goto Spawn+16
+	Death2:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("GregDebree",0,0,0,0,0,0,0,0,0)
+		stop
+	Cloud:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("ElectricCloudSpawner",0,0,0,0,0,0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("ElectricCloudSpawner",0,0,0,0,0,0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("ElectricCloudSpawner",0,0,0,0,0,0,0,0,0)
+		Goto Spawn+16
+	}
+}
+
+
+
+
+
+
+
+
+	
+Actor AttackOrbTrail
+{
+  Projectile
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_Jump(16,1)
+    TNT1 A 1 A_SpawnItemEx("AttackOrbTrailPart",0,0,0,Random(-5,5),Random(-5,5),Random(-5,5),0,0,32)
+    Stop
+	TNT1 A 1 A_SpawnItemEx("AttackOrbTrailPart",Random(Random(-10,-5),Random(5,10)),Random(Random(-10,-5),Random(5,10)),Random(Random(-10,-5),Random(5,10)),Random(-5,5),Random(-5,5),Random(-5,5),0,0,32)
+    Stop
+  }
+}
+
+Actor AttackOrbTrailPart
+{
+  Projectile
+  +NoClip
+  RenderStyle Add
+  Alpha 0.9
+  Scale 1.5
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    CLSL ABCDCBABCDCBABCDCBABCDCBABCDCBABCDCBABCDCBABCDCB 1 Bright A_FadeOut(0.05)
+    loop
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+	
+Actor GregDebree
+{
+ +NoGravity
+ +ForceRadiusDmg
+ +ForceYBillboard
+ RenderStyle Add
+ XScale 1.0
+ YScale 1.0
+ Scale 1.0
+ Alpha 1.0
+ States
+ {
+  Spawn:
+   BLUZ A 0 Bright
+   BLUZ A 0 Bright A_PlaySound("Ion/Fallout")
+   BLUZ A 1 Bright A_FadeOut(0.04)
+   Wait
+ }
+}
+
+Actor OrbDebree
+{
+ +NoGravity
+ +ForceRadiusDmg
+ +ForceYBillboard
+ RenderStyle Add
+ XScale 1.0
+ YScale 1.0
+ Scale 1.0
+ Alpha 1.0
+ States
+ {
+  Spawn:
+   TNT1 A 0 Bright
+   TNT1 A 45 Bright
+   BLUZ A 1 Bright A_FadeOut(0.03)
+   Wait
+ }
+}
+
+actor GregRunnerShort
+{
+	var int user_runtimer;
+	radius 5
+	height 5
+	renderstyle Add
+	scale 0.3
+	speed 24
+	damage 5
+	DamageType Greg_Runner
+	PROJECTILE
+	-NOGRAVITY
+	+BLOODSPLATTER
+	+FLOORHUGGER
+	+NOEXPLODEFLOOR
+	SeeSound "10VNGreg/Plasma"
+	DeathSound "weapons/plasmax"
+	states
+	{
+		Spawn:
+		    TRUN A 0 bright A_JumpIf(user_runtimer == 3,"Death")
+			TRUN A 1 bright A_BishopMissileWeave
+			TRUN A 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN B 1 bright A_BishopMissileWeave
+			TRUN B 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN C 1 bright A_BishopMissileWeave
+			TRUN C 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 1 bright A_BishopMissileWeave
+			TRUN D 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 0 bright A_SetUserVar("user_runtimer",user_runtimer+1)
+			loop
+		Death:
+		    TRUN D 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			stop
+	}
+}
+
+actor GregRunnerMedium : GregRunnerShort
+{
+	states
+	{
+		Spawn:
+		    TRUN A 0 bright A_JumpIf(user_runtimer == 6,"Death")
+			TRUN A 1 bright A_BishopMissileWeave
+			TRUN A 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN B 1 bright A_BishopMissileWeave
+			TRUN B 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN C 1 bright A_BishopMissileWeave
+			TRUN C 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 1 bright A_BishopMissileWeave
+			TRUN D 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 0 bright A_SetUserVar("user_runtimer",user_runtimer+1)
+			loop
+	}
+}
+
+actor GregRunnerLong : GregRunnerShort
+{
+	states
+	{
+		Spawn:
+		    TRUN A 0 bright A_JumpIf(user_runtimer == 9,"Death")
+			TRUN A 1 bright A_BishopMissileWeave
+			TRUN A 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN B 1 bright A_BishopMissileWeave
+			TRUN B 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN C 1 bright A_BishopMissileWeave
+			TRUN C 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 1 bright A_BishopMissileWeave
+			TRUN D 0 bright A_SpawnItemEx("GregRunnerTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+			TRUN D 0 bright A_SetUserVar("user_runtimer",user_runtimer+1)
+			loop
+	}
+}
+
+actor GregRunnerTrail
+{
+	renderstyle Add
+	scale 0.2
+	PROJECTILE
+	-NOGRAVITY
+	+FLOORHUGGER
+	+RIPPER
+	+NOEXPLODEFLOOR
+	states
+	{
+		Spawn:
+			TRUN ABCD 1
+		Death:
+			TRUN ABCD 3 bright A_FadeOut(0.2)
+			loop
+	}
+}
+
+Actor TossOrb
+{
+	Projectile
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Obituary "Shocking, isn't it?"
+	Damage 50
+	DamageType Greg_Toss
+	Alpha 0.8
+	Scale 0.6
+	Speed 16
+	Radius 16
+	Height 32
+	States
+	{
+	Spawn:
+	    TNT1 A 0
+		BALZ A 0 A_PlaySound("10VNGreg/ThrowOrb",5,1,1)
+		BALZ A 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ A 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ B 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ B 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ C 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ C 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ D 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ D 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ E 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ E 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ F 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ F 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ G 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ G 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ H 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ H 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		BALZ I 0 bright A_SpawnItem("AttackOrbTrail",0,64)
+		BALZ I 1 bright A_SpawnItem("TPortMistSpawnerA",0,64)
+		Goto Spawn+2
+	Death:
+	    TNT1 A 0
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 bright A_SpawnItemEx("GregDebree",0,0,0,0,0,0,0,0,0)
+		BALZ A 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ B 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ C 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ D 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ E 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		BALZ F 0 bright A_SpawnItemEx("AttackOrbTrail",Random(-40,40),Random(-40,40),Random(-40,40),0,0,0,0,0,0)
+		TNT1 A 0 bright A_Quake(7,15,0,5096)
+		TNT1 A 35
+		TNT1 A 1
+		stop
+	}
+}
+
+
+
+
+Actor ElectricCloudSpawner
+{
+	Radius 0
+	Height 0
+	-SOLID
+	+NOBLOCKMAP
+	+SPAWNCEILING
+	+NOGRAVITY
+	PROJECTILE
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("ElectricCloud",random(-192, 192),random(-192, 192),random(-96,96),0,0,0,0,128)
+		stop
+	}
+}
+
+Actor ElectricCloud
+{
+  Renderstyle Translucent
+  Radius 4
+  Height 16
+  Alpha 0.5
+  +FORCEXYBILLBOARD
+  +THRUACTORS
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FFGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright 
+	DF99 FGHIJ 4 Bright
+	DF99 F 1 Bright A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(-4,4),random(-2,2),random(-2,2),random(-2,2),0,192)
+	DF99 FGHIJ 4  Bright A_FadeOut(0.05)
+	stop
+  }
+}
+
+Actor LightningSparks
+{
+   Radius 0
+   Height 0
+   PROJECTILE
+   +NOGRAVITY
+   +FORCEXYBILLBOARD
+   renderstyle add
+   alpha 0.3
+   scale 2.0
+   States
+   {
+   Spawn:
+	  ZAPR ABCDEFABCDEFABCDEF 1 Bright
+	  goto death
+   Death:
+	  ZAPR ABCDEF 1 Bright A_FadeOut(0.10)
+	loop
+   }
+}
+
+Actor 10VNLightningStrike
+{
+	+NoInteraction
+	+FloorHugger
+	DamageType zztop_Lightning
+	States
+	{
+	Spawn:
+	    TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("ThunderMarkerFX", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_PlaySound("10VNLightning/Charge", 0, 1.0)
+		TNT1 A 90
+		TNT1 A 0 A_SpawnItemEx("ThunderFX", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_Explode(5,148,0,0,88,0,0)
+		Stop
+	}
+}
+
+Actor ThunderMarkerFX
+{
+	+NoInteraction
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("RaiseBeam", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAA 4 A_SpawnItemEx("RaiseStone", Random(-12,12), Random(-12,12), 1, 0, 0, Random(1,4), 0, 128, 0)
+		Stop
+	}
+}
+
+Actor ThunderFX
+{
+	+NoInteraction
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Flare", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Flare", 0, 0, 512, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Bolt", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(4,64),random(-2,2),random(-2,2),random(-2,2),0,128)
+		TNT1 A 0 A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(4,64),random(-2,2),random(-2,2),random(-2,2),0,128)
+		TNT1 A 0 A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(4,64),random(-2,2),random(-2,2),random(-2,2),0,128)
+		TNT1 A 0 A_SpawnItemEx("LightningSparks",random(-4,4),random(-4,4),random(4,64),random(-2,2),random(-2,2),random(-2,2),0,128)
+		TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("ThunderFX_Smoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("ThunderFX_Spark", 0, 0, 8, 0.01 * Random(-300, 300), 0.01 * Random(-300, 300), 0.01 * Random(0, 600), 0, 128, 0)
+		TNT1 A 0 A_PlaySound("10VNLightning/Strike", 0, 1.0)
+		TNT1 A 30 Radius_Quake(9, 30, 0, 15, 0)
+		Stop
+	}
+}
+
+Actor ThunderFX_Flare
+{
+	+NoInteraction
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Flash1", "Flash2", "Flash3", "Flash4")
+	Flash1:
+		BFLX A 1
+		BFLX A 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash2:
+		BFLX B 1
+		BFLX B 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash3:
+		BFLX C 1
+		BFLX C 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash4:
+		BFLX D 1
+		BFLX D 1 Bright A_FadeOut(0.05)
+		Wait
+	}
+}
+
+Actor ThunderFX_Bolt
+{
+	+NoInteraction
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Flash1", "Flash2", "Flash3")
+	Flash1:
+		THUN A 1
+		THUN A 1 Bright A_FadeOut(0.04)
+		Wait
+	Flash2:
+		THUN B 1
+		THUN B 1 Bright A_FadeOut(0.04)
+		Wait
+	Flash3:
+		THUN C 1
+		THUN C 1 Bright A_FadeOut(0.04)
+		Wait
+	}
+}
+
+Actor ThunderFX_Spark
+{
+	+Missile
+	+DONTSPLASH
+	-NoGravity
+	Gravity 0.1
+	Radius 4
+	Height 8
+	RenderStyle Add
+	Scale 0.0125
+	States
+	{
+	Spawn:
+		BFLX A -1 Bright
+		Wait
+	}
+}
+
+Actor ThunderFX_Smoke
+{
+	+NoInteraction
+	+DONTSPLASH
+	Alpha 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		TFXS A 1 A_FadeOut(0.0125)
+		Wait
+	Cloud2:
+		TFXS B 1 A_FadeOut(0.0125)
+		Wait
+	Cloud3:
+		TFXS C 1 A_FadeOut(0.0125)
+		Wait
+	Cloud4:
+		TFXS D 1 A_FadeOut(0.0125)
+		Wait
+	}
+}
+
+Actor RaiseStone
+{
+  PROJECTILE
+  +NOGRAVITY
+  Radius 0
+  Height 0
+  Scale 0.2
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    STNB ABCDEFGH 3
+	STNB ABCDEFGH 3 A_Fadeout(0.06)
+    Goto Spawn+9
+  }
+}
+
+Actor RaiseBeam
+{
+  Radius 0
+  Height 0
+  XScale 0.125
+  YScale 0.25
+  RenderStyle ADD
+  Alpha 0.0
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    NRDL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_FadeIn(0.01111111)
+	NRDL AAAAAAAAAA 1 Bright A_Fadeout(0.1)
+    Stop
+  }
+}
+
+Actor SpawnBeamCharge
+{
+  Radius 0
+  Height 0
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_PlaySound("10VNOrbiter/Charge",0,1.0,0,0.3)
+	TNT1 A 1
+    Stop
+  }
+}
+
+Actor SpawnBeam
+{
+  Radius 0
+  Height 0
+  RenderStyle ADD
+  Alpha 1.0
+  XScale 0.8
+  YScale 1.2
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_Quake(8,70,0,5096)
+	TNT1 A 0 A_PlaySound("10VNOrbiter/Beam",0,1.0,0,0.3)
+    SBLU AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_FadeOut(0.01111111)
+	TNT1 A 0
+    Stop
+  }
+}
+
+
+
+
+
+
+ACTOR CraigPlasma : PlasmaBall
+{ 
+	Scale 1.5
+    Damage 5
+	Radius 16
+	Height 32
+    Speed 40
+	DamageType Craig_Plasma
+	SeeSound "10VNCraig/PlasmaFire"
+	DeathSound "10VNCraig/PlasmaExplode"
+    States
+    {
+    Spawn:
+	  TNT1 A 0
+      ZLSS ABCDEF 1 BRIGHT A_CustomMissile("CraigPlasmaTrail",0,0,0)
+      Loop
+    Death:
+      ZLSE A 0 A_Jump(128,2)
+      ZLSE ABCDEF 2 BRIGHT
+      Stop
+      ZLSE GHIJKL 2 BRIGHT
+      Stop
+    }
+    
+}
+
+ACTOR CraigPlasmaTrail : PlasmaBall
+{ 
+	Scale 1.5
+    Damage 0
+    Speed 0
+	RenderStyle ADD
+	Alpha 0.75
+    + NOCLIP
+    SeeSound ""
+    DeathSound ""
+    States
+    {
+    Spawn:
+      ZLSS A 1 BRIGHT
+      ZLSS A 1 BRIGHT A_SetTranslucent(0.6)
+      ZLSS B 1 BRIGHT A_SetTranslucent(0.55)
+      ZLSS C 1 BRIGHT A_SetTranslucent(0.5)
+      ZLSS D 1 BRIGHT A_SetTranslucent(0.45)
+      ZLSS E 1 BRIGHT A_SetTranslucent(0.4)
+      ZLSS F 1 BRIGHT A_SetTranslucent(0.35)
+      ZLSS A 1 BRIGHT A_SetTranslucent(0.3)
+      ZLSS B 1 BRIGHT A_SetTranslucent(0.25)
+      ZLSS C 1 BRIGHT A_SetTranslucent(0.2)
+      ZLSS D 1 BRIGHT A_SetTranslucent(0.15)
+      ZLSS E 1 BRIGHT A_SetTranslucent(0.1)
+      ZLSS F 1 BRIGHT A_SetTranslucent(0.05)
+      Stop
+    }
+}
+
+ACTOR CraigBeam : PlasmaBall
+{ 
+	Scale 2.75
+    Damage 1
+	Radius 28
+	Height 56
+    Speed 40
+	DamageType Craig_Beam
+	SeeSound ""
+	DeathSound ""
+    States
+    {
+    Spawn:
+	  TNT1 A 0
+      ZLSS ABCDEF 1 BRIGHT A_CustomMissile("CraigBeamTrail",0,0,0)
+      Loop
+    Death:
+	  ZLSE A 0 A_SpawnItemEx("ThunderFX_Flare", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+      ZLSE A 0 A_Jump(128,2)
+      ZLSE ABCDEF 2 BRIGHT
+      Stop
+      ZLSE GHIJKL 2 BRIGHT
+      Stop
+    }
+    
+}
+
+ACTOR CraigBeamTrail : PlasmaBall
+{ 
+	Scale 2.75
+    Damage 0
+    Speed 0
+    + NOCLIP
+    SeeSound ""
+    DeathSound ""
+    States
+    {
+    Spawn:
+      ZLSS A 1 BRIGHT
+      ZLSS A 1 BRIGHT
+      ZLSS B 1 BRIGHT 
+      ZLSS C 1 BRIGHT
+      ZLSS D 1 BRIGHT
+      ZLSS E 1 BRIGHT 
+      ZLSS F 1 BRIGHT 
+      ZLSS A 1 BRIGHT 
+      ZLSS B 1 BRIGHT 
+      ZLSS C 1 BRIGHT 
+      ZLSS D 1 BRIGHT 
+      ZLSS E 1 BRIGHT 
+      ZLSS F 1 BRIGHT 
+      Stop
+    }
+}
+
+Actor CraigBeamSpawner
+{
+	var int user_craigbeamtime;
+	Radius 0
+	Height 0
+	Speed 0
+	-SOLID
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+LOOKALLAROUND
+	Monster
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1
+	See:
+		TNT1 A 0 A_PlaySound("10VNCraig/Loop",3,1,1,0.3)
+		TNT1 A 0 A_FaceTarget
+		TNT1 A 1 A_CustomMissile("CraigBeam",80,0) 
+		TNT1 A 0 A_SetUserVar("user_craigbeamtime",user_craigbeamtime+1)
+		TNT1 A 0 A_JumpIf(user_craigbeamtime == 175,"Death")
+		Goto See+1
+	Death:
+		TNT1 A 0 A_StopSound(3)
+		TNT1 A 1 A_PlaySound("10VNCraig/Explode",0,1.0,0,0.3)
+		stop
+	}
+}
+
+
+
+
+
+
+
+Actor Orbiter
+{
+
+	var int user_orbittime;
+	+NOBLOCKMAP
+	+DROPOFF
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	+LOOKALLAROUND
+	Monster
+	Obituary "Shocking, isn't it?"
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.50
+	Radius 32
+	Height 64
+	Speed 14
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("RaiseBeam", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 AAAAAAA 5 A_SpawnItemEx("RaiseStone", Random(-32,32), Random(-32,32), 1, 0, 0, Random(1,6), 0, 128, 0)
+		TNT1 A 0 A_PlaySound("10VNOrbiter/Activate",0,1.0,0,0.8)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		TNT1 AAAAAAA 5 A_SpawnItemEx("RaiseStone", Random(-32,32), Random(-32,32), 1, 0, 0, Random(1,6), 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("GregDebree",0,0,64,0,0,0,0,0)
+		TNT1 A 1 A_Look
+		Goto Spawn+19
+	See:
+		TNT1 A 0 A_PlaySound("TPortalLoop",5,1,1)
+		TNT1 A 0 A_JumpIf(user_orbittime == 350,"Death")
+		TNT1 A 0 A_SpawnItemEx("TPortalOrbiter",0,0,256,0,0,0,60,0,0)
+		TNT1 A 0 A_SpawnItemEx("OrbiterBeam",0,0,0,0,0,0,60,0,0)
+		TNT1 A 0 A_SetUserVar("user_orbittime",user_orbittime+1)
+		TNT1 A 0 A_PlaySound("10VNOrbiter/Active",0,1.0,0,0.8)
+		TNT1 A 2 A_Chase
+		Goto See+1
+	Death:
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 A_PlaySound("10VNOrbiter/Death",0,1.0,0,0.8)
+		Stop
+	}
+}
+
+Actor OrbiterBeam
+{
+  Radius 0
+  Height 0
+  XScale 0.125
+  YScale 0.175
+  RenderStyle ADD
+  DamageType zztop_Orbiter
+  +NOINTERACTION
+  Alpha 0.0
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_SpawnItemEx("LightningSparks",0,0,0,random(-2,2),random(-2,2),random(0,6),0,128)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_SpawnItemEx("OrbiterFlare", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_SpawnItemEx("LightningSparks",0,0,0,random(-2,2),random(-2,2),random(0,6),0,128)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+	NRDL A 0 Bright A_Explode(99,80,0,0,32,0,0)
+    NRDL A 1 Bright A_FadeIn(0.2)
+    Stop
+  }
+}
+
+Actor TPortalOrbiter
+{
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.50
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 AA 1 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		BPPO ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		BPPO DCB 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		BPPO ABC 1 bright A_SpawnItem("TPortMistSpawnerB",0,64)
+		TNT1 A 0 A_SetTranslucent(0.0,1)
+		Stop
+	}
+}
+
+Actor OrbiterFlare
+{
+	+NoInteraction
+	RenderStyle Add
+	Scale 0.5
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Flash1", "Flash2", "Flash3", "Flash4")
+	Flash1:
+		BFLX A 1
+		BFLX A 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash2:
+		BFLX B 1
+		BFLX B 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash3:
+		BFLX C 1
+		BFLX C 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash4:
+		BFLX D 1
+		BFLX D 1 Bright A_FadeOut(0.05)
+		Wait
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+Actor TPortMistA : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.2
+	Scale 1.0
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		Stop
+	}
+}
+
+Actor TPortMistSpawnerA : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AA 0 A_SpawnItemEx("TPortMistA",Random(-14,14),Random(-14,14),Random(-20,8),0.024*Random(-600,600),0.024*Random(-600,600),0.024*Random(-600,600),0,0,24)
+		stop
+	}
+}
+
+
+
+Actor OrbitPhotonA
+{
+  Radius 6
+  Height 8
+  RenderStyle Add
+  +NoClip
+  Scale 0.4
+  Speed 10
+  Alpha 1.0
+  Projectile
+  States
+  {
+  Spawn:
+    LITB AAAA 1 Bright
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BBBB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CCCC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhotonA", 0, 0, 83, 0, 0)
+    Stop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitPhotonB : OrbitPhotonA
+{
+  States
+  {
+  Spawn:
+    LITB AAAA 1 Bright
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BBBB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CCCC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhotonB", 0, 0, -83, 0, 0)
+    Stop
+  }
+}
+
+
+
+
+
+
+Actor OrbitPhoton0 : OrbitPhotonA
+{
+  States
+  {
+  Spawn:
+    LITB AA 1 Bright
+	TNT1 A 0 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhoton0", 0, 0, -15, 10, 0)
+    Stop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitPhoton1 : OrbitPhotonA
+{
+  States
+  {
+  Spawn:
+    LITB AA 1 Bright
+	TNT1 A 0 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhoton1", 0, 0, 20, 10, 0)
+    Stop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitPhoton2 : OrbitPhotonA
+{
+  States
+  {
+  Spawn:
+    LITB AA 1 Bright
+	TNT1 A 0 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhoton2", 0, 0, -30, 10, 0)
+    Stop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitPhoton3 : OrbitPhotonA
+{
+  States
+  {
+  Spawn:
+    LITB AA 1 Bright
+	TNT1 A 0 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	TNT1 A 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB BB 1 Bright
+	TNT1 B 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+	LITB CC 1 Bright
+	TNT1 C 0 Bright A_SpawnItemEx("OrbitPhotonTail", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_CustomMissile("OrbitPhoton3", 0, 0, 40, 10, 0)
+    Stop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitPhotonTail
+{
+  Projectile
+  +NoClip
+  RenderStyle Add
+  Alpha 1.0
+  Scale 1.0
+  States
+  {
+  Spawn:
+    CLSL ABCDCBABCDCBABCDCBABCDCBABCDCBABCDCBABCDCBABCDCB 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+
+ACTOR EnvyEyes
+{
+  Radius 1
+  Height 1
+  Mass 999999999999
+  +DONTSPLASH
+  +NOGRAVITY
+  +SOLID
+  +NOCLIP
+  +FloatBob
+  Monster
+  RenderStyle Add
+  Alpha 0.0
+  Scale 0.33
+  Speed 0
+  States
+  {
+  Spawn:
+    10VE A 0 Bright    
+	10VE A 0 Bright A_SpawnItemEx("EnvyHeadCentre",0,0,-112,0,0,0,0,SXF_SETMASTER,0)
+    10VE A 0 Bright A_SpawnItemEx("EnvyHead",0,0,0,0,0,0,0,SXF_SETMASTER,0)
+    10VE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_FadeIn(0.02)
+	10VE A 1 Bright
+  Loopy:
+	10VE A 1 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	Loop
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+ACTOR EnvyHead
+{
+  Radius 1
+  Height 1
+  Mass 999999999999
+  +DONTSPLASH
+  +NOGRAVITY
+  +SOLID
+  +NOCLIP
+  +FloatBob
+  Monster
+  RenderStyle Add
+  Alpha 0.0
+  Scale 2.5
+  Speed 0
+  States
+  {
+  Spawn:
+    LITB A 0 Bright
+    LITB ABCABCABCA 1 Bright A_FadeIn(0.1)
+	LITB A 2 Bright
+  Loopy:
+    LITB B 2 Bright
+	LITB C 2 Bright
+	LITB ABC 2 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	Goto loopy+2
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+ACTOR EnvyHeadCentre
+{
+  Radius 1
+  Height 1
+  Mass 999999999999
+  +DONTSPLASH
+  +NOGRAVITY
+  +SOLID
+  +NOCLIP
+  +FloatBob
+  Monster
+  RenderStyle Add
+  Alpha 0.0
+  Scale 1.1
+  Speed 0
+  States
+  {
+  Spawn:
+    BALZ A 0 Bright
+    BALZ ABCDEFGHIA 2 Bright A_FadeIn(0.03)
+  Loopy:
+    BALZ B 2 Bright
+	BALZ CDEFGHIAB 2 Bright A_JumpIf(CallACS("OrbTerminate") == 2,"Death")
+	Goto loopy+1
+  Death:
+	TNT1 A 0
+	stop
+  }
+}
+
+Actor OrbitProxy 
+{
+  Health 99999999
+  Radius 1
+  Height 1
+  +DONTTHRUST
+  Speed 0
+  Monster
+  Renderstyle Add
+  Alpha 1.0
+  Scale 2.5
+  Obituary "Shocking, isn't it?"
+  HitObituary "Eeehaahahahahahaah! Grounded!"
+  +NoGravity
+  +FloatBob
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0 Bright
+	TNT1 A 1 Bright A_Look
+	loop
+  See:
+	TNT1 A 0 A_CustomMissile("OrbitPhotonA", -352, 0, 90, 2, 0)
+    TNT1 A 0 A_CustomMissile("OrbitPhotonB", 352, 0, 270, 2, 0)
+    TNT1 A 1 Bright
+	Goto See+2
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Actor HTCLightningGRN
+{
+	var int user_count[3];
+	var int user_xyz[3];
+	Projectile
+	Speed 6
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(165,5)
+		TNT1 A 0 A_Jump(45,2)
+		TNT1 A 0
+		TNT1 A 0 A_Jump(25,2)
+		TNT1 A 0
+		TNT1 A 0 A_SetUserArray("user_count",0,0)
+	DirectionIni:
+		TNT1 A 0 A_SetUserArray("user_xyz",0,frandom(-10,10))
+		TNT1 A 0 A_SetUserArray("user_xyz",1,frandom(-10,10))
+		TNT1 A 0 A_SetUserArray("user_xyz",2,frandom(-10,10))
+	Direction:
+		TNT1 A 0 A_SetAngle(angle+frandom(-4,4))
+		TNT1 A 0 A_SetUserArray("user_count",1,0)
+	Moving:
+		TNT1 A 0 A_SpawnItemEx("HTCLightningMissileArkGRN",0,0,0,0,0,0,random(-10,10),32|SXF_TRANSFERPOINTERS,250)
+		TNT1 A 0 A_SpawnItemEx("HTCLightningTrailDistortionGRN",frandom(-2,2),frandom(-2,2),frandom(-2,2),0,0,0,0,32)
+		TNT1 AA 0
+		TNT1 A 0 A_Warp(AAPTR_DEFAULT,user_xyz[0],user_xyz[1],user_xyz[2],0,WARPF_USECALLERANGLE,"MoveSuccess")
+		Goto End
+	MoveSuccess:
+	    TNT1 A 0 A_SetUserArray("user_xyz",0,frandom(user_xyz[0] - 4,user_xyz[0] + 4))
+		TNT1 A 0 A_SetUserArray("user_xyz",1,frandom(user_xyz[1] - 4,user_xyz[1] + 4))
+		TNT1 A 0 A_SetUserArray("user_xyz",2,frandom(user_xyz[2] - 4,user_xyz[2] + 4))
+		TNT1 A 0 A_SetUserArray("user_count",0,user_count[0]+1)
+		TNT1 A 0 A_SetUserArray("user_count",1,user_count[1]+1)
+		TNT1 A 0 A_SetUserArray("user_count",2,user_count[2]+1)
+		TNT1 A 0 A_JumpIf(user_count[0]>=100,"End")
+		TNT1 A 0 A_JumpIf(user_count[1]>=8,"Direction")
+		TNT1 A 0 A_JumpIf(user_count[2]>=2,"MovingJump")
+		Goto Moving
+	MovingJump:
+		TNT1 A 0 A_SetUserArray("user_count",2,0)
+		Goto Moving+2
+	End:
+		TNT1 A 1
+		Stop
+	Death:
+        TNT1 A 1
+        Stop
+	}
+}
+
+Actor HTCLightningMissileArkGRN
+{
+	var int user_count[2];
+	var int user_xyz[3];
+	Projectile
+	+PAINLESS
+	+DONTREFLECT
+	Speed 6
+	Damage 0
+	Radius 6
+	Height 4
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SetUserArray("user_count",0,0)
+	DirectionIni:
+		TNT1 A 0 A_SetUserArray("user_xyz",0,frandom(-5,5))
+		TNT1 A 0 A_SetUserArray("user_xyz",1,frandom(-5,5))
+		TNT1 A 0 A_SetUserArray("user_xyz",2,frandom(-5,5))
+	Direction:
+		TNT1 A 0 A_SetAngle(angle+random(0,359))
+		TNT1 A 0 A_SetUserArray("user_count",1,0)
+	Moving:
+		TNT1 A 1 A_SpawnItemEx("HTCLightningTrailDistortionMiniGRN",frandom(-2,2),0,frandom(-2,2),0,0,0,random(0,359),32)
+		TNT1 AAA 0
+		TNT1 A 0 A_Warp(AAPTR_DEFAULT,user_xyz[0],user_xyz[1],user_xyz[2],0,WARPF_USECALLERANGLE,"MoveSuccess")
+		Goto Death
+	MoveSuccess:
+		TNT1 A 0 A_SetUserArray("user_count",0,user_count[0]+1)
+		TNT1 A 0 A_SetUserArray("user_count",1,user_count[1]+1)
+		TNT1 A 0 A_JumpIf(user_count[0]>=50,"Death")
+		TNT1 A 0 A_JumpIf(user_count[1]>=6,"Direction")
+		Goto Moving
+	Death:
+		TNT1 A 0 A_SpawnItemEx("HTCLightningTrailDistortionMiniGRNEnd",frandom(-2,2),0,frandom(-2,2),0,0,0,random(0,359),32)
+        Stop
+	}
+}
+
+Actor HTCLightningTrailDistortionMiniGRNEnd : HTCLightningTrailDistortionP
+{
+	Scale 0.15
+	States
+	{
+	Spawn:
+		GLSL A 0
+		GLSL BCDBCDBCDBCDBCDBCDBCDBCDBCDBCDBCDBCD 1 bright A_FadeOut(0.025)
+		Stop
+	}
+}
+
+Actor HTCLightningTrailDistortionGRN
+{
+	+NOINTERACTION
+	RenderStyle Add
+	Scale 0.4
+	Alpha 0.35
+	States
+	{
+	Spawn:
+		GLSL A 0
+		GLSL A 0 A_SetScale(frandom(0.4,0.6))
+		GLSL BCD 1 bright
+		Stop
+	}
+}
+
+Actor HTCLightningTrailDistortionMiniGRN : HTCLightningTrailDistortionGRN
+{
+	Scale 0.15
+	States
+	{
+	Spawn:
+		GLSL A 0
+		GLSL A 0 A_SetScale(frandom(0.15,0.35))
+		GLSL BCD 1 bright 
+		Stop
+	}
+}
+
+actor BossDefeated : PowerProtection 
+{
+powerup.duration 700
++NORADIUSDMG
++INVENTORY.AUTOACTIVATE
+DamageFactor "zztop_Lightning", 0.0
+inventory.icon "TNT1A0" 
+}
+
+
+
+
+
+
+DamageType Greg_Crush{}
+DamageType Greg_Toss{}
+DamageType Greg_Runner{}
+
+DamageType Craig_Plasma{}
+DamageType Craig_Beam{}
+
+DamageType zztop_Lightning{}
+DamageType zztop_Orbiter{}

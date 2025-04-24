@@ -1,0 +1,1214 @@
+class SLN_GMVariable {
+	private uint id;
+
+	static SLN_GMVariable internalCreate(uint curId) {
+		let ret = new();
+		ret.id = curId;
+		return ret;
+	}
+
+	uint getId() { return self.id; }
+}
+class SLN_GMVariableHasher : SLN_GMHasher {
+	override uint hash(Object o) { return SLN_GMVariable(o).getId(); }
+	override bool eq(Object o0, Object o1) {
+		return SLN_GMVariable(o0).getId() == SLN_GMVariable(o1).getId();
+	}
+}
+
+struct SLN_GMVariableManager {
+	private uint curId;
+
+	SLN_GMVariable createVariable() {
+		let ret = SLN_GMVariable.internalCreate(self.curId);
+		self.curId += 1;
+		return ret;
+	}
+}
+
+class SLN_GMTerm {
+	SLN_GMVariable variable;
+	double coefficient;
+
+	static SLN_GMTerm create(SLN_GMVariable variable, double coefficient) {
+		let ret = new();
+		ret.variable = variable;
+		ret.coefficient = coefficient;
+		return ret;
+	}
+}
+
+class SLN_GMExpr {
+	Array<SLN_GMTerm> terms;
+	double constant;
+
+	static SLN_GMExpr fromConstant(double v) {
+		let ret = new();
+		ret.constant = v;
+		return ret;
+	}
+	static SLN_GMExpr c(double v) { return SLN_GMExpr.fromConstant(v); }
+
+	static SLN_GMExpr fromTerm(SLN_GMTerm term) {
+		let ret = new();
+		ret.terms.push(term);
+		return ret;
+	}
+
+	static SLN_GMExpr fromVariable(SLN_GMVariable variable) {
+		let ret = new();
+		ret.terms.push(SLN_GMTerm.create(variable, 1.0));
+		return ret;
+	}
+	static SLN_GMExpr v(SLN_GMVariable variable) { return SLN_GMExpr.fromVariable(variable); }
+
+	static SLN_GMExpr create() {
+		let ret = new();
+		return ret;
+	}
+
+	void negate() {
+		self.constant = -self.constant;
+		for (let i = 0; i < self.terms.size(); i++) {
+			let t = self.terms[i];
+			t.coefficient = -t.coefficient;
+		}
+	}
+
+	SLN_GMExpr addAssignVariable(SLN_GMVariable variable, double coefficient = 1.0) {
+		self.terms.push(SLN_GMTerm.create(variable, coefficient));
+		return self;
+	}
+	SLN_GMExpr addAssignConstant(double constant) {
+		self.constant += constant;
+		return self;
+	}
+	SLN_GMExpr addAssignExpression(SLN_GMExpr e) {
+		for (let i = 0; i < e.terms.size(); i++) {
+			self.terms.push(e.terms[i]);
+		}
+		self.constant += e.constant;
+		return self;
+	}
+	SLN_GMExpr mulAssign(double coeff) {
+		for (let i = 0; i < self.terms.size(); i++) {
+			self.terms[i].coefficient *= coeff;
+		}
+		self.constant *= coeff;
+		return self;
+	}
+}
+
+struct SLN_GMStrength {
+	static double create(double a, double b, double c, double w) {
+		return
+			clamp(a * w, 0.0, 1000.0) * 1000000.0 +
+			clamp(b * w, 0.0, 1000.0) * 1000.0 +
+			clamp(c * w, 0.0, 1000.0);
+	}
+
+	const REQUIRED = 1001001000.0;
+	const STRONG = 1000000.0;
+	const MEDIUM = 1000.0;
+	const WEAK = 1.0;
+
+	static double clip(double s) {
+		return clamp(s, 0.0, REQUIRED);
+	}
+}
+
+enum SLN_GMRel {
+	SLN_GMRel_LEq,
+	SLN_GMRel_Eq,
+	SLN_GMRel_GEq,
+}
+
+struct SLN_GMConstraintManager {
+	private uint curId;
+
+	SLN_GMConstraint createConstraint(SLN_GMExpr e, SLN_GMRel op, double strength) {
+		let ret = SLN_GMConstraint.internalCreate(e, op, strength, self.curId);
+		self.curId += 1;
+		return ret;
+	}
+}
+
+class SLN_GMConstraint {
+	private SLN_GMExpr expression;
+	private double strength;
+	private SLN_GMRel op;
+	private uint id;
+
+	static SLN_GMConstraint internalCreate(SLN_GMExpr e, SLN_GMRel op, double strength, uint curId) {
+		let ret = new();
+		ret.expression = e;
+		ret.op = op;
+		ret.strength = strength;
+		ret.id = curId;
+		return ret;
+	}
+
+	SLN_GMExpr getExpr() { return self.expression; }
+	SLN_GMRel getOp() { return self.op; }
+	double getStrength() { return self.strength; }
+	uint getId() { return self.id; }
+}
+class SLN_GMConstraintHasher : SLN_GMHasher {
+	override uint hash(Object o) { return SLN_GMConstraint(o).getId(); }
+	override bool eq(Object o0, Object o1) {
+		return SLN_GMConstraint(o0).getId() == SLN_GMConstraint(o1).getId();
+	}
+}
+
+class SLN_GMConstraintBuilderWithRhs {
+	SLN_GMExpr lhs;
+	SLN_GMExpr rhs;
+	SLN_GMRel rel;
+	double strength;
+}
+
+enum SLN_GMSymbolKind {
+	SLN_GMSymbolKind_Invalid,
+	SLN_GMSymbolKind_External,
+	SLN_GMSymbolKind_Slack,
+	SLN_GMSymbolKind_Error,
+	SLN_GMSymbolKind_Dummy,
+}
+
+class SLN_GMSymbol {
+	uint id;
+	SLN_GMSymbolKind kind;
+
+	static SLN_GMSymbol invalid() {
+		let ret = new();
+		ret.id = 0;
+		ret.kind = SLN_GMSymbolKind_Invalid;
+		return ret;
+	}
+
+	static SLN_GMSymbol create(uint id, SLN_GMSymbolKind kind) {
+		let ret = new();
+		ret.id = id;
+		ret.kind = kind;
+		return ret;
+	}
+
+	SLN_GMSymbol clone() {
+		let ret = new();
+		ret.id = self.id;
+		ret.kind = self.kind;
+		return ret;
+	}
+
+	String repr() {
+		let ret = "Symbol(";
+		ret.appendFormat("%d, ", self.id);
+		switch (self.kind) {
+			case SLN_GMSymbolKind_Invalid:  ret.appendFormat("Invalid"); break;
+			case SLN_GMSymbolKind_External: ret.appendFormat("External"); break;
+			case SLN_GMSymbolKind_Slack:    ret.appendFormat("Slack"); break;
+			case SLN_GMSymbolKind_Error:    ret.appendFormat("Error"); break;
+			case SLN_GMSymbolKind_Dummy:    ret.appendFormat("Dummy"); break;
+		}
+		ret.appendFormat(")");
+		return ret;
+	}
+}
+
+class SLN_GMSymbolHasher : SLN_GMHasher {
+	override uint hash(Object o) {
+		let o = SLN_GMSymbol(o);
+		let seed = o.id;
+		hashCombine(seed, o.kind);
+		return seed;
+	}
+	override bool eq(Object o0, Object o1) {
+		let o0 = SLN_GMSymbol(o0);
+		let o1 = SLN_GMSymbol(o1);
+
+		return
+			o0.id == o1.id &&
+			o0.kind == o1.kind;
+	}
+}
+
+class SLN_GMRow {
+	SLN_GMHashMap/*<Symbol, BoxedDouble>*/ cells;
+	double constant;
+
+	static SLN_GMRow create(double constant) {
+		let ret = new();
+		ret.cells = SLN_GMHashMap.create(new("SLN_GMSymbolHasher"));
+		ret.constant = constant;
+		return ret;
+	}
+
+	SLN_GMRow clone() {
+		let ret = new();
+		ret.cells = SLN_GMHashMap.create(new("SLN_GMSymbolHasher"));
+		let iter = self.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let k = SLN_GMSymbol(ko);
+			let v = SLN_GMBoxedDouble(vo);
+
+			ret.cells.insert(k.clone(), v.clone());
+		}
+		ret.constant = self.constant;
+		return ret;
+	}
+
+	double add(double v) {
+		self.constant += v;
+		return self.constant;
+	}
+
+	void insertSymbol(SLN_GMSymbol s, double coefficient) {
+		let g = self.cells.get(s);
+		if (g is "SLN_GMHashUnoccupied") {
+			if (!SLN_GMGlobalMaths.nearZero(coefficient)) {
+				self.cells.insert(s, SLN_GMBoxedDouble.create(coefficient));
+			}
+		} else {
+			let g = SLN_GMBoxedDouble(g);
+			g.val += coefficient;
+			if (SLN_GMGlobalMaths.nearZero(g.val)) {
+				self.cells.remove(s);
+			}
+		}
+	}
+
+	bool insertRow(SLN_GMRow other, double coefficient) {
+		let constantDiff = other.constant * coefficient;
+		self.constant += constantDiff;
+		let iter = other.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let s = SLN_GMSymbol(ko);
+			let v = SLN_GMBoxedDouble(vo).val;
+
+			self.insertSymbol(s, v * coefficient);
+		}
+		return constantDiff != 0.0;
+	}
+
+	void remove(SLN_GMSymbol s) {
+		self.cells.remove(s);
+	}
+
+	void reverseSign() {
+		self.constant = -self.constant;
+		let iter = self.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+			let v = SLN_GMBoxedDouble(vo);
+			v.val = -v.val;
+		}
+	}
+
+	void solveForSymbol(SLN_GMSymbol s) {
+		let e = SLN_GMBoxedDouble(self.cells.remove(s)).val;
+		let coeff = -1.0 / e;
+		self.constant *= coeff;
+		let iter = self.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+			let v = SLN_GMBoxedDouble(vo);
+			v.val *= coeff;
+		}
+	}
+
+	void solveForSymbols(SLN_GMSymbol lhs, SLN_GMSymbol rhs) {
+		self.insertSymbol(lhs, -1.0);
+		self.solveForSymbol(rhs);
+	}
+
+	double coefficientFor(SLN_GMSymbol s) {
+		let v = self.cells.get(s);
+		return (!(v is "SLN_GMHashUnoccupied")) ? SLN_GMBoxedDouble(v).val : 0.0;
+	}
+
+	bool substitute(SLN_GMSymbol s, SLN_GMRow row) {
+		let e = self.cells.remove(s);
+		if (!(e is "SLN_GMHashUnoccupied")) {
+			let coeff = SLN_GMBoxedDouble(e).val;
+			return self.insertRow(row, coeff);
+		} else {
+			return false;
+		}
+	}
+}
+
+enum SLN_GMAddConstraintError {
+	SLN_GMAddConstraintError_None,
+	SLN_GMAddConstraintError_DuplicateConstraint,
+	SLN_GMAddConstraintError_UnsatisfiableConstraint,
+}
+
+enum SLN_GMRemoveConstraintError {
+	SLN_GMRemoveConstraintError_None,
+	SLN_GMRemoveConstraintError_UnknownConstraint,
+}
+
+enum SLN_GMAddEditVariableError {
+	SLN_GMAddEditVariableError_None,
+	SLN_GMAddEditVariableError_DuplicateEditVariable,
+	SLN_GMAddEditVariableError_BadRequiredStrength,
+}
+
+enum SLN_GMRemoveEditVariableError {
+	SLN_GMRemoveEditVariableError_None,
+	SLN_GMRemoveEditVariableError_UnknownEditVariable,
+}
+
+enum SLN_GMSuggestValueError {
+	SLN_GMSuggestValueError_None,
+	SLN_GMSuggestValueError_UnknownEditVariable,
+}
+
+class SLN_GMTag {
+	SLN_GMSymbol marker;
+	SLN_GMSymbol other;
+
+	static SLN_GMTag create(SLN_GMSymbol marker = NULL, SLN_GMSymbol other = NULL) {
+		let ret = new();
+		ret.marker = marker;
+		ret.other = other;
+		return ret;
+	}
+}
+
+class SLN_GMEditInfo {
+	SLN_GMTag tag;
+	SLN_GMConstraint constraint;
+	double constant;
+
+	static SLN_GMEditInfo create(SLN_GMTag tag, SLN_GMConstraint constraint, double constant) {
+		let ret = new();
+		ret.tag = tag;
+		ret.constraint = constraint;
+		ret.constant = constant;
+		return ret;
+	}
+}
+
+class SLN_GMVarDataEntry {
+	double value;
+	SLN_GMSymbol symbol;
+	uint count;
+
+	static SLN_GMVarDataEntry create(double value, SLN_GMSymbol symbol, uint count) {
+		let ret = new();
+		ret.value = value;
+		ret.symbol = symbol;
+		ret.count = count;
+		return ret;
+	}
+}
+
+class SLN_GMPublicChangesEntry {
+	SLN_GMVariable variable;
+	double value;
+
+	static SLN_GMPublicChangesEntry create(SLN_GMVariable variable, double value) {
+		let ret = new();
+		ret.variable = variable;
+		ret.value = value;
+		return ret;
+	}
+}
+
+class SLN_GMSolver {
+	private SLN_GMHashMap/*<Constraint, Tag>*/ cns;
+	private SLN_GMHashMap/*<Variable, VarDataEntry>*/ varData;
+	private SLN_GMHashMap/*<Symbol, Variable>*/ varForSymbol;
+	private Array<SLN_GMPublicChangesEntry> publicChanges;
+	private SLN_GMHashSet/*<Variable>*/ changed;
+	private bool shouldClearChanges;
+	private SLN_GMHashMap/*<Symbol, Row>*/ rows;
+	private SLN_GMHashMap/*<Variable, EditInfo>*/ edits;
+	private Array<SLN_GMSymbol> infeasibleRows;
+	private SLN_GMRow objective;
+	private /* Nullable */ SLN_GMRow artificial;
+	private uint idTick;
+
+	private SLN_GMVariableManager variableManager;
+	SLN_GMConstraintManager constraintManager;
+
+	static SLN_GMSolver create() {
+		let constraintHasher = new("SLN_GMConstraintHasher");
+		let variableHasher = new("SLN_GMVariableHasher");
+		let symbolHasher = new("SLN_GMSymbolHasher");
+
+		let ret = new();
+		ret.cns = SLN_GMHashMap.create(constraintHasher);
+		ret.varData = SLN_GMHashMap.create(variableHasher);
+		ret.varForSymbol = SLN_GMHashMap.create(symbolHasher);
+		/* ret.publicChanges = default; */
+		ret.changed = SLN_GMHashSet.create(variableHasher);
+		ret.shouldClearChanges = false;
+		ret.rows = SLN_GMHashMap.create(symbolHasher);
+		ret.edits = SLN_GMHashMap.create(variableHasher);
+		/* ret.infeasibleRows = default; */
+		ret.objective = SLN_GMRow.create(0.0);
+		ret.artificial = NULL;
+		ret.idTick = 1;
+
+		return ret;
+	}
+
+	SLN_GMVariable createVariable() {
+		return self.variableManager.createVariable();
+	}
+
+	static void assertNoErr(int errcode) {
+		if (errcode != 0) { throwAbortException("err %d", errcode); }
+	}
+
+	SLN_GMAddConstraintError, SLN_GMConstraint addConstraintFromRelation(
+		SLN_GMExpr lhs,
+		Name op,
+		SLN_GMExpr rhs,
+		double strength = SLN_GMStrength.REQUIRED
+	) {
+		rhs.negate();
+		lhs.addAssignExpression(rhs);
+		if (op != '==' && op != '<=' && op != '>=') {
+			throwAbortException("invalid op string '%s'", op);
+		}
+		let op = (op == '==') ? SLN_GMRel_Eq : (op == '<=') ? SLN_GMRel_Leq : SLN_GMRel_Geq;
+		let constraint = self.constraintManager.createConstraint(lhs, op, strength);
+		return self.addConstraint(constraint), constraint;
+	}
+
+	SLN_GMAddConstraintError addConstraint(SLN_GMConstraint constraint) {
+		if (self.cns.containsKey(constraint)) {
+			return SLN_GMAddConstraintError_DuplicateConstraint;
+		}
+
+		SLN_GMRow row; SLN_GMTag tag;
+		[row, tag] = self.createRow(constraint);
+		let subject = chooseSubject(row, tag);
+
+		if (subject.kind == SLN_GMSymbolKind_Invalid && allDummies(row)) {
+			if (!SLN_GMGlobalMaths.nearZero(row.constant)) {
+				return SLN_GMAddConstraintError_UnsatisfiableConstraint;
+			} else {
+				subject = tag.marker;
+			}
+		}
+		if (subject.kind == SLN_GMSymbolKind_Invalid) {
+			if (!self.addWithArtificialVariable(row)) {
+				return SLN_GMAddConstraintError_UnsatisfiableConstraint;
+			}
+		} else {
+			row.solveForSymbol(subject);
+			self.substitute(subject, row);
+
+			if (subject.kind == SLN_GMSymbolKind_External && row.constant != 0.0) {
+				let v = SLN_GMVariable(self.varForSymbol.get(subject));
+				self.varChanged(v);
+			}
+			self.rows.insert(subject, row);
+		}
+
+		self.cns.insert(constraint, tag);
+
+		let objective = self.objective;
+		self.optimise(objective);
+
+		return SLN_GMAddConstraintError_None;
+	}
+
+	SLN_GMRemoveConstraintError removeConstraint(SLN_GMConstraint constraint) {
+		let t = self.cns.remove(constraint);
+		if (t is "SLN_GMHashUnoccupied") {
+			return SLN_GMRemoveConstraintError_UnknownConstraint;
+		}
+		let tag = SLN_GMTag(t);
+
+		self.removeConstraintEffects(constraint, tag);
+
+		if (self.rows.remove(tag.marker) is "SLN_GMHashUnoccupied") {
+			SLN_GMSymbol leaving; SLN_GMRow row;
+			[leaving, row] = self.getMarkerLeavingRow(tag.marker);
+			row.solveForSymbols(leaving, tag.marker);
+			self.substitute(tag.marker, row);
+		}
+
+		let objective = self.objective;
+		self.optimise(objective);
+
+		let cexpr = constraint.getExpr();
+		for (let i = 0; i < cexpr.terms.size(); i++) {
+			let term = cexpr.terms[i];
+			if (!SLN_GMGlobalMaths.nearZero(term.coefficient)) {
+				let shouldRemove = false;
+				let v = self.varData.get(term.variable);
+				if (!(v is "SLN_GMHashUnoccupied")) {
+					let v = SLN_GMVarDataEntry(v);
+					v.count -= 1;
+					shouldRemove = v.count == 0;
+				}
+				if (shouldRemove) {
+					self.varForSymbol.remove(SLN_GMVarDataEntry(self.varData.get(term.variable)).symbol);
+					self.varData.remove(term.variable);
+				}
+			}
+		}
+
+		return SLN_GMRemoveConstraintError_None;
+	}
+
+	bool hasConstraint(SLN_GMConstraint constraint) {
+		return self.cns.containsKey(constraint);
+	}
+
+	SLN_GMAddEditVariableError addEditVariable(SLN_GMVariable v, double strength) {
+		if (self.edits.containsKey(v)) {
+			return SLN_GMAddEditVariableError_DuplicateEditVariable;
+		}
+		let strength = SLN_GMStrength.clip(strength);
+		if (strength == SLN_GMStrength.REQUIRED) {
+			return SLN_GMAddEditVariableError_BadRequiredStrength;
+		}
+		let cn = self.constraintManager.createConstraint(
+			SLN_GMExpr.fromTerm(SLN_GMTerm.create(v, 1.0)),
+			SLN_GMRel_Eq,
+			strength
+		);
+		{
+			let err = self.addConstraint(cn);
+			if (err != 0) { throwAbortException("shouldn't happen"); }
+		}
+		self.edits.insert(
+			v,
+			SLN_GMEditInfo.create(
+				SLN_GMTag(self.cns.get(cn)),
+				cn,
+				0.0
+			)
+		);
+
+		return SLN_GMAddEditVariableError_None;
+	}
+
+	SLN_GMRemoveEditVariableError removeEditVariable(SLN_GMVariable v) {
+		let e = self.edits.remove(v);
+		if (!(e is "SLN_GMHashUnoccupied")) {
+			let constraint = SLN_GMEditInfo(e).constraint;
+			let err = self.removeConstraint(constraint);
+			if (err == SLN_GMRemoveConstraintError_UnknownConstraint) {
+				throwAbortException("Edit constraint not in system.");
+			}
+			return SLN_GMRemoveEditVariableError_None;
+		} else {
+			return SLN_GMRemoveEditVariableError_UnknownEditVariable;
+		}
+	}
+
+	bool hasEditVariable(SLN_GMVariable v) {
+		return self.edits.containsKey(v);
+	}
+
+	SLN_GMSuggestValueError suggestValue(SLN_GMVariable variable, double value) {
+		let i = self.edits.get(variable);
+		if (i is "SLN_GMHashUnoccupied") {
+			return SLN_GMSuggestValueError_UnknownEditVariable;
+		}
+		let info = SLN_GMEditInfo(i);
+		let infoTagMarker = info.tag.marker;
+		let infoTagOther = info.tag.other;
+		let delta = value - info.constant;
+		info.constant = value;
+
+		{
+			let rm = self.rows.get(infoTagMarker);
+			let ro = self.rows.get(infoTagOther);
+			if (!(rm is "SLN_GMHashUnoccupied")) {
+				let row = SLN_GMRow(rm);
+				if (row.add(-delta) < 0.0) {
+					infeasibleRows.push(infoTagMarker);
+				}
+			} else if (!(ro is "SLN_GMHashUnoccupied")) {
+				let row = SLN_GMRow(ro);
+				if (row.add(delta) < 0.0) {
+					infeasibleRows.push(infoTagOther);
+				}
+			} else {
+				let iter = self.rows.iter();
+				while (true) {
+					Object ko, vo;
+					[ko, vo] = iter.next();
+					if (ko is "SLN_GMHashUnoccupied") { break; }
+
+					let symbol = SLN_GMSymbol(ko);
+					let row = SLN_GMRow(vo);
+
+					let coeff = row.coefficientFor(infoTagMarker);
+					let diff = delta * coeff;
+					if (diff != 0.0 && symbol.kind == SLN_GMSymbolKind_External) {
+						let v = SLN_GMVariable(self.varForSymbol.get(symbol));
+						if (self.shouldClearChanges) {
+							self.changed.clear();
+							self.shouldClearChanges = false;
+						}
+						self.changed.insert(v);
+					}
+					if (
+						coeff != 0.0 &&
+						row.add(diff) < 0.0 &&
+						symbol.kind != SLN_GMSymbolKind_External
+					) {
+						infeasibleRows.push(symbol);
+					}
+				}
+			}
+		}
+
+		self.dualOptimise();
+
+		return SLN_GMSuggestValueError_None;
+	}
+
+	private void varChanged(SLN_GMVariable v) {
+		if (self.shouldClearChanges) {
+			self.changed.clear();
+			self.shouldClearChanges = false;
+		}
+		self.changed.insert(v);
+	}
+
+	void fetchChanges(out Array<SLN_GMPublicChangesEntry> ret) {
+		if (self.shouldClearChanges) {
+			self.changed.clear();
+			self.shouldClearChanges = false;
+		} else {
+			self.shouldClearChanges = true;
+		}
+		self.publicChanges.clear();
+
+		let iter = self.changed.iter();
+		while (true) {
+			let vo = iter.next();
+			if (vo is "SLN_GMHashUnoccupied") { break; }
+			let v = SLN_GMVariable(vo);
+			
+			let vd = self.varData.get(v);
+			if (!(vd is "SLN_GMHashUnoccupied")) {
+				let varData = SLN_GMVarDataEntry(vd);
+				let r = self.rows.get(varData.symbol);
+				let newValue = 0.0;
+				if (!(r is "SLN_GMHashUnoccupied")) {
+					newValue = SLN_GMRow(r).constant;
+				}
+				let oldValue = varData.value;
+				if (oldValue != newValue) {
+					self.publicChanges.push(
+						SLN_GMPublicChangesEntry.create(v, newValue)
+					);
+					varData.value = newValue;
+				}
+			}
+		}
+
+		ret.copy(self.publicChanges);
+	}
+
+	void reset() {
+		self.rows.clear();
+		self.cns.clear();
+		self.varData.clear();
+		self.varForSymbol.clear();
+		self.changed.clear();
+		self.shouldClearChanges = false;
+		self.edits.clear();
+		self.infeasibleRows.clear();
+		self.objective = SLN_GMRow.create(0.0);
+		self.artificial = NULL;
+		self.idTick = 1;
+	}
+
+	private SLN_GMSymbol getVarSymbol(SLN_GMVariable v) {
+		SLN_GMVarDataEntry value;
+		let vd = self.varData.get(v);
+		if (!(vd is "SLN_GMHashUnoccupied")) {
+			value = SLN_GMVarDataEntry(vd);
+		} else {
+			let s = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_External);
+			self.varForSymbol.insert(s, v);
+			self.idTick += 1;
+			value = SLN_GMVarDataEntry.create(double.NAN, s, 0);
+			self.varData.insert(v, value);
+		}
+		value.count += 1;
+		return value.symbol;
+	}
+
+	private SLN_GMRow, SLN_GMTag createRow(SLN_GMConstraint constraint) {
+		let expr = constraint.getExpr();
+		let row = SLN_GMRow.create(expr.constant);
+		for (let i = 0; i < expr.terms.size(); i++) {
+			let term = expr.terms[i]; 
+			if (!SLN_GMGlobalMaths.nearZero(term.coefficient)) {
+				let symbol = self.getVarSymbol(term.variable);
+				let o = self.rows.get(symbol);
+				if (!(o is "SLN_GMHashUnoccupied")) {
+					let otherRow = SLN_GMRow(o);
+					row.insertRow(otherRow, term.coefficient);
+				} else {
+					row.insertSymbol(symbol, term.coefficient);
+				}
+			}
+		}
+
+		let objective = self.objective;
+
+		SLN_GMTag tag;
+		let constraintOp = constraint.getOp();
+		switch (constraintOp) {
+		case SLN_GMRel_Geq:
+		case SLN_GMRel_Leq: {
+			let coeff = (constraintOp == SLN_GMRel_Leq) ? 1.0 : -1.0;
+			let slack = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Slack);
+			self.idTick += 1;
+			row.insertSymbol(slack, coeff);
+			let constraintStrength = constraint.getStrength();
+			if (constraintStrength < SLN_GMStrength.REQUIRED) {
+				let error = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Error);
+				self.idTick += 1;
+				row.insertSymbol(error, -coeff);
+				objective.insertSymbol(error, constraintStrength);
+				tag = SLN_GMTag.create(
+					marker: slack,
+					other: error
+				);
+			} else {
+				tag = SLN_GMTag.create(
+					marker: slack,
+					other: SLN_GMSymbol.invalid()
+				);
+			}
+			break;
+		}
+		case SLN_GMRel_Eq: {
+			let constraintStrength = constraint.getStrength();
+			if (constraintStrength < SLN_GMStrength.REQUIRED) {
+				let errplus = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Error);
+				self.idTick += 1;
+				let errminus = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Error);
+				self.idTick += 1;
+				row.insertSymbol(errplus,  -1.0);
+				row.insertSymbol(errminus,  1.0);
+				objective.insertSymbol(errplus, constraintStrength);
+				objective.insertSymbol(errminus, constraintStrength);
+				tag = SLN_GMTag.create(
+					marker: errplus,
+					other: errminus
+				);
+			} else {
+				let dummy = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Dummy);
+				self.idTick += 1;
+				row.insertSymbol(dummy, 1.0);
+				tag = SLN_GMTag.create(
+					marker: dummy,
+					other: SLN_GMSymbol.invalid()
+				);
+			}
+			break;
+		}
+		default:
+			throwAbortException("shouldn't happen");
+		}
+
+		if (row.constant < 0.0) {
+			row.reverseSign();
+		}
+		return row, tag;
+	}
+
+	static private SLN_GMSymbol chooseSubject(SLN_GMRow row, SLN_GMTag tag) {
+		let iter = row.cells.iter();
+		while (true) {
+			let ko = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+			let s = SLN_GMSymbol(ko);
+
+			if (s.kind == SLN_GMSymbolKind_External) {
+				return s;
+			}
+		}
+		if (tag.marker.kind == SLN_GMSymbolKind_Slack || tag.marker.kind == SLN_GMSymbolKind_Error) {
+			if (row.coefficientFor(tag.marker) < 0.0) {
+				return tag.marker;
+			}
+		}
+		if (tag.other.kind == SLN_GMSymbolKind_Slack || tag.other.kind == SLN_GMSymbolKind_Error) {
+			if (row.coefficientFor(tag.other) < 0.0) {
+				return tag.other;
+			}
+		}
+		return SLN_GMSymbol.invalid();
+	}
+
+	private bool addWithArtificialVariable(SLN_GMRow row) {
+		let art = SLN_GMSymbol.create(self.idTick, SLN_GMSymbolKind_Slack);
+		self.idTick += 1;
+		self.rows.insert(art, row.clone());
+		self.artificial = row.clone();
+
+		let artificial = self.artificial;
+		self.optimise(artificial);
+		let success = SLN_GMGlobalMaths.nearZero(artificial.constant);
+		self.artificial = NULL;
+
+		let r = self.rows.remove(art);
+		if (!(r is "SLN_GMHashUnoccupied")) {
+			let row = SLN_GMRow(r);
+			if (row.cells.isEmpty()) {
+				return success;
+			}
+			let entering = anyPivotableSymbol(row);
+			if (entering.kind == SLN_GMSymbolKind_Invalid) {
+				return false;
+			}
+			row.solveForSymbols(art, entering);
+			self.substitute(entering, row);
+			self.rows.insert(entering, row);
+		}
+
+		let iter = self.rows.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let row = SLN_GMRow(vo);
+
+			row.remove(art);
+		}
+		self.objective.remove(art);
+		return success;
+	}
+
+	private void substitute(SLN_GMSymbol symbol, SLN_GMRow row) {
+		let iter = self.rows.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let otherSymbol = SLN_GMSymbol(ko);
+			let otherRow = SLN_GMRow(vo);
+
+			let constantChanged = otherRow.substitute(symbol, row);
+			if (otherSymbol.kind == SLN_GMSymbolKind_External && constantChanged) {
+				let v = SLN_GMVariable(self.varForSymbol.get(otherSymbol));
+				if (self.shouldClearChanges) {
+					self.changed.clear();
+					self.shouldClearChanges = false;
+				}
+				self.changed.insert(v);
+			}
+			if (otherSymbol.kind != SLN_GMSymbolKind_External && otherRow.constant < 0.0) {
+				self.infeasibleRows.push(otherSymbol);
+			}
+		}
+		self.objective.substitute(symbol, row);
+		if (self.artificial != NULL) {
+			let artificial = self.artificial;
+			artificial.substitute(symbol, row);
+		}
+	}
+
+	private void optimise(SLN_GMRow objective) {
+		while (true) {
+			let entering = getEnteringSymbol(objective);
+			if (entering.kind == SLN_GMSymbolKind_Invalid) {
+				return;
+			}
+			SLN_GMSymbol leaving;
+			SLN_GMRow row;
+			[leaving, row] = self.getLeavingRow(entering);
+			if (leaving == NULL) {
+				throwAbortException("internal solver error: the objective is unbounded");
+			}
+			row.solveForSymbols(leaving, entering);
+			self.substitute(entering, row);
+			if (entering.kind == SLN_GMSymbolKind_External && row.constant != 0.0) {
+				let v = SLN_GMVariable(self.varForSymbol.get(entering));
+				self.varChanged(v);
+			}
+			self.rows.insert(entering, row);
+		}
+	}
+
+	private void dualOptimise() {
+		while (self.infeasibleRows.size() != 0u) {
+			let leaving = self.infeasibleRows[self.infeasibleRows.size() - 1];
+			self.infeasibleRows.pop();
+
+			SLN_GMRow row;
+			let e = self.rows.get(leaving);
+			if (!(e is "SLN_GMHashUnoccupied")) {
+				let entry = SLN_GMRow(e);
+				if (entry.constant < 0.0) {
+					row = entry;
+					self.rows.remove(leaving);
+				} else {
+					row = NULL;
+				}
+			} else {
+				row = NULL;
+			}
+			if (row != NULL) {
+				let entering = self.getDualEnteringSymbol(row);
+				if (entering.kind == SLN_GMSymbolKind_Invalid) {
+					throwAbortException("internal solver error: dual optimise failed");
+				}
+				row.solveForSymbols(leaving, entering);
+				self.substitute(entering, row);
+				if (entering.kind == SLN_GMSymbolKind_External && row.constant != 0.0) {
+					let v = SLN_GMVariable(self.varForSymbol.get(entering));
+					self.varChanged(v);
+				}
+				self.rows.insert(entering, row);
+			}
+		}
+	}
+
+	private SLN_GMSymbol getEnteringSymbol(SLN_GMRow objective) {
+		let iter = objective.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let value = SLN_GMBoxedDouble(vo).val;
+
+			if (symbol.kind != SLN_GMSymbolKind_Dummy && value < 0.0) {
+				return symbol;
+			}
+		}
+		return SLN_GMSymbol.invalid();
+	}
+
+	private SLN_GMSymbol getDualEnteringSymbol(SLN_GMRow row) {
+		let entering = SLN_GMSymbol.invalid();
+		let ratio = double.INFINITY;
+		let objective = self.objective;
+		let iter = row.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let value = SLN_GMBoxedDouble(vo).val;
+
+			if (value > 0.0 && symbol.kind != SLN_GMSymbolKind_Dummy) {
+				let coeff = objective.coefficientFor(symbol);
+				let r = coeff / value;
+				if (r < ratio) {
+					ratio = r;
+					entering = symbol;
+				}
+			}
+		}
+		return entering;
+	}
+
+	private static SLN_GMSymbol anyPivotableSymbol(SLN_GMRow row) {
+		let iter = row.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+
+			if (symbol.kind == SLN_GMSymbolKind_Slack || symbol.kind == SLN_GMSymbolKind_Error) {
+				return symbol;
+			}
+		}
+		return SLN_GMSymbol.invalid();
+	}
+
+	private SLN_GMSymbol, SLN_GMRow getLeavingRow(SLN_GMSymbol entering) {
+		let ratio = double.INFINITY;
+		SLN_GMSymbol found = NULL;
+		let iter = self.rows.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let row = SLN_GMRow(vo);
+
+			if (symbol.kind != SLN_GMSymbolKind_External) {
+				let temp = row.coefficientFor(entering);
+				if (temp < 0.0) {
+					let tempRatio = -row.constant / temp;
+					if (tempRatio < ratio) {
+						ratio = tempRatio;
+						found = symbol;
+					}
+				}
+			}
+		}
+		if (found != NULL) {
+			return found, SLN_GMRow(self.rows.remove(found));
+		} else {
+			return NULL, NULL;
+		}
+	}
+
+	private SLN_GMSymbol, SLN_GMRow getMarkerLeavingRow(SLN_GMSymbol marker) {
+		let r1 = double.INFINITY;
+		let r2 = r1;
+		SLN_GMSymbol first = NULL;
+		SLN_GMSymbol second = NULL;
+		SLN_GMSymbol third = NULL;
+		let iter = self.rows.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let row = SLN_GMRow(vo);
+
+			let c = row.coefficientFor(marker);
+			if (c == 0.0) {
+				continue;
+			}
+			if (symbol.kind == SLN_GMSymbolKind_External) {
+				third = symbol;
+			} else if (c < 0.0) {
+				let r = -row.constant / c;
+				if (r < r1) {
+					r1 = r;
+					first = symbol;
+				}
+			} else {
+				let r = row.constant / c;
+				if (r < r2) {
+					r2 = r;
+					second = symbol;
+				}
+			}
+		}
+		let s =
+			(first != NULL)
+			? first
+			: (second != NULL)
+			  ? second
+			  : third;
+		if (s != NULL) {
+			if (s.kind == SLN_GMSymbolKind_External && SLN_GMRow(self.rows.get(s)).constant != 0.0) {
+				let v = SLN_GMVariable(self.varForSymbol.get(s));
+				self.varChanged(v);
+			}
+			let r = self.rows.remove(s);
+			if (!(r is "SLN_GMHashUnoccupied")) {
+				return s, SLN_GMRow(r);
+			} else {
+				return NULL, NULL;
+			}
+		} else {
+			return NULL, NULL;
+		}
+	}
+
+	private void removeConstraintEffects(SLN_GMConstraint cn, SLN_GMTag tag) {
+		if (tag.marker.kind == SLN_GMSymbolKind_Error) {
+			self.removeMarkerEffects(tag.marker, cn.getStrength());
+		} else if (tag.other.kind == SLN_GMSymbolKind_Error) {
+			self.removeMarkerEffects(tag.other, cn.getStrength());
+		}
+	}
+
+	private void removeMarkerEffects(SLN_GMSymbol marker, double strength) {
+		let r = self.rows.get(marker);
+		if (!(r is "SLN_GMHashUnoccupied")) {
+			let row = SLN_GMRow(r);
+			self.objective.insertRow(row, -strength);
+		} else {
+			self.objective.insertSymbol(marker, -strength);
+		}
+	}
+
+	private static bool allDummies(SLN_GMRow row) {
+		let iter = row.cells.iter();
+		while (true) {
+			let ko = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+			let s = SLN_GMSymbol(ko);
+
+			if (s.kind != SLN_GMSymbolKind_Dummy) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	static void printRow(SLN_GMRow row) {
+		let ret = "row = Row {\n    cells: {\n";
+
+		let iter = row.cells.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let val = SLN_GMBoxedDouble(vo).val;
+
+			ret.appendFormat("        %s: %f,\n", symbol.repr(), val);
+		}
+		ret.appendFormat("    },\n    constant: %f,\n}", row.constant);
+		Console.printf(ret);
+	}
+
+	private void printRows() {
+		let ret = "self.rows = {\n";
+		let iter = self.rows.iter();
+		while (true) {
+			Object ko, vo;
+			[ko, vo] = iter.next();
+			if (ko is "SLN_GMHashUnoccupied") { break; }
+
+			let symbol = SLN_GMSymbol(ko);
+			let row = SLN_GMRow(vo);
+
+			ret.appendFormat("    %s: Row {\n        cells: {\n", symbol.repr());
+
+			let iter = row.cells.iter();
+			while (true) {
+				Object ko, vo;
+				[ko, vo] = iter.next();
+				if (ko is "SLN_GMHashUnoccupied") { break; }
+
+				let symbol = SLN_GMSymbol(ko);
+				let val = SLN_GMBoxedDouble(vo).val;
+
+				ret.appendFormat("            %s: %f,\n", symbol.repr(), val);
+			}
+			ret.appendFormat("        },\n        constant: %f,\n    },\n", row.constant);
+		}
+		ret.appendFormat("}");
+		Console.printf(ret);
+	}
+}

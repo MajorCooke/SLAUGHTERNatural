@@ -1,0 +1,108 @@
+Class SLNEvent_Lake : SLNEvent_MapBase
+{
+	static clearscope SLNEvent_Lake Fetch()
+	{	return SLNEvent_Lake(Find('SLNEvent_Lake'));	}
+
+	private bool once;
+	private int c;
+	override void WorldLoaded(WorldEvent e)
+	{
+		foreach (ln : Level.Lines)
+		{
+			if (!ln) continue;
+			for (int i = 0; i < ln.CountIDs(); i++)
+				if (ln.GetID(i) == 666)
+				{
+					let lt = new('SLNLineTex');
+					lt.ln = ln;
+					BloodLines.Push(lt);
+					for (int i = 0; i < 2; i++)
+						if (ln.sidedef[i]) 
+						{
+							lt.tex[i] = ln.sidedef[i].GetTexture(Side.mid);
+						}
+				}
+		}
+	}
+	
+	override void HandleSetup()
+	{
+		if (!once)
+		{
+			once = true;
+			{
+				// Now record all things tagged as corrupt and make them vanish.
+				let it = ThinkerIterator.Create("Actor", Thinker.STAT_DEFAULT);
+				Actor mo;
+				while (mo = Actor(it.Next()))
+				{
+					if (mo.TID == 666)
+						BloodThings.Push(mo);
+				}
+			}
+			{	
+				let it = ThinkerIterator.Create("DynamicLight", Thinker.STAT_DEFAULT);
+				DynamicLight mo;
+				while (mo = DynamicLight(it.Next()))
+				{
+					for (int i = 0; i < 3; i++)
+						mo.Args[i] = abs(mo.Args[i]);
+				}
+			}
+			{	
+				let it = Level.CreateActorIterator(11115, "AimingCamera");
+				
+				AimingCamera mo = AimingCamera(it.Next());
+				if (mo)
+				{
+					mo.SetViewPos(mo.pos, VPSF_ORTHOGRAPHIC|VPSF_ABSOLUTEPOS);
+				}
+			}
+		}
+		if (c < 2)
+			c++;
+		else if (c == 2)
+		{
+			c++;
+			HandleStatNums();
+			HandleSectorLighting(25);
+			Setup = true;
+		}
+	}
+	
+	private bool corrupt;
+	private Array<SLNLineTex> BloodLines;
+	private Array<Actor> BloodThings;
+	void SetCorruption(bool on)
+	{
+		foreach (ltex : BloodLines)
+		{
+			if (ltex) ltex.SetTex(on);
+		}
+		
+		foreach (mo : BloodThings)
+		{
+			if (mo)	
+			{
+				mo.A_ChangeLinkFlags(!on, !on);
+				mo.SetOrigin(mo.pos, false);
+				if (on)	
+				{
+					mo.Activate(null);
+					mo.FreezeTics = 2000000000;
+				}
+				else	
+				{
+					mo.Deactivate(null);
+					mo.FreezeTics = 0;
+				}
+			}
+		}
+	}
+	
+	static void GSetCorruption(int on)
+	{
+		let ev = SLNEvent_Lake.Fetch();
+		if (ev)	ev.SetCorruption(on);
+	}
+}

@@ -1,0 +1,17 @@
+// Player tweaks to some vanilla weapons. Cells are not plentiful, but cell
+// weapons deal more damage to make up for it.
+
+Class SLNPlayerTweaker : Inventory
+{
+	override void ModifyDamage(int damage, Name damageType, out int newdamage, bool passive, Actor i, Actor s, int flags)
+	{
+		if (damage < 1 || passive || !i)	return;
+		
+		Name cls = i.GetClassName();
+		Switch(cls)
+		{
+			Case 'BFGBall':		newdamage = damage * 2;	return;
+			Case 'PlasmaBall':	newdamage = damage * 2; return;
+		}
+	}
+}

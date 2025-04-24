@@ -1,0 +1,32 @@
+/*------------------------------------------------------------------------------
+10VN
+
+The GRN power plant is used as a backup source to recharge 
+------------------------------------------------------------------------------*/
+
+Class SLN10VN : SLNBoss
+{
+	Default
+	{
+		Tag "10VN";
+		+DONTTHRUST
+		+NOGRAVITY
+		+BRIGHT
+		+LOOKALLAROUND
+		Health 1000000;
+		Radius 128;
+		Height 256;
+		Scale 1.0;
+		Mass LARGE_MASS;
+		RenderStyle "Add";
+		Obituary "%o was made into a lightning rod by 10VN";
+		HitObituary "%o became Kentucky Fried Human to 10VN's expert cooking with lightning.";
+	}
+	
+	States
+	{
+	Spawn:
+		10VN A -1; //15 A_Look();
+		Wait;
+	}
+}

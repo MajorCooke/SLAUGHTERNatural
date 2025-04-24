@@ -1,0 +1,34 @@
+// Debug cvar for checking json parsing.
+server bool SLN_PrintJson = false;
+
+//==============================================================================
+// Gameplay CVars
+//==============================================================================
+// Spawn in custom demon enemies from Realm667. If not, standard Doom monsters 
+// spawn instead during attack waves. Does not affect Nightmare enemies or Smile.
+server bool SLN_CustomDemons = true;
+
+// The ACTUAL skill level. Can be [0,5].
+server cheat int SLN_Skill = 2;
+
+//==============================================================================
+// Rendering CVars
+//==============================================================================
+// Enables rendering of foliage and SFX. Disabling increases performance.
+server bool SLN_Foliage = true;
+server bool SLN_Torches = true;
+
+// Determines various aspects of weather, including rain behavior, spawn rates,
+// and lightning ratio.
+server bool 	SLN_Weather = true;
+server int		SLN_PrecipType = 0; 
+server float 	SLN_PrecipRatio = 1.0;
+server float 	SLN_PrecipRadii = 512.0;
+server float 	SLN_LightningRatio = 1.0;
+
+noarchive server int SLN_TreeDist = 5193;
+noarchive server int SLN_Debug = 0;
+
+
+server float SLN_DialogueShadow = 0.7;
+server float SLN_CinematicShadow = 0.95;

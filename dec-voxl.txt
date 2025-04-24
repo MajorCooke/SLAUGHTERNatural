@@ -1,0 +1,1080 @@
+
+//Actual Voxels
+
+actor 60sCarRed
+{
+//$Category Voxel
+	Radius 32
+	Height 39
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		RCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarBlue : 60sCarRed
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarGreen : 60sCarRed
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarOrange : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarWhite : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		WCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarPink : 60sCarRed
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PCAR A -1
+		Stop
+	}
+}
+
+actor 60sCarBrown : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRCA A -1
+		Stop
+	}
+}
+
+actor ChopperRed 
+{
+//$Category Voxel
+	Radius 8
+	Height 32
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RCHO A -1
+		Stop
+	}
+}
+
+actor ChopperBlue : ChopperRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BCHO A -1
+		Stop
+	}
+}
+
+actor ChopperGreen : ChopperRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GCHO A -1
+		Stop
+	}
+}
+
+actor ChopperOrange : ChopperRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OCHO A -1
+		Stop
+	}
+}
+
+actor ChopperWhite : ChopperRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		WCHO A -1
+		Stop
+	}
+}
+
+actor ChopperDarkRed : ChopperRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DCHO A -1
+		Stop
+	}
+}
+
+actor 80sTaxi : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OCAB A -1
+		Stop
+	}
+}
+
+actor 80sCopOff : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OCOP A -1
+		Stop
+	}
+}
+
+actor 80sCopOn : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OCOP BC 15
+		Loop
+	}
+}
+
+actor ModernCarRed 
+{
+//$Category Voxel
+	Radius 28
+	Height 40
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RMOD A -1
+		Stop
+	}
+}
+
+actor ModernCarDarkRed : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRMO A -1
+		Stop
+	}
+}
+
+actor ModernCarBlue : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BMOD A -1
+		Stop
+	}
+}
+
+actor ModernCarDarkBlue : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBMO A -1
+		Stop
+	}
+}
+
+actor ModernCarGreen : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GMOD A -1
+		Stop
+	}
+}
+
+actor ModernCarDirtyGreen : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGMO A -1
+		Stop
+	}
+}
+
+actor ModernCarOrange : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OMOD A -1
+		Stop
+	}
+}
+
+actor ModernCarPink : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PMOD A -1
+		Stop
+	}
+}
+
+actor ModernCarBrown : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRMO A -1
+		Stop
+	}
+}
+
+actor 60sCarDarkRed : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRCA A -1
+		Stop
+	}
+}
+actor 60sCarDarkBlue : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBCA A -1
+		Stop
+	}
+}
+
+actor 60sCarDirtyGreen : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGCA A -1
+		Stop
+	}
+}
+
+actor ModernTaxi : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		MCAB A -1
+		Stop
+	}
+}
+
+actor ModernCopOff : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		MCOP A -1
+		Stop
+	}
+}
+
+actor ModernCopOn : ModernCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		MCOP BC 15
+		Loop
+	}
+}
+
+actor 60sWagonRed : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		RWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonDarkRed : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRWA A -1
+		Stop
+	}
+}
+
+actor 60sWagonBlue : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonDarkBlue : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBWA A -1
+		Stop
+	}
+}
+
+actor 60sWagonGreen : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonDirtyGreen : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGWA A -1
+		Stop
+	}
+}
+
+actor 60sWagonOrange : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonWhite : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		WWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonPink : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PWAG A -1
+		Stop
+	}
+}
+
+actor 60sWagonBrown : 60sCarRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRWA A -1
+		Stop
+	}
+}
+
+actor HatchBackRed 
+{
+//$Category Voxel
+	Radius 26
+	Height 40
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RHAT A -1
+		Stop
+	}
+}
+
+actor HatchBackDarkRed : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRHA A -1
+		Stop
+	}
+}
+
+actor HatchBackBlue : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BHAT A -1
+		Stop
+	}
+}
+
+actor HatchBackDarkBlue : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBHA A -1
+		Stop
+	}
+}
+
+actor HatchBackGreen : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GHAT A -1
+		Stop
+	}
+}
+
+actor HatchBackDirtyGreen : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGHA A -1
+		Stop
+	}
+}
+
+actor HatchBackOrange : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OHAT A -1
+		Stop
+	}
+}
+
+actor HatchBackPink : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PHAT A -1
+		Stop
+	}
+}
+
+actor HatchBackBrown : HatchBackRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRHA A -1
+		Stop
+	}
+}
+
+actor VanRed 
+{
+//$Category Voxel
+	Radius 0
+	Height 0
+	Scale 1.2
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RVAN A -1
+		Stop
+	}
+}
+
+actor VanDarkRed : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRVA A -1
+		Stop
+	}
+}
+
+actor VanBlue : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BVAN A -1
+		Stop
+	}
+}
+
+actor VanDarkBlue : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBVA A -1
+		Stop
+	}
+}
+
+actor VanGreen : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GVAN A -1
+		Stop
+	}
+}
+
+actor VanDirtyGreen : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGVA A -1
+		Stop
+	}
+}
+
+actor VanOrange : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OVAN A -1
+		Stop
+	}
+}
+
+actor VanWhite : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		WVAN A -1
+		Stop
+	}
+}
+
+actor VanPink : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PVAN A -1
+		Stop
+	}
+}
+
+actor VanBrown : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRVA A -1
+		Stop
+	}
+}
+
+actor VanUAC : VanRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		UVAN A -1
+		Stop
+	}
+}
+
+actor PickupRed 
+{
+//$Category Voxel
+	Radius 0
+	Height 0
+	Scale 1.2
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RPIC A -1
+		Stop
+	}
+}
+
+actor PickupDarkRed : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRPI A -1
+		Stop
+	}
+}
+
+actor PickupBlue : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BPIC A -1
+		Stop
+	}
+}
+
+actor PickupDarkBlue : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBPI A -1
+		Stop
+	}
+}
+
+actor PickupGreen : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GPIC A -1
+		Stop
+	}
+}
+
+actor PickupDirtyGreen : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGPI A -1
+		Stop
+	}
+}
+
+actor PickupOrange : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OPIC A -1
+		Stop
+	}
+}
+
+actor PickupWhite : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		WPIC A -1
+		Stop
+	}
+}
+
+actor PickupPink : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		PPIC A -1
+		Stop
+	}
+}
+
+actor PickupBrown : PickupRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BRPI A -1
+		Stop
+	}
+}
+
+actor PlaneRed 
+{
+//$Category Voxel
+	Radius 26
+	Height 58
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		RPLA A -1
+		Stop
+	}
+}
+
+actor PlaneDarkRed : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRPL A -1
+		Stop
+	}
+}
+
+actor PlaneBlue : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BPLA A -1
+		Stop
+	}
+}
+
+actor PlaneDarkBlue : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBPL A -1
+		Stop
+	}
+}
+
+actor PlaneGreen : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GPLA A -1
+		Stop
+	}
+}
+
+actor PlaneDarkGreen : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGPL A -1
+		Stop
+	}
+}
+
+actor PlaneOrange : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OPLA A -1
+		Stop
+	}
+}
+
+actor PlaneGreenGold : PlaneRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GGPL A -1
+		Stop
+	}
+}
+
+actor HelicopterRed 
+{
+//$Category Voxel
+	Radius 0
+	Height 0
+	Scale 1.3
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	+NOBLOCKMAP
+	Gravity 0
+	States
+	{
+	Spawn:
+		RHEL A -1
+		Stop
+	}
+}
+
+actor HelicopterDarkRed : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DRHE A -1
+		Stop
+	}
+}
+
+actor HelicopterBlue : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BHEL A -1
+		Stop
+	}
+}
+
+actor HelicopterDarkBlue : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DBHE A -1
+		Stop
+	}
+}
+
+actor HelicopterGreen : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		GHEL A -1
+		Stop
+	}
+}
+
+actor HelicopterDarkGreen : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		DGHE A -1
+		Stop
+	}
+}
+
+actor HelicopterOrange : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		OHEL A -1
+		Stop
+	}
+}
+
+actor HelicopterUAC : HelicopterRed 
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		UHEL A -1
+		Stop
+	}
+}
+
+actor ArmoredUACtruckGreen 
+{
+//$Category Voxel
+	Radius 0
+	Height 0
+	Scale 1.3
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		ATRU A -1
+		Stop
+	}
+}
+
+actor ArmoredUACtruckBrown : ArmoredUACtruckGreen
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		ATR2 A -1
+		Stop
+	}
+}
+
+actor VTOLgreen
+{
+//$Category Voxel
+	Radius 0
+	Height 0
+	Scale 1.3
+	+SOLID
+	+SHOOTABLE
+	+NODAMAGE
+	+NOBLOOD
+	+CANPASS
+	States
+	{
+	Spawn:
+		GVTO A -1
+		Stop
+	}
+}
+
+actor VTOLbrown : VTOLgreen
+{
+//$Category Voxel
+	States
+	{
+	Spawn:
+		BVTO A -1
+		Stop
+	}
+}

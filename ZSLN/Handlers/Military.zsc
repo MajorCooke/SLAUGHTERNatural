@@ -1,0 +1,117 @@
+Class SLNEvent_Military : SLNEvent_MapBase
+{
+	static clearscope SLNEvent_Military Fetch()
+	{	return SLNEvent_Military(Find('SLNEvent_Military'));	}
+	
+	
+	
+	override void WorldLoaded(WorldEvent e)
+	{
+		foreach (ln : Level.Lines)
+		{
+			if (!ln) continue;
+			for (int i = 0; i < ln.CountIDs(); i++)
+				if (ln.GetID(i) == 666)
+				{
+					let lt = new('SLNLineTex');
+					lt.ln = ln;
+					BloodLines.Push(lt);
+					for (int i = 0; i < 2; i++)
+						if (ln.sidedef[i]) 
+						{
+							lt.tex[i] = ln.sidedef[i].GetTexture(Side.mid);
+						}
+				}
+		}
+	}
+	private bool once;
+	private int c;
+	override void HandleSetup()
+	{
+		if (!once)
+		{
+			once = true;
+			{
+				// Now record all things tagged as corrupt and make them vanish.
+				let it = ThinkerIterator.Create("Actor", Thinker.STAT_DEFAULT);
+				Actor mo;
+				while (mo = Actor(it.Next()))
+				{
+					if (mo.TID == 666)
+						BloodThings.Push(mo);
+				}
+			}
+			{
+				let it = ThinkerIterator.Create("DynamicLight");
+				
+				DynamicLight mo;
+				while (mo = DynamicLight(it.Next()))
+				{
+					for (int i = 0; i < 3; i++)
+						if (mo.Args[i] < 0) mo.Args[i] += 255;
+				}
+			}
+		}
+		if (c < 2)
+			c++;
+		else if (c == 2)
+		{
+			c++;
+			HandleStatNums();
+			HandleSectorLighting(25);
+			Setup = true;
+		}
+	}
+	
+	private bool corrupt;
+	private Array<SLNLineTex> BloodLines;
+	private Array<Actor> BloodThings;
+	void SetCorruption(bool on)
+	{
+		foreach (ltex : BloodLines)
+		{
+			if (ltex) ltex.SetTex(on);
+		}
+		
+		foreach (mo : BloodThings)
+		{
+			if (mo)	
+			{
+				mo.A_ChangeLinkFlags(!on, !on);
+				mo.SetOrigin(mo.pos, false);
+				if (on)	mo.Activate(null);
+				else	mo.Deactivate(null);
+			}
+		}
+	}
+	
+	static void GSetCorruption(int on)
+	{
+		let ev = SLNEvent_Military.Fetch();
+		if (ev)	ev.SetCorruption(on);
+	}
+}
+
+Class SLNLineTex play
+{
+	TextureID tex[2];
+	Line ln;
+	
+	void SetTex(bool on)
+	{
+		if (!ln) return;
+		TextureID empt; empt.SetNull(); 
+	//	if (!on) empt = TexMan.CheckForTexture("");
+		for (int i = 0; i < 2; i++)
+			if (ln.sidedef[i])
+			{
+				if (on) ln.sidedef[i].SetTexture(Side.mid, tex[i]);
+				else	
+				{	
+					
+					ln.sidedef[i].SetTexture(Side.mid, empt);
+				}
+			}
+		
+	}
+}

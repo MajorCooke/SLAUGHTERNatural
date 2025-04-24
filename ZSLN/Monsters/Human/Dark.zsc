@@ -1,0 +1,147 @@
+/*------------------------------------------------------------------------------
+You have questions. You're wondering, why were you even here? What's even
+happening? Why are so many supernatural elements coming into play, suddenly?
+Who are these terrors? What the Hell is going on!?
+
+And why is Darkness trapped in a bottle!?
+------------------------------------------------------------------------------*/
+
+Class SLNDarkInABottle : CustomInventory
+{
+	Default
+	{
+		Tag "Dark-in-a-bottle";
+	}
+}
+
+/*------------------------------------------------------------------------------
+Darkness
+
+It may be time to pull the genie out of the bottle and demand some answers.
+You've done his bidding long enough and overcome some seriously messed up 
+business just to find him locked up inside a regular human drinking container.
+
+You suspect he won't be receptive. Perhaps you might have to force the answer
+out of it, if you can even do that to him...
+------------------------------------------------------------------------------*/
+
+Class SLNDarkness : SLNBoss
+{
+	private bool angry;
+	Default
+	{
+		//$Sprite DRFTA0
+		//$Category "Humans"
+		//$Color 2
+		Tag "DARKness";
+		+DONTTHRUST
+		-SHOOTABLE
+		+NONSHOOTABLE
+		+NEVERTARGET
+		-COUNTKILL
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOICEDEATH
+		+DONTMORPH
+		Radius 2;
+		Height 56;
+		Speed 32;
+		Health 20000;
+		Translation "0:255=%[0,0,0]:[1,0.9,0]";
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		SoundOn(true);
+	}
+	
+	protected void SoundOn(bool on)
+	{
+		if (on)	A_StartSound("DarkRift/Loop", 20, CHANF_OVERLAP|CHANF_LOOP, pitch: 1.0);
+		else	A_StopSound(20);
+	}
+	
+	protected void SpawnCloud(int count = 1)
+	{
+		if (count < 1)	return;
+		double h = height * 0.5;
+		if (angry)
+			for (int i = 0; i < count; i++)
+				A_SpawnItemEx("RiftCloudAngry", 0, 0, h, random(-4, 0), random(-4, 4), random(-2, 8),0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+			
+		
+		else for (int i = 0; i < count; i++)
+				A_SpawnItemEx("RiftCloud", 0, 0, h, random(-4, 4), random(-4, 4), random(-2, 2),0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION);
+	}
+	
+	override void Tick()
+	{
+		if (IsFrozen())	return;
+		Super.Tick();
+		
+		SpawnCloud();
+	}
+	
+	override int DamageMobj(Actor i, Actor s, int damage, Name mod, int flags, double angle)
+	{
+		if (!bBOSS || bKILLED || (!bSHOOTABLE && !bVULNERABLE))
+			return -1;
+		
+		return Super.DamageMobj(i, s, damage, mod, flags, angle);
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 1 A_FaceTarget();
+		Wait;
+	}
+}
+
+Class RiftCloud : Actor
+{
+	const fadenorm = 0.05;
+	const fadeangry = 0.03;
+	meta bool Angry;
+	Property Angry: Angry;
+	Default
+	{
+		RiftCloud.Angry false;
+		+NOINTERACTION
+		+NOBLOCKMAP
+		RenderStyle "Translucent";
+		Alpha 0.7;
+	}
+	private double fader;
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		bXFLIP = random(0,1);
+		bYFLIP = random(0,1);
+		fader = fadenorm;
+		if (Angry) 
+		{
+			A_SetScale(1.2);
+			fader = fadeangry;
+		}
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_Jump(256,"S1","S2","S3");
+	S1:
+		DRFT ABCDE 3 A_FadeOut(fader);
+		Loop;
+	S2:
+		DRFT FGHIJ 3 A_FadeOut(fader);
+		Loop;
+	S3:
+		DRFT KLMNO 3 A_FadeOut(fader);
+		Loop;
+	}
+}
+
+Class RiftCloudAngry : RiftCloud
+{	Default { RiftCloud.Angry true; }}

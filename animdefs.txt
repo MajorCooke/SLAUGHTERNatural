@@ -1,0 +1,672 @@
+
+/////General Animdefs/////
+
+//Animated textures 
+warp texture WHELFIRE
+warp texture WHELFNG
+warp texture WCIBFIRE
+warp texture WCIBFNC
+warp texture WCIBFNG
+warp texture WCIBFNCG
+
+//Hellfire/Darkfire transition
+warp texture DRHLF_01
+warp texture DRHLF_02
+warp texture DRHLF_03
+warp texture DRHLF_04
+warp texture DRHLF_05
+warp texture DRHLF_06
+warp texture DRHLF_07
+warp texture DRHLF_08
+warp texture DRHLF_09
+
+warp texture DRHELL55
+warp texture DRHELL66
+
+//Hellfirefall
+texture HFFALL1
+    pic HFFALL1 tics 2
+    pic HFFALL2 tics 2
+    pic HFFALL3 tics 2
+    pic HFFALL4 tics 2
+
+//Darkfirefall
+texture CFFALL1
+    pic CFFALL1 tics 2
+    pic CFFALL2 tics 2
+    pic CFFALL3 tics 2
+    pic CFFALL4 tics 2
+	
+//Hellfirefall/Darkfirefall transition	
+texture DRHLF_11
+    pic DRHLF_11 tics 2
+    pic DRHLF_21 tics 2
+    pic DRHLF_31 tics 2
+    pic DRHLF_41 tics 2
+	
+texture DRHLF_12
+    pic DRHLF_12 tics 2
+    pic DRHLF_22 tics 2
+    pic DRHLF_32 tics 2
+    pic DRHLF_42 tics 2
+	
+texture DRHLF_13
+    pic DRHLF_13 tics 2
+    pic DRHLF_23 tics 2
+    pic DRHLF_33 tics 2
+    pic DRHLF_43 tics 2
+	
+texture DRHLF_14
+    pic DRHLF_14 tics 2
+    pic DRHLF_24 tics 2
+    pic DRHLF_34 tics 2
+    pic DRHLF_44 tics 2
+	
+texture DRHLF_15
+    pic DRHLF_15 tics 2
+    pic DRHLF_25 tics 2
+    pic DRHLF_35 tics 2
+    pic DRHLF_45 tics 2
+	
+texture DRHLF_16
+    pic DRHLF_16 tics 2
+    pic DRHLF_26 tics 2
+    pic DRHLF_36 tics 2
+    pic DRHLF_46 tics 2
+	
+texture DRHLF_17
+    pic DRHLF_17 tics 2
+    pic DRHLF_27 tics 2
+    pic DRHLF_37 tics 2
+    pic DRHLF_47 tics 2
+	
+texture DRHLF_18
+    pic DRHLF_18 tics 2
+    pic DRHLF_28 tics 2
+    pic DRHLF_38 tics 2
+    pic DRHLF_48 tics 2
+	
+texture DRHLF_19
+    pic DRHLF_19 tics 2
+    pic DRHLF_29 tics 2
+    pic DRHLF_39 tics 2
+    pic DRHLF_49 tics 2
+	
+texture LAVAFAL1
+	pic LAVAFAL1 tics 2
+	pic LAVAFAL2 tics 2
+	pic LAVAFAL3 tics 2
+	pic LAVAFAL4 tics 2
+	
+texture LAVA1
+	pic LAVA1 tics 2
+	pic LAVA1 tics 2	
+texture LAVA2
+	pic LAVA2 tics 2
+	pic LAVA2 tics 2	
+texture LAVA3
+	pic LAVA3 tics 2
+	pic LAVA3 tics 2	
+texture LAVA4
+	pic LAVA4 tics 2
+	pic LAVA4 tics 2
+	
+
+
+texture N_CM06A
+pic 1 tics 3
+pic 2 tics 3
+pic 3 tics 3
+pic 4 tics 3
+
+texture DRCOMP91
+pic DRCOMP91 tics 3
+pic DRCOMP92 tics 3
+pic DRCOMP93 tics 3
+pic DRCOMP94 tics 3
+
+texture VADELEC1
+pic VADELEC1 tics 3
+pic VADELEC2 tics 3
+pic VADELEC3 tics 3
+
+texture VADELEC4
+pic VADELEC4 tics 3
+pic VADELEC5 tics 3
+pic VADELEC6 tics 3
+
+texture VADELEC7
+pic VADELEC7 tics 3
+pic VADELEC8 tics 3
+pic VADELEC9 tics 3
+
+texture VADELEC2
+pic VADELEC2 tics 3
+pic VADELEC3 tics 3
+pic VADELEC1 tics 3
+
+texture VADELEC5
+pic VADELEC5 tics 3
+pic VADELEC6 tics 3
+pic VADELEC4 tics 3
+
+texture VADELEC8
+pic VADELEC8 tics 3
+pic VADELEC9 tics 3
+pic VADELEC7 tics 3
+
+
+texture VADELEC3
+pic VADELEC3 tics 3
+pic VADELEC1 tics 3
+pic VADELEC2 tics 3
+
+texture VADELEC6
+pic VADELEC6 tics 3
+pic VADELEC4 tics 3
+pic VADELEC5 tics 3
+
+texture VADELEC9
+pic VADELEC9 tics 3
+pic VADELEC7 tics 3
+pic VADELEC8 tics 3
+
+
+texture VADCOM1A
+pic VADCOM1A tics 3
+pic VADCOM1B tics 3
+pic VADCOM1C tics 3
+pic VADCOM1D tics 3
+  
+texture GRYFALL1
+pic GRYFALL1 tics 2
+pic GRYFALL2 tics 2
+pic GRYFALL3 tics 2
+pic GRYFALL4 tics 2
+
+texture N_BFAL01
+pic N_BFAL01 tics 2
+pic N_BFAL02 tics 2
+pic N_BFAL03 tics 2
+pic N_BFAL04 tics 2
+
+texture N_BFAL05
+pic N_BFAL05 tics 2
+pic N_BFAL06 tics 2
+pic N_BFAL07 tics 2
+pic N_BFAL08 tics 2
+
+texture FANSE1
+pic FANSE1 tics 2
+pic FANSE2 tics 2
+pic FANSE3 tics 2
+pic FANSE4 tics 2
+
+texture FANSF1
+pic FANSF1 tics 2
+pic FANSF2 tics 2
+pic FANSF3 tics 2
+pic FANSF4 tics 2
+
+texture SHAWNTV1
+pic SHAWNTV1 tics 3
+pic SHAWNTV2 tics 3
+pic SHAWNTV3 tics 3
+
+texture SHAWNTV4
+pic SHAWNTV4 tics 3
+pic SHAWNTV5 tics 3
+pic SHAWNTV6 tics 3
+
+texture SHAWNTV7
+pic SHAWNTV7 tics 3
+pic SHAWNTV8 tics 3
+pic SHAWNTV9 tics 3
+
+texture SHAWNTVX
+pic SHAWNTVX tics 3
+pic SHAWNTVY tics 3
+pic SHAWNTVZ tics 3
+
+
+
+texture X_CMON01
+pic X_CMON01 tics 2
+pic X_CMON02 tics 2
+pic X_CMON03 tics 2
+
+texture X_CMON02
+pic X_CMON02 tics 2
+pic X_CMON03 tics 2
+pic X_CMON01 tics 2
+
+texture X_CMON03
+pic X_CMON03 tics 2
+pic X_CMON01 tics 2
+pic X_CMON02 tics 2
+
+
+
+texture COMPCT11
+pic COMPCT11 tics 15
+pic COMPCT12 tics 15
+
+texture COMPCT21
+pic COMPCT21 tics 9
+pic COMPCT22 tics 9
+pic COMPCT23 tics 9
+pic COMPCT24 tics 9
+
+texture COMPCT41
+pic COMPCT41 tics 10
+pic COMPCT42 tics 10
+
+texture COMPCT71
+pic COMPCT71 tics 9
+pic COMPCT72 tics 9
+pic COMPCT73 tics 9
+pic COMPCT74 tics 9
+
+texture COMPCT51
+pic COMPCT51 tics 7
+pic COMPCT52 tics 7
+
+texture COMPCT61
+pic COMPCT61 tics 10
+pic COMPCT62 tics 10
+
+texture COMPCTXA
+pic COMPCTXA tics 1
+pic COMPCTXB tics 1
+pic COMPCTXC tics 1
+pic COMPCTXD tics 1
+
+texture X_10VN12
+pic X_10VN12 tics 10
+pic X_10VN13 tics 10
+
+texture X_10VN22
+pic X_10VN22 tics 10
+pic X_10VN23 tics 10
+
+texture X_10VN34
+pic X_10VN34 tics 10
+pic X_10VN35 tics 10
+
+texture X_10VN00
+pic X_10VN00 tics 10
+pic X_10VN01 tics 10
+
+
+
+texture X_FFC01
+pic X_FFC01 tics 7
+pic X_FFC02 tics 7
+
+texture X_FFC001
+pic X_FFC001 tics 7
+pic X_FFC002 tics 7
+
+texture X_FFC010
+pic X_FFC010 tics 7
+pic X_FFC020 tics 7
+
+texture X_FFC011
+pic X_FFC011 tics 7
+pic X_FFC022 tics 7
+
+texture X_FFC100
+pic X_FFC100 tics 7
+pic X_FFC200 tics 7
+
+texture X_FFC101
+pic X_FFC101 tics 7
+pic X_FFC202 tics 7
+
+texture X_FFC110
+pic X_FFC110 tics 7
+pic X_FFC220 tics 7
+
+
+
+//Radio Tower Screens
+texture R_CMON5A
+pic R_CMON5A tics 3
+pic R_CMON5B tics 3
+pic R_CMON5C tics 3
+pic R_CMON5D tics 3
+
+texture R_CMON5B
+pic R_CMON5B tics 3
+pic R_CMON5C tics 3
+pic R_CMON5D tics 3
+pic R_CMON5A tics 3
+
+texture R_CMON5C
+pic R_CMON5C tics 3
+pic R_CMON5D tics 3
+pic R_CMON5A tics 3
+pic R_CMON5B tics 3
+
+texture R_CMON5D
+pic R_CMON5D tics 3
+pic R_CMON5A tics 3
+pic R_CMON5B tics 3
+pic R_CMON5C tics 3
+
+
+
+TEXTURE DRSPIN05
+Range DRSPIN11
+Tics 4
+Oscillate
+
+TEXTURE DRSPIN13
+Range DRSPIN20
+Tics 4
+Oscillate
+
+TEXTURE DRSPIN21
+Range DRSPIN28
+Tics 4
+Oscillate
+
+TEXTURE DRSPIN29
+Range DRSPIN36
+Tics 4
+Oscillate
+
+TEXTURE DRROCK01
+Range DRROCK04
+Tics 8
+
+switch DRSWC00A on sound Switch1 pic DRSWC00B tics 0
+switch DRSWC00B off sound Switch2 pic DRSWC00A tics 0
+
+switch DRSWC01A on sound Switch1 pic DRSWC01B tics 0
+switch DRSWC01B off sound Switch2 pic DRSWC01A tics 0
+
+switch DRSWC02A on sound Switch1 pic DRSWC02B tics 0
+switch DRSWC02B off sound Switch2 pic DRSWC02A tics 0
+
+switch DRSWC03A on sound Switch1 pic DRSWC03B tics 0
+switch DRSWC03B off sound Switch2 pic DRSWC03A tics 0
+
+switch DRSWC04A on sound Switch1 pic DRSWC04B tics 0
+switch DRSWC04B off sound Switch2 pic DRSWC04A tics 0
+
+switch DRSWC05A on sound Switch1 pic DRSWC05B tics 0
+switch DRSWC05B off sound Switch2 pic DRSWC05A tics 0
+
+switch DRSWC06A on sound Switch1 pic DRSWC06B tics 0
+switch DRSWC06B off sound Switch2 pic DRSWC06A tics 0
+
+switch DRSWC07A on sound Switch1 pic DRSWC07B tics 0
+switch DRSWC07B off sound Switch2 pic DRSWC07A tics 0
+
+switch DRSWC09A on sound Switch1 pic DRSWC09B tics 0
+switch DRSWC09B off sound Switch2 pic DRSWC09A tics 0
+
+switch DRSWC10A on sound Switch1 pic DRSWC10B tics 0
+switch DRSWC10B off sound Switch2 pic DRSWC10A tics 0
+
+switch DRSWC11A on sound Switch1 pic DRSWC11B tics 0
+switch DRSWC11B off sound Switch2 pic DRSWC11A tics 0
+
+switch DRSWC12A on sound Switch1 pic DRSWC12B tics 0
+switch DRSWC12B off sound Switch2 pic DRSWC12A tics 0
+
+switch DRSWC13A on sound Switch1 pic DRSWC13B tics 0
+switch DRSWC13B off sound Switch2 pic DRSWC13A tics 0
+
+switch DRSWC14A on sound Switch1 pic DRSWC14B tics 0
+switch DRSWC14B off sound Switch2 pic DRSWC14A tics 0
+
+switch SW1SLIM on sound Switch1 pic SW2SLIM tics 0
+switch SW2SLIM off sound Switch2 pic SW1SLIM tics 0
+
+switch SW1SLIMX on sound Switch1 pic SW2SLIMX tics 0
+switch SW2SLIMX off sound Switch2 pic SW1SLIMX tics 0
+
+switch DRSWC08A 
+on sound Switch1 
+pic DRSWC08B tics 8 
+pic DRSWC08C tics 8 
+pic DRSWC08D tics 8   
+
+
+
+//Extra Switches
+
+switch CGSWC01A on sound Switch1 pic CGSWC01B tics 0
+switch CGSWC01B off sound Switch2 pic CGSWC01A tics 0
+
+switch CGSWC02A on sound Switch1 pic CGSWC02B tics 0
+switch CGSWC02B off sound Switch2 pic CGSWC02A tics 0
+
+switch CGSWC03A on sound Switch1 pic CGSWC03B tics 0
+switch CGSWC03B off sound Switch2 pic CGSWC03A tics 0
+
+
+
+///////////////////////////////////////
+//Taken from the unfortunately incomplete mod, Rain. Let 5RADIO be a spiritual continuation for the art they created.
+//Thanks, guys.
+
+Texture R_RADIO1
+
+PIC R_RADIO2 RAND 50 70
+PIC R_RADIO3 RAND 1 35
+PIC R_RADIO1 RAND 1 5
+PIC R_RADIO3 RAND 35 105
+PIC R_RADIO1 RAND 35 70
+PIC R_RADIO2 RAND 20 30
+PIC R_RADIO3 RAND 10 15
+
+Texture R_RADIO2
+
+PIC R_RADIO3 RAND 35 105
+PIC R_RADIO1 RAND 35 70
+PIC R_RADIO2 RAND 20 30
+PIC R_RADIO3 RAND 10 15
+PIC R_RADIO2 RAND 50 70
+PIC R_RADIO3 RAND 1 35
+PIC R_RADIO1 RAND 1 5
+
+Texture R_RADI1
+
+PIC R_RADI2 RAND 50 70
+PIC R_RADI3 RAND 1 35
+PIC R_RADI1 RAND 1 5
+PIC R_RADI3 RAND 35 105
+PIC R_RADI1 RAND 35 70
+PIC R_RADI2 RAND 20 30
+PIC R_RADI3 RAND 10 15
+
+Texture R_RADI2
+
+PIC R_RADI3 RAND 35 105
+PIC R_RADI1 RAND 35 70
+PIC R_RADI2 RAND 20 30
+PIC R_RADI3 RAND 10 15
+PIC R_RADI2 RAND 50 70
+PIC R_RADI3 RAND 1 35
+PIC R_RADI1 RAND 1 5
+
+Texture R_COMP1
+
+PIC R_COMP1 TICS 17
+PIC R_COMP2 TICS 17
+
+Texture R_COMP2A
+
+PIC R_COMP2A RAND 35 105
+PIC R_COMP2B RAND 1 5
+PIC R_COMP2A RAND 1 5
+PIC R_COMP2B RAND 1 5
+
+
+
+
+//////////////////////////////////////////////////
+
+
+
+//Cameras
+cameratexture CAMERA1 64 64 fit 64 64
+cameratexture CAMERA2 64 64 fit 64 64
+cameratexture CAMERA3 64 64 fit 64 64
+cameratexture CAMERA4 64 64 fit 64 64
+cameratexture CAMERA5 64 64 fit 64 64
+cameratexture CAMERA6 64 64 fit 64 64
+cameratexture CAMERA7 64 64 fit 64 64
+
+cameratexture SMILECAM 512 512 fit 62 64
+
+//Warping
+   
+warp texture FRGRN1
+warp texture FRGRN2
+warp2 texture WWATER
+warp2 texture WWATER2
+warp2 texture WGWATER
+warp2 texture WDWATER
+warp2 texture WGWATER2
+warp2 texture WGWATER3
+warp2 texture WDWATER2
+warp2 texture WDWATER3
+warp2 texture WWLOOD
+warp texture WWLIME
+warp texture WWUKAGE
+warp texture WWUKAGE2
+warp texture DRFLAT01
+warp texture LAVA1
+warp texture LAVA2
+warp texture LAVA3
+warp texture LAVA4
+
+
+Switch TSW4A on pic TSW4B tics 0
+Switch TMTLSW1A on pic TMTLSW1B tics 0
+Switch TMTLSW2A on pic TMTLSW2B tics 0
+Switch TMTLSW3A on pic TMTLSW3B tics 0 
+Switch T2SW01A on pic T2SW01B tics 0
+Switch T2SW02A on pic T2SW02B tics 0
+
+warp flat TLAVFL0
+warp flat TSLIMEFL
+warp flat TWARP01
+warp flat TWARP02
+warp flat TWARP03
+warp flat TWARP04
+
+texture THEDWL1A
+   allowdecals
+   pic THEDWL1A tics 5
+   pic THEDWL1B tics 5
+   pic THEDWL1C tics 5
+   pic THEDWL1D tics 5
+   pic THEDWL1C tics 5
+   pic THEDWL1B tics 5
+   
+texture TLIGWL1A
+  allowdecals
+  pic TLIGWL1A tics 5
+  pic TLIGWL1B tics 5
+  pic TLIGWL1C tics 5
+  pic TLIGWL1D tics 5
+  pic TLIGWL1E tics 5
+  pic TLIGWL1D tics 5
+  pic TLIGWL1C tics 5
+  pic TLIGWl1B tics 5
+
+
+// This Texture Pack was Converted and Compiled by Tormentor667
+// Get more @ http://www.tormentor667.de
+
+// Portal sprites from Myolden's Simulacrum.wad, graphics by muumi
+texture PORTA16
+	pic PORTA16 rand 2 3
+	pic PORTA15 rand 2 3
+	pic PORTA14 rand 2 3
+	pic PORTA13 rand 2 3
+	pic PORTA12 rand 2 3
+	pic PORTA11 rand 2 3
+	pic PORTA10 rand 2 3
+	pic PORTA09 rand 2 3
+	pic PORTA08 rand 2 3
+	pic PORTA07 rand 2 3
+	pic PORTA06 rand 2 3
+	pic PORTA05 rand 2 3
+	pic PORTA04 rand 2 3
+	pic PORTA03 rand 2 3
+	pic PORTA02 rand 2 3
+	pic PORTA01 rand 2 3
+	
+texture URNHELL
+	pic SKHELL01 tics 2
+	pic SKHELL02 tics 2
+	pic SKHELL03 tics 2
+	pic SKHELL04 tics 2
+	pic SKHELL05 tics 2
+	pic SKHELL06 tics 2
+	pic SKHELL07 tics 2
+	pic SKHELL08 tics 2
+	pic SKHELL09 tics 2
+	pic SKHELL10 tics 2
+	pic SKHELL11 tics 2
+	pic SKHELL12 tics 2
+	pic SKHELL13 tics 2
+	pic SKHELL14 tics 2
+	pic SKHELL15 tics 2
+	pic SKHELL16 tics 2
+	pic SKHELL17 tics 2
+	pic SKHELL18 tics 2
+	pic SKHELL19 tics 2
+	pic SKHELL20 tics 2
+	pic SKHELL21 tics 2
+	pic SKHELL22 tics 2
+	pic SKHELL23 tics 2
+	pic SKHELL24 tics 2
+	pic SKHELL25 tics 2
+	pic SKHELL26 tics 2
+	pic SKHELL27 tics 2
+	pic SKHELL28 tics 2
+	pic SKHELL29 tics 2
+	pic SKHELL30 tics 2
+	pic SKHELL31 tics 2
+	pic SKHELL32 tics 2
+	
+texture URNHELL2
+	pic SKHELL32 tics 2
+	pic SKHELL31 tics 2
+	pic SKHELL30 tics 2
+	pic SKHELL29 tics 2
+	pic SKHELL28 tics 2
+	pic SKHELL27 tics 2
+	pic SKHELL26 tics 2
+	pic SKHELL25 tics 2
+	pic SKHELL24 tics 2
+	pic SKHELL23 tics 2
+	pic SKHELL22 tics 2
+	pic SKHELL21 tics 2
+	pic SKHELL20 tics 2
+	pic SKHELL19 tics 2
+	pic SKHELL18 tics 2
+	pic SKHELL17 tics 2
+	pic SKHELL16 tics 2
+	pic SKHELL15 tics 2
+	pic SKHELL14 tics 2
+	pic SKHELL13 tics 2
+	pic SKHELL12 tics 2
+	pic SKHELL11 tics 2
+	pic SKHELL10 tics 2
+	pic SKHELL09 tics 2
+	pic SKHELL08 tics 2
+	pic SKHELL07 tics 2
+	pic SKHELL06 tics 2
+	pic SKHELL05 tics 2
+	pic SKHELL04 tics 2
+	pic SKHELL03 tics 2
+	pic SKHELL02 tics 2
+	pic SKHELL01 tics 2

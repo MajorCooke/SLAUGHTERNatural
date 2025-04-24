@@ -1,0 +1,15 @@
+/*------------------------------------------------------------------------------
+Staunch
+
+Another terrifying manifestation of the Terrorfiends rising tall enough to flatten
+a car underfoot. Only its hands and head are visible. Very tanky but slow.
+------------------------------------------------------------------------------*/
+Class SLNStaunch : SLNMonster
+{
+	Default
+	{
+		Tag "Staunch";
+		Species "Terrorfiend";
+		Obituary "%o was too Staunch to heed fear.";
+	}
+}

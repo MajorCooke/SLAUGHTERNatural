@@ -1,0 +1,33 @@
+:HeavyBiDoor
+	door		0
+	playuntildone	Activator/BasedoorStart
+	playrepeat	Activator/BasedoorMid
+	stopsound	Activator/BasedoorClose
+end
+
+:LightHydraulicDoor
+        door            2
+        playuntildone   hldoor1
+        nostopcutoff
+end
+
+:LightSlidingDoor
+		door 			3
+		playuntildone	PolyDoor2Open
+		nostopcutoff
+end
+
+:Lift1
+        platform        1
+        playuntildone   slift1a
+        playrepeat      slift1b
+        stopsound       slift1c
+end
+
+:HeavyLift
+        platform        0
+        playuntildone   Activator/BasedoorStart
+        playrepeat      Activator/BasedoorMid
+        stopsound       Activator/BasedoorClose
+end
+

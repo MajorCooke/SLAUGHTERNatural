@@ -1,0 +1,6 @@
+/*
+BigFont
+{
+	Template ZDFON%03d
+}
+*/

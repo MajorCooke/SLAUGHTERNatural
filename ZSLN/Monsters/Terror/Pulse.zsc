@@ -1,0 +1,14 @@
+/*------------------------------------------------------------------------------
+Pulse
+
+Unknown. Something to do with storms..
+------------------------------------------------------------------------------*/
+Class SLNPulse : SLNMonster
+{
+	Default
+	{
+		Tag "Pulse";
+		Species "Terrorfiend";
+		Obituary "%o took a Pulse too big to handle.";
+	}
+}

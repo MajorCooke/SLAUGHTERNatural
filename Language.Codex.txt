@@ -1,0 +1,51 @@
+[en default]
+/*==============================================================================
+Locations
+==============================================================================*/
+
+SLN_SEWER_TITL = "Sewer";
+SLN_SEWER_DESC =
+	"The sewer system developed in conjunction with Battery City is designed\n"
+	"to accommodate the entire terraformed NT-AU area. The sewer was first\n"
+	"constructed for Battery City in 2017, and remained consistently maintained\n"
+	"and expanded as the terraforming process was carried out. Due to the\n"
+	"construction of the Silkwood Mountain Range Military Base, the sewer\n"
+	"will double as an emergency evacuation system in case of disaster once\n"
+	"their expansion is complete.\n"
+	"\n"
+	"The original plans to expand the Sewer were set into place in early 2018\n"
+	"after the terraforming of the \cm[REDACTED]\cj area was complete. However,\n"
+	"construction teams began disappearing within the sewer for unknown reasons.\n"
+	"The sewer was still functional, however expansion was delayed indefinitely,\n"
+	"and access to the sewer was disallowed without authorization.\n"
+	"\n"
+	"In 2029, the UAC investigated the sewers for the first time since 2018.\n"
+	"The first expedition teams had difficulties navigating the area, due to\n"
+	"maps being incorrect. Upon further investigation, it was discovered that\n"
+	"the sewer had\cm[REDACTED]\cj, and began expanding \cm[REDACTED]\cj the\n"
+	"region. \cm[REDACTED]\cj discovered nothing, but \cm[REDACTED]\cj human\n"
+	"remains \cm[REDACTED]\cj \cm[REDACTED]\cj. \cm[REDACTED]\cj demon remains\n"
+	"\cm[REDACTED]\cj \cm[REDACTED]\cj \cm[REDACTED]\cj \cm[REDACTED]\cj. From\n"
+	"this poi\cm[REDACTED]\cj. Pleas\cm[REDACTED]\cj, save u\cm[REDACTED]\cj\n"
+	"S\cm[REDACTED]\cj M\cm[REDACTED]\cj I\cm[REDACTED]\cj L\cm[REDACTED]\cj E\cm[REDACTED]\cj.";
+	
+SLN_SMILE =
+"";
+	
+SLN_SEWER_TIP_01 =
+"So long as all of the Spawns live, no one can enter or leave the sewer.";
+
+SLN_SEWER_TIP_02 =
+"Smile hunts EVERYTHING that enters the sewer indiscriminately. Take advantage of this.";
+
+SLN_SEWER_TIP_03 =
+"Smile's invulnerable, but can be driven back with enough firepower if pinned in"
+"a corner. This comes with a cost; the more time she's pushed back, the more aggressive"
+"she becomes. If she kills something, she will calm partially..";
+
+SLN_SEWER_TIP_04 = 
+"Driving Smile back will make her more aggressive. Avoid being cornered if at all possible.";
+
+SLN_SEWER_TIP_05 =
+"Stay out of Smile's way when she has someone else as a target. She will run over"
+"anyone and deal tremendous damage while moving at ludicrous speeds.";

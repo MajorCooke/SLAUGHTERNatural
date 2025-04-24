@@ -1,0 +1,31 @@
+/*==============================================================================
+'Mad Dog' Maddox
+
+"I am designed to alert all staff and personnel to any and all active threats.
+There are no means by which you, the 'legendary' Slayer, could have teleported
+over 7,000 miles into our base. You're supposed to be cleaning the  JA-AU region
+of demons. Which means one of several things... You're an imposter, or you're
+a deserter. There's no other logical explanation. They will come to understand
+my actions once I've eliminated you, or I will deprecate them for being blinded
+by your malevolence.
+
+Now go back to Hel, demon!"
+
+One of the final bosses that is a giant mech who will attack the player with 
+big guns. The only way to get him to attack is by ignoring all objectives
+Maddox specifically sets up to test players.
+
+Maddox is only hostile due to the fact that Slayer ends up in NT-AU by no logical
+means, at least to Maddox. 
+-----
+*** STRATEGY ***
+
+Maddox only spawns in outdoor areas, descending from the sky. When he does, any
+humans nearby will relent Maddox's behavior and quickly escape the region at
+Slayer's insistence to take it on alone. Its attacks obliterate anything, but can
+be resisted with Darkfire, so make sure to bring plenty of it. 
+==============================================================================*/
+
+Class SLNMaddox : SLNBoss
+{
+}

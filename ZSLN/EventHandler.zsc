@@ -1,0 +1,257 @@
+#include "./Handlers/Military.zsc"
+#include "./Handlers/Lake.zsc"
+#include "./Handlers/Sewer.zsc"
+
+
+// Maximum 10 hours for the squad to arrive and evacuate.
+const SLN_MAXTIME = 60 * 10;
+const SLN_TURN_NOON = double(SLN_MAXTIME * 0.33);
+const SLN_TURN_DUSK = double(SLN_MAXTIME * 0.66);
+enum ESLNDayStatus
+{
+	SLN_TIME_DAWN = 1,
+	SLN_TIME_NOON,
+	SLN_TIME_DUSK
+	
+};
+
+Class SLNMapStore
+{
+	int Time;
+	Map<Name, SLNLocation> Maps;
+	
+	void Init()
+	{
+		Maps.Clear();
+		Time = 0;
+	}
+	
+	void AddLocation(Name mapname) // "Sewer", "Military Base", nice names.
+	{
+	}
+}
+
+Class SLNLocation
+{
+	int Time;
+	int TimeStatus;
+}
+
+Class SLNStatic : StaticEventHandler
+{
+	internal readonly SLNMapStore NT;
+	internal readonly int Time;
+	internal readonly Map<Name, SLNLocation> Maps;
+	
+	override void OnRegister()
+	{
+		string check = "SMPBEventHandler";
+		Class<Object> cls = check;
+		if (cls)
+		{
+			let sc = new('ScriptScanner');
+			sc.ScriptError("SlaughterMapPerformanceBooster is not compatible with SLAUGHTERNatural. Please remove it to continue.");
+			return;
+		}
+	}
+	
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		if (e.Name == 'SLN_Parse')
+			ParseJSON();
+	}
+	
+	override void OnEngineInitialize()
+	{
+		ParseJSON();
+	}
+	
+	override void NewGame()
+	{
+		/*
+		if (NT) NT.Destroy();
+		NT = new('SLNMapStore');
+		NT.Init();
+		*/
+		Time = 0;
+		Maps.Clear();
+	}
+	
+	override void WorldLoaded(WorldEvent e)
+	{
+		
+	}
+	
+	int GetTime() { return Time; }
+	int GetTimeStatus()
+	{
+		double Dime = double(Time);
+		
+		if (Dime < SLN_TURN_NOON)	return SLN_TIME_DAWN;
+		if (Dime < SLN_TURN_DUSK)	return SLN_TIME_NOON;
+		return SLN_TIME_DUSK;
+	}
+	
+	void AdvanceTime(int amt, bool set = false)
+	{
+		Time = (set) ? amt : Time + amt;
+		Time = Clamp(Time, 0, SLN_MAXTIME);
+	}
+	
+	int GetLightAdd()
+	{
+		int check = GetTimeStatus();
+		if (check == SLN_TIME_DAWN)	return 75;
+		if (check == SLN_TIME_NOON)	return 100;
+		return 50; // Dusk
+	}
+	
+	static clearscope SLNStatic Fetch()
+	{	return SLNStatic(Find('SLNStatic'));	}
+}
+
+Class SLNEvent : EventHandler
+{
+	static clearscope SLNEvent Fetch()
+	{	return SLNEvent(Find('SLNEvent'));	}
+	
+	private Array<uint16> Fog;
+	private bool Setup;
+	
+	override void WorldTick()
+	{
+		if (!Setup)
+		{
+			Setup = true;
+			SendInterfaceEvent(0,'SLNSwapBars',1);
+		}
+	}
+	
+	// Records the fog densities for testing purposes.
+	override void WorldLoaded(WorldEvent e)
+	{
+		if (e.IsReopen)
+			return;
+		int size = level.Sectors.Size();
+		Fog.Resize(size);
+		for (int i = 0; i < size; i++)
+			Fog[i] = level.Sectors[i].Colormap.FogDensity;
+			
+		
+	}
+	
+	override void UITick()
+	{	
+		DoUITick();
+	}
+	
+	override void RenderOverlay(RenderEvent e)
+	{
+		DoDraw(e.FracTic);
+	}
+	
+	
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		int num = e.Player;
+		let plr = players[num].mo;
+		if (!plr) return;
+		if (e.Name == 'fogd')
+		{
+			for (int i = 0; i < level.Sectors.Size(); i++)
+			{	
+				let sec = level.Sectors[i];
+				int arg = e.Args[0];
+				if (arg > -1)	sec.SetFogDensity(arg);
+				else			sec.SetFogDensity(Fog[i]);
+			}
+		}
+		else if (e.Name == 'ToggleFlashlight')
+		{
+			if (plr.CountInv("FlashlightToken") < 1)
+				plr.A_SetInventory("FlashlightToken", 1);
+				
+			let fl = FlashlightToken(plr.FindInventory("FlashlightToken"));
+			if (fl)	fl.ToggleLight();
+		}
+		else if (e.Name == 'RemoveTrees')
+		{
+			Actor mo;
+			Array<Actor> trees; trees.Clear();
+			int count = 0;
+			
+			{
+				let it = ThinkerIterator.Create("SLNTreeBase",Thinker.STAT_FIRST_THINKING-1);
+				while (mo = Actor(it.Next()))
+				{
+					if (mo && mo is 'SLNTreeBase')
+					{	trees.Push(mo); count++; }
+				}
+			}
+			if (trees.Size() > 0)
+			{
+				for (int i = 0; i < trees.Size(); i++)
+				{
+					if (trees[i]) trees[i].Destroy();
+				}
+			}
+			Console.Printf("%d trees removed.", count);
+		}
+	}
+}
+
+Class SLNEvent_MapBase : EventHandler
+{
+	protected SLNStatic SEvent;
+	protected bool Setup;
+	private int count, index;
+	
+	override void WorldLoaded(WorldEvent e)
+	{
+		SEvent = SLNStatic.Fetch();
+	}
+	
+	override void WorldTick()
+	{		
+		if (!Setup)
+			HandleSetup();
+	}
+	
+	protected virtual void HandleSetup()
+	{
+		if (count < 2)
+			count++;
+		else if (count == 2)
+		{
+			count++;
+			HandleStatNums();
+			HandleSectorLighting(100);
+			Setup = true;
+		}
+	}
+	
+	protected virtual void HandleStatNums()
+	{
+		let it = ThinkerIterator.Create('SLNTreeBase',Thinker.STAT_DEFAULT);
+		SLNTreeBase mo;
+		while (mo = SLNTreeBase(it.Next()))
+		{
+			mo.ChangeStatNum(Thinker.STAT_FIRST_THINKING - 1);
+		}
+	}
+	
+	protected virtual void HandleSectorLighting(int lev, bool set = false)
+	{
+		int i = 0;
+		int size = level.Sectors.Size();
+		for (index; index < size; index++)
+		{
+			let s = level.Sectors[index];
+			if (!s)	continue;
+			
+			if (!set) lev += s.LightLevel;
+			s.lightlevel = Clamp(lev, 0, 256);
+		}
+	}
+}
+

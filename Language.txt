@@ -1,0 +1,73 @@
+[en default]
+
+SLN_VERSION = "Alpha 0.1";
+SLN_MOD_ID = "SLAUGHTERNatural";
+
+QUITMSG =	"I'd leave too if I had to listen to another ridiculous story by that abomination.";
+QUITMSG1 =	"Come back soon. There's plenty to kill.";
+QUITMSG2 =	"Those who leave without answers to their questions often return at some point.";
+QUITMSG3 =	"You've yet to cleanse your nightmares.";
+QUITMSG4 =	"Is 'she' too much for you to handle?";
+QUITMSG5 =	"See you soon.";
+QUITMSG6 =	"Shall I note your cowardice in your record?";
+QUITMSG7 =	"Children are so easily startled. Isn't that right, child?";
+QUITMSG8 =	"Are you telling me your worth is equivalent to Dark's worthless stories?";
+QUITMSG9 =	"Get out of Silkwood while you still can.";
+QUITMSG10 = "They'll all still be here when you return.";
+QUITMSG11 = "In time, you'll share Dark's fate if you leave now.";
+QUITMSG12 = "HAH! WIMPY COWERING HUMAN!";
+QUITMSG13 = "You were never meant to be here from the start.";
+QUITMSG14 = "SMILE pretty for the Devil!";
+
+STARTUP1 = "\ctThe right man. The wrong place. Does it make a difference?";
+STARTUP2 = "\ctSometimes a story intertwines with another.";
+STARTUP3 = "\ctSuch an event can better it, or worsen.";
+STARTUP4 = "\ctBut it is an intriguing experiment nonetheless.";
+STARTUP5 = "\ctWhat say you, Dark?";
+
+/* Just for reference on how wide the text can be before needing to split it.
+"No. I don't care what you are and I don't care what you're";
+*/
+
+SLN_SKILL_CONFIRM_INGAME =
+"You'll retain your earned upgrades, but restart the campaign. To reset, select"
+"New Game in the hub. Don't forget to save before continuing! Are you ready?";
+
+SLN_SKILL_CONFIRM_NOGAME_FIRST =
+"Remember, there are custom keybinds for Hellfire & Darkfire powers." 
+"Ready to face Hel?";
+
+// Entity identifiers
+SLNI_NOID = "???";
+
+SLNI_BAPHOMET = "Baphomet";
+SLNI_AZMODAN = "Azmodan";
+
+SLNI_DARK = "Darkness";
+SLNI_SMILE = "Smile";
+
+SLNI_ENTERBLATHNIR = "Colonel Enterblathnir";
+SLNI_FORD = "Specialist Ford";
+SLNI_NORTH = "Corporal North";
+SLNI_HUGHES = "Corporal Hughes";
+SLNI_PRESTON = "Private Preston";
+SLNI_POWELL = "Corporal Powell";
+SLNI_SMITH = "Private Smith";
+SLNI_GREG = "Specialist Greg";
+SLNI_VENN = "Sgt. Mjr. Venn";
+SLNI_ATKINSON = "Staff Sgt. Atkinson";
+SLNI_KYLE = "Major Kyle";
+SLNI_EVANS = "Cpt. Evans-Turner";
+SLNI_MADDOX = "Mad Dog Maddox";
+
+SLNI_FORD_CODE = "Concoruda";
+SLNI_NORTH_CODE = "Tetherwolf";
+SLNI_HUGHES_CODE = "Hamstrat";
+SLNI_PRESTON_CODE = "Olion";
+SLNI_POWELL_CODE = "Blue Impala";
+SLNI_SMITH_CODE = "Warbluran";
+SLNI_GREG_CODE = "Aerosguin";
+SLNI_VENN_CODE = "Kalgriffin";
+SLNI_ATKINSON_CODE = "Coltwing";
+SLNI_KYLE_CODE = "Jaculuslan";
+SLNI_EVANS_CODE = "Dracossack";

@@ -1,0 +1,17 @@
+/*------------------------------------------------------------------------------
+Traumatize
+
+A dog-like creature whose voice induces effects similar to alcohol intoxication.
+The effect wears off pretty quickly, but the creature is fast.
+Can traverse up any slope no matter how deep, but cannot climb/descend stairs.
+------------------------------------------------------------------------------*/
+
+Class SLNTraumatize : SLNMonster
+{
+	Default
+	{
+		Tag "Traumatize";
+		Species "Terrorfiend";
+		Obituary "%o was Traumatized by a nightmare.";
+	}
+}

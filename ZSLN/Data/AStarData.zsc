@@ -1,0 +1,48 @@
+Class SLN_NoAStarData
+{
+	Class<Actor> ID;
+	bool Parent;
+	
+	clearscope bool CheckBanned(Actor mo) const
+	{
+		if (!mo)	return true;
+		if (!ID)	return false;
+		return (mo.GetClass() == ID || (Parent && mo is ID));
+	}
+	
+	static SLN_NoAStarData Deserialize(SLN_JsonElement elem)
+	{
+		if (!elem)	ThrowAbortException("SLN_NoAStarData: Expected JsonElement, got null");
+		let str = SLN_JsonString(elem);
+		if (!str)	ThrowAbortException("SLN_NoAStarData: Expected JsonString, got "..elem.GetClassName());
+		
+		return new('SLN_NoAStarData').ProcessString(str);
+	}
+	// Definition of each 'no_astar' is actor name FIRST, then periods between properties.
+	// "<classname>.[parent].[other properties]"
+	private SLN_NoAStarData ProcessString(SLN_JsonString str)
+	{
+		Array<String> sp;
+		str.s.Split(sp, ".");
+		if (sp.Size() < 1)	return null;
+		
+		ID = sp[0];
+		if (!ID)	return null;
+		if (sp.Size() > 1)
+		{
+			for (int i = 0; i < sp.Size(); i++)
+			{
+				if (sp[i] ~== "parent")
+					Parent = true;
+			}
+		}
+		if (SLN_PrintJson)
+		{
+			String res = "Class \cd"..ID.GetClassName().."";
+			if (parent)	res = res.."\cl and children ";
+			res = res.."\cl banned from AStar";
+			Console.Printf(res);
+		}
+		return self;
+	}
+}

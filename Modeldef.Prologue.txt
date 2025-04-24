@@ -1,0 +1,89 @@
+Model RETree01
+{
+	Path "Models/Prologue"
+	Model 0 "tree01.md3"
+	Skin 0 "skin_green3.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree04
+{
+	Path "Models/Prologue"
+	Model 0 "tree04.md3"
+	Skin 0 "skin_green1.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree05
+{
+	Path "Models/Prologue"
+	Model 0 "tree05.md3"
+	Skin 0 "skin_green1.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree06
+{
+	Path "Models/Prologue"
+	Model 0 "tree06.md3"
+	Skin 0 "skin_green1.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree08
+{
+	Path "Models/Prologue"
+	Model 0 "tree08.md3"
+	Skin 0 "skin_green3.png"
+	Scale 1 1 1.62
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree09
+{
+	Path "Models/Prologue"
+	Model 0 "tree09.md3"
+	Skin 0 "skin_green3.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree10
+{
+	Path "Models/Prologue"
+	Model 0 "tree05.md3"
+	Skin 0 "skin_green4.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree11
+{
+	Path "Models/Prologue"
+	Model 0 "tree09.md3"
+	Skin 0 "skin_green3.png"
+	Scale 1 1 1
+
+	FrameIndex ASDF A 0 0
+}
+
+Model RETree12
+{
+	Path "Models/Prologue"
+	Model 0 "tree12.md3"
+	Skin 0 "skin_green1.png"
+	Scale 1 1 1.5
+
+	FrameIndex ASDF A 0 0
+}

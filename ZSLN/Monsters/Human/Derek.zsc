@@ -1,0 +1,84 @@
+/*------------------------------------------------------------------------------
+Derek Wharton
+
+No one's coming to save you.
+...
+I spent 22 years in this dump
+Wasting my entire life being the filth that others scrape off their feet
+Being a disappointment of my father
+And being invisible to the rest of the world.
+
+I wanted to change that.
+I wanted to be the one who wins.
+Not the one who's constantly cast aside.
+But it seemed I couldn't become that person.
+Not even in my own dreams.
+
+Instead, I imagined all my problems disappeared,
+including myself.
+
+But see now, you've helped me change that.
+Now I can focus. Heheh...
+This place will be perfect.
+
+------------------------------------------------------------------------------*/
+// Good luck.
+Class SLNDerekWharton : SLNSuperBoss
+{
+	Default
+	{
+		Tag "Derek Wharton";
+		Species "Human";
+		Obituary "All according to plan, %o.";
+	}
+	
+	private bool CanDamage;
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		HP = Health;
+		CanDamage = true;
+	}
+	
+	private int HP;
+	override int DamageMobj(Actor i, Actor s, int damage, Name mod, int flags, double angle)
+	{
+		if (bKILLED || (!bSHOOTABLE && !bVULNERABLE))
+			return -1;
+		int dmg = damage;
+		if (s && s is "PlayerPawn")
+		{
+			
+		}
+		else dmg = 0;
+		
+		if (OkayToSwitchTarget(s))
+			Target = s;
+		
+		HP -= dmg;
+		Health = HP;
+		
+		if (HP < 1) 
+		{
+			Die(s, i, flags, mod);
+		}
+		
+		return dmg;
+	}
+	
+	override bool Morph(Actor activator, class<PlayerPawn> playerclass, class<MorphedMonster> monsterclass, int duration, int style, class<Actor> morphflash, class<Actor>unmorphflash)
+	{	return false;	}
+	
+	override bool MorphMonster(Class<Actor> spawntype, int duration, int style, Class<Actor> enter_flash, Class<Actor> exit_flash)
+	{	return false;	}
+	
+	override void ApplyKickback(Actor i, Actor s, int damage, double angle, Name mod, int flags)
+	{	return;		}
+	
+	override void Die(Actor s, Actor i, int flags, Name mod)
+	{
+		if (HP > 0 || bKILLED)	return;
+		bNOICEDEATH = true;
+		Super.Die(s, i, flags, mod);
+	}
+}

@@ -1,0 +1,16 @@
+Texture ELECSB01, 256, 256 	{ 	Patch "PBELECTR", 0, 0 {}	}
+Texture ELECSB02, 256, 256	{	Patch "PBELECTR",  16, 0 {} Patch "PBELECTR", -240, 0 {}	}
+Texture ELECSB03, 256, 256	{	Patch "PBELECTR",  32, 0 {} Patch "PBELECTR", -224, 0 {}	}
+Texture ELECSB04, 256, 256	{	Patch "PBELECTR",  48, 0 {} Patch "PBELECTR", -208, 0 {}	}
+Texture ELECSB05, 256, 256	{	Patch "PBELECTR",  64, 0 {} Patch "PBELECTR", -192, 0 {}	}
+Texture ELECSB06, 256, 256	{	Patch "PBELECTR",  80, 0 {} Patch "PBELECTR", -176, 0 {}	}
+Texture ELECSB07, 256, 256	{	Patch "PBELECTR",  96, 0 {} Patch "PBELECTR", -160, 0 {}	}
+Texture ELECSB08, 256, 256	{	Patch "PBELECTR", 112, 0 {} Patch "PBELECTR", -144, 0 {}	}
+Texture ELECSB09, 256, 256	{	Patch "PBELECTR", 128, 0 {} Patch "PBELECTR", -128, 0 {}	}
+Texture ELECSB10, 256, 256	{	Patch "PBELECTR", 144, 0 {} Patch "PBELECTR", -112, 0 {}	}
+Texture ELECSB11, 256, 256	{	Patch "PBELECTR", 160, 0 {} Patch "PBELECTR", -96, 0 {}	}
+Texture ELECSB12, 256, 256	{	Patch "PBELECTR", 176, 0 {} Patch "PBELECTR", -80, 0 {}	}
+Texture ELECSB13, 256, 256	{	Patch "PBELECTR", 192, 0 {} Patch "PBELECTR", -64, 0 {}	}
+Texture ELECSB14, 256, 256	{	Patch "PBELECTR", 208, 0 {} Patch "PBELECTR", -48, 0 {}	}
+Texture ELECSB15, 256, 256	{	Patch "PBELECTR", 224, 0 {} Patch "PBELECTR", -32, 0 {}	}
+Texture ELECSB16, 256, 256	{	Patch "PBELECTR", 240, 0 {} Patch "PBELECTR", -16, 0 {}	}

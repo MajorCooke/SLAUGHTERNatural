@@ -1,0 +1,270 @@
+include MapEdNums.txt
+
+
+   /////////////////////////
+  //MAPINFO WOOOOOOOOOOOO//
+ /////////////////////////
+
+GameInfo
+{
+	AddEventHandlers = "SLNEvent", "SLNStatic", "AStarEvent"
+}
+
+clearepisodes
+clearskills
+
+skill "Base"
+{
+	SpawnFilter = Normal
+	DefaultSkill
+}
+
+
+//==============================================================================
+// Maps
+//==============================================================================
+
+episode 0HUB
+{
+	name = "SLAUGHTERNatural"
+	noskillmenu
+}
+
+map 0HUB "Library HUB"
+{
+	levelnum = 0
+	cluster = 1
+	music = ""
+	sky1 = "URNHELL2"
+	keepfullinventory
+	nointermission
+	lightmode = 0
+}
+
+map 1JUNGLE "Jungle Base 0A2"
+{
+	levelnum = 1
+	cluster = 1
+	music = ""
+	sky1 = "MORNING"
+	keepfullinventory
+	nointermission
+	lightmode = 0
+}
+
+map 2MLITARY "Military Base"
+{
+	levelnum = 2
+	music = ""
+	sky1 = "MORNING"
+	cluster = 1
+	keepfullinventory
+	nointermission
+	outsidefog = "FFFFFF"
+	lightmode = 0
+	EventHandlers = "SLNEvent_Military"
+}
+
+map 3SEWER "Sewer"
+{
+	levelnum = 3
+	music = ""
+	sky1 = "URNHELL"
+	cluster = 1
+	keepfullinventory
+	nointermission
+	lightmode = 0
+//	EventHandlers = "SLNEvent_Sewer", "AStarEvent"
+	EventHandlers = "SLNEvent_Sewer"
+}
+
+map 4LAKE "Lake"
+{
+	levelnum = 4
+	music = ""
+	sky1 = "DAYSKY"
+	cluster = 1
+	keepfullinventory
+	nointermission
+	outsidefog = "FFFFFF"
+	lightmode = 0
+	EventHandlers = "SLNEvent_Lake"
+}
+
+map 6POWER "Power Plant"
+{
+	levelnum = 6
+	music = ""
+	sky1 = "DAYSKY"
+	cluster = 1
+	keepfullinventory
+	nointermission
+	outsidefog = FFFFFF
+}
+
+
+/*
+
+//Map definitons
+map ABYSM "Flesh Abysm"
+{
+	levelnum = 66
+	sky1 = "URNHELL"
+	music = ""
+	keepfullinventory
+	nointermission
+	lightmode = 1
+}
+
+
+map TITLEMAP "SLAUGHTERNatural"
+{
+	music = ""
+	sky1 = "SKYB"
+	keepfullinventory
+	nointermission
+	lightmode = 1
+}
+
+map STARTMAP "SLAUGHTERNatural"
+{
+   music = ""
+   sky1 = "SKYB"
+   keepfullinventory
+   nointermission
+   next = "XSTART"
+}
+
+map 1START "Road"
+{
+   levelnum = 1
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+map XSTART "Road"
+{
+   levelnum = 99
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+map XMLITARY "Military Base"
+{
+   levelnum = 98
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+map 5RADIO "Radio Tower"
+{
+   levelnum = 5
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+map 5RADIO1 "Radio Tower" //Lower area of radio tower
+{
+   levelnum = 51
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+
+
+map 7MINE "Mines"
+{
+   levelnum = 7
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+
+map 6POWER "Power Plant"
+{
+   levelnum = 6
+   music = ""
+   sky1 = "SKYB"
+   cluster = 1
+   keepfullinventory
+   nointermission
+}
+*/
+cluster 1
+{
+	hub
+}
+
+
+
+//Have you got the skillz? 
+//SEE I CAN BE HIP TOO
+// [MC] I lol'd.
+/*
+skill z_baby
+{
+	AmmoFactor = 2
+	DamageFactor = 0.5
+	Aggressiveness = 0.2
+	SpawnFilter = Baby
+	Name = "I'm too young to die."
+	TextColor = Orange
+	Key = "i"
+}
+
+skill z_easy
+{
+	Aggressiveness = 0.4
+	SpawnFilter = Easy
+	Name = "Hey, not too rough"
+	TextColor = Purple
+	Key = "h"
+}
+
+skill z_normal
+{
+	Aggressiveness = 0.6
+	SpawnFilter = Normal
+	Key = "h"
+	Name = "Hurt me plenty."
+	TextColor = Purple
+	DefaultSkill
+}
+
+skill z_hard
+{
+	Aggressiveness = 0.8
+	SpawnFilter = Hard
+	Name = "Ultra-Violence."
+	TextColor = Purple
+	Key = "u"
+}
+
+skill z_nightmare
+{
+	Aggressiveness = 1.0
+	AmmoFactor = 2
+	SpawnFilter = Nightmare
+	Name = "Nightmare!"
+	TextColor = Black
+	MustConfirm
+	Key = "n"
+}
+*/

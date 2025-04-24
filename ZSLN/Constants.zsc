@@ -1,0 +1,56 @@
+const SLNDebVal = 10;
+
+enum FrameInts
+{
+	Fr_A = 0,
+	Fr_B = 1,
+	Fr_C,
+	Fr_D,
+	Fr_E,
+	Fr_F,
+	Fr_G,
+	Fr_H,
+	Fr_I,
+	Fr_J,
+	Fr_K,
+	Fr_L,
+	Fr_M,
+	Fr_N,
+	Fr_O,
+	Fr_P,
+	Fr_Q,
+	Fr_R,
+	Fr_S,
+	Fr_T,
+	Fr_U,
+	Fr_V,
+	Fr_W,
+	Fr_X,
+	Fr_Y,
+	Fr_Z,
+};
+
+enum SNStats
+{
+	STAT_SNWEATHER = Thinker.STAT_USER,
+	STAT_MONSTER,
+	STAT_AI,
+	STAT_ASTAR = Thinker.STAT_USER_MAX+1
+};
+
+enum ACSActivationType	// TriggerType Property
+{
+	Note_OnOpen = 0,	// Activate upon switching to the note. DEFAULT
+	Note_OnClose		// Activate upon switching from the note.
+};
+
+enum ACSExecuteType		// ExecuteType Property (ACS_(Named)...)
+{
+	Ex_None = 0,		// No ACS. DEFAULT.
+	Ex_Normal = 1,		// ...Execute
+	Ex_Always,			// ...ExecuteAlways
+	Ex_WithResult		// ...ExecuteWithResult
+};
+
+const TextWidth = 640.0;
+const TextHeight = 480.0;

@@ -1,0 +1,1393 @@
+/*------------------------------------------------------------------------------
+Smile
+
+"What? I never placed anything in the sewers. I wouldn't even want to go near
+that filthy place. ...Who did?" - Unknown
+
+"I have found Hell. We thought we found it a year or two ago but we were wrong.
+This place is truly Hell." - Final note from the Scientist
+
+"Look at me when I'm talking to you.
+
+The sewers were built with multiple purposes. Aside from its namesake, the 
+sewers also serve as an emergency evacuation route. Construction of the place
+has been on and off due to teams going missing, construction crews vanishing
+and never being heard from again. Due to this reason, access to the sewer is
+denied without authorization. Some things are best left to the unknown...
+
+
+
+------------------------------------------------------------------------------*/
+
+// The grin
+Class SmileMouth : Actor
+{
+	Default
+	{
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+FORCEYBILLBOARD
+		+BRIGHT
+		RenderStyle "Add";
+		Scale 0.5;
+	}
+	
+	States
+	{
+	Spawn:
+		SMIL A -1;
+		Stop;
+	}
+}
+
+// Phase one.
+Class SLNSmile : SLNSuperBoss //sealed(SLNSmileSecond)
+{
+	private SLNEvent Event;
+	SLNEvent_Sewer Sewer;
+	enum ESmileNums
+	{
+		CHAN_HEARTBEAT = 20,
+		CHAN_SMILEAMB = 21,
+		CHAN_EVILBASS = 22
+	}
+	const NodeTimeout = 	15;						// How long to wait before pinging nodes again.
+	const FlashDelayMin =	2;
+	const FlashDelayMax =	15;
+	const OneSecond = 		35;						// Tics per second. As of 3.2.3 (or so) it's now accurate.
+	const TeleportTimeout = OneSecond * 20;			// How long to wait before teleporting to a new spot in seconds.
+	const StopRange =		2048;					// How close Smile must get to the player before she stops.
+	const StopRangeSq =		StopRange ** 2;
+	const SmileRange =		1536 ** 2;				// How close Smile must be... to smile pretty for the devil~.
+	const OutsideRange =	(StopRange + 100) ** 2;	// Teleport if the player goes beyond this range.
+	const nRadius =			48;
+	const KillRange =		(nRadius * 2) ** 2;		// How close the enemy must be for Smile to kill it.
+	const SightFlags = 		SF_IGNOREVISIBILITY|SF_IGNOREWATERBOUNDARY;
+	const StepAmount = 0.05;
+	
+	Array<Actor> Spots;
+	double Volume, VolumeTarget;
+	Actor Mouth, JS;
+	int ticks;
+	bool found, IsFlashed;
+	double AlphaTarget;
+	uint FlashCount;
+	int startnum;
+	bool NoTicks, IsSmiling, NoFade, NoTendril, NoTicksReal;
+	int PingTimeout;
+	
+	Default
+	{
+		//$Name "Smile"
+		//$Category "Sewer"
+		//$Color 4
+		+BRIGHT
+		+QUICKTORETALIATE
+		-BOSS
+		+DONTMORPH
+		+NOICEDEATH
+		+BOSSDEATH
+		+CROSSLINECHECK
+		Health 8000;		
+		YScale 1.15;
+		XScale 2.5;
+		Radius 48;
+		Height 128;
+		Speed 100;
+		MeleeRange nRadius;
+		BloodColor "Black";
+		Species "Abyss";
+		Obituary "%o \c[W8]Smiled \c*pretty for the \c[W8]Devil\c*.";
+		Tag "\c[W8]SMILE";
+	}
+	
+	override bool CanCrossLine(Line c, Vector3 next)
+	{
+		return (!c || c.GetUDMFInt('user_blocksmile') < 1);
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Event = SLNEvent.Fetch();
+		Mouth = Spawn('SmileMouth', pos);
+		if (Mouth) Mouth.master = self;
+		NoTicks = true; // Prevent her from randomly teleporting until active.
+		AlphaTarget = 0.0;
+		Spots.Clear();
+		ThinkerIterator it = ThinkerIterator.Create("TeleportDest");
+		TeleportDest mo = null;
+		while (mo = TeleportDest(it.Next()))
+		{
+			if (mo.tid >= 400 && mo.tid <= 499)
+			Spots.Push(mo);
+		}
+		startnum = cursector.sectornum;
+		
+		A_StartSound("IntenseHeartBeat", CHAN_HEARTBEAT, CHANF_LOOP, 0.01, ATTN_NONE);
+		A_SoundVolume(CHAN_HEARTBEAT, 0.0);
+	}
+	
+	override void OnDestroy()
+	{
+		ACS_NamedExecute("CameraDeactivate");
+		if (Mouth) Mouth.Destroy();
+		if (JS) JS.Destroy();
+		A_StopAllSounds();
+		Super.OnDestroy();
+	}
+	
+	const CleanTrigger = 35 * 10; // 10 seconds
+	private int CleanTimer;
+	private Array<Actor> Targets;
+	private Actor LastDamager;
+	
+	override bool OkayToSwitchTarget(Actor other)
+	{
+		if (!other || other == self || other.bKILLED || !other.bSHOOTABLE)
+			return false;
+		
+		if (bNOTARGETSWITCH && target && !target.bKILLED)
+			return false;
+		
+		if (other.bNEVERTARGET)	return false;
+		
+		if (other is 'PlayerPawn')
+		{
+			// Only honor NOTARGET on players. Everything else is fair game.
+			if (other.bNOTARGET || (other.player && (other.player.cheats & CF_NOTARGET)))
+				return false;
+				
+		}
+		return true;
+	}
+	
+	bool AddTarget(Actor mo)
+	{
+		if (mo && mo != self && (mo.bISMONSTER || mo is 'PlayerPawn'))
+		{
+			if (Targets.Find(mo) >= Targets.Size())
+			{
+				Targets.Push(mo);
+				if (SLN_Debug == 1)
+					Console.Printf("Added target %s", mo.GetClassName());
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	private void CleanTargets()
+	{
+		if (Targets.Size() > 0)
+		{
+			int prev = Targets.Size();
+			int i = 0, j = 0;
+			
+			foreach(mon : Targets)
+				if (mon) Targets[j++] = mon;
+			
+			if (SLN_Debug == 1)
+				Console.Printf("Prev: %d - New: %d", prev, Targets.Size());
+			Targets.Resize(j);
+		}
+	}
+	
+	private void RearrangeTarget(Actor mo)
+	{
+	
+		if (Targets.Find(mo) >= Targets.Size())
+			AddTarget(mo);
+		else if (Targets.Size() > 0)
+		{
+			int pos = Targets.Find(mo);
+			if (pos == Targets.Size() - 1) // Already at the end.
+				return;
+			Targets[pos] = null;
+			Targets.Push(mo);
+			CleanTargets();
+		}
+	}
+	
+	private void NextTarget()
+	{
+		if (Targetable(Target))
+			return;
+		
+		if (SLN_Debug == 1)
+			Console.Printf("Getting potential target: %d total.", Targets.Size());
+		for (int i = Targets.Size() - 1; i > -1; i--)
+		{
+			let mo = Targets[i];
+			if (Targetable(mo))
+			{	
+				if (SLN_Debug == 1)
+					Console.Printf("%d - %s", i, mo.GetClassName());
+				Target = mo;	return;		
+			}
+			Targets.Pop();
+		}
+	}
+	
+	private bool Targetable(Actor mo)
+	{	
+		if (!mo || mo == self || mo.bKILLED) mo = Target;
+		return OkayToSwitchTarget(mo);
+	}
+	
+	
+	private void TweakTargetNodes()
+	{
+		/*
+		foreach (mo : Targets)
+		{
+			if (!mo || mo.bNOPATHING || mo.bKILLED || mo.player || mo.target != self)	
+				continue;
+			
+			// Recalculate their goals to go from theirs to hers.
+			let g = AStarNode(mo.goal);
+			Level.FindPath(mo, self, g, NextNode);
+		}
+		*/
+	}
+	
+	private bool DangerTeleport, NoDamage;
+	override int DamageMobj(Actor i, Actor s, int damage, Name mod, int flags, double angle)
+	{
+		if (!bSHOOTABLE && !bVULNERABLE)
+			return -1;
+		
+		int dmg = damage;
+		
+		if (!(flags & DMG_NO_FACTOR))
+			dmg = ApplyDamageFactor(mod, damage);
+			
+		Actor old = Target;
+		if (!Targetable(s))
+		{
+			if (i && i.Target && Targetable(i.Target))
+				s = i.Target;
+		}
+		
+		if (s && (s == self || s.bKILLED))
+			return -1;
+		
+		
+		if (dmg > -1)
+		{
+			bool tg = Targetable(s);
+			if (tg)
+			{
+				Target = s;
+				RearrangeTarget(s);
+				if (sln_debug == 2 && Target)
+				{
+					Name ol = (old) ? old.GetClassName() : 'Null';
+					if (old != target)
+						Console.Printf("New target: %s from %s", Target.GetClassName(), ol);
+				}
+			}
+			else if (SLN_Debug == 2)
+			{
+				Name src = (s) ? s.GetClassName() : 'Null';
+				Console.Printf("%s not targetable (2)", src);
+			}
+		}
+		if ((dmg > 0 || i.bCAUSEPAIN) && !bNOPAIN)
+		{
+			bNOPAIN = true;
+			let p = SmilePainAmp(Spawn('SmilePainAmp', pos, ALLOW_REPLACE));
+			if (!(target is 'PlayerPawn'))
+				p.NoGlobal = true;
+			ticks = 0;
+			ACS_NamedExecute("CameraBlink", 0, (!IsSmiling && DangerLevel < 4));
+			IsSmiling = false;
+			SetStateLabel("DangerTele");
+		}
+		
+	//	if (!DangerTeleport && !NoDamage && DangerLevel < 3)
+	//		Health -= dmg;
+		
+		
+			
+		if (Health < 1) Die(s, i, flags, mod);
+		return dmg;
+	}
+	
+	private bool CanDie;
+	override void Die(Actor s, Actor i, int flags, Name mod)
+	{
+		if (!CanDie)
+		{
+			DangerTeleport = true;
+			Health = Default.Health;
+			Spawn('SmilePainAmp', pos, ALLOW_REPLACE);
+			SetState(FindState("DangerTele"));
+			return;
+		}
+		
+		Super.Die(s, i, flags, mod);
+	}
+	
+	
+	
+	
+	
+	
+	// Don't touch this unless you know what you're doing!
+	override void Tick()
+	{
+		if (IsFrozen())	return;
+		if (!bKILLED && !bDESTROYED && !Mouth)
+		{
+			Mouth = Spawn("SmileMouth", pos);
+			if (Mouth) Mouth.Master = self;
+		}
+		Super.Tick();
+		bNOFEAR = true;
+		if (bKILLED)
+			return;
+		
+		if (CleanTimer++ >= CleanTrigger)
+		{
+			CleanTimer = 0;
+			CleanTargets();
+		}
+			
+		if (!bDORMANT)
+		{
+			// Fading control
+			if (!NoFade)	Mouth.A_FadeTo(AlphaTarget,0.1,FTF_CLAMP);
+			Mouth.bNOTIMEFREEZE = bNOTIMEFREEZE;
+			
+			if (PrevDangerLevel != DangerLevel && !th)
+				HandleDangerLevel();
+			
+			
+			if (PingTimeout > 0) PingTimeout--;
+			
+			// Damage anything she touches.
+			if (TouchedMobjs.Size() > 0)
+				DamageTouchers();
+			
+			// Weaving/spawning of tentacle
+			if (!NoTendril || !Target)
+				SpawnTendril();
+			
+			if (NoTicksReal || bDORMANT || (Target && CheckSight(Target, SF_IGNOREVISIBILITY|SF_IGNOREWATERBOUNDARY)))
+				ticks = 0;
+			
+			// Don't teleport if near Target.
+			if (!found && ticks >= TeleportTimeout)
+				TeleportRandom();
+		}
+		// Do not try to teleport randomly if in the starting sector.
+		// And make sure her heartbeat is quiet.
+		if (cursector.sectornum != startnum)
+		{
+			VolumeTarget = 1.0;
+			ticks++;
+		}
+		else VolumeTarget = 0.0;
+		
+		if (Volume != VolumeTarget)
+		{
+			if (abs(VolumeTarget - Volume) <= StepAmount)
+				Volume = VolumeTarget;
+			else if (Volume > VolumeTarget)
+				Volume -= StepAmount;
+			else if (Volume < VolumeTarget)
+				Volume += StepAmount;
+		}
+		A_SoundVolume(CHAN_HEARTBEAT, Volume);
+	}
+	
+	private Array<Actor> TouchedMobjs;
+	private void DoFakeCollide(Actor other, bool passive)
+	{
+		if (other && other != self && other.CanCollideWith(self, !passive))
+		{
+			if (passive)	other.CollidedWith(self, !passive);
+			else			CollidedWith(other, passive);
+		}
+	}
+	override bool CanCollideWith(Actor other, bool passive)
+	{
+		if (!other || other == self)	return false;
+		if (other.bACTLIKEBRIDGE || other.bMISSILE)	return true;
+		
+		if (other.bSHOOTABLE)
+		{
+			if (other != Target && TouchedMobjs.Find(other) >= TouchedMobjs.Size())
+				TouchedMobjs.Push(other);
+			DoFakeCollide(other, passive);
+			return false;
+		}
+		
+		if (other.bFLOAT || (other.bSOLID && !other.bSHOOTABLE))
+		{
+			DoFakeCollide(other, passive);
+			return false;
+		}
+		return true;
+	}
+	override void Activate(Actor act)
+	{
+		Super.Activate(act);
+		VolumeTarget = 1.0;
+		TeleportRandom(true);
+		ACS_NamedExecute("CameraActivate", 0, 0);
+	}
+	
+	override void Deactivate(Actor act)
+	{
+		NoTendril = true;
+		VolumeTarget = 0.0;
+		SetOrigin(SpawnPoint, false);
+		ACS_NamedExecute("CameraDeactivate", 0, 0);
+		Super.Deactivate(act);
+	}
+	
+	States
+	{
+	Spawn:
+		SMIL B 2 SmileWander();
+		Wait;
+	See:
+		---- A 1 SmileChase();
+		Loop;
+	SeeWait:
+		---- A 1 SmileWait();
+		Loop;
+	Kill:
+		---- A 12 LunchTime();
+		---- A 1 EatTarget();
+		Goto See;
+	DangerTele:
+		---- A 1 PrepareTeleport(false);
+		Wait;
+	TransWait:
+		---- A 1 TransitionWait();
+		Wait;
+	}
+}
+
+extend class SLNSmile
+{
+	private void SpawnTendril()
+	{
+		bool t;
+		Actor tendril;
+		WeaveIndexXY = (WeaveIndexXY + 1) % 64;
+		[t, tendril] = A_SpawnItemEx("SmileDark",0,0,0,25,0,0,0,SXF_SETTARGET);
+		if (t && tendril)
+		{
+			tendril.WeaveIndexXY = WeaveIndexXY;
+			tendril.tracer = Target;
+		}
+	}
+	
+	private void TransitionWait()
+	{	
+		ACS_NamedExecute("CameraSmiling",0);
+		if (th) return;
+		TeleportRandom(true);
+	}
+	
+	private int DangerLevel, PrevDangerLevel, CurDangerLevel;
+	void SetDangerLevel(int diff, int instant)
+	{
+		if (diff == DangerLevel)	return;
+		
+		PrevDangerLevel = DangerLevel;
+		DangerLevel = diff;
+		Console.Printf("Smile Threat Level: %d", DangerLevel);
+		
+		if (instant || DangerLevel < PrevDangerLevel)	
+		{
+			PrevDangerLevel = DangerLevel;
+			ACS_NamedExecute("SetStage", 3, DangerLevel);
+		}
+		if (!th)
+			TeleportRandom(false);
+		
+	}
+	
+	private SmileTransistor th;
+	private void HandleDangerLevel()
+	{
+		if (th) return; // In transition already so wait for this one to finish.
+		if (PrevDangerLevel > DangerLevel)
+		{
+			PrevDangerLevel = DangerLevel;
+			TeleportRandom(true);
+		}
+		else
+		{
+			bNOPAIN = true;
+			th = new('SmileTransistor');
+			th.owner = self;
+			th.DLev = DangerLevel;
+			th.DLevPrev = PrevDangerLevel;
+			PrevDangerLevel = DangerLevel;
+			ACS_NamedExecute("CameraSmiling", 0, 0);
+			SetStateLabel("TransWait");
+			SetOrigin(SpawnPoint, false);
+			if (Mouth) Mouth.SetOrigin(SpawnPoint, false);
+		}
+	}
+	
+	
+	
+	void PrepareTeleport(bool laugh = false)
+	{
+		AlphaTarget = 0.0;
+		if (Mouth && Mouth.Alpha <= 0.0)
+			TeleportRandom(laugh);
+	}
+	
+	const PlrChanceMax = 10;
+	private int TPChance;
+	void TeleportRandom(bool laugh = false, statelabel to = "See")
+	{
+		if (bDORMANT)	return;
+		plan = null;
+		NextNode = null;
+		ticks = 0;
+		AlphaTarget = Mouth.Alpha = 0.0;
+		found = IsSmiling = NoTicksReal = NoFade = false;
+		NoTendril = true;
+		A_StartSound("smile/ambient",CHAN_SMILEAMB, CHANF_LOOP, 10);
+		A_StartSound("sfxsource/evilbass3",CHAN_EVILBASS, CHANF_LOOP);
+		ACS_NamedExecute("CameraBlink", 0, 1);
+		if (Spots.Size() > 0)
+		{
+			int rng;
+			if (TPChance >= PlrChanceMax || random(TPChance, PlrChanceMax) >= PlrChanceMax)
+			{
+				TPChance = 1;
+				double cdist = double.max;
+				Actor close = null;
+				Actor plr = null;
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (!playeringame[i]) continue;
+					let pl = players[i].mo;
+					if (pl)
+					{
+						plr = pl;
+						break;
+					}
+				}
+				rng = 0;
+				int ind = 0;
+				foreach(sp : Spots)
+				{	
+					ind++;
+					if (!sp) continue;
+					double dis = plr.Distance3DSquared(sp);
+					if (dis < cdist)
+					{
+						rng = ind - 1;
+						close = sp;
+						cdist = dis;
+					}
+				}
+			}
+			else
+			{
+				TPChance++;
+			}
+			
+			while (Spots.Size() > 0)
+			{
+				rng = random(0,Spots.Size() - 1);
+				if (Spots[rng])
+				{
+					Vector3 dest = Spots[rng].pos;
+					SetOrigin(dest,false);
+					GetPath(true);
+					bNOPAIN = false;
+					if (Mouth) Mouth.SetOrigin(pos, false);
+					if (laugh) DoLaugh();
+					
+					break;
+				}
+				else 
+				{
+					Spots.Delete(rng);
+				}
+			}
+		}
+		SetStateLabel(to);
+		NoDamage = false;
+	}
+	
+	void DoLaugh()
+	{	A_StartSound("smile/laugh", CHAN_VOICE, CHANF_OVERLAP, 1, ATTN_NONE, 1);	}
+	
+	private void SmileWander()
+	{
+		Speed = Default.Speed;
+		NextTarget();
+		A_Look();
+		if (!Targetable(Target))
+			A_Wander();
+	}
+	
+	private AStarPlan Plan;
+	private AStarNode NextNode;
+	private AStarEvent AStar;
+	private void SmileChase()
+	{
+		bNOTARGETSWITCH = bNOPAIN = found = false;
+		Pitch = 15;
+		Speed = Default.Speed;
+		
+		if (cursector.sectornum == startnum)
+			return;
+		
+		if (!Targetable(Target))
+		{
+			NextTarget();
+			if (!Targetable(Target))
+			{	SetStateLabel("Spawn"); return;		}
+		}
+		
+		
+		int ChaseFlags = CHF_DONTMOVE|CHF_NORANDOMTURN|CHF_NODIRECTIONTURN;
+		
+		// Danger level handling.
+		int sight = -1;
+		bool DoStop = false;
+		if (DangerLevel < 3)
+		{
+			NoTendril = true;
+			double dist = Distance3DSquared(Target);
+			if (dist <= StopRangeSq)
+			{
+				if (DangerLevel > 0)
+				{
+					sight = CheckSight(Target, SightFlags);
+					DoStop = (sight > 0);
+					if (!DoStop && DangerLevel < 2)
+					{
+						double distrad = dist - (radius ** 2);
+						speed = (Default.speed * 0.5) * (Max(0, distrad) / StopRangeSq);
+						if (random(0,255) < 1)
+							ticks = 0;
+					}
+				}
+				else	DoStop = true;
+			}
+		}
+		else // Pray for mercy, for she will show you none.
+		{	// Hope you cleared out the military base's exit. 
+			if (Mouth) Mouth.Alpha = 1.0;
+			AlphaTarget = 1.0;
+			A_QuakeEx(0, 2, 2, 35 * 5, 0, 4096, "", QF_SCALEDOWN|QF_RELATIVE, falloff: 1);
+			Speed = Default.Speed;
+			double dist = Distance3DSquared(Target);
+			NoTendril = true;
+			Switch (DangerLevel)
+			{
+				// You have a small chance to escape. Run like Hell, as she will
+				// be on your ass the entire time, constantly keeping up with you.
+				Case 3: 
+				{
+					
+					if (dist <= StopRangeSq)
+					{
+						NoTendril = false;
+						ticks = 0;
+						double distrad = dist - (radius ** 2);
+						speed = (Default.speed * 0.5) * (Max(0, distrad) / StopRangeSq) + 5;
+					}
+					break;
+				}
+				// You overdid it and shot her too much. You're dead.
+				Case 4:
+					ticks = 0;
+					Speed = Default.Speed * 0.5;
+					break;
+				Default:
+					ticks = 0;
+					Speed = Default.Speed;
+					break;
+			}
+		}
+		
+		if (DoStop)
+		{
+			NoTendril = false;
+			found = true;
+		//	TweakTargetNodes();
+			SetState(FindState("SeeWait"));
+			return;
+		}
+		else NoTendril = true;
+		
+		//----------------------------------------------------------------------
+		// Chase handling.
+		
+		Vector3 last = pos;
+		if (sight < 0)
+			sight = CheckSight(Target, SightFlags);
+			
+		{
+			if (DangerLevel > 2 && sight)
+			{
+				 plan = null;
+				 NextNode = null;
+				 ChaseFlags = 0;
+				 NoTendril = false;
+			}
+			else
+			{
+				GetPath();
+				if (!plan || plan.Size() < 1)
+				{
+					ChaseFlags = 0;
+					NextNode = null;
+					plan = null;
+				}
+				else
+				{
+					if (!NextNode || Distance3DSquared(NextNode) <= ((speed * 2) ** 2))
+					{
+						if (NextNode) SetOrigin(NextNode.pos, true);
+						NextNode = plan.Next();
+						
+						if (!NextNode)
+						{
+							GetPath();
+							if (plan)
+								NextNode = plan.Next();
+						}
+						
+					}
+					if (NextNode)
+					{
+						A_Face(NextNode, 45);
+						Vector2 move = Vec2Angle(speed, AngleTo(NextNode));
+						bool good = TryMove(move, bDROPOFF);
+						if (!good)
+							ChaseFlags = 0;
+						
+					}
+					else ChaseFlags = 0;
+				}
+			}
+		}
+		A_Chase("Kill", null, ChaseFlags);
+	//	if (PingTimeout < 1)
+	//		TweakTargetNodes();
+		if (Mouth && last != pos)
+			Mouth.SetOrigin(pos, true);
+		
+	}
+	
+	private bool Touching(Actor mo)
+	{
+		if (!mo)	return false;
+		//Her box is smaller to ensure she can fit.
+		double rad = Radius + 2 + mo.Radius;
+					
+		return !(
+				abs(pos.X - mo.pos.X) >= rad ||
+				abs(pos.Y - mo.pos.Y) >= rad ||
+				pos.Z > mo.pos.Z + mo.Height ||
+				mo.pos.z > pos.Z + height);
+	}
+	
+	private void GetPath(bool force = false)
+	{
+		if (!plan || force)
+		{	
+		//	level.FindPath(self, target);
+			if (!AStar)	AStar = AStarEvent.Fetch();
+			plan = AStarNode.GetPath(self, target, null, null, AStar);
+			
+			if (!Plan || Plan.nodes.Size() < 1)
+			{
+				plan = null;
+				return;
+			}
+			plan.ResetIndex();
+			NextNode = plan.Next();			
+		}
+	}
+	
+	private void SmileWait()
+	{
+		if (!Target)
+		{
+			TeleportRandom(IsSmiling);
+			return;
+		}
+		double dist = Distance3DSquared(Target);
+		bool InRange = (dist <= SmileRange);
+		bool InSight = A_JumpIfTargetInLOS("Null",360,JLOSF_DEADNOJUMP);
+		NoTendril = false;
+		AlphaTarget = 0.0;
+		if (dist > OutsideRange || !Target || Target.bKILLED || !OkayToSwitchTarget(Target))
+		{
+			TeleportRandom(IsSmiling);
+			return;
+		}
+		A_FaceTarget(10);
+		if (InRange && InSight)
+		{
+			if (!IsSmiling)
+			{
+				IsSmiling = true;
+				int attn = (Target is 'PlayerPawn') ? ATTN_NONE : ATTN_NORM;
+				A_StartSound("Smile/Appear", CHAN_VOICE, CHANF_OVERLAP, 1, attn);
+			}
+			
+			
+			AlphaTarget = 1.0;
+			A_Chase("Kill", null, CHF_STOPIFBLOCKED|CHF_DONTMOVE|CHF_NODIRECTIONTURN|CHF_NORANDOMTURN|CHF_DONTTURN|CHF_NOPLAYACTIVE);
+		}
+	}
+	
+	private void DamageTouchers()
+	{
+		/*
+		foreach (mo : TouchedMobjs)
+		{
+			if (!mo || mo.bKILLED) continue;
+		//	int dmg = (mo is 'PlayerPawn') ? 10 : 50;
+			int dmg = 5;
+			mo.DamageMobj(self, self, dmg, "Smile", DMG_THRUSTLESS);
+			
+		}
+		*/
+		TouchedMobjs.Clear();
+	}
+	
+	private void LunchTime()
+	{
+		if (!Target || Target.bKILLED || Target.bINVULNERABLE || Target.bNODAMAGE)
+		{
+			TeleportRandom(IsSmiling);
+			return;
+		}
+		
+		NoTendril = bNOTARGETSWITCH = NoDamage = bNOPAIN = true;
+		if (target is 'PlayerPawn' && target.player)
+		{
+			if ((Target.bINVULNERABLE && !bFOILINVUL) || 
+				Target.bNODAMAGE ||
+				Target.player.cheats & (CF_GODMODE|CF_GODMODE2))
+			{
+				TeleportRandom(IsSmiling);
+				return;
+			}
+			
+			int i = 0;
+			for (i; i < MAXPLAYERS; i++)
+			{
+				if (!playeringame[i])	continue;
+				if (players[i].mo == target)
+				{
+					EventHandler.SendInterfaceEvent(i, "SmileJumpscare");
+					break;
+				}
+			}
+		}
+		ACS_NamedExecute("CameraSmiling", 0, 0);
+		int mx = 31;
+		double vol = 0.15;
+		if (target is 'PlayerPawn') { mx = 34; vol = 1.0; }
+		for (int i = 30; i < mx; i++)
+			A_StartSound("Smile/Attack1", i, CHANF_OVERLAP, vol, ATTN_NONE, frandom[rng](0.8, 1.2));
+	}
+	
+	private void EatTarget()
+	{
+		if (Target && !Target.bKILLED)
+		{
+			A_Face(Target);
+			Target.DamageMobj(self, self, TELEFRAG_DAMAGE, "Smile", DMG_THRUSTLESS|DMG_FOILINVUL|DMG_NO_ARMOR|DMG_NO_PROTECT|DMG_NO_FACTOR);
+		}
+		if (!Target || Target.bKILLED)
+		{
+			Target = null;
+			NextTarget();
+		}
+		TeleportRandom(true);
+	}
+}
+
+
+Class SmileTransSound : Thinker
+{
+	double VolAmt, VolInc;
+	Actor Owner;
+	private int channel;
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if (Owner) 
+		{
+			for (int i = 1000; i < 1250; i++)
+			{
+				if (!Owner.IsActorPlayingSound(i, "world/quake"))
+				{
+					Owner.A_StartSound("world/quake", i, CHANF_OVERLAP|CHANF_LOOP, 0.01, ATTN_NONE, 1);
+					Owner.A_SoundVolume(i, 0);
+					channel = i;
+					break;
+				}
+			}
+		}
+	}
+	
+	override void OnDestroy()
+	{
+		if (Owner && channel) Owner.A_StopSound(channel);
+		Super.OnDestroy();
+	}
+	
+	override void Tick()
+	{
+		if (bDESTROYED) return;
+		if (Owner) 
+		{
+			if (channel)
+			{
+				if (VolAmt > 0.0 || VolInc > 0.0)
+				{
+					VolAmt = Clamp(VolAmt + VolInc, 0.0, 1.0);
+					Owner.A_SoundVolume(channel, VolAmt);
+				}
+				else 
+				{
+					Destroy();
+				}
+			}
+		}
+		else Destroy();
+	}
+}
+
+Class SmileTransistor : Thinker
+{
+	const EndTic = TICRATE * 10;
+	const EndFlash = TICRATE * 7;
+	Actor Owner;
+	int DLevPrev, DLev;
+	
+	private SLNEvent_Sewer Sewer;
+	private int tic;
+	private SmileTransSound snd;
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		Sewer = SLNEvent_Sewer.Fetch();
+	}
+	
+	enum ETRQuakeTimer
+	{
+		RampUpTime =	TICRATE * 4,
+		HoldTime =		TICRATE * 3,
+		RampDnTime =	TICRATE * 5,
+		
+	};
+	private void DoRock(int i)
+	{
+		int time = 35;
+		int flags = QF_RELATIVE;
+		double tens = 5.0;
+		double rad = 32767.0;
+		double vol = 0.0;
+		
+		Switch(i)
+		{
+			Case 0:
+				time = RampUpTime;
+				flags |= QF_SCALEUP;
+				vol = 1.0 / time;
+				break;
+			Case 1:
+				time = HoldTime;
+				Owner.A_StartSound("Smile/Roar", 2000, CHANF_OVERLAP, 1, ATTN_NONE);
+				break;
+			Case 2:
+				time = RampDnTime;
+				vol = -abs(1.0 / time);
+				flags |= QF_SCALEDOWN;
+				break;
+			Default:
+				return;
+		}
+		Owner.A_QuakeEx(0, tens, tens, time, 0, rad, "", flags);
+		if (!snd)
+		{
+			snd = new('SmileTransSound');
+			snd.Owner = Owner;
+		}
+		snd.VolInc = vol;
+	}
+	
+	double Lerp(double a, double b, double t)
+	{	
+		t = Clamp(t, 0.0, 1.0);
+		return a * (1.0 - t) + b * t;	
+	}
+	
+	override void Tick()
+	{
+		if (bDESTROYED)	return;
+		if (!Owner || tic >= EndTic) 
+		{	
+			Destroy();	
+			return; 
+		}
+		
+		Switch (tic++)
+		{
+			Case 0:
+				if (DLevPrev == DLev)
+					tic = EndTic;
+				else
+					DoRock(0);
+				break;
+			Case RampUpTime:
+				DoRock(1);		break;
+			Case (RampUpTime + HoldTime):
+				DoRock(2);		break;
+		}
+		
+		if (Sewer) 
+		{
+			int n = random[rng](0, EndFlash);
+			n = (n < tic) ? DLev : DLevPrev;
+		//	Sewer.SetStage(n);
+			Owner.ACS_NamedExecute("SetStage", 3, n);
+		}
+	}
+}
+
+/*==============================================================================
+================================================================================
+	Phase 2
+================================================================================
+================================================================================
+Welcome to the Flesh Abysm. Shaped from the innumerable souls she's slaughtered,
+if it isn't made of metal, it's made of flesh. 
+
+~~~Welcome to Hell.~~~
+*/
+Class SLNSmileSecond : SLNSuperBoss
+{
+	const nRadius =			48;
+	const KillRange =		(nRadius * 2) ** 2;		// How close the enemy must be for Smile to kill it.
+	const SightFlags = 		SF_IGNOREVISIBILITY|SF_IGNOREWATERBOUNDARY;
+	const StepAmount = 0.05;
+	
+	Default
+	{
+		//$Name "Smile"
+		//$Category "Hell"
+		//$Color 4
+		+BRIGHT
+		+QUICKTORETALIATE
+		Health 8000;		
+		YScale 1.15;
+		XScale 2.5;
+		Radius 48;
+		Height 128;
+		Speed 100;
+		MeleeRange nRadius;
+		BloodColor "Black";
+		Species "Abyss";
+		Obituary "%o \c[W8]Smiled \c*pretty for the \c[W8]Devil\c*.";
+		Tag "\c[W8]SMILE";
+	}
+}
+
+Class SmileTeeth : Actor {}
+Class SmileFang : Actor {}
+Class SmileEye : Actor {}
+
+Class SmileDark : Actor
+{
+	Array<Actor> Exclusions;
+	const StartSize = 60.0;
+	SmileShrinkLight light;
+	double size;			// For the dynamic light.
+	Default
+	{
+		Projectile;
+		+BLOODLESSIMPACT
+		+NOEXPLODEFLOOR
+		+DONTSPLASH
+		+NOWALLBOUNCESND
+		+NOBOUNCESOUND
+		+FLOORHUGGER
+		+BOUNCEONWALLS
+		+NOTONAUTOMAP
+		+PAINLESS
+		+CAUSEPAIN
+		+FORCERADIUSDMG
+		Radius 16;
+		Height 1;
+		DamageType "SmileShake";
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		if (Target && Target.Target)
+			tracer = Target.Target;
+		SetLight(StartSize);
+		
+	}
+	
+	void SetLight(int size)
+	{
+	//	int flags = DynamicLight.LF_SUBTRACTIVE|DynamicLight.LF_ATTENUATE;
+		int flags = DynamicLight.LF_SUBTRACTIVE;
+		A_AttachLight("Darkness", 0, "FFFFFF", size, 0, flags);
+	}
+	
+	
+	override int SpecialMissileHit(Actor victim)
+	{
+		int size = Exclusions.Size();
+		
+		// Ignore the owner and those it has already touched once. 
+		// The latter is because otherwise they go flying towards Smile.
+		if (!victim || victim == Target || bNOINTERACTION ||
+			(size > 0 && Exclusions.Find(victim) < size))	
+			return 1;
+		
+		Exclusions.Push(victim);		
+		
+		if (victim.bTHRUACTORS)	return 1;
+		
+		if (Target && victim.bSHOOTABLE && !victim.bDONTTHRUST && CheckSight(victim))
+		{
+			double ang = AngleTo(Target);
+			double th = (Target is 'PlayerPawn') ? 1.5 : 1.0;
+			victim.Thrust(th, ang);
+		}
+		if (!(Target is "PlayerPawn"))
+		{
+			victim.Threshold = victim.DefThreshold;
+			victim.Target = Target;
+			victim.lastheard = Target;
+		}
+		return 1;
+	}
+	
+	private void Weave()
+	{
+		A_Weave(3,0,3.0,0);
+		
+		size += (90.0 / 53.0);
+		SetLight(cos(size) * StartSize);
+	}
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Weave(); //53
+		Stop;
+	Death:
+		TNT1 A 0;
+		Stop;
+	DeathNoPull:
+	Death2:
+		TNT1 A 0; //A_Explode(2,32,0,FALSE);
+		Stop;
+	}
+}
+
+Class SmileShrinkLight : PointLight
+{
+	const DefSize = 60.0;
+	double Size;
+	bool destroyed;
+	Default
+	{
+		+NOTONAUTOMAP
+		+NOINTERACTION
+		+DYNAMICLIGHT.SUBTRACTIVE
+	}
+	
+	override void BeginPlay()
+	{
+		args[0] = 255;	// Red
+		args[1] = 255;	// Green
+		args[2] = 255;	// Blue
+		args[3] = DefSize;	// Size
+		Super.BeginPlay();
+	}
+	
+	override void Tick()
+	{	
+		if (destroyed || !Target)
+		{	Destroy(); return;	}
+		
+		Super.Tick();
+	}
+}
+
+Class SmilePainAmp : Actor
+{
+	bool NoGlobal;
+	
+	Default
+	{
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+INVISIBLE
+		+NOTONAUTOMAP
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 35 NoDelay 
+		{
+			int atten = NoGlobal ? ATTN_NORM : ATTN_NONE;
+			A_StartSound("brain/pain",CHAN_VOICE, CHANF_OVERLAP, 1, atten);
+			A_QuakeEx(5,5,0,35,0,5000,"",QF_SCALEDOWN, falloff: 1);
+		}
+		Stop;
+	}
+}
+
+/*------------------------------------------------------------------------------
+Smilespawn
+
+Malformed monsters of the matriarch. She hates them as much as she hates you.
+Use that to your advantage.
+------------------------------------------------------------------------------*/
+Class SLNSmileSpawn : SLNMonster
+{
+	Default
+	{
+		Tag "Smilespawn";
+	}
+}
+
+Class SmileJaw : VisualThinker
+{
+	
+}
+
+Class SmileJS : Actor
+{
+	SLNSmile smile;
+	Actor Cam;
+	private double RollAmt;
+	private SmileJaw jaw[2];
+	private Vector3 spos;
+	Default
+	{
+		+DORMANT
+		+NOINTERACTION
+		+NOBLOCKMAP
+		+NOSECTOR
+		+BRIGHT
+		+BILLBOARDNOFACECAMERA
+		+NOTIMEFREEZE
+		Alpha 0.0;
+		Scale 0.0;
+	}
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		spos = pos;
+		for (int i = 0; i < 2; i++)
+		{
+			jaw[i] = SmileJaw(level.SpawnVisualThinker("SmileJaw"));
+			String check;
+			if (i < 1)	check = "Graphics/SmileBottom.png";
+			else		check = "Graphics/SmileTop.png";
+			
+			jaw[i].Texture = TexMan.CheckForTexture(check);
+			jaw[i].Scale = (0,0);
+			jaw[i].Flags = SPF_FULLBRIGHT|SPF_NOFACECAMERA;
+		}
+	}
+	
+	override void Tick()
+	{
+		bNOTIMEFREEZE = true;
+		Super.Tick();
+	}
+	
+	override void Activate(Actor act)
+	{
+		if (!bDORMANT)	return;
+		Target = act;
+		bDORMANT = false;
+		SetStateLabel('Active');
+		Scale = (1,1);
+		Roll = random(-20,20);
+		RollAmt = frandom(0.5, 3.0) * frandompick(-1.0, 1.0);
+		if (Cam) 
+		{
+			Cam.Roll = Roll;
+		}
+	}
+	
+	override void Deactivate(Actor act)
+	{
+		if (bDORMANT) return;
+		Target = null;
+		bDORMANT = true;
+		SetStateLabel('Inactive');
+		Scale = (0,0);
+		SpriteOffset = (0,0);
+		UpdateJaws();
+	}
+	
+	private void UpdateJaws()
+	{
+		for (int i = 0; i < jaw.Size(); i++)
+		{
+			let ja = jaw[i];
+			if (!ja) continue;
+			
+			ja.scale = scale;
+			ja.Offset = SpriteOffset;
+			if (i < 1)	ja.Offset.Y *= -1.0;
+		}
+		if (Cam) Cam.Roll += RollAmt;
+	}
+	
+	override void OnDestroy()
+	{
+		for (int i = 0; i < 2; i++)
+			if (jaw[i])	jaw[i].Destroy();
+		
+		if (target) target.SetCamera(target, true);
+		Super.OnDestroy();
+	}
+	
+	const scaleup = 0.2;
+	const moveup = 3.0;
+	
+	States
+	{
+	Spawn:
+	Inactive:
+		TNT1 A -1;
+	Active:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1
+		{
+			Scale += (scaleup, scaleup);
+			WorldOffset += (0, moveup);
+			UpdateJaws();
+		}
+		TNT1 A 1 Deactivate(self);
+		Goto Inactive;
+	}
+}

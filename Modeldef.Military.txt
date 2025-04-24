@@ -1,0 +1,172 @@
+Model M2_SB_CornerFrontL
+{
+	Model 0 "Models/Military/M2_SB_CornerFrontL.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 1984 -656 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_CornerFrontR
+{
+	Model 0 "Models/Military/M2_SB_CornerFrontR.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -1984 -656 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_CornerLightL
+{
+	Model 0 "Models/Military/M2_SB_CornerLightL.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 1984 -656 0
+	Skin 0 "GTMETL06"
+	FrameIndex ASDF A 0 0
+	Skin 0 "GTMETLR6"
+	FrameIndex ASDF B 0 0
+}
+
+Model M2_SB_CornerLightR
+{
+	Model 0 "Models/Military/M2_SB_CornerLightR.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -1984 -656 0
+	Skin 0 "GTMETL06"
+	FrameIndex ASDF A 0 0
+	Skin 0 "GTMETLR6"
+	FrameIndex ASDF B 0 0
+}
+
+Model M2_SB_FrontL
+{
+	Model 0 "Models/Military/M2_SB_FrontL.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 1216 -1088 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_FrontR
+{
+	Model 0 "Models/Military/M2_SB_FrontR.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -1216 -1088 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_LightAdd
+{
+	Model 0 "Models/Military/M2_SB_LightAdd.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_LightL
+{
+	Model 0 "Models/Military/M2_SB_LightL.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 1216 128 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_LightR
+{
+	Model 0 "Models/Military/M2_SB_LightR.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -1216 128 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Pylon1
+{
+	Model 0 "Models/Military/M2_SB_Pylon1.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Pylon2
+{
+	Model 0 "Models/Military/M2_SB_Pylon2.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Pylon2Add
+{
+	Model 0 "Models/Military/M2_SB_Pylon2add.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_SideL
+{
+	Model 0 "Models/Military/M2_SB_SideL.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 2432 448 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_SideR
+{
+	Model 0 "Models/Military/M2_SB_SideR.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -2432 448 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Mountain1
+{
+	Model 0 "Models/Military/M2_SB_Mountain1.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset -4096 2048 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Mountain2
+{
+	Model 0 "Models/Military/M2_SB_Mountain2.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 0 3072 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Mountain3
+{
+	Model 0 "Models/Military/M2_SB_Mountain3.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 3072 1536 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Mountain4
+{
+	Model 0 "Models/Military/M2_SB_Mountain4.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 8192 1024 0
+	FrameIndex ASDF A 0 0
+}
+
+Model M2_SB_Mountain5
+{
+	Model 0 "Models/Military/M2_SB_Mountain5.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	Offset 8192 -2048 0
+	FrameIndex ASDF A 0 0
+}

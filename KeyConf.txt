@@ -1,0 +1,12 @@
+alias sewercathedral "pukename lowercathedralwalls; pukename lowercathedralcolumn"
+alias SmileHard1 "netevent SmileHard 1"
+alias SmileHard2 "netevent SmileHard 2"
+alias SmileHard3 "netevent SmileHard 3"
+alias SmileHard4 "netevent SmileHard 4"
+alias SmileHard5 "netevent SmileHard 5"
+
+	addkeysection "SLAUGHTERnatural" SLAUGHTERNaturalKS
+
+	addmenukey "Toggle Flashlight" SLNFlashlight
+	alias SLNFlashlight "NetEvent ToggleFlashlight"
+	defaultbind f SLNFlashlight

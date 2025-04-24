@@ -1,0 +1,11 @@
+LISTMENU "MainMenu"
+{
+	LineSpacing 16	// This must account for some single-graphic replacements, so it cannot be widened
+	StaticPatch 94, 2, "M_DOOM"
+	Position 97, 72
+	PatchItem "M_NGAME", "n", "PlayerclassMenu"
+	PatchItem "M_OPTION","o", "OptionsMenu", 0
+	PatchItem "M_LOADG", "l", "LoadGameMenu", 0
+	PatchItem "M_SAVEG", "s", "SaveGameMenu", 0
+	PatchItem "M_QUITG", "q", "QuitMenu", 0
+}

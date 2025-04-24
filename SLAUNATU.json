@@ -1,0 +1,7 @@
+{
+	"mod_id":	"$SLN_MOD_ID",
+	"no_astar":
+	[
+		"SLNSmile" // Implemented directly so don't give her a behavior.
+	]
+}

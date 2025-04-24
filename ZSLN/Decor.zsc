@@ -1,0 +1,350 @@
+//==============================================================================
+//==============================================================================
+// SUPERNatural Models + Decor
+// By Major Cooke
+//==============================================================================
+//==============================================================================
+
+Class SLNTreeBase : SolidProp abstract
+{
+	Default
+	{
+		DistanceCheck "SLN_TreeDist";
+	}
+}
+
+Class Tree1 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 240;
+	}
+	States
+	{
+	Spawn:
+		TEE1 A -1;
+		Stop;
+	}
+}
+
+Class Tree2 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 240;
+	}
+	States
+	{
+	Spawn:
+		TEE2 A -1;
+		Stop;
+	}
+}
+
+Class Tree3 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 240;
+	}
+	States
+	{
+	Spawn:
+		TEE3 A -1;
+		Stop;
+	}
+}
+
+Class Tree4 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 240;
+	}
+	States
+	{
+	Spawn:
+		TEE4 A -1;
+		Stop;
+	}
+}
+
+Class Tree5 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 16;
+		Height 56;
+	}
+	States
+	{
+	Spawn:
+		TEE5 A -1;
+		Stop;
+	}
+}
+
+Class Tree6 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 24;
+		Height 88;
+	}
+	States
+	{
+	Spawn:
+		TEE6 A -1;
+		Stop;
+	}
+}
+
+Class Tree7 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 112;
+	}
+	States
+	{
+	Spawn:
+		TEE7 A -1;
+		Stop;
+	}
+}
+
+Class Tree8 : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Radius 32;
+		Height 240;
+	}
+	States
+	{
+	Spawn:
+		TEE8 A -1;
+		Stop;
+	}
+}
+
+Class Tree1B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 1.75;
+		Radius 56;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE1 A -1;
+		Stop;
+	}
+}
+
+Class Tree2B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 1.75;
+		Radius 56;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE2 A -1;
+		Stop;
+	}
+}
+
+Class Tree3B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 1.75;
+		Radius 56;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE3 A -1;
+		Stop;
+	}
+}
+
+Class Tree4B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 1.75;
+		Radius 56;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE4 A -1;
+		Stop;
+	}
+}
+
+Class Tree5B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 3.0;
+		Radius 16;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE5 A -1;
+		Stop;
+	}
+}
+
+Class Tree6B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 2.75;
+		Radius 24;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE6 A -1;
+		Stop;
+	}
+}
+
+Class Tree7B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 2.5;
+		Radius 32;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE7 A -1;
+		Stop;
+	}
+}
+
+Class Tree8B : SLNTreeBase
+{
+	Default
+	{
+		//$Category Nature
+		Scale 1.75;
+		Radius 56;
+		Height 256;
+	}
+	States
+	{
+	Spawn:
+		TEE8 A -1;
+		Stop;
+	}
+}
+
+Class SLN_DarkTentacle : VisualThinker
+{
+	const FrameTime = 2;
+	private Array<TextureID> IDs;
+	private int Timer, Index;
+	override void PostBeginPlay()
+	{
+		String prepend = "Graphics/VThinkers/DarkTentacle";
+		String append = ".png";
+		int count = 1;
+		while (true)
+		{
+			String ful = prepend;
+			if (count < 10)	ful = ful.."0";
+			ful = String.Format(prepend.."%d"..append);
+			
+			TextureID tex = Texman.CheckForTexture(ful);
+			if (tex.IsValid())	IDs.Push(tex);
+			else break;
+		}
+		if (IDs.Size() < 1)
+		{
+			Console.Printf("%s graphics are missing!", GetClassName());
+			Destroy();
+			return;
+		}
+		Super.PostBeginPlay();
+		
+		UpdateSector();
+		double z = pos.z;
+		if (CurSector)
+		{
+			int rn = random[rng](0,1);
+			if (rn)		z = CurSector.CeilingPlane.ZAtPoint(pos.XY);
+			else		z = CurSector.FloorPlane.ZAtPoint(pos.XY);
+			
+			bYFLIP = (rn > 0);
+			pos.z = z;
+			UpdateSector();
+		}
+		flags |= SPF_NO_XY_BILLBOARD;
+		Prev = Pos;
+		Timer = FrameTime;
+		Index = random[rng](0, IDs.Size() - 1);
+		Texture = IDs[Index];
+		
+		UpdateSpriteInfo();
+		
+		Scale *= frandom[rng](1.5, 3.0);
+	}
+	
+	override void Tick()
+	{
+		if (IsFrozen())	return;
+		
+		prev = pos;
+		pos += vel;
+		if (!(prev ~== pos))
+			UpdateSector();
+			
+		if (IDs.Size() > 1 && --Timer < 1)
+		{
+			Timer = FrameTime;
+			Index--;
+			if (Index < 0)	Index = IDs.Size() - 1;
+			Texture = IDs[Index];
+			UpdateSpriteInfo();
+		}
+	}
+	
+}

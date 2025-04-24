@@ -1,0 +1,68 @@
+
+// Terrorfiends
+#include "./Terror/Avoid.zsc"
+#include "./Terror/Interact.zsc"
+#include "./Terror/Repent.zsc"
+#include "./Terror/Observe.zsc"
+#include "./Terror/Traumatize.zsc"
+#include "./Terror/Staunch.zsc"
+#include "./Terror/Drench.zsc"
+#include "./Terror/Blink.zsc"
+#include "./Terror/Pulse.zsc"
+#include "./Terror/Vanish.zsc"
+
+// Bosses
+#include "./Demon/Baphomet.zsc"
+#include "./Human/Colonel.zsc"
+#include "./Terror/10VN.zsc"
+#include "./Human/Dark.zsc"
+#include "./Human/Derek.zsc"
+#include "./Terror/Eyes.zsc"
+#include "./Abyss/Smile.zsc"
+#include "./Abyss/Maddox.zsc"
+
+// Others
+#include "./Human/Marines.zsc"
+#include "./Misc.zsc"
+
+//==============================================================================
+//==============================================================================
+
+Class SLNMonster : SLNBase abstract
+{
+	Default
+	{
+		Monster;
+	}
+}
+
+Class SLNBoss : SLNMonster abstract
+{
+	Default
+	{
+		+BOSS
+		+BOSSDEATH
+		+NOICEDEATH
+		+DONTMORPH
+		+DONTTHRUST
+		Mass LARGE_MASS;
+	}
+	
+	override bool Morph(Actor a, Class<Playerpawn> pl, Class<Actor> mc, int d, EMorphFlags s,
+		Class<Actor> mf, Class<Actor> umf)
+	{	return false;	}
+	
+	override bool MorphMonster(Class<Actor> st, int dur, emorphflags s, Class<Actor> ef, class<Actor> exf)
+	{	return false;	}
+	
+	override void Die(Actor s, Actor i, int flags, name mod)
+	{
+		bNOICEDEATH = true;
+		Super.Die(s, i, flags, mod);
+	}
+}
+
+Class SLNSuperBoss : SLNBoss abstract
+{
+	
+}

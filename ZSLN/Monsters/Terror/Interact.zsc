@@ -1,0 +1,21 @@
+/*------------------------------------------------------------------------------
+Interact
+
+Follows around entities and is harmless until gazed at for too long. When this
+happens, it darkens and transforms, allowing for a moment to flee before rushing
+down its target. This is by far the fastest of all Terrorfiends.
+------------------------------------------------------------------------------*/
+
+Class SLNInteract : SLNMonster
+{
+	Default
+	{
+		Tag "Interact";
+		Obituary "%o Interacted with something terrible.";
+		Species "Terrorfiend";
+	}
+}
+
+Class SLNInteractStatic : SLNMonster
+{
+}

@@ -1,0 +1,3 @@
+STARTUPTITLE = "SLAUGHTER Natural"
+STARTUPCOLORS = "00aa00", "0000aa"
+IWAD = "doom2.wad"

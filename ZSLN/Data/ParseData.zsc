@@ -1,0 +1,132 @@
+extend Class SLNStatic
+{
+	private SLN_Data JData;
+	
+	private void ParseJSON()
+	{
+		if (JData)	JData.Destroy();
+		JData = null;
+		
+		Array<SLN_Data> datas;
+		String lname = "SLAUNATU.json";
+		int lump = 0;
+		while (true)
+		{
+			lump = Wads.FindLump(lname, lump);
+			if (lump == -1)	break;
+			
+			SLN_JsonElementOrError data = SLN_Json.Parse(Wads.ReadLump(lump),false);
+			
+			if (data is "SLN_JsonError")
+			{
+			//	ThrowAbortException(""..lname..": "..SLN_JsonError(data).what);
+				ThrowAbortException(""..WADs.GetLumpFullPath(lump)..": "..SLN_JsonError(data).what);
+				return;
+			}
+			else if (data is "SLN_JsonElement") 
+			{
+				SLN_Data dat = SLN_Data.Deserialize(SLN_JsonElement(data));
+				if (dat)
+				{
+					String s = StringTable.Localize(dat.ModID);
+					if (s ~== "SLAUGHTERNatural")
+					{
+						JData = dat;
+						datas.Insert(0, dat);
+					}
+					else datas.Push(dat);
+				}
+			}
+			lump++;
+		}
+		
+		if (datas.Size() < 1)
+		{	Console.Printf("Nothing added. Using internal values."); return;	}
+		
+		
+		Array<String> IDs;
+		for (int i = 0; i < datas.Size(); i++)
+		{
+			let data = datas[i];
+			if (data.ModID.Length() < 1 || data.ModID == " " ||
+				IDs.Find(data.ModID) != IDs.Size())
+			{
+				ThrowAbortException(""..data.ModID..": mod_id must be present, unique and not conflicting with other mod_ids");
+				return;
+			}
+			IDs.Push(data.ModID);
+			
+			if (JData && JData == data)
+				continue;
+				
+			HandleAddon(data);
+		}
+		
+	}
+	
+	private void HandleAddon(SLN_Data data)
+	{
+	//	if (!data)	return;
+		
+	}
+	
+	clearscope bool CheckAStarBan(Actor mo) const
+	{
+		if (!mo)	return true;
+		return !JData || JData.CheckBanned(mo);
+	}
+}
+
+Class SLN_Data
+{
+	String ModID;
+	Map<Name, SLN_NoAStarData> NoAStarData;
+	
+	clearscope bool CheckBanned(Actor mo) const
+	{
+		if (!mo)	return true;
+		foreach (k, v : NoAStarData)
+			if (v && v.CheckBanned(mo))
+				return true;
+				
+		return false;
+	}
+	
+	static SLN_Data Deserialize(SLN_JsonElement elem)
+	{
+		if (!elem)	ThrowAbortException("SLN_Data: Expected JsonElement, got null");
+		let obj = SLN_JsonObject(elem);
+		if (!obj)	ThrowAbortException("SLN_Data: Expected JsonObject, got "..elem.GetClassName());
+		return new('SLN_Data').ProcessObject(obj);
+	}
+	
+	private SLN_Data ProcessObject(SLN_JsonObject obj)
+	{
+		SLN_JsonElement eid = obj.Get("mod_id");
+		if (!eid)	ThrowAbortException("SLN_Data: mod_id missing");
+		SLN_JsonString id = SLN_JsonString(eid);
+		if (!id)	ThrowAbortException("SLN_Data: Expected 'mod_id' to be a string, got "..eid.GetClassName());
+		
+		ModID = id.s;
+		
+		SLN_JsonElement ebl = obj.Get("no_astar");
+		if (ebl)
+		{
+			let arr = SLN_JsonArray(ebl);
+			if (!arr)	ThrowAbortException("SLN_Data: Expected 'no_astar' to be a string array, got "..ebl.GetClassName());
+			
+			for (uint i = 0; i < arr.Size(); i++)
+			{
+				let ad = SLN_NoAStarData.Deserialize(arr.Get(i));
+				if (ad && ad.ID)	
+				{	
+					Name nam = ad.ID.GetClassName();
+					NoAStarData.Insert(nam, ad);
+				}
+			}
+			
+		}
+		
+		return self;
+	}
+}

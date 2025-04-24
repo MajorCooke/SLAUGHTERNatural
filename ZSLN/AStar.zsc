@@ -1,0 +1,553 @@
+
+/*
+These are used to connect AI nodes together and allow for efficient navigation
+for all monsters.
+
+Arguments are TIDs to the things they're connected to.
+*/
+
+Class AStarPlan play
+{
+	bool objective; 
+	AStarNode end;
+	Array<AStarNode> nodes;
+	private int Index;
+	
+	void ResetIndex() { Index = 0; }
+	
+	AStarNode Next() 
+	{
+		if (Index >= nodes.Size())
+		{
+			Destroy();
+			return null;
+		}
+		while (Index < nodes.Size())
+		{
+			let mo = nodes[Index++];
+			if (mo)	return mo;
+		} 
+		return null;
+	}
+	
+	// Shortcut functions.
+	clearscope int Size() const					{	return nodes.Size(); }
+	clearscope int Find(AStarNode node) const	{	return (node) ? nodes.Find(node) : nodes.Size();	}
+	
+	void Push(AStarNode node)		{	if (node && nodes.Find(node) >= nodes.Size())	nodes.Push(node);	}
+}
+
+Class AStarNode : Actor
+{
+	const SightFlags = 		SF_IGNOREVISIBILITY|SF_IGNOREWATERBOUNDARY;
+	
+	internal readonly Array<AStarNode> neighbors;
+	internal readonly Array<Class<Actor> > Restricted, Forbidden;
+	internal readonly Map<Name, Int> ReqFlags;
+	internal readonly Map<Int, Int> MType,	// Movement Type
+									TFog;	// Teleport Fog
+	
+	int allNodesIndex;
+	private AStarEvent astar;
+	
+	// user_MoveType# determines how the actor should get to the next position
+	// 0 - Walk
+	// 1 - Teleport
+	// 2 - Warp (ignore collision)
+	
+	int user_MoveType1;
+	int user_MoveType2;
+	int user_MoveType3;
+	int user_MoveType4;
+	int user_MoveType5;
+	
+	// user_Fog# overrides fog behaviors if MoveType > 0
+	// 0: Dont override
+	// 1: Force source fog
+	// 2: Force destination fog
+	// 3: 1 & 2 combined
+	//-1: Force no source fog
+	//-2: Force no dest fog
+	//-3: -1 & -2 combined
+	
+	int user_Fog1;
+	int user_Fog2;
+	int user_Fog3;
+	int user_Fog4;
+	int user_Fog5;
+	
+	// Similar to <Forbidden/Restricted>To for inventory, but prevents classes
+	// from including this in their plans. The parent variables below will apply
+	// to children of the specified classes.
+	
+	
+	String user_zRestrictedTo; 	//Separate by comma for each actor
+	String user_zForbiddenTo;	//Separate by comma for each actor
+	//$UserDefaultValue 1
+	int user_zzParentRestrict;	//If > 0, checks for actors inheriting from the defined RestrictedTo var
+	//$UserDefaultValue 1
+	int user_zzParentForbid;	//If > 0, checks for actors inheriting from the defined ForbiddenTo var
+	
+	String user_zFlags;			// List of actor flags needed, separated by comma and starting with a + or -.
+	
+	Default
+	{
+		//$Arg0 "TID 1"
+		//$Arg1 "TID 2"
+		//$Arg2 "TID 3"
+		//$Arg3 "TID 4"
+		//$Arg4 "TID 5"
+		//$Arg0Type 14
+		//$Arg1Type 14
+		//$Arg2Type 14
+		//$Arg3Type 14
+		//$Arg4Type 14
+		+NOGRAVITY
+		+INVISIBLE
+		+NOBLOCKMAP
+		+DONTTHRUST
+		Radius 16;
+		Height 56;
+		MeleeRange 0; // If > 0, the actors must be this close to do sight checks.
+	}
+	
+	override void BeginPlay()
+	{
+		Super.BeginPlay();
+		ChangeStatNum(STAT_ASTAR);
+	}
+	
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		neighbors.Clear();
+		for (int i = 0; i < Args.Size(); i++)
+		{
+			if (!Args[i])	continue;
+			
+			let it = level.CreateActorIterator(Args[i], "AStarNode");
+			AStarNode node;
+			do
+			{
+				if (node && node != self)
+					neighbors.Push(node);
+			} while (node = AStarNode(it.Next()));
+		//	Console.Printf("%d - %d", TID, neighbors.Size());
+		}
+		ProcessUDMF();
+		AStarEvent astar = AStarEvent.Fetch();
+		allNodesIndex = astar.allNodes.Size();
+		astar.allNodes.Push(self);
+	}
+	
+	private void ProcessUDMF()
+	{
+		Restricted.Clear();
+		Forbidden.Clear();
+		ReqFlags.Clear();
+		
+		MType.Insert(Args[0], user_MoveType1);
+		MType.Insert(Args[1], user_MoveType2);
+		MType.Insert(Args[2], user_MoveType3);
+		MType.Insert(Args[3], user_MoveType4);
+		MType.Insert(Args[4], user_MoveType5);
+		TFog.Insert(Args[0], user_Fog1);
+		TFog.Insert(Args[1], user_Fog2);
+		TFog.Insert(Args[2], user_Fog3);
+		TFog.Insert(Args[3], user_Fog4);
+		TFog.Insert(Args[4], user_Fog5);
+		
+		if (user_zFlags.Length() > 0)
+		{
+			Array<String> reqs;
+			user_zFlags.Split(reqs, ",");
+			if (reqs.Size() > 0)
+			{
+				String s = "";
+				for (int i = 0; i < reqs.Size(); i++)
+				{
+					s = reqs[i];
+					int which = 0;
+					if (s.IndexOf("+") == 0)					which = 1;
+					else if (s.IndexOf("-") == 0)				which = -1;
+					if (which != 0)		s.Remove(0,1);
+					ReqFlags.Insert(s, which);
+				}
+			}
+		}
+		if (user_zRestrictedTo.Length() > 0)
+		{
+			Array<String> names;
+			user_zRestrictedTo.Split(names, ",");
+			for (int i = 0; i < names.Size(); i++)
+			{
+				Class<Actor> check = names[i];
+				if (check)	Restricted.Push(check);
+			}
+		}
+		if (user_zForbiddenTo.Length() > 0)
+		{
+			Array<String> names;
+			user_zForbiddenTo.Split(names, ",");
+			for (int i = 0; i < names.Size(); i++)
+			{
+				Class<Actor> check = names[i];
+				if (check)	Forbidden.Push(check);
+			}
+		}
+	}
+	
+	bool CanUse(Actor mo)
+	{
+		if (!mo)	return false;
+		let cls = mo.GetClass();
+		int s1 = Restricted.Size();
+		int s2 = Forbidden.Size();
+		if (s2 > 0 && Forbidden.Find(cls) < s2)
+			return false;
+		if (s1 > 0 && Restricted.Find(cls) >= s1)
+			return false;
+		
+		
+		if (!FlagMatch('float', mo.bFLOAT) ||
+			!FlagMatch('nogravity', mo.bNOGRAVITY)
+			)
+			return false;
+		
+		return true;
+	}
+	
+	private bool FlagMatch(Name flag, bool cur)
+	{
+		int val = ReqFlags.GetIfExists(flag);
+		return (!val || (val > 0 && cur) || (val < 0 && !cur));
+	}
+	
+	static void SetConnectionGlobal(int tid1, int tid2, int on)
+	{
+		Array<AStarNode> n2;
+		AStarNode node;
+		{
+			let it = level.CreateActorIterator(tid2, "AStarNode");
+			
+			do
+			{
+				if (node)	n2.Push(node);
+			} while (node = AStarNode(it.Next()));
+			
+		}
+		node = null;
+		{
+			let it = level.CreateActorIterator(tid1, "AStarNode");
+			do
+			{
+				if (node)
+				{
+					foreach (n : n2)
+					{
+						if (!n) continue;
+						node.SetConnection(n, (on > 0));
+						n.SetConnection(n, (on > 1));
+					}
+				}
+			} while (node = AStarNode(it.Next()));
+		}
+	}
+	
+	void SetConnection(AStarNode other, bool on)
+	{
+		if (!other)	return;
+		
+		if (on)
+		{
+			if (neighbors.Find(other) >= neighbors.Size())
+				neighbors.Push(other);
+		}
+		else
+		{
+			int pos = neighbors.Find(other);
+			if (pos < neighbors.Size())
+				neighbors.Delete(pos);
+		}
+	}
+	
+	static AStarPlan GetPath(Actor from, Actor to, AStarNode start = null, AStarNode goal = null, AStarEvent astar = null)
+	{
+		if (!astar) 
+		{
+			astar = AStarEvent.Fetch();
+			if (!astar)
+			{
+			//	Console.Printf("No AStarEvent!");
+				return null; // Map not set up for nodes.
+			}
+		}
+		
+		if (!from || !to) // Insufficient actor data to get nodes.
+			return null;
+		
+		if (!start || !goal)
+		{
+			double startdist = double.max, goaldist = double.max;
+			
+			foreach(mo : astar.allNodes)
+			{
+				if (!mo) continue;
+				
+				double dis = from.Distance3DSquared(mo);
+				
+				if (mo.InNodeRange(from, dis) && dis < startdist && mo.CheckSight(from, SightFlags))
+				{
+					startdist = dis;
+					start = mo;
+				}
+				
+				dis = to.Distance3DSquared(mo);
+				
+				if (mo.InNodeRange(to, dis) && dis < goaldist && mo.CheckSight(to, SightFlags))
+				{
+					goaldist = dis;
+					goal = mo;
+				}
+			}
+			
+			if (!start || !goal) // Fool proofing...
+			{
+				return null;
+			}
+		}
+		
+		let plan = new('AStarPlan');
+		astar.FindPath(start, goal, plan.nodes);
+		if (plan.Size() < 1)
+			plan = null;
+		return plan;
+	}
+	
+	clearscope bool InNodeRange(Actor mo, double dist) const
+	{	return (mo && (MeleeRange <= 0.0 || dist <= MeleeRange));	}
+	
+}
+
+// Thanks to RicardoLuis0 for this code.
+class AStarEvent : EventHandler
+{
+	Array<AStarNode> allNodes;
+	
+	static clearscope AStarEvent Fetch()
+	{	return AStarEvent(Find('AStarEvent'));	}
+	
+	private SLNStatic ev;
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let mo = e.Thing;
+		if (mo && mo.bISMONSTER) 
+		{
+			if (!ev)	ev = SLNStatic.Fetch();
+			if (!ev.CheckAStarBan(mo))
+				mo.AddBehavior('SLN_AStarBE');
+		}
+	}
+	
+	clearscope double getScore(Map<int, double> scores, AStarNode n)
+	{
+		return (scores.CheckKey(n.allNodesIndex)) ? scores.get(n.allNodesIndex) : double(int.max);
+	}
+	
+	clearscope int BinarySearch(Array<AStarNode> nodes, Map<int, double> fScore, AStarNode item, bool exact = false)
+	{
+		int Count = nodes.Size();
+		
+		double itemScore = getScore(fScore, item);
+		
+		if (Count == 0) return 0;
+		if (Count == 1) return (itemScore < getScore(fScore, nodes[0])) ? 0 : 1;
+
+		int lo = 0;
+		int hi = Count - 1;
+
+		while(lo <= hi)
+		{
+			int mid = lo + ((hi - lo) / 2);
+			
+			double midScore = getScore(fScore, nodes[mid]);
+
+			if(midScore < itemScore)
+			{
+				lo = mid + 1;
+			}
+			else if(itemScore < midScore)
+			{
+				hi = mid - 1;
+			}
+			else
+			{
+				return mid;
+			}
+		}
+		
+		if(exact)
+		{
+			return Count;
+		}
+		else
+		{
+			return (lo == Count || (itemScore < getScore(fScore, nodes[lo]))) ? lo : lo + 1;
+		}
+	}
+	
+	clearscope void ReconstructPath(Map<int, AStarNode> cameFrom, AStarNode current, out Array<AStarNode> path)
+	{
+		path.Clear();
+		path.Push(current);
+		while (current = cameFrom.GetIfExists(current.allNodesIndex))
+		{
+			path.insert(0, current);
+		}
+	}
+	
+	clearscope void FindPath(AStarNode start, AStarNode goal, out Array<AStarNode> path)
+	{
+		if (!start || !goal) // Fool proofing...
+		{
+			path.Clear();
+			return;
+		}	
+		Array<AStarNode> openSet;
+		openSet.Push(start);
+		Map<int, AStarNode> camefrom;
+		Map<int, double> gScore;
+		Map<int, double> fScore;
+		
+		gScore.insert(start.allNodesIndex, 0);
+		fScore.insert(start.allNodesIndex, start.distance2D(goal));
+		
+		while (openSet.Size() > 0)
+		{
+			let current = openSet[0];
+			openSet.Delete(0);
+			if (current == goal)
+			{
+				ReconstructPath(cameFrom, current, path);
+				return;
+			}
+			
+			double current_gScore = getScore(gScore, current);
+			
+			foreach (neighbor : current.neighbors)
+			{
+				double tentative_gScore = current_gScore + current.Distance2D(neighbor);
+				
+				if (tentative_gScore < getScore(gScore, neighbor))
+				{
+					cameFrom.insert(neighbor.allNodesIndex, current);
+					gScore.insert(neighbor.allNodesIndex, tentative_gScore);
+					fScore.insert(neighbor.allNodesIndex, tentative_gScore + neighbor.Distance2D(goal));
+					
+					int openSetIndex = BinarySearch(openSet, fScore, neighbor, false);
+					if (openSetIndex >= openSet.Size() || openSet[openSetIndex] != neighbor)
+					{
+						openSet.Insert(openSetIndex, neighbor);
+					}
+				}
+			}
+		}
+	}
+}
+
+Class SLN_AStarBE : Behavior
+{
+	private Vector3 prev;
+	private AStarNode NextNode;
+	private AStarPlan plan;
+	private AStarEvent ev;
+	private int Timer;
+	
+	override void Initialize()
+	{
+		ev = AStarEvent.Fetch();
+	}
+	
+	override void Reinitialize()
+	{	Initialize();	}
+	
+	override void Tick()
+	{
+		
+		if (!Owner || Owner.player)	{	Destroy(); return;	}
+		
+		reached = false;
+		
+		if (Owner.Pos ~== prev ||Owner.bKILLED || Owner.IsFrozen() || Owner.bDORMANT || Owner.FreezeTics > 0)	
+			return;
+			
+		prev = Owner.Pos;
+		let tar = Owner.Target;
+		if (tar)
+		{
+			if (tar.bKILLED || Owner.CheckSight(tar, SF_IGNOREWATERBOUNDARY|SF_IGNOREVISIBILITY))
+			{
+				ClearPath();
+				return;	
+			}
+			GetPath();
+			if (plan)
+			{
+				NextNode = plan.Next();
+				Owner.Goal = NextNode;
+				Owner.bCHASEGOAL = true;
+			}
+			
+			if (NextNode && NextNode.InNodeRange(Owner, Owner.Radius + NextNode.Radius))
+			{
+				GoalReached(Owner, NextNode);
+			}
+		}
+		else ClearPath();
+	}
+	private bool reached;
+	void GoalReached(Actor mo, Actor goal)
+	{
+		if (reached || !mo || mo != Owner)	return;
+		
+		reached = true;
+		
+		if (!plan) GetPath();
+		if (plan)
+		{
+			NextNode = plan.Next();
+			Owner.bCHASEGOAL = true;
+		}
+		else ClearPath();
+	}
+	
+	private void ClearPath()
+	{
+		if (Owner)
+		{
+			Owner.bCHASEGOAL = false;
+			if (Owner.Goal is 'AStarNode')	
+				Owner.Goal = null;
+		}
+		if (plan)	plan.Destroy();
+		plan = null;
+		NextNode = null;
+	}
+	
+	private void GetPath(bool force = false)
+	{
+		if (!plan || force)
+		{	
+			if (!ev)	ev = AStarEvent.Fetch();
+			plan = AStarNode.GetPath(Owner, Owner.target, null, null, ev);
+			
+			if (!Plan || Plan.nodes.Size() < 1)
+			{
+				plan = null;
+				return;
+			}
+			plan.ResetIndex();
+			NextNode = plan.Next();			
+		}
+	}
+}

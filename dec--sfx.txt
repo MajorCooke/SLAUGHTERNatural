@@ -1,0 +1,5361 @@
+
+///////////////////
+///////////////////
+//Special Effects//
+///////////////////
+///////////////////
+
+//====Spawners
+
+Actor WhiteSparkSpawner : SwitchableDecoration  
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_W6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_W1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_W16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_W1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_W16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_W1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_W16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+
+Actor RedSparkSpawner : SwitchableDecoration
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_R6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_R1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_R16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_R1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_R16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_R1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_R16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+Actor OrangeSparkSpawner : SwitchableDecoration 
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_O6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_O1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_O16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_O1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_O16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_O1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_O16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+Actor YellowSparkSpawner : SwitchableDecoration
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_Y6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_Y1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_Y1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_Y16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_Y1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_Y16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+Actor GreenSparkSpawner : SwitchableDecoration
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_G6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_G1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_G16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_G1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_G16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_G1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_G16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+Actor BlueSparkSpawner : SwitchableDecoration 
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_B6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_B1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_B16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_B1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_B16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_B1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_B16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+Actor PurpleSparkSpawner : SwitchableDecoration 
+{
+//$Category SFX
+  Height 8
+  Radius 4
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  +NoClip
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, "Inactive")
+    TNT1 A 10 A_Jump(Args[1]/16, "Active")
+    Loop
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_PlaySound("World/Spark")
+    TNT1 A 0 A_Jump(256, 1, 2, 3, 4, 5, 6)
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P1", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P2", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P3", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P4", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P5", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+    TNT1 A 1 A_SpawnItemEx("SparkFlare_P6", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto SpawnSparks
+  SpawnSparks:
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "SpawnDown")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "SpawnSide")
+    Goto SpawnUp
+  SpawnUp:
+    TNT1 AA 0 A_CustomMissile("Spark_P1", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P2", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P3", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P4", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P5", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P6", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P7", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P8", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P9", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P10", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P11", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P12", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P13", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P14", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P15", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 AA 0 A_CustomMissile("Spark_P16", 0, 0, Random(0, 360), 2, Random(67, 113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnDown:
+    TNT1 AA 0 A_CustomMissile("Spark_P1", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P2", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P3", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P4", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P5", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P6", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P7", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P8", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P9", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P10", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P11", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P12", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P13", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P14", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P15", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 AA 0 A_CustomMissile("Spark_P16", 0, 0, Random(0, 360), 2, Random (-67, -113))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  SpawnSide:
+    TNT1 AA 0 A_CustomMissile("Spark_P1", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P2", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P3", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P4", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P5", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P6", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P7", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P8", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P9", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P10", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P11", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P12", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P13", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P14", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P15", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 AA 0 A_CustomMissile("Spark_P16", 0, 0, Random(-23, 23), 2, Random(157, 203))
+    TNT1 A 1 A_JumpIf(Args[2] > 0, 1)
+    Goto Spawn
+    TNT1 A 1
+    Goto Inactive
+  Inactive:
+    TNT1 A -1
+    Loop
+  }
+}
+
+//Flares
+
+Actor SparkFlare_W1
+{
+  Height 0
+  Radius 0
+  Mass 0
+  +Missile
+  +NoBlockMap
+  +NoClip
+  +NoGravity
+  +NoInteraction
+  RenderStyle Add
+  Scale 0.25
+  States
+  {
+  Spawn:
+    SPKW A 1 Bright A_FadeOut(0.1)
+    Loop
+  }
+}
+
+Actor SparkFlare_W2 : SparkFlare_W1 { States { Spawn: SPKW B 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_W3 : SparkFlare_W1 { States { Spawn: SPKW C 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_W4 : SparkFlare_W1 { States { Spawn: SPKW D 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_W5 : SparkFlare_W1 { States { Spawn: SPKW E 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_W6 : SparkFlare_W1 { States { Spawn: SPKW F 1 Bright A_FadeOut(0.1) Loop } }
+
+Actor SparkFlare_R1 : SparkFlare_W1 { States { Spawn: SPKR A 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_R2 : SparkFlare_W1 { States { Spawn: SPKR B 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_R3 : SparkFlare_W1 { States { Spawn: SPKR C 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_R4 : SparkFlare_W1 { States { Spawn: SPKR D 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_R5 : SparkFlare_W1 { States { Spawn: SPKR E 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_R6 : SparkFlare_W1 { States { Spawn: SPKR F 1 Bright A_FadeOut (0.1) Loop } }
+
+Actor SparkFlare_O1 : SparkFlare_W1 { States { Spawn: SPKO A 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_O2 : SparkFlare_W1 { States { Spawn: SPKO B 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_O3 : SparkFlare_W1 { States { Spawn: SPKO C 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_O4 : SparkFlare_W1 { States { Spawn: SPKO D 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_O5 : SparkFlare_W1 { States { Spawn: SPKO E 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_O6 : SparkFlare_W1 { States { Spawn: SPKO F 1 Bright A_FadeOut (0.1) Loop } }
+
+Actor SparkFlare_Y1 : SparkFlare_W1 { States { Spawn: SPKY A 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_Y2 : SparkFlare_W1 { States { Spawn: SPKY B 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_Y3 : SparkFlare_W1 { States { Spawn: SPKY C 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_Y4 : SparkFlare_W1 { States { Spawn: SPKY D 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_Y5 : SparkFlare_W1 { States { Spawn: SPKY E 1 Bright A_FadeOut (0.1) Loop } }
+Actor SparkFlare_Y6 : SparkFlare_W1 { States { Spawn: SPKY F 1 Bright A_FadeOut (0.1) Loop } }
+
+Actor SparkFlare_G1 : SparkFlare_W1 { States { Spawn: SPKG A 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_G2 : SparkFlare_W1 { States { Spawn: SPKG B 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_G3 : SparkFlare_W1 { States { Spawn: SPKG C 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_G4 : SparkFlare_W1 { States { Spawn: SPKG D 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_G5 : SparkFlare_W1 { States { Spawn: SPKG E 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_G6 : SparkFlare_W1 { States { Spawn: SPKG F 1 Bright A_FadeOut(0.1) Loop } }
+
+Actor SparkFlare_B1 : SparkFlare_W1 { States { Spawn: SPKB A 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_B2 : SparkFlare_W1 { States { Spawn: SPKB B 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_B3 : SparkFlare_W1 { States { Spawn: SPKB C 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_B4 : SparkFlare_W1 { States { Spawn: SPKB D 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_B5 : SparkFlare_W1 { States { Spawn: SPKB E 1 Bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_B6 : SparkFlare_W1 { States { Spawn: SPKB F 1 Bright A_FadeOut(0.1) Loop } }
+
+Actor SparkFlare_P1 : SparkFlare_W1 { States { Spawn: SPKP A 1 bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_P2 : SparkFlare_W1 { States { Spawn: SPKP B 1 bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_P3 : SparkFlare_W1 { States { Spawn: SPKP C 1 bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_P4 : SparkFlare_W1 { States { Spawn: SPKP D 1 bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_P5 : SparkFlare_W1 { States { Spawn: SPKP E 1 bright A_FadeOut(0.1) Loop } }
+Actor SparkFlare_P6 : SparkFlare_W1 { States { Spawn: SPKP F 1 bright A_FadeOut(0.1) Loop } }
+
+//Sparks
+
+Actor Spark_W1
+{
+  Height 1
+  Radius 2
+  Mass 0
+  Speed 0.25
+  +Missile
+  +NoBlockMap
+  +LowGravity
+  +DontSplash
+  RenderStyle Add
+  Scale 0.025
+  States
+  {
+  Spawn:
+    SPKW E 1 Bright
+    Loop
+  Death:
+    SPKW E 1 Bright A_FadeOut(0.1)
+    Loop
+  }
+}
+
+Actor Spark_W2 : Spark_W1  { Speed 0.5  }
+Actor Spark_W3 : Spark_W1  { Speed 0.75 }
+Actor Spark_W4 : Spark_W1  { Speed 1.0  }
+Actor Spark_W5 : Spark_W1  { Speed 1.25 }
+Actor Spark_W6 : Spark_W1  { Speed 1.5  }
+Actor Spark_W7 : Spark_W1  { Speed 1.75 }
+Actor Spark_W8 : Spark_W1  { Speed 2.0  }
+Actor Spark_W9 : Spark_W1  { Speed 2.25 }
+Actor Spark_W10 : Spark_W1 { Speed 2.5  }
+Actor Spark_W11 : Spark_W1 { Speed 2.75 }
+Actor Spark_W12 : Spark_W1 { Speed 3.0  }
+Actor Spark_W13 : Spark_W1 { Speed 3.25 }
+Actor Spark_W14 : Spark_W1 { Speed 3.5  }
+Actor Spark_W15 : Spark_W1 { Speed 3.75 }
+Actor Spark_W16 : Spark_W1 { Speed 4.0  }
+
+Actor Spark_R1 : Spark_W1
+{
+  States
+  {
+  Spawn:
+    SPKR E 1 bright
+    Loop
+  Death:
+    SPKR E 1 bright A_FadeOut (0.1)
+    Loop
+  }
+}
+
+Actor Spark_R2 : Spark_R1  { Speed 0.5  }
+Actor Spark_R3 : Spark_R1  { Speed 0.75 }
+Actor Spark_R4 : Spark_R1  { Speed 1.0  }
+Actor Spark_R5 : Spark_R1  { Speed 1.25 }
+Actor Spark_R6 : Spark_R1  { Speed 1.5  }
+Actor Spark_R7 : Spark_R1  { Speed 1.75 }
+Actor Spark_R8 : Spark_R1  { Speed 2.0  }
+Actor Spark_R9 : Spark_R1  { Speed 2.25 }
+Actor Spark_R10 : Spark_R1 { Speed 2.5  }
+Actor Spark_R11 : Spark_R1 { Speed 2.75 }
+Actor Spark_R12 : Spark_R1 { Speed 3.0  }
+Actor Spark_R13 : Spark_R1 { Speed 3.25 }
+Actor Spark_R14 : Spark_R1 { Speed 3.5  }
+Actor Spark_R15 : Spark_R1 { Speed 3.75 }
+Actor Spark_R16 : Spark_R1 { Speed 4.0  }
+
+Actor Spark_O1 : Spark_W1
+{
+  States
+  {
+  Spawn:
+    SPKO E 1 bright
+    Loop
+  Death:
+    SPKO E 1 bright A_FadeOut(0.1)
+    Loop
+  }
+}
+
+Actor Spark_O2 : Spark_O1  { Speed 0.5  }
+Actor Spark_O3 : Spark_O1  { Speed 0.75 }
+Actor Spark_O4 : Spark_O1  { Speed 1.0  }
+Actor Spark_O5 : Spark_O1  { Speed 1.25 }
+Actor Spark_O6 : Spark_O1  { Speed 1.5  }
+Actor Spark_O7 : Spark_O1  { Speed 1.75 }
+Actor Spark_O8 : Spark_O1  { Speed 2.0  }
+Actor Spark_O9 : Spark_O1  { Speed 2.25 }
+Actor Spark_O10 : Spark_O1 { Speed 2.5  }
+Actor Spark_O11 : Spark_O1 { Speed 2.75 }
+Actor Spark_O12 : Spark_O1 { Speed 3.0  }
+Actor Spark_O13 : Spark_O1 { Speed 3.25 }
+Actor Spark_O14 : Spark_O1 { Speed 3.5  }
+Actor Spark_O15 : Spark_O1 { Speed 3.75 }
+Actor Spark_O16 : Spark_O1 { Speed 4.0  }
+
+Actor Spark_Y1 : Spark_W1
+{
+  States
+  {
+  Spawn:
+    SPKY E 1 bright
+    Loop
+  Death:
+    SPKY E 1 bright A_FadeOut (0.1)
+    Loop
+  }
+}
+
+Actor Spark_Y2 : Spark_Y1  { Speed 0.5  }
+Actor Spark_Y3 : Spark_Y1  { Speed 0.75 }
+Actor Spark_Y4 : Spark_Y1  { Speed 1.0  }
+Actor Spark_Y5 : Spark_Y1  { Speed 1.25 }
+Actor Spark_Y6 : Spark_Y1  { Speed 1.5  }
+Actor Spark_Y7 : Spark_Y1  { Speed 1.75 }
+Actor Spark_Y8 : Spark_Y1  { Speed 2.0  }
+Actor Spark_Y9 : Spark_Y1  { Speed 2.25 }
+Actor Spark_Y10 : Spark_Y1 { Speed 2.5  }
+Actor Spark_Y11 : Spark_Y1 { Speed 2.75 }
+Actor Spark_Y12 : Spark_Y1 { Speed 3.0  }
+Actor Spark_Y13 : Spark_Y1 { Speed 3.25 }
+Actor Spark_Y14 : Spark_Y1 { Speed 3.5  }
+Actor Spark_Y15 : Spark_Y1 { Speed 3.75 }
+Actor Spark_Y16 : Spark_Y1 { Speed 4.0  }
+
+Actor Spark_G1 : Spark_W1
+{
+  States
+  {
+  Spawn:
+    SPKG E 1 Bright
+    Loop
+  Death:
+    SPKG E 1 Bright A_FadeOut(0.1)
+    Loop
+  }
+}
+
+Actor Spark_G2 : Spark_G1  { Speed 0.5  }
+Actor Spark_G3 : Spark_G1  { Speed 0.75 }
+Actor Spark_G4 : Spark_G1  { Speed 1.0  }
+Actor Spark_G5 : Spark_G1  { Speed 1.25 }
+Actor Spark_G6 : Spark_G1  { Speed 1.5  }
+Actor Spark_G7 : Spark_G1  { Speed 1.75 }
+Actor Spark_G8 : Spark_G1  { Speed 2.0  }
+Actor Spark_G9 : Spark_G1  { Speed 2.25 }
+Actor Spark_G10 : Spark_G1 { Speed 2.5  }
+Actor Spark_G11 : Spark_G1 { Speed 2.75 }
+Actor Spark_G12 : Spark_G1 { Speed 3.0  }
+Actor Spark_G13 : Spark_G1 { Speed 3.25 }
+Actor Spark_G14 : Spark_G1 { Speed 3.5  }
+Actor Spark_G15 : Spark_G1 { Speed 3.75 }
+Actor Spark_G16 : Spark_G1 { Speed 4.0  }
+
+Actor Spark_B1 : Spark_W1   
+{ 
+  States 
+  { 
+  Spawn: 
+    SPKB E 1 Bright 
+    Loop 
+  Death: 
+    SPKB E 1 Bright A_FadeOut(0.1) 
+    Loop 
+  } 
+}
+
+Actor Spark_B2 : Spark_B1  { Speed 0.5  }
+Actor Spark_B3 : Spark_B1  { Speed 0.75 }
+Actor Spark_B4 : Spark_B1  { Speed 1.0  }
+Actor Spark_B5 : Spark_B1  { Speed 1.25 }
+Actor Spark_B6 : Spark_B1  { Speed 1.5  }
+Actor Spark_B7 : Spark_B1  { Speed 1.75 }
+Actor Spark_B8 : Spark_B1  { Speed 2.0  }
+Actor Spark_B9 : Spark_B1  { Speed 2.25 }
+Actor Spark_B10 : Spark_B1 { Speed 2.5  }
+Actor Spark_B11 : Spark_B1 { Speed 2.75 }
+Actor Spark_B12 : Spark_B1 { Speed 3.0  }
+Actor Spark_B13 : Spark_B1 { Speed 3.25 }
+Actor Spark_B14 : Spark_B1 { Speed 3.5  }
+Actor Spark_B15 : Spark_B1 { Speed 3.75 }
+Actor Spark_B16 : Spark_B1 { Speed 4.0  }
+
+Actor Spark_P1 : Spark_W1
+{
+  states
+  {
+  Spawn:
+    SPKP E 1 Bright
+    Loop
+  Death:
+    SPKP E 1 Bright A_FadeOut(0.1)
+    Loop
+  }
+}
+
+Actor Spark_P2 : Spark_P1  { Speed 0.5  }
+Actor Spark_P3 : Spark_P1  { Speed 0.75 }
+Actor Spark_P4 : Spark_P1  { Speed 1.0  }
+Actor Spark_P5 : Spark_P1  { Speed 1.25 }
+Actor Spark_P6 : Spark_P1  { Speed 1.5  }
+Actor Spark_P7 : Spark_P1  { Speed 1.75 }
+Actor Spark_P8 : Spark_P1  { Speed 2.0  }
+Actor Spark_P9 : Spark_P1  { Speed 2.25 }
+Actor Spark_P10 : Spark_P1 { Speed 2.5  }
+Actor Spark_P11 : Spark_P1 { Speed 2.75 }
+Actor Spark_P12 : Spark_P1 { Speed 3.0  }
+Actor Spark_P13 : Spark_P1 { Speed 3.25 }
+Actor Spark_P14 : Spark_P1 { Speed 3.5  }
+Actor Spark_P15 : Spark_P1 { Speed 3.75 }
+Actor Spark_P16 : Spark_P1 { Speed 4.0  }
+
+Actor SteamSpawner : SwitchableDecoration 
+{
+//$Category SFX
+  Height 2
+  Radius 1
+  Mass 0
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "Down")
+    TNT1 A 0 A_JumpIf(Args[0] > 1, "Forward")
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "UpBurst")
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Loop", "SoundSlot7", 1)
+    TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    Loop
+  Down:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "DownBurst")
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Loop", "SoundSlot7", 1)
+    TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+    Loop
+  Forward:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "ForwardBurst")
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Loop", "SoundSlot7", 1)
+    TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+    Loop
+  UpBurst:
+    TNT1 A 1 A_Jump(Args[2]/16, 1)
+    Loop
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Fire", "SoundSlot7", 0)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    Loop
+  DownBurst:
+    TNT1 A 1 A_Jump(Args[2]/16, 1)
+    Loop
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Fire", "SoundSlot7", 0)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+    Loop
+  ForwardBurst:
+    TNT1 A 1 A_Jump(Args[2]/16, 1)
+    Loop
+    TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("Steam/Fire", "SoundSlot7", 0)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+    Loop
+  Inactive:
+    TNT1 A 1 A_StopSoundEx("SoundSlot7")
+    TNT1 A 1
+    Goto Inactive+1
+  }
+}
+
+Actor SteamParticle
+{
+  Height 1
+  Radius 1
+  Mass 0
+  +Missile
+  +NoGravity
+  +NoBlockMap
+  +DontSplash
+  RenderStyle Add
+  Scale 0.4
+  Alpha 0.65
+  States
+  {
+  Spawn:
+    STEM A 2 A_SetTranslucent(0.6, 1)
+    STEM B 2 A_SetTranslucent(0.55, 1)
+    STEM C 2 A_SetTranslucent(0.5, 1)
+    STEM D 2 A_SetTranslucent(0.45, 1)
+    STEM E 2 A_SetTranslucent(0.4, 1)
+    STEM F 2 A_SetTranslucent(0.35, 1)
+    STEM G 2 A_SetTranslucent(0.3, 1)
+    STEM H 2 A_SetTranslucent(0.25, 1)
+    STEM I 2 A_SetTranslucent(0.2, 1)
+    STEM J 2 A_SetTranslucent(0.15, 1)
+    STEM K 2 A_SetTranslucent(0.1, 1)
+    STEM L 2 A_SetTranslucent(0.05, 1)
+    Stop
+  }
+}
+
+//SMOKE, BABY
+
+Actor Smoke : SwitchableDecoration 
+{
+//$Category SFX
+    Height 2
+    Radius 1
+    +NoBlockMap +NoGravity +NoSector +NoInteraction +NoClip -Solid +CLIENTSIDEONLY
+    States
+    {
+    Spawn:
+    Active:
+    	TNT1 A 0
+    	TNT1 A 0 A_Jump(240, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeA", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(224, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeB", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(208, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeC", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(192, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeD", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(176, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeE", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(160, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeF", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(144, 2)
+    	TNT1 A 1 A_SpawnItem("SmokeG", 0, 0, 0)
+    	Loop
+    	TNT1 A 0 A_Jump(128, 2)
+    	TNT1 A 0 A_SpawnItem("SmokeH", 0, 0, 0)
+    	Loop
+    	TNT1 A 1 A_SpawnItem("SmokeI", 0, 0, 0)
+    	Loop
+    Inactive:
+    	TNT1 A 1
+    	Loop
+    }
+}
+
+Actor SmokeA
+{
+    Height 2
+    Radius 1
+    +Missile +NoGravity +NoInteraction +NoBlockmap
+    RenderStyle Translucent
+    Alpha .5
+    Scale .35
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+    	TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK1 I 4
+    	SMK1 H 4
+    	SMK1 G 4
+    	SMK1 F 4
+    	SMK1 E 2 A_SetTranslucent(.45, 0)
+    	SMK1 E 2 A_SetTranslucent(.4, 0)
+    	SMK1 D 2 A_SetTranslucent(.35, 0)
+    	SMK1 D 2 A_SetTranslucent(.3, 0)
+    	SMK1 C 2 A_SetTranslucent(.25, 0)
+    	SMK1 C 2 A_SetTranslucent(.2, 0)
+    	SMK1 B 1 A_SetTranslucent(.18, 0)
+    	SMK1 B 1 A_SetTranslucent(.16, 0)
+    	SMK1 B 1 A_SetTranslucent(.14, 0)
+    	SMK1 B 1 A_SetTranslucent(.12, 0)
+    	SMK1 A 1 A_SetTranslucent(.1, 0)
+    	SMK1 A 1 A_SetTranslucent(.08, 0)
+    	SMK1 A 1 A_SetTranslucent(.06, 0)
+    	SMK1 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+Actor SmokeB : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK2 I 4
+    	SMK2 H 4
+    	SMK2 G 4
+    	SMK2 F 4
+    	SMK2 E 2 A_SetTranslucent(.45, 0)
+    	SMK2 E 2 A_SetTranslucent(.4, 0)
+    	SMK2 D 2 A_SetTranslucent(.35, 0)
+    	SMK2 D 2 A_SetTranslucent(.3, 0)
+    	SMK2 C 2 A_SetTranslucent(.25, 0)
+    	SMK2 C 2 A_SetTranslucent(.2, 0)
+    	SMK2 B 1 A_SetTranslucent(.18, 0)
+    	SMK2 B 1 A_SetTranslucent(.16, 0)
+    	SMK2 B 1 A_SetTranslucent(.14, 0)
+    	SMK2 B 1 A_SetTranslucent(.12, 0)
+    	SMK2 A 1 A_SetTranslucent(.1, 0)
+    	SMK2 A 1 A_SetTranslucent(.08, 0)
+    	SMK2 A 1 A_SetTranslucent(.06, 0)
+    	SMK2 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+Actor SmokeC : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK3 I 4
+    	SMK3 H 4
+    	SMK3 G 4
+    	SMK3 F 4
+    	SMK3 E 2 A_SetTranslucent(.45, 0)
+    	SMK3 E 2 A_SetTranslucent(.4, 0)
+    	SMK3 D 2 A_SetTranslucent(.35, 0)
+    	SMK3 D 2 A_SetTranslucent(.3, 0)
+    	SMK3 C 2 A_SetTranslucent(.25, 0)
+    	SMK3 C 2 A_SetTranslucent(.2, 0)
+    	SMK3 B 1 A_SetTranslucent(.18, 0)
+    	SMK3 B 1 A_SetTranslucent(.16, 0)
+    	SMK3 B 1 A_SetTranslucent(.14, 0)
+    	SMK3 B 1 A_SetTranslucent(.12, 0)
+    	SMK3 A 1 A_SetTranslucent(.1, 0)
+    	SMK3 A 1 A_SetTranslucent(.08, 0)
+    	SMK3 A 1 A_SetTranslucent(.06, 0)
+    	SMK3 A 1 A_SetTranslucent(.04, 0)
+    Stop
+    }
+}
+
+Actor SmokeD : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK4 I 4
+    	SMK4 H 4
+    	SMK4 G 4
+    	SMK4 F 4
+    	SMK4 E 2 A_SetTranslucent(.45, 0)
+    	SMK4 E 2 A_SetTranslucent(.4, 0)
+    	SMK4 D 2 A_SetTranslucent(.35, 0)
+    	SMK4 D 2 A_SetTranslucent(.3, 0)
+    	SMK4 C 2 A_SetTranslucent(.25, 0)
+    	SMK4 C 2 A_SetTranslucent(.2, 0)
+    	SMK4 B 1 A_SetTranslucent(.18, 0)
+    	SMK4 B 1 A_SetTranslucent(.16, 0)
+    	SMK4 B 1 A_SetTranslucent(.14, 0)
+    	SMK4 B 1 A_SetTranslucent(.12, 0)
+    	SMK4 A 1 A_SetTranslucent(.1, 0)
+    	SMK4 A 1 A_SetTranslucent(.08, 0)
+    	SMK4 A 1 A_SetTranslucent(.06, 0)
+    	SMK4 A 1 A_SetTranslucent(.04, 0)
+    Stop
+    }
+}
+
+Actor SmokeE : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK5 I 4
+    	SMK5 H 4
+    	SMK5 G 4
+    	SMK5 F 4
+    	SMK5 E 2 A_SetTranslucent(.45, 0)
+    	SMK5 E 2 A_SetTranslucent(.4, 0)
+    	SMK5 D 2 A_SetTranslucent(.35, 0)
+    	SMK5 D 2 A_SetTranslucent(.3, 0)
+    	SMK5 C 2 A_SetTranslucent(.25, 0)
+    	SMK5 C 2 A_SetTranslucent(.2, 0)
+    	SMK5 B 1 A_SetTranslucent(.18, 0)
+    	SMK5 B 1 A_SetTranslucent(.16, 0)
+    	SMK5 B 1 A_SetTranslucent(.14, 0)
+    	SMK5 B 1 A_SetTranslucent(.12, 0)
+    	SMK5 A 1 A_SetTranslucent(.1, 0)
+    	SMK5 A 1 A_SetTranslucent(.08, 0)
+    	SMK5 A 1 A_SetTranslucent(.06, 0)
+    	SMK5 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+Actor SmokeF : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK6 I 4
+    	SMK6 H 4
+    	SMK6 G 4
+    	SMK6 F 4
+    	SMK6 E 2 A_SetTranslucent(.45, 0)
+    	SMK6 E 2 A_SetTranslucent(.4, 0)
+    	SMK6 D 2 A_SetTranslucent(.35, 0)
+    	SMK6 D 2 A_SetTranslucent(.3, 0)
+    	SMK6 C 2 A_SetTranslucent(.25, 0)
+    	SMK6 C 2 A_SetTranslucent(.2, 0)
+    	SMK6 B 1 A_SetTranslucent(.18, 0)
+    	SMK6 B 1 A_SetTranslucent(.16, 0)
+    	SMK6 B 1 A_SetTranslucent(.14, 0)
+    	SMK6 B 1 A_SetTranslucent(.12, 0)
+    	SMK6 A 1 A_SetTranslucent(.1, 0)
+    	SMK6 A 1 A_SetTranslucent(.08, 0)
+    	SMK6 A 1 A_SetTranslucent(.06, 0)
+    	SMK6 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+Actor SmokeG : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK7 I 4
+    	SMK7 H 4
+    	SMK7 G 4
+    	SMK7 F 4
+    	SMK7 E 2 A_SetTranslucent(.45, 0)
+    	SMK7 E 2 A_SetTranslucent(.4, 0)
+    	SMK7 D 2 A_SetTranslucent(.35, 0)
+    	SMK7 D 2 A_SetTranslucent(.3, 0)
+    	SMK7 C 2 A_SetTranslucent(.25, 0)
+    	SMK7 C 2 A_SetTranslucent(.2, 0)
+    	SMK7 B 1 A_SetTranslucent(.18, 0)
+    	SMK7 B 1 A_SetTranslucent(.16, 0)
+    	SMK7 B 1 A_SetTranslucent(.14, 0)
+    	SMK7 B 1 A_SetTranslucent(.12, 0)
+    	SMK7 A 1 A_SetTranslucent(.1, 0)
+    	SMK7 A 1 A_SetTranslucent(.08, 0)
+    	SMK7 A 1 A_SetTranslucent(.06, 0)
+    	SMK7 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+Actor SmokeH : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK8 I 4
+    	SMK8 H 4
+    	SMK8 G 4
+    	SMK8 F 4
+    	SMK8 E 2 A_SetTranslucent(.45, 0)
+    	SMK8 E 2 A_SetTranslucent(.4, 0)
+    	SMK8 D 2 A_SetTranslucent(.35, 0)
+    	SMK8 D 2 A_SetTranslucent(.3, 0)
+    	SMK8 C 2 A_SetTranslucent(.25, 0)
+    	SMK8 C 2 A_SetTranslucent(.2, 0)
+    	SMK8 B 1 A_SetTranslucent(.18, 0)
+    	SMK8 B 1 A_SetTranslucent(.16, 0)
+    	SMK8 B 1 A_SetTranslucent(.14, 0)
+    	SMK8 B 1 A_SetTranslucent(.12, 0)
+    	SMK8 A 1 A_SetTranslucent(.1, 0)
+    	SMK8 A 1 A_SetTranslucent(.08, 0)
+    	SMK8 A 1 A_SetTranslucent(.06, 0)
+    	SMK8 A 1 A_SetTranslucent(.04, 0)
+    Stop
+    }
+}
+
+Actor SmokeI : SmokeA
+{
+    States
+    {
+    Spawn:
+    	TNT1 A 0
+        TNT1 A 0 ThrustThingZ(0, random(8, 16), 0, 0)
+    	TNT1 A 0 ThrustThing(random(0, 255), random(-1, 1), 0, 0)
+    	SMK9 I 4
+    	SMK9 H 4
+    	SMK9 G 4
+    	SMK9 F 4
+    	SMK9 E 2 A_SetTranslucent(.45, 0)
+    	SMK9 E 2 A_SetTranslucent(.4, 0)
+    	SMK9 D 2 A_SetTranslucent(.35, 0)
+    	SMK9 D 2 A_SetTranslucent(.3, 0)
+    	SMK9 C 2 A_SetTranslucent(.25, 0)
+    	SMK9 C 2 A_SetTranslucent(.2, 0)
+    	SMK9 B 1 A_SetTranslucent(.18, 0)
+    	SMK9 B 1 A_SetTranslucent(.16, 0)
+    	SMK9 B 1 A_SetTranslucent(.14, 0)
+    	SMK9 B 1 A_SetTranslucent(.12, 0)
+    	SMK9 A 1 A_SetTranslucent(.1, 0)
+    	SMK9 A 1 A_SetTranslucent(.08, 0)
+    	SMK9 A 1 A_SetTranslucent(.06, 0)
+    	SMK9 A 1 A_SetTranslucent(.04, 0)
+        Stop
+    }
+}
+
+
+
+actor PointFire : SwitchableDecoration 
+{
+//$Category SFX
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOSECTOR
+	+DONTSPLASH
+	RenderStyle Add
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("FlameSpawner", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		loop
+	Inactive:
+		TNT1 A -1
+		stop
+	}
+}
+
+actor DecoPointFire : PointFire 
+{
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItemEx("DecoFlameSpawner", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		loop
+	Inactive:
+		TNT1 A -1
+		stop
+	}
+}
+
+actor AreaFire : SwitchableDecoration 
+{
+//$Category SFX
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOSECTOR
+	+DONTSPLASH
+	RenderStyle None
+	var int user_size;
+	var int user_intensity;
+	var int user_num_loops;
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 A 1
+		goto Size
+	Inactive:
+		TNT1 A -1
+		stop
+	Size:
+		TNT1 A 0 A_JumpIf(Args[1] < 1, "MinSize")
+		TNT1 A 0 A_JumpIf(Args[1] > 8, "MaxSize")
+		TNT1 A 0 A_SetUserVar("user_size", Args[1])
+		goto Intensity
+	MinSize:
+		TNT1 A 0 A_SetUserVar("user_size", 1)
+		goto Intensity
+	MaxSize:
+		TNT1 A 0 A_SetUserVar("user_size", 8)
+	Intensity:
+		TNT1 A 0 A_JumpIf(Args[2] < 1, "MinIntensity")
+		TNT1 A 0 A_JumpIf(Args[0] < 2 && Args[2] > 8, "MaxShapeIntensity")
+		TNT1 A 0 A_JumpIf(Args[0] > 1 && Args[2] > 4, "MaxLineIntensity")
+		TNT1 A 0 A_SetUserVar("user_intensity", Args[2])
+		goto NumLoops
+	MinIntensity:
+		TNT1 A 0 A_SetUserVar("user_intensity", 1)
+		goto NumLoops
+	MaxShapeIntensity:
+		TNT1 A 0 A_SetUserVar("user_intensity", 8)
+		goto NumLoops
+	MaxLineIntensity:
+		TNT1 A 0 A_SetUserVar("user_intensity", 4)
+	NumLoops:
+		TNT1 A 0 A_JumpIf(Args[0] > 1, "NumLoopsLine")
+		TNT1 A 0 A_SetUserVar("user_num_loops", user_intensity * (4 * (user_size - 1) + 1))
+		goto Shape
+	NumLoopsLine:
+		TNT1 A 0 A_SetUserVar("user_num_loops", user_intensity * user_size)
+	Shape:
+		TNT1 A 0 A_JumpIf(Args[0] <= 0, "Square")
+		TNT1 A 0 A_JumpIf(Args[0] == 1, "Circle")
+		TNT1 A 0 A_JumpIf(Args[0] == 2, "Line")
+		TNT1 A 0 A_JumpIf(Args[0] == 3, "Ring")
+		TNT1 A 0 A_JumpIf(Args[0] >= 4, "Box")
+	Square:
+		TNT1 A 0 A_JumpIf(Args[3] == 1, "FloorSquare")
+		TNT1 A 0 A_JumpIf(Args[3] == 2, "DecoSquare")
+		TNT1 A 0 A_JumpIf(Args[3] == 3, "DecoFloorSquare")
+		TNT1 A 0 A_SpawnItemEx("FlameSpawner", frandom(-user_size * 32, user_size * 32), frandom(-user_size * 32, user_size * 32), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	FloorSquare:
+		TNT1 A 0 A_SpawnItemEx("FlameFloorSpawner", frandom(-user_size * 32, user_size * 32), frandom(-user_size * 32, user_size * 32), 2, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoSquare:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameSpawner", frandom(-user_size * 32, user_size * 32), frandom(-user_size * 32, user_size * 32), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoFloorSquare:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameFloorSpawner", frandom(-user_size * 32, user_size * 32), frandom(-user_size * 32, user_size * 32), 2, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	Circle:
+		TNT1 A 0 A_JumpIf(Args[3] == 1, "FloorCircle")
+		TNT1 A 0 A_JumpIf(Args[3] == 2, "DecoCircle")
+		TNT1 A 0 A_JumpIf(Args[3] == 3, "DecoFloorCircle")
+		TNT1 A 0 A_SpawnItemEx("FlameSpawner", frandom(0, user_size * 32), 0, 0, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	FloorCircle:
+		TNT1 A 0 A_SpawnItemEx("FlameFloorSpawner", frandom(0, user_size * 32), 0, 2, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoCircle:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameSpawner", frandom(0, user_size * 32), 0, 0, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoFloorCircle:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameFloorSpawner", frandom(0, user_size * 32), 0, 2, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	Line:
+		TNT1 A 0 A_JumpIf(Args[3] == 1, "FloorLine")
+		TNT1 A 0 A_JumpIf(Args[3] == 2, "DecoLine")
+		TNT1 A 0 A_JumpIf(Args[3] == 3, "DecoFloorLine")
+		TNT1 A 0 A_SpawnItemEx("FlameSpawner", frandom(0, user_size * 64), 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	FloorLine:
+		TNT1 A 0 A_SpawnItemEx("FlameFloorSpawner", frandom(0, user_size * 64), 0, 2, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoLine:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameSpawner", frandom(0, user_size * 64), 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoFloorLine:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameFloorSpawner", frandom(0, user_size * 64), 0, 2, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	Ring:
+		TNT1 A 0 A_JumpIf(Args[3] == 1, "FloorRing")
+		TNT1 A 0 A_JumpIf(Args[3] == 2, "DecoRing")
+		TNT1 A 0 A_JumpIf(Args[3] == 3, "DecoFloorRing")
+		TNT1 A 0 A_SpawnItemEx("FlameSpawner", user_size * 32, 0, 0, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	FloorRing:
+		TNT1 A 0 A_SpawnItemEx("FlameFloorSpawner", user_size * 32, 0, 2, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoRing:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameSpawner", user_size * 32, 0, 0, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoFloorRing:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameFloorSpawner", user_size * 32, 0, 2, 0, 0, 0, random(0, 359), SXF_NOCHECKPOSITION)
+		goto LoopTest
+	Box:
+		TNT1 A 0 A_JumpIf(Args[3] == 1, "FloorBox")
+		TNT1 A 0 A_JumpIf(Args[3] == 2, "DecoBox")
+		TNT1 A 0 A_JumpIf(Args[3] == 3, "DecoFloorBox")
+		TNT1 A 0 A_SpawnItemEx("FlameSpawner", user_size * 32, frandom(-user_size * 32, user_size * 32), 0, 0, 0, 0, random(0, 3) * 90, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	FloorBox:
+		TNT1 A 0 A_SpawnItemEx("FlameFloorSpawner", user_size * 32, frandom(-user_size * 32, user_size * 32), 2, 0, 0, 0, random(0, 3) * 90, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoBox:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameSpawner", user_size * 32, frandom(-user_size * 32, user_size * 32), 0, 0, 0, 0, random(0, 3) * 90, SXF_NOCHECKPOSITION)
+		goto LoopTest
+	DecoFloorBox:
+		TNT1 A 0 A_SpawnItemEx("DecoFlameFloorSpawner", user_size * 32, frandom(-user_size * 32, user_size * 32), 2, 0, 0, 0, random(0, 3) * 90, SXF_NOCHECKPOSITION)
+	LoopTest:
+		TNT1 A 0 A_SetUserVar("user_num_loops", user_num_loops - 1)
+		TNT1 A 0 A_JumpIf(user_num_loops == 0, "Spawn")
+		goto Shape
+	}
+}
+
+actor FlameSpawner : MapSpot
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78)
+		TNT1 A 1 A_SpawnItemEx("FlameA1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+	SpawnEmber:
+		TNT1 A 0 A_Jump(16, "Ember")
+		stop
+	Ember:
+		TNT1 A 0 A_SpawnItemEx("Ember", random(-8, 8), random(-8, 8), 0, frandom(0, 1), frandom(0, 1), random(3, 5), random(0, 359), SXF_NOCHECKPOSITION)
+		stop 
+	}
+}
+
+actor FlameFloorSpawner : MapSpot
+{
+	-NOGRAVITY
+	+MISSILE
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		loop
+	Death:
+		TNT1 A 0 A_Jump(256, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78)
+		TNT1 A 1 A_SpawnItemEx("FlameA1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameA6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameB6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameC6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameD6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameE6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameF6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameG6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameH6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameI6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameJ6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameK6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameL6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("FlameM6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+	SpawnEmber:
+		TNT1 A 0 A_Jump(16, "Ember")
+		stop
+	Ember:
+		TNT1 A 0 A_SpawnItemEx("Ember", random(-8, 8), random(-8, 8), 0, frandom(0, 1), frandom(0, 1), random(3, 5), random(0, 359), SXF_NOCHECKPOSITION)
+		stop 
+	}
+}
+
+actor DecoFlameSpawner : MapSpot
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78)
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+	SpawnEmber:
+		TNT1 A 0 A_Jump(16, "Ember")
+		stop
+	Ember:
+		TNT1 A 0 A_SpawnItemEx("Ember", random(-8, 8), random(-8, 8), 0, frandom(0, 1), frandom(0, 1), random(3, 5), random(0, 359), SXF_NOCHECKPOSITION)
+		stop 
+	}
+}
+
+actor DecoFlameFloorSpawner : MapSpot
+{
+	-NOGRAVITY
+	+MISSILE
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		loop
+	Death:
+		TNT1 A 0 A_Jump(256, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78)
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameA6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameB6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameC6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameD6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameE6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameF6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameG6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameH6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameI6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameJ6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameK6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameL6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM1", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM2", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM3", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM4", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM5", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+		TNT1 A 1 A_SpawnItemEx("DecoFlameM6", 0, 0, 0, 0, 0, frandom(2, 4), random(0, 359), SXF_NOCHECKPOSITION)
+		goto SpawnEmber
+	SpawnEmber:
+		TNT1 A 0 A_Jump(16, "Ember")
+		stop
+	Ember:
+		TNT1 A 0 A_SpawnItemEx("Ember", random(-8, 8), random(-8, 8), 0, frandom(0, 1), frandom(0, 1), random(3, 5), random(0, 359), SXF_NOCHECKPOSITION)
+		stop 
+	}
+}
+
+actor FlameA1
+{
+	Height 2
+	Radius 1
+	Damage (1)
+	Mass 0
+	RenderStyle Add
+	Scale 0.4
+	+NOGRAVITY
+	+MISSILE
+	+RIPPER
+	+BLOODLESSIMPACT
+	+WINDTHRUST
+	+FORCEXYBILLBOARD
+	+FIREDAMAGE
+	+DONTSPLASH
+	States
+	{
+	Spawn:
+		FLM1 A 1 bright A_FadeOut(0.05)
+		FLM1 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameA2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 A 1 bright A_FadeOut(0.05)
+		FLM2 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameA3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 A 1 bright A_FadeOut(0.05)
+		FLM3 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameA4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 A 1 bright A_FadeOut(0.05)
+		FLM4 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameA5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 A 1 bright A_FadeOut(0.05)
+		FLM5 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameA6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 A 1 bright A_FadeOut(0.05)
+		FLM6 A 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 B 1 bright A_FadeOut(0.05)
+		FLM1 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 B 1 bright A_FadeOut(0.05)
+		FLM2 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 B 1 bright A_FadeOut(0.05)
+		FLM3 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 B 1 bright A_FadeOut(0.05)
+		FLM4 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 B 1 bright A_FadeOut(0.05)
+		FLM5 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameB6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 B 1 bright A_FadeOut(0.05)
+		FLM6 B 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 C 1 bright A_FadeOut(0.05)
+		FLM1 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 C 1 bright A_FadeOut(0.05)
+		FLM2 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 C 1 bright A_FadeOut(0.05)
+		FLM3 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 C 1 bright A_FadeOut(0.05)
+		FLM4 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 C 1 bright A_FadeOut(0.05)
+		FLM5 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameC6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 C 1 bright A_FadeOut(0.05)
+		FLM6 C 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 D 1 bright A_FadeOut(0.05)
+		FLM1 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 D 1 bright A_FadeOut(0.05)
+		FLM2 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 D 1 bright A_FadeOut(0.05)
+		FLM3 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 D 1 bright A_FadeOut(0.05)
+		FLM4 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 D 1 bright A_FadeOut(0.05)
+		FLM5 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameD6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 D 1 bright A_FadeOut(0.05)
+		FLM6 D 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 E 1 bright A_FadeOut(0.05)
+		FLM1 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 E 1 bright A_FadeOut(0.05)
+		FLM2 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 E 1 bright A_FadeOut(0.05)
+		FLM3 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 E 1 bright A_FadeOut(0.05)
+		FLM4 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 E 1 bright A_FadeOut(0.05)
+		FLM5 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameE6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 E 1 bright A_FadeOut(0.05)
+		FLM6 E 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 F 1 bright A_FadeOut(0.05)
+		FLM1 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 F 1 bright A_FadeOut(0.05)
+		FLM2 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 F 1 bright A_FadeOut(0.05)
+		FLM3 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 F 1 bright A_FadeOut(0.05)
+		FLM4 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 F 1 bright A_FadeOut(0.05)
+		FLM5 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameF6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 F 1 bright A_FadeOut(0.05)
+		FLM6 F 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 G 1 bright A_FadeOut(0.05)
+		FLM1 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 G 1 bright A_FadeOut(0.05)
+		FLM2 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 G 1 bright A_FadeOut(0.05)
+		FLM3 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 G 1 bright A_FadeOut(0.05)
+		FLM4 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 G 1 bright A_FadeOut(0.05)
+		FLM5 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameG6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 G 1 bright A_FadeOut(0.05)
+		FLM6 G 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 H 1 bright A_FadeOut(0.05)
+		FLM1 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 H 1 bright A_FadeOut(0.05)
+		FLM2 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 H 1 bright A_FadeOut(0.05)
+		FLM3 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 H 1 bright A_FadeOut(0.05)
+		FLM4 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 H 1 bright A_FadeOut(0.05)
+		FLM5 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameH6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 H 1 bright A_FadeOut(0.05)
+		FLM6 H 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 I 1 bright A_FadeOut(0.05)
+		FLM1 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 I 1 bright A_FadeOut(0.05)
+		FLM2 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 I 1 bright A_FadeOut(0.05)
+		FLM3 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 I 1 bright A_FadeOut(0.05)
+		FLM4 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 I 1 bright A_FadeOut(0.05)
+		FLM5 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameI6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 I 1 bright A_FadeOut(0.05)
+		FLM6 I 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 J 1 bright A_FadeOut(0.05)
+		FLM1 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 J 1 bright A_FadeOut(0.05)
+		FLM2 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 J 1 bright A_FadeOut(0.05)
+		FLM3 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 J 1 bright A_FadeOut(0.05)
+		FLM4 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 J 1 bright A_FadeOut(0.05)
+		FLM5 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameJ6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 J 1 bright A_FadeOut(0.05)
+		FLM6 J 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 K 1 bright A_FadeOut(0.05)
+		FLM1 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 K 1 bright A_FadeOut(0.05)
+		FLM2 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 K 1 bright A_FadeOut(0.05)
+		FLM3 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 K 1 bright A_FadeOut(0.05)
+		FLM4 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 K 1 bright A_FadeOut(0.05)
+		FLM5 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameK6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 K 1 bright A_FadeOut(0.05)
+		FLM6 K 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 L 1 bright A_FadeOut(0.05)
+		FLM1 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 L 1 bright A_FadeOut(0.05)
+		FLM2 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 L 1 bright A_FadeOut(0.05)
+		FLM3 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 L 1 bright A_FadeOut(0.05)
+		FLM4 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 L 1 bright A_FadeOut(0.05)
+		FLM5 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameL6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 L 1 bright A_FadeOut(0.05)
+		FLM6 L 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM1 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM1 M 1 bright A_FadeOut(0.05)
+		FLM1 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM2 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM2 M 1 bright A_FadeOut(0.05)
+		FLM2 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM3 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM3 M 1 bright A_FadeOut(0.05)
+		FLM3 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM4 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM4 M 1 bright A_FadeOut(0.05)
+		FLM4 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM5 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM5 M 1 bright A_FadeOut(0.05)
+		FLM5 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor FlameM6 : FlameA1
+{
+	States
+	{
+	Spawn:
+		FLM6 M 1 bright A_FadeOut(0.05)
+		FLM6 M 0 bright A_SetScale(scaleX - 0.01)
+		loop
+	}
+}
+
+actor DecoFlameA1 : FlameA1 { +NOINTERACTION }
+actor DecoFlameA2 : FlameA2 { +NOINTERACTION }
+actor DecoFlameA3 : FlameA3 { +NOINTERACTION }
+actor DecoFlameA4 : FlameA4 { +NOINTERACTION }
+actor DecoFlameA5 : FlameA5 { +NOINTERACTION }
+actor DecoFlameA6 : FlameA6 { +NOINTERACTION }
+
+actor DecoFlameB1 : FlameB1 { +NOINTERACTION }
+actor DecoFlameB2 : FlameB2 { +NOINTERACTION }
+actor DecoFlameB3 : FlameB3 { +NOINTERACTION }
+actor DecoFlameB4 : FlameB4 { +NOINTERACTION }
+actor DecoFlameB5 : FlameB5 { +NOINTERACTION }
+actor DecoFlameB6 : FlameB6 { +NOINTERACTION }
+
+actor DecoFlameC1 : FlameC1 { +NOINTERACTION }
+actor DecoFlameC2 : FlameC2 { +NOINTERACTION }
+actor DecoFlameC3 : FlameC3 { +NOINTERACTION }
+actor DecoFlameC4 : FlameC4 { +NOINTERACTION }
+actor DecoFlameC5 : FlameC5 { +NOINTERACTION }
+actor DecoFlameC6 : FlameC6 { +NOINTERACTION }
+
+actor DecoFlameD1 : FlameD1 { +NOINTERACTION }
+actor DecoFlameD2 : FlameD2 { +NOINTERACTION }
+actor DecoFlameD3 : FlameD3 { +NOINTERACTION }
+actor DecoFlameD4 : FlameD4 { +NOINTERACTION }
+actor DecoFlameD5 : FlameD5 { +NOINTERACTION }
+actor DecoFlameD6 : FlameD6 { +NOINTERACTION }
+
+actor DecoFlameE1 : FlameE1 { +NOINTERACTION }
+actor DecoFlameE2 : FlameE2 { +NOINTERACTION }
+actor DecoFlameE3 : FlameE3 { +NOINTERACTION }
+actor DecoFlameE4 : FlameE4 { +NOINTERACTION }
+actor DecoFlameE5 : FlameE5 { +NOINTERACTION }
+actor DecoFlameE6 : FlameE6 { +NOINTERACTION }
+
+actor DecoFlameF1 : FlameF1 { +NOINTERACTION }
+actor DecoFlameF2 : FlameF2 { +NOINTERACTION }
+actor DecoFlameF3 : FlameF3 { +NOINTERACTION }
+actor DecoFlameF4 : FlameF4 { +NOINTERACTION }
+actor DecoFlameF5 : FlameF5 { +NOINTERACTION }
+actor DecoFlameF6 : FlameF6 { +NOINTERACTION }
+
+actor DecoFlameG1 : FlameG1 { +NOINTERACTION }
+actor DecoFlameG2 : FlameG2 { +NOINTERACTION }
+actor DecoFlameG3 : FlameG3 { +NOINTERACTION }
+actor DecoFlameG4 : FlameG4 { +NOINTERACTION }
+actor DecoFlameG5 : FlameG5 { +NOINTERACTION }
+actor DecoFlameG6 : FlameG6 { +NOINTERACTION }
+
+actor DecoFlameH1 : FlameH1 { +NOINTERACTION }
+actor DecoFlameH2 : FlameH2 { +NOINTERACTION }
+actor DecoFlameH3 : FlameH3 { +NOINTERACTION }
+actor DecoFlameH4 : FlameH4 { +NOINTERACTION }
+actor DecoFlameH5 : FlameH5 { +NOINTERACTION }
+actor DecoFlameH6 : FlameH6 { +NOINTERACTION }
+
+actor DecoFlameI1 : FlameI1 { +NOINTERACTION }
+actor DecoFlameI2 : FlameI2 { +NOINTERACTION }
+actor DecoFlameI3 : FlameI3 { +NOINTERACTION }
+actor DecoFlameI4 : FlameI4 { +NOINTERACTION }
+actor DecoFlameI5 : FlameI5 { +NOINTERACTION }
+actor DecoFlameI6 : FlameI6 { +NOINTERACTION }
+
+actor DecoFlameJ1 : FlameJ1 { +NOINTERACTION }
+actor DecoFlameJ2 : FlameJ2 { +NOINTERACTION }
+actor DecoFlameJ3 : FlameJ3 { +NOINTERACTION }
+actor DecoFlameJ4 : FlameJ4 { +NOINTERACTION }
+actor DecoFlameJ5 : FlameJ5 { +NOINTERACTION }
+actor DecoFlameJ6 : FlameJ6 { +NOINTERACTION }
+
+actor DecoFlameK1 : FlameK1 { +NOINTERACTION }
+actor DecoFlameK2 : FlameK2 { +NOINTERACTION }
+actor DecoFlameK3 : FlameK3 { +NOINTERACTION }
+actor DecoFlameK4 : FlameK4 { +NOINTERACTION }
+actor DecoFlameK5 : FlameK5 { +NOINTERACTION }
+actor DecoFlameK6 : FlameK6 { +NOINTERACTION }
+
+actor DecoFlameL1 : FlameL1 { +NOINTERACTION }
+actor DecoFlameL2 : FlameL2 { +NOINTERACTION }
+actor DecoFlameL3 : FlameL3 { +NOINTERACTION }
+actor DecoFlameL4 : FlameL4 { +NOINTERACTION }
+actor DecoFlameL5 : FlameL5 { +NOINTERACTION }
+actor DecoFlameL6 : FlameL6 { +NOINTERACTION }
+
+actor DecoFlameM1 : FlameM1 { +NOINTERACTION }
+actor DecoFlameM2 : FlameM2 { +NOINTERACTION }
+actor DecoFlameM3 : FlameM3 { +NOINTERACTION }
+actor DecoFlameM4 : FlameM4 { +NOINTERACTION }
+actor DecoFlameM5 : FlameM5 { +NOINTERACTION }
+actor DecoFlameM6 : FlameM6 { +NOINTERACTION }
+
+actor Ember
+{
+	Height 2
+	Radius 1
+	Mass 0
+	RenderStyle Add
+	Alpha 1.0
+	Scale 0.1
+	+NOGRAVITY
+	+MISSILE
+	+WINDTHRUST
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		EMBR A 0 bright
+		EMBR A 35 bright
+		goto Death
+	Death:
+		EMBR A 1 bright A_FadeOut(0.1, 1)
+		loop
+	}
+}
+
+actor DecoEmber : Ember { +NOINTERACTION }
+
+
+actor Thunder_GeneratorWhite : SwitchableDecoration 3199
+{
+//$Category SFX
+	+NoBlockMap +NoGravity +NoInteraction +NoClip -Solid +CLIENTSIDEONLY
+        Renderstyle Add
+        Height 1
+        Radius 1
+        Alpha 0.2
+        Scale 4.0
+        states
+        {
+        Spawn:
+           Active:
+                TNT1 A 0 
+		TNT1 A 0 //A_PlaySoundEx("thunder/hit", "Voice", 0, 2)                
+                TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 //A_SpawnItemEx("Thunder_Spark", 0, 0, 0, random(1,10), 0, random(1,10), random(0,359), 129)
+                THND AAAA 1 Bright A_FadeIn(0.2)
+                THND AAAA 2 Bright A_FadeOut(0.2)
+                TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1  Bright //A_SpawnItemEx("Thunder_Smoke", 0, 0, 0, random(0,3), 0, random(2,3), random(0,359), 128)
+                Goto Inactive
+           Inactive:
+	        TNT1 A 1
+	        Loop
+        }     
+        
+}
+
+actor Thunder_GeneratorTan : Thunder_GeneratorWhite 
+{
+//$Category SFX
+        translation "80:111=48:79"
+}
+
+actor Thunder_GeneratorGreen : Thunder_GeneratorWhite 
+{
+//$Category SFX
+        translation "80:111=112:127"
+}
+
+actor Thunder_GeneratorRed : Thunder_GeneratorWhite 
+{
+//$Category SFX
+        translation "80:111=171:191"
+}
+
+actor Thunder_GeneratorBlue : Thunder_GeneratorWhite 
+{
+//$Category SFX
+        translation "80:111=192:207"
+}
+
+actor Thunder_GeneratorPink : Thunder_GeneratorWhite 
+{
+//$Category SFX
+        translation "80:111=16:47"
+}
+
+Actor Thunder_Spark
+{
+	Speed 3
+	Height 2
+	Radius 1
+	Mass 0
+	+Missile +LowGravity
+	RenderStyle Add
+	Scale 0.4
+	States
+	{
+	Spawn:
+	    TNT1 A 0
+            SPRK A 1 A_Jump(80, 4)              
+            SPRK A 1 A_Jump(80, 4)              
+            SPRK A 1 A_Jump(80, 4)              
+	    SPRK A 32 Bright
+	    SPRK A 32 Bright
+	    SPRK A 32 Bright
+	    SPRK A 32 Bright
+	    SPRK ABCDEFGHHH 1 Bright A_FadeOut(0.1)
+	    Stop
+	Death:
+	    SPRK ABCDEFGHHH 1 Bright A_FadeOut(0.1)
+ 	    Stop		
+	}
+}
+
+Actor Thunder_Smoke
+{
+    Height 2
+    Radius 1
+    +Missile +NoGravity +NoInteraction +NoBlockmap
+    RenderStyle Translucent
+    Alpha .5
+    Scale .65
+    States
+    {
+    Spawn:
+    	SMK1 IHGFEEDDCCBBBBAAAAAA 2 A_FadeOut(0.05) 
+        Stop
+    }
+}
+
+
+
+
+
+
+// This is the activatable version
+
+Actor TPortal : SwitchableDecoration 
+{
+//$Category SFX
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.25
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		goto Activated
+	Activated:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalLoop",5,1,1)
+		goto Ready
+	Ready:
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		loop
+	Inactive:
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 A_PlaySound("TPortalFade")
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 AAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,144)
+		goto Inactivated
+	Inactivated:
+		TNT1 A 1
+		loop
+	}
+}
+
+// Spawn this for a permanent portal
+
+Actor TPortalPermanent : TPortal 
+{
+//$Category SFX
+	States
+	{
+	Spawn:
+		goto Activated
+	}
+}
+
+// Spawn this for a temporary portal. It takes 77 tics to fully appear, so if it needs to spawn something, 
+// delay it by this amount, or spawn it directly from DECORATE
+
+Actor TPortalTemporary : TPortal 
+{
+//$Category SFX
+	//SpawnID - give one
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		goto Activated
+	Activated:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalLoop",5,1,1)
+		TNT1 A 0 A_GiveInventory("Counter",25)
+		goto Ready
+	Ready:
+		TNT1 A 0 A_JumpIfInventory("Counter",1,1)
+		goto Inactive
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_TakeInventory("Counter",1)
+		loop
+	}
+}
+
+Actor Counter : Inventory
+{
+	Inventory.MaxAmount 255
+}
+
+
+
+// This one is for the Radio Tower Inside!
+
+Actor TPortalRadio : SwitchableDecoration 
+{
+//$Category SFX
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	//+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.50
+	States
+	{
+	Spawn:
+	Goto Activated
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		goto Activated
+	Activated:
+		TNT1 A 0
+		TNT1 A 0 //A_PlaySound("TPortalLoop",5,1,1)
+		goto Ready
+	Ready:
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerR",0,64)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawnerR",0,0,64,0,0,0,0,0,160)
+		loop
+	Inactive:
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 A_PlaySound("TPortalFade")
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		ORBP ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		ORBP A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 AAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,144)
+		goto Inactivated
+	Inactivated:
+		TNT1 A 1
+		loop
+	}
+}
+
+// And this one is for the BLU Power Plant.
+
+Actor TPortalPlant : SwitchableDecoration 
+{
+//$Category SFX
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 2.2
+	States
+	{
+	Spawn:
+	Goto Activated
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		BPPO ABC 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		BPPO DCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		BPPO ABC 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		BPPO DCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		BPPO ABC 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		BPPO DCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		BPPO ABC 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawnerP",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		goto Activated
+	Activated:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalLoop",5,1,1)
+		goto Ready
+	Ready:
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItemEx("TPortMistSpawnerP",0,0,352,0,0,0,0,0,160)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,256,0,0,0,0,0,160)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawnerP",0,0,256,0,0,0,0,0,160)
+		loop
+	Inactive:
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 A_PlaySound("TPortalFade")
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		BPPO ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		BPPO A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 AAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,144)
+		goto Inactivated
+	Inactivated:
+		TNT1 A 1
+		loop
+	Brighten:
+		BPPO A 2 A_SetTranslucent(0.4,1)
+		BPPO A 2 A_SetTranslucent(0.5,1)
+		BPPO A 2 A_SetTranslucent(0.6,1)
+		BPPO A 2 A_SetTranslucent(0.7,1)
+		BPPO A 2 A_SetTranslucent(0.8,1)
+		Goto Ready
+	Darken:
+		BPPO A 2 A_SetTranslucent(0.7,1)
+		BPPO A 2 A_SetTranslucent(0.6,1)
+		BPPO A 2 A_SetTranslucent(0.5,1)
+		BPPO A 2 A_SetTranslucent(0.4,1)
+		BPPO A 2 A_SetTranslucent(0.3,1)
+		Goto Ready
+	}
+}
+
+//***************//
+// Support Actors//
+//***************//
+
+Actor TPortMist : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.25
+	Scale 0.225
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		loop
+	}
+}
+
+Actor TPortMistR : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.25
+	Scale 0.45
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		loop
+	}
+}
+
+Actor TPortMistP : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.2
+	Scale 1.0
+	RenderStyle Subtract
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		Stop
+	}
+}
+
+Actor TPortMistSpawner : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AA 0 A_SpawnItemEx("TPortMist",Random(-14,14),Random(-14,14),Random(-14,14),0.012*Random(-50,50),0.012*Random(-50,50),0.012*Random(-50,50),0,0,24)
+		stop
+	}
+}
+
+Actor TPortMistSpawnerR : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AA 0 A_SpawnItemEx("TPortMistR",Random(-14,14),Random(-14,14),Random(-14,14),0.012*Random(-50,50),0.012*Random(-50,50),0.012*Random(-50,50),0,0,24)
+		stop
+	}
+}
+
+Actor TPortMistSpawnerP : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAA 0 A_SpawnItemEx("TPortMistP",Random(-14,14),Random(-14,14),Random(-14,14),0.024*Random(-600,600),0.024*Random(-600,600),0.024*Random(-600,600),0,0,24)
+		stop
+	}
+}
+
+// A wave of lightning
+Actor TPortLightningWave : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("TPortLightningSmall",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningMedium",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningLarge",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningHuge",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+		stop
+	}
+}
+
+// A wave of lightning
+Actor TPortLightningWaveR : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("TPortLightningSmallR",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningMediumR",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningLargeR",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningHugeR",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+		stop
+	}
+}
+
+// Also a wave of lightning
+Actor TPortLightningWaveP : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		/*
+		TNT1 A 0 A_SpawnItemEx("TPortLightningSmallP",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningMediumP",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningLargeP",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningHugeP",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+		*/
+		TNT1 A 0 A_SpawnItemEx("HTCLightningPP",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,Random(0,360),SXF_TRANSFERPITCH,32)
+		TNT1 A 0 A_SpawnItemEx("HTCLightningPPP",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,Random(0,360),SXF_TRANSFERPITCH,220)
+		stop
+	}
+}
+
+// Spawns lightning waves
+Actor TPortLightningWaveSpawner : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalZap")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 3 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 5 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWave")
+		TNT1 A 4 A_SpawnItem("TPortLightningWave")
+		stop
+	}
+}
+
+// Spawns lightning waves
+Actor TPortLightningWaveSpawnerR : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_PlaySound("TPortalZap")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 3 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 5 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWaveR")
+		TNT1 A 4 A_SpawnItem("TPortLightningWaveR")
+		stop
+	}
+}
+
+// Also spawns lightning waves
+Actor TPortLightningWaveSpawnerP : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalZap")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 3 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 5 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 1 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 2 Light("TPortZap") A_SpawnItem("TPortLightningWaveP")
+		TNT1 A 4 A_SpawnItem("TPortLightningWaveP")
+		stop
+	}
+}
+
+
+
+
+
+
+Actor SHTorchSpawner : SwitchableDecoration 
+{
+//$Category SFX
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +NoClip
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, 3)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchStart", "SoundSlot7", 0)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchLoop", "SoundSlot6", 1)
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "Blue")
+    TNT1 A 0 A_JumpIf(Args[0] == 2, "Green")
+    TNT1 A 0 A_JumpIf(Args[0] == 3, "Yellow")
+    TNT1 A 0 A_JumpIf(Args[0] == 4, "Blood")
+    TNT1 A 0 A_JumpIf(Args[0] == 5, "Purple")
+    TNT1 A 0 A_JumpIf(Args[0] == 6, "White")
+    TNT1 A 0 A_JumpIf(Args[0] > 6, "Cyan")
+    Goto Red
+  Red:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigRed")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Red+1
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Red+1
+  BigRed:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigRed
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigRed
+  Blue:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlue")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Blue+1
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Blue+1
+  BigBlue:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigBlue
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigBlue
+  Green:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigGreen")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Green+1
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Green+1
+  BigGreen:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigGreen
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigGreen
+  Yellow:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigYellow")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Yellow+1
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Yellow+1
+  BigYellow:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigYellow
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigYellow
+  Blood:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlood")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Blood+1
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Blood+1
+  BigBlood:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigBlood
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigBlood
+  Purple:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigPurple")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Purple+1
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Purple+1
+  BigPurple:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigPurple
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigPurple
+  White:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigWhite")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto White+1
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto White+1
+  BigWhite:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigWhite
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigWhite
+  Cyan:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigCyan")
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Cyan+1
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Cyan+1
+  BigCyan:
+    TNT1 A 0 A_CheckSight(4)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigCyan
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigCyan
+  Inactive:
+    TNT1 A 0 A_JumpIf(Args[2] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchDie", "SoundSlot7", 0)
+    TNT1 A 0 A_StopSoundEx("SoundSlot6")
+    TNT1 A -1
+    Goto Inactive+3
+  }
+}
+
+Actor SHTorchSpawnerStay : SwitchableDecoration 
+{
+//$Category SFX
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +NoClip
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+  Active:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(Args[2] > 0, 3)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchStart", "SoundSlot7", 0)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchLoop", "SoundSlot6", 1)
+    TNT1 A 0 A_JumpIf(Args[0] == 1, "Blue")
+    TNT1 A 0 A_JumpIf(Args[0] == 2, "Green")
+    TNT1 A 0 A_JumpIf(Args[0] == 3, "Yellow")
+    TNT1 A 0 A_JumpIf(Args[0] == 4, "Blood")
+    TNT1 A 0 A_JumpIf(Args[0] == 5, "Purple")
+    TNT1 A 0 A_JumpIf(Args[0] == 6, "White")
+    TNT1 A 0 A_JumpIf(Args[0] > 6, "Cyan")
+    Goto Red
+  Red:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigRed")
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Red+1
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Red+1
+  BigRed:
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigRed
+    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigRed
+  Blue:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlue")
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Blue+1
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Blue+1
+  BigBlue:
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigBlue
+    TNT1 A 1 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigBlue
+  Green:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigGreen")
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Green+1
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Green+1
+  BigGreen:
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigGreen
+    TNT1 A 1 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigGreen
+  Yellow:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigYellow")
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Yellow+1
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Yellow+1
+  BigYellow:
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigYellow
+    TNT1 A 1 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigYellow
+  Blood:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlood")
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Blood+1
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Blood+1
+  BigBlood:
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigBlood
+    TNT1 A 1 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigBlood
+  Purple:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigPurple")
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Purple+1
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Purple+1
+  BigPurple:
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigPurple
+    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigPurple
+  White:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigWhite")
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto White+1
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto White+1
+  BigWhite:
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigWhite
+    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigWhite
+  Cyan:
+    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigCyan")
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+    Goto Cyan+1
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto Cyan+1
+  BigCyan:
+    TNT1 A 0 
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+    Goto BigCyan
+    TNT1 A 1 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+    Goto BigCyan
+  Inactive:
+    TNT1 A 0 A_JumpIf(Args[2] > 0, 2)
+    TNT1 A 0 A_PlaySoundEx("SFX/TorchDie", "SoundSlot7", 0)
+    TNT1 A 0 A_StopSoundEx("SoundSlot6")
+    TNT1 A -1
+    Goto Inactive+3
+  }
+}
+
+//Flare actors
+
+Actor SHRedTorchFlare
+{
+  +NoGravity
+  +NoInteraction
+  +NoBlockmap
+  +ForceXYBillboard
+  RenderStyle Add
+  Scale 0.4
+  Alpha 0.6
+  States
+  {
+  Spawn:
+    RFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHBlueTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    BFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHGreenTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    GFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHYellowTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    YFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHBloodTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    XFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHPurpleTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    PFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHWhiteTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    WFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHCyanTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    CFLR A 2 Bright
+    Stop
+  }
+}
+
+//Flame actors
+
+Actor SHRedTorchFireSmall
+{
+  +NoGravity
+  +NoInteraction
+  +NoBlockmap
+  +NoTeleport
+  +ForceXYBillboard
+  Radius 0
+  Height 0
+  RenderStyle Add
+  Scale 0.175
+  States
+  {
+  Spawn:
+    FIR1 A 0
+    FIR1 A 0 A_Jump(128, "Spawn2")
+    FIR1 ABCDEFG 1 Bright
+    FIR1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIR2 ABCDEFG 1 Bright
+    FIR2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHRedTorchFireLarge : SHRedTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHBlueTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIB1 A 0
+    FIB1 A 0 A_Jump(128, "Spawn2")
+    FIB1 ABCDEFG 1 Bright
+    FIB1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIB2 ABCDEFG 1 Bright
+    FIB2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHBlueTorchFireLarge : SHBlueTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHGreenTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIG1 A 0
+    FIG1 A 0 A_Jump(128, "Spawn2")
+    FIG1 ABCDEFG 1 Bright
+    FIG1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIG2 ABCDEFG 1 Bright
+    FIG2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHGreenTorchFireLarge : SHGreenTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHYellowTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIY1 A 0
+    FIY1 A 0 A_Jump(128, "Spawn2")
+    FIY1 ABCDEFG 1 Bright
+    FIY1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIY2 ABCDEFG 1 Bright
+    FIY2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHYellowTorchFireLarge : SHYellowTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHBloodTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIX1 A 0
+    FIX1 A 0 A_Jump(128, "Spawn2")
+    FIX1 ABCDEFG 1 Bright
+    FIX1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIX2 ABCDEFG 1 Bright
+    FIX2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHBloodTorchFireLarge : SHBloodTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHPurpleTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIP1 A 0
+    FIP1 A 0 A_Jump(128, "Spawn2")
+    FIP1 ABCDEFG 1 Bright
+    FIP1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIP2 ABCDEFG 1 Bright
+    FIP2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHPurpleTorchFireLarge : SHPurpleTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHWhiteTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIW1 A 0
+    FIW1 A 0 A_Jump(128, "Spawn2")
+    FIW1 ABCDEFG 1 Bright
+    FIW1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIW2 ABCDEFG 1 Bright
+    FIW2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHWhiteTorchFireLarge : SHWhiteTorchFireSmall
+{
+  Scale 0.25
+}
+
+Actor SHCyanTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIC1 A 0
+    FIC1 A 0 A_Jump(128, "Spawn2")
+    FIC1 ABCDEFG 1 Bright
+    FIC1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIC2 ABCDEFG 1 Bright
+    FIC2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }
+}
+
+Actor SHCyanTorchFireLarge : SHCyanTorchFireSmall
+{
+  Scale 0.25
+}
+
+//Dynamic Light actors
+
+Actor SHRedTorchSmallLight
+{
+  +ClientSideOnly
+  +NoClip
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  States
+  {
+  Spawn:
+   TNT1 A 2
+   stop
+  }
+}
+
+Actor SHBlueTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHGreenTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHYellowTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHBloodTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHPurpleTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHWhiteTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHCyanTorchSmallLight : SHRedTorchSmallLight {}
+Actor SHRedTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHBlueTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHGreenTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHYellowTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHBloodTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHPurpleTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHWhiteTorchLargeLight : SHRedTorchSmallLight {}
+Actor SHCyanTorchLargeLight : SHRedTorchSmallLight {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Actor BlastExplosion
+{
+	+NoInteraction
+	+BRIGHT
+	RenderStyle Add
+	Scale 5.0
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_PlaySound("Blast/Explosion")
+			TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BlastFlame", 0, 0, 0, 0.1 * Random(0, 20), 0.1 * Random(0, 20), 0.1 * Random(0, 20), Random(0, 359), 128, 0)
+			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BlastSpark", 0, 0, 0, 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+			TNT1 AAAAAAA 0 A_SpawnItemEx("SLNBlastDebris", 0, 0, 0, 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BlastSmoke", 0, 0, 0, 0.1 * Random(0, 20), 0.1 * Random(0, 20), 0.1 * Random(0, 20), Random(0, 359), 128, 0)
+			EXN1 A 1 Bright A_FadeOut(0.02)
+			Wait
+	}
+}
+
+Actor BlastExhaustSmoke
+{
+	+NoInteraction
+	
+	Radius 0
+	Height 0
+	
+	Scale 0.25
+	Alpha 0.3
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 0 A_Jump(255, "Idle1", "Idle2", "Idle3", "Idle4")
+		Idle1:
+			SMOK A 1 A_FadeOut(0.005)
+			Wait
+		Idle2:
+			SMOK B 1 A_FadeOut(0.005)
+			Wait
+		Idle3:
+			SMOK C 1 A_FadeOut(0.005)
+			Wait
+		Idle4:
+			SMOK D 1 A_FadeOut(0.005)
+			Wait
+	}
+}
+
+Actor BlastSmoke : BlastExhaustSmoke
+{	
+	Scale 2.7
+	Alpha 0.0
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 0 A_Jump(255, "Idle1", "Idle2", "Idle3", "Idle4")
+		Idle1:
+			SMOK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_FadeIn(0.02)
+		Fade1:
+			SMOK A 10
+			SMOK A 0 A_ScaleVelocity(0.96)
+			SMOK A 1 A_FadeOut(0.005)
+			Goto Fade1 + 1
+		Idle2:
+			SMOK BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB 1 A_FadeIn(0.02)
+		Fade2:
+			SMOK B 10
+			SMOK B 0 A_ScaleVelocity(0.96)
+			SMOK B 1 A_FadeOut(0.005)
+			Goto Fade2 + 1
+		Idle3:
+			SMOK CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_FadeIn(0.02)
+		Fade3:
+			SMOK C 10
+			SMOK C 0 A_ScaleVelocity(0.96)
+			SMOK C 1 A_FadeOut(0.005)
+			Goto Fade3 + 1
+		Idle4:
+			SMOK DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 1 A_FadeIn(0.02)
+		Fade4:
+			SMOK D 10
+			SMOK D 0 A_ScaleVelocity(0.96)
+			SMOK D 1 A_FadeOut(0.005)
+			Goto Fade4 + 1
+	}
+}
+
+Actor BlastSpark
+{
+	Projectile
+	+BRIGHT
+	Gravity 0.35
+	Radius 4
+	Height 8
+	Damage (1)
+	DamageType "Fire"
+	
+	RenderStyle Add
+	Scale 0.25
+	Alpha 0.99
+	
+	States
+	{
+		Spawn:
+			PAO1 A 35
+			PAO1 A 1 A_FadeOut(0.04)
+			Wait
+	}
+}
+
+Actor BlastFlame : BlastSmoke
+{
+	RenderStyle Add
+	+BRIGHT
+	Scale 0.25
+	Alpha 0.5
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 0 A_Jump(255, "Idle1", "Idle2", "Idle3", "Idle4")
+		Idle1:
+			FLA1 A 1 Bright A_FadeOut(0.01)
+			Wait
+		Idle2:
+			FLA2 A 1 Bright A_FadeOut(0.01)
+			Wait
+		Idle3:
+			FLA3 A 1 Bright A_FadeOut(0.01)
+			Wait
+		Idle4:
+			FLA4 A 1 Bright A_FadeOut(0.01)
+			Wait
+	}
+}
+
+Actor BlastExhaustFlame : BlastFlame
+{
+	Scale 0.025
+	Alpha 1
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 0 A_Jump(255, "Idle1", "Idle2", "Idle3", "Idle4")
+		Idle1:
+			FLA1 A 1 Bright A_FadeOut(0.1)
+			Wait
+		Idle2:
+			FLA2 A 1 Bright A_FadeOut(0.1)
+			Wait
+		Idle3:
+			FLA3 A 1 Bright A_FadeOut(0.1)
+			Wait
+		Idle4:
+			FLA4 A 1 Bright A_FadeOut(0.1)
+			Wait
+	}
+}
+
+Actor SLNBlastDebris
+{
+	+Missile
+	Gravity 0.5
+	Radius 0
+	Height 0
+	
+	Scale 0.1
+		
+	States
+	{
+		Spawn:
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+			TNT1 A 2 A_Jump(64, 2)
+		Fly:
+			DEB1 ABCDEFGH 6
+			Loop
+	}
+}
+
+//==================================================//
+//===============The  Explosion=================//
+//==================================================//
+
+Actor SLNExplosion
+{
+	+NoInteraction
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_SpawnItem("BlastExplosion")
+			TNT1 A 0 A_SpawnItemEx("MiniNuke", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+			TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("SLNDebris", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("SLNBlastDebris", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+			TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("SLNDebris2", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.09 * Random(50, 170), 0.09 * Random(50, 170), 0.09 * Random(50, 170), Random(0, 359), 128, 0)
+			TNT1 AAAAAA 0 A_SpawnItemEx("SLNDebris3", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.08 * Random(50, 170), 0.08 * Random(50, 170), 0.08 * Random(50, 170), Random(0, 359), 128, 0)
+			Stop
+	}
+}
+
+Actor SLNExplosionNoDebree
+{
+	+NoInteraction
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_SpawnItem("BlastExplosion")
+			TNT1 A 0 A_SpawnItemEx("MiniNuke", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		//	TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 //A_SpawnItemEx("SLNDebris", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+		//	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAA 0 //A_SpawnItemEx("SLNBlastDebris", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.1 * Random(50, 170), 0.1 * Random(50, 170), 0.1 * Random(50, 170), Random(0, 359), 128, 0)
+		//	TNT1 AAAAAAAAAAAAAAA 0 //A_SpawnItemEx("SLNDebris2", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.09 * Random(50, 170), 0.09 * Random(50, 170), 0.09 * Random(50, 170), Random(0, 359), 128, 0)
+		//	TNT1 AAAAAA 0 //A_SpawnItemEx("SLNDebris3", Random(-50, 50), Random(-50, 50), Random(0, 40), 0.08 * Random(50, 170), 0.08 * Random(50, 170), 0.08 * Random(50, 170), Random(0, 359), 128, 0)
+			Stop
+	}
+}
+
+Actor SLNDebris : SLNBlastDebris
+{
+	Scale 0.3
+	-MISSILE
+	States
+	{
+		Spawn:
+			Fly:
+			DEB1 ABCDEFGH 6
+			DEB1 A -1
+			stop
+	}
+}
+
+Actor SLNDebris2 : SLNDebris
+{
+    -MISSILE
+    Scale 0.6
+	States
+	{
+		Spawn:
+			Fly:
+			DEB1 ABCDEFGH 6
+			DEB1 A 0 A_Jump(128,"wait1")
+			DEB1 A 0 A_Jump(128,"wait2")
+			DEB1 A 0 A_Jump(128,"wait3")
+			DEB1 E 6
+		Wait1:
+			DEB1 B -1
+			stop
+		Wait2:
+		    DEB1 C -1
+			stop
+		Wait3:
+			DEB1 G -1
+			stop
+	}
+}
+
+Actor SLNDebris3 : SLNDebris
+{
+	Scale 1.0
+	-MISSILE
+    States
+	{
+		Spawn:
+			Fly:
+			DEB1 ABCDEFGH 6 A_SpawnItemEx("blastSmoke",0,0,0,0,0,0.1 * Random(0, 1), Random(0, 359), 128, 0)
+			DEB1 A 0 A_Jump(128,"Smoke1")
+			DEB1 A 0 A_Jump(128,"Smoke2")
+			DEB1 A 0 A_Jump(128,"Smoke3")
+		Smoke1:
+			DEB1 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 12 A_SpawnitemEx("blastSmoke2",0,0,0,0,0,0.1 * Random(8, 16), Random(0, 359), 128, 0)
+			DEB1 D -1
+			Stop
+		Smoke2:
+			DEB1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 12 A_SpawnitemEx("blastSmoke2",0,0,0,0,0,0.1 * Random(8, 16), Random(0, 359), 128, 0)
+			DEB1 A -1
+			Stop
+		Smoke3:
+		    DEB1 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 12 A_SpawnitemEx("blastSmoke2",0,0,0,0,0,0.1 * Random(8, 16), Random(0, 359), 128, 0)
+			DEB1 F -1
+			Stop
+	}
+}
+
+Actor blastsmoke2 : blastsmoke
+{
+    Scale 1.0
+}
+
+Actor MiniNuke
+{
+	+NoInteraction
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_PlaySoundEx("Blast/Explosion", "Voice", 0, 2)
+			TNT1 AAA 0 A_SpawnItemEx("NukeFloor", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+			TNT1 AAA 0 A_SpawnItemEx("NukeSmokeFloor", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+			TNT1 A 0 A_SpawnItemEx("NukePillar", 0, 0, 0, 0, 0, 5, 0, 128, 0)
+			TNT1 A 55 A_SpawnItemEx("NukeSmokePillar", 0, 0, 0, 0, 0, 5, 0, 128, 0)
+			TNT1 A 0 A_SpawnItemEx("NukeMushroom", 0, 0, 320, 0, 0, 0, 0, 128, 0)
+			TNT1 A 0 A_SpawnItemEx("NukeSmokeMushroom", 0, 0, 320, 0, 0, 0, 0, 128, 0)
+			Stop
+	}
+}
+
+Actor NukeFloor : MiniNuke
+{
+	ReactionTime 40
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Burn:
+			TNT1 A 0 A_CountDown
+			TNT1 A 0 A_SpawnItemEx("BlastFlame", 0, 0, 0, 0.25 * Random(-15, 15), 0.25 * Random(-15, 15), 0, Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor NukeSmokeFloor : NukeFloor
+{	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Smoke:
+			TNT1 A 0 A_CountDown
+			TNT1 A 0 A_SpawnItemEx("BlastSmoke", 0, 0, 0, 0.25 * Random(-15, 15), 0.25 * Random(-15, 15), 0, Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor NukePillar : NukeFloor
+{
+	ReactionTime 60
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Burn:
+			TNT1 A 0 A_CountDown
+			TNT1 A 1 A_SpawnItemEx("BlastFlame", 0, 0, 0, 0.1 * Random(-15, 15), 0.1 * Random(-15, 15), 0, Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor NukeSmokePillar : NukePillar
+{
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Smoke:
+			TNT1 A 0 A_CountDown
+			TNT1 A 1 A_SpawnItemEx("BlastSmoke", 0, 0, 0, 0.1 * Random(-15, 15), 0.1 * Random(-15, 15), 0, Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor NukeMushroom : NukePillar
+{
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Burn:
+			TNT1 A 0 A_CountDown
+			TNT1 A 1 A_SpawnItemEx("BlastFlame", 0, 0, 0, 0.1 * Random(-25, 25), 0.1 * Random(-25, 25), 0.2 * Random(-5, 5), Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor NukeSmokeMushroom : NukeMushroom
+{
+	States
+	{
+		Spawn:
+			TNT1 A 0
+		Smoke:
+			TNT1 A 0 A_CountDown
+			TNT1 A 1 A_SpawnItemEx("BlastSmoke", 0, 0, 0, 0.1 * Random(-25, 25), 0.1 * Random(-25, 25), 0.2 * Random(-5, 5), Random(0, 359), 128, 0)
+			Loop
+	}
+}
+
+Actor KD_SmokePillar : SwitchableDecoration 
+{
+	//$Category SFX
+	//$Sprite SMOKA0
+	//$Title Smoke pillar
+	
+	Var Int User_SPitch;
+	Var Int User_Angle;
+	Var Int User_Pitch;
+	Var Int User_Speed;
+	
+	+NOINTERACTION
+	
+	Radius 2
+	Height 4
+	Scale 0.4
+	States
+	{
+		Spawn:
+		Active:
+			TNT1 A 0 NoDelay A_SetUserVar("User_SPitch", Args[4] * 360 / 255)
+			TNT1 A 0 A_SetPitch(User_SPitch)
+			TNT1 A 0 A_JumpIf(Args[0] <= 0, "SetSpawnRate")
+			Goto Generate
+		SetSpawnRate:
+			TNT1 A 0 A_SetArg(0, 1)	// So you don't accidentally net yourself
+		Generate:					// a grand old crash on map load.
+			TNT1 A 0 A_SetTics(Args[0])
+			TNT1 A 0 A_SetUserVar("User_Angle", Angle +
+								Random(-Args[3], Args[3]) * 360 / 256)
+			TNT1 A 0 A_SetUserVar("User_Pitch", Pitch +
+								Random(-Args[3], Args[3]) * 360 / 256)
+			TNT1 A 0 A_SetUserVar("User_Speed", Random(Args[1], Args[2]))
+			TNT1 A 0 A_SpawnItemEx("KD_SmokeCloud", 0, 0, 0,
+			
+								ScaleX * cos(User_Pitch) *
+								cos(User_Angle) * User_Speed,
+								
+								ScaleX * cos(User_Pitch) *
+								sin(User_Angle) * User_Speed,
+								
+								ScaleX * sin(User_Pitch) * User_Speed,
+								
+								0, SXF_CLIENTSIDE | SXF_TRANSFERSCALE |
+								SXF_ABSOLUTEMOMENTUM, 0)
+			Loop
+		Inactive:
+			TNT1 A 350
+			Wait
+	}
+}
+
+Actor KD_SmokeCloud
+{
+	+FORCEXYBILLBOARD
+	+NOINTERACTION
+	Var Int User_GrowthFactor;
+	
+	RenderStyle Translucent
+	Alpha 0.0
+	States
+	{
+		Spawn:
+			TNT1 A 0 NoDelay A_SetUserVar("User_GrowthFactor", ScaleX * 1000)
+			TNT1 A 0 A_SetScale(ScaleX)
+			TNT1 A 0 A_Jump(256, "A", "B", "C", "D")
+		A:
+		    TNT1 A 0
+			SMFU A 0
+			Goto FadeIn
+		B:
+			SMFU B 0
+			Goto FadeIn
+		C:
+			SMFU C 0
+			Goto FadeIn
+		D:
+			SMFU D 0
+			Goto FadeIn
+		FadeIn:
+			"####" "#" 1 A_FadeIn(FRandom(0.005, 0.008))
+			"####" "#" 0 A_JumpIf(Alpha >= 0.5, "FadeOut")
+			Loop
+		FadeOut:
+			"####" "#" 2 A_SetScale(ScaleX + FRandom(0.01, 0.02) *
+									  User_GrowthFactor * 0.001)
+			"####" "#" 0 A_FadeOut(FRandom(0.001, 0.003))
+			"####" "#" 0 A_ChangeVelocity(VelX * FRandom(0.99, 1.01),
+										  VelY * FRandom(0.99, 1.01),
+										  VelZ + FRandom(0.0, 0.02),
+										  CVF_REPLACE)
+			Loop
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////Waterfall Effect By Tormentor667//////////
+
+actor WaterfallParticleA1
+{
+	Height 16
+	Radius 8
+	Mass 0
+	Scale 0.05
+	Gravity 0.3
+	RenderStyle Add
+	Alpha 0.4
+	+MISSILE
+	+WINDTHRUST
+	//+FORCEXYBILLBOARD
+	+DONTSPLASH
+	States
+	{
+	Spawn:
+		WFZ1 A 1 A_SetScale(scaleX + 0.05)
+		WFZ1 A 0 A_FadeOut(0.01)
+		loop
+	}
+}
+
+actor WaterfallParticleA2 : WaterfallParticleA1
+{
+	States
+	{
+	Spawn:
+		WFZ2 A 1 A_SetScale(scaleX + 0.05)
+		WFZ2 A 0 A_FadeOut(0.01)
+		loop
+	}
+}
+
+actor WaterfallParticleA3 : WaterfallParticleA1
+{
+	States
+	{
+	Spawn:
+		WFZ3 A 1 A_SetScale(scaleX + 0.05)
+		WFZ3 A 0 A_FadeOut(0.01)
+		loop
+	}
+}
+
+actor WaterfallParticleA4 : WaterfallParticleA1
+{
+	States
+	{
+	Spawn:
+		WFZ4 A 1 A_SetScale(scaleX + 0.05)
+		WFZ4 A 0 A_FadeOut(0.01)
+		loop
+	}
+}
+
+Actor Watersplashspawner : SwitchableDecoration 
+{
+//$Category SFX
+  Height 2
+  Radius 1
+  Mass 0
+  +NoBlockMap
+  +NoGravity
+  +NoInteraction
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+  Inactive:
+    TNT1 A 1
+	TNT1 A 0 A_CheckSight("Inactive")
+  Active:
+    TNT1 A 1 A_SpawnItemEx("WaterfallParticleA1", 0, 0, 1, Random(0, 3), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 A 1 A_SpawnItemEx("WaterfallParticleA2", 0, 0, 1, Random(0, 3), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 A 1 A_SpawnItemEx("WaterfallParticleA3", 0, 0, 1, Random(0, 3), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+    TNT1 A 1 A_SpawnItemEx("WaterfallParticleA4", 0, 0, 1, Random(0, 3), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+	TNT1 A 0 A_CheckSight("Inactive")
+	Loop
+  }
+}
+
+
+
+
+
+
+
+
+Actor BloodMistSpawner
+{
+	var int user_angle;
+	+NOINTERACTION
+	RenderStyle None
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("BloodMistDisintegrate2",0,0,0,0,0,0,0,32)
+	MainLoop:
+		TNT1 A 0 A_Jumpif(user_angle>=345,"Disintegrate")
+		TNT1 A 0 A_SpawnItemEx("BloodMist",0,0,0,frandom(0.5,2.6),0,0,user_angle,32)
+		TNT1 A 0 A_SetUserVar("user_angle",user_angle+15)
+		Loop
+	Disintegrate:
+		TNT1 AAAAAAAA 0 A_SpawnItemEx("BloodMistDisintegrate",0,0,0,frandom(0.1,2.0),0,frandom(-2.0,2.0),random(0,359),32)
+		TNT1 AAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BloodMist",0,0,0,frandom(0.5,2.6),0,frandom(-2.6,2.6),random(0,359),32)
+		TNT1 AAAAAAAA 0 A_SpawnItemEx("BloodMist",0,0,0,frandom(0.5,2.6),0,frandom(-2.6,2.6),random(0,359),32)
+		TNT1 A 10 
+		Stop
+	}
+}
+
+Actor BloodMist
+{
+	+NOINTERACTION
+	Radius 2
+	Height 2
+	RenderStyle Add
+	Alpha 0.5
+	Scale 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255,"One","Two","Three","Four")
+	One:
+		X101 ABCD 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 EFGH 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 IJKL 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 MNOP 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		Loop
+	Two:
+		X101 EFGH 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 IJKL 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 MNOP 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 ABCD 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		Loop
+	Three:
+		X101 IJKL 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 MNOP 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 ABCD 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 EFGH 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		Loop
+	Four:
+		X101 MNOP 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 ABCD 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 EFGH 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		X101 IJKL 3 A_FadeOut(0.023)
+		TNT1 A 0 A_ScaleVelocity(0.9)
+		Loop
+	}
+}
+
+Actor BloodMist2 : BloodMist
+{	}
+
+//***************************************************
+Actor BloodMistDisintegrate
+{
+	+NOINTERACTION
+	Speed 0
+	Radius 3
+	Height 5
+	RenderStyle Translucent
+	Alpha 0.7
+	Scale 0.73
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(128,2,4,5)
+		X125 ABCDEF 2 Bright //A_FadeOut(0.03)
+		TNT1 A 0 A_ScaleVelocity(0.8)
+		X125 GHIJKL 2 Bright //A_FadeOut(0.03)
+		TNT1 A 0 A_ScaleVelocity(0.7)
+		X125 MNOPQR 2 Bright //A_FadeOut(0.03)
+		TNT1 A 0 A_ScaleVelocity(0.55)
+		Stop
+	}
+}
+//**************************************************************************
+
+
+Actor BloodMistDisintegrate2
+{
+	+NOINTERACTION
+	RenderStyle Add
+	Scale 1.4
+	States
+	{
+	Spawn:
+		X125 ABCDEFGHIJKLMNOPQR 2 Bright A_FadeOut(0.03)
+		Stop
+	}
+}
+
+ACTOR PointLightMove : PointLight
+{
+	Radius 0
+	Height 0
+	-NOBLOCKMAP
+	+THRUACTORS
+	+MOVEWITHSECTOR
+	-FIXMAPTHINGPOS
+	+NOCLIP
+}

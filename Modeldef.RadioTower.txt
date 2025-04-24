@@ -1,0 +1,119 @@
+//==============================================================================
+// Radio Tower Middle
+//==============================================================================
+Model "RadioTowerMiddle"
+{
+	Model 0 "Models/RadioTowerMiddle.obj"
+	Scale 10.0 10.0 12.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerMiddle_Monitors"
+{
+	Scale 10.0 10.0 12.0
+	
+	Model 0 "Models/RadioTowerMiddle_MonitorsOn.obj"
+	FrameIndex RDTW A 0 0
+	Model 0 "Models/RadioTowerMiddle_MonitorsOff.obj"
+	FrameIndex RDTW B 0 0
+}
+
+Model "RadioTowerMiddle_LightsBottom"
+{
+	Model 0 "Models/RadioTowerMiddle_LightsBottom.obj"
+	Scale 10.0 10.0 12.0
+	DONTCULLBACKFACES
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerMiddle_LightsMiddle"
+{
+	Scale 10.0 10.0 12.0
+	
+	Model 0 "Models/RadioTowerMiddle_LightsMiddleOn.obj"
+	FrameIndex RDTW A 0 0
+	Model 0 "Models/RadioTowerMiddle_LightsMiddleOff.obj"
+	FrameIndex RDTW B 0 0
+}
+
+Model "RadioTowerMiddle_LightsTopInner"
+{
+	Model 0 "Models/RadioTowerMiddle_LightsTopInner.obj"
+	Scale 10.0 10.0 12.0
+	DONTCULLBACKFACES
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerMiddle_LightsTopOuter"
+{
+	Model 0 "Models/RadioTowerMiddle_LightsTopOuter.obj"
+	Scale 10.0 10.0 12.0
+	DONTCULLBACKFACES
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerMiddle_Trans"
+{
+	Model 0 "Models/RadioTowerMiddle_Trans.obj"
+	Scale 10.0 10.0 12.0
+	DONTCULLBACKFACES
+	FrameIndex RDTW A 0 0
+}
+
+//==============================================================================
+// Radio Tower Top
+//==============================================================================
+// DO NOT set the Z scales to 1.2x! These were exported from GZDoom Builder which
+// has the option of increasing the height by 20% already.
+
+Model "RadioTowerUpper"
+{	
+	Model 0 "Models/RadioTowerUpper.obj"
+	Scale 10.0 10.0 10.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerUpper_Add"
+{	
+	DONTCULLBACKFACES
+
+	Model 0 "Models/RadioTowerUpper_Add.md3"
+	Scale 10.0 10.0 10.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerUpper_Lights"
+{	
+	DONTCULLBACKFACES
+
+	Model 0 "Models/RadioTowerUpper_Lights.obj"
+	Scale 10.0 10.0 10.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerUpper_InnerRing"
+{	
+	Model 0 "Models/RadioTowerUpper_InnerRing.obj"
+	Scale 10.0 10.0 10.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerUpper_MiddleRing"
+{	
+	Model 0 "Models/RadioTowerUpper_MiddleRing.obj"
+	Scale 10.0 10.0 10.0
+	
+	FrameIndex RDTW A 0 0
+}
+
+Model "RadioTowerUpper_OuterRing"
+{	
+	Model 0 "Models/RadioTowerUpper_OuterRing.obj"
+	Scale 10.0 10.0 10.0
+	FrameIndex RDTW A 0 0
+}

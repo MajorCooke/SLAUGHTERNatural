@@ -1,0 +1,13 @@
+Cinematic Dialogue
+---------------------------------------------------------------
+
+Function void CinematicDialogue(int camera, int startstopvis, int charchange, str character, str text, int textcolour, int lineid, str nextscript)
+
+camera:			number of camera to change to. If 0, does nothing
+startstopvis:	If 1, starts. If 2, stops. If 3, visual mode
+charchange:     if 0, keeps same name. If 1, changes name
+character:      name string
+text:           text string
+textcolour:     colour of the text
+lineid:         the id of the line you press use on to continue
+nextscript:     the str name of the next script

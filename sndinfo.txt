@@ -1,0 +1,1026 @@
+///////SOUNDS////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MENU/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$pitchshiftrange 0
+
+menu/activate		MENUOPEN	// Activate a new menu
+menu/backup			MENUOPEN	// Backup to previous menu
+menu/prompt			MENUOPEN	// Activate a prompt "menu"
+menu/cursor			MENUSCRL		// Move cursor up/down
+menu/change			MENUCHNG	// Select new value for option
+menu/invalid		MENUINVD		// Menu not available
+menu/dismiss		MENUCLSE	// Dismiss a prompt message
+menu/choose			MENUSLCT	// Choose a menu item
+menu/clear			MENUCLSE	// Close top menu
+
+$random menu/quit1	{ Activator/Cardoor sfxsource/demonicpowerdown1 Ambient/Smash Ambient/Roar tubes/break SFX/TorchDie TPortalAppear }
+$random menu/quit2	{ Activator/Cardoor sfxsource/demonicpowerdown1 Ambient/Smash Ambient/Roar tubes/break SFX/TorchDie TPortalAppear }
+
+
+
+
+$limit brain/pain 0
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SEQUENCES/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Activator/BasedoorOpen	udoor1a 			//Heavy Door
+Activator/BasedoorMid	udoor1b				
+Activator/BasedoorClose	udoor1c				
+
+hldoor1  hldoor1							//Light Hydraulic Door
+
+slift1a  slift1a							//Slow Maintenance Elevator
+slift1b  slift1b
+slift1c  slift1c
+
+PolyDoor2Open dspol2op						//Light Sliding Door
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ACTIVATOR/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//Srt Music
+//
+SUPERINT							SUPERINT	   	//End Demo Music
+10VNMUS1							10VNMUS1	   	//Boss Fight Music
+//
+//End Music
+//
+
+Activator/Cardoor					DSCARDOR	    //Car Door
+
+sfxsource/demonicpowerdown1 		pwrdown1		//Power Low
+doomedit/demonicpowerdown2 			pwrdown2		//Power Screech
+button/eyescan						dseye			//A-OK!
+Ambient/Smash						SCPSMASH		//BAMN - From SCP
+Ambient/Roar						SCPROAR			//Silent Roar - From SCP
+Ambient/Gore						SCPGORE			//First Gore Sighting
+sfxsource/evilbass 					evilbas4		//Designed for Tendrils
+
+Lockdown/DoorsOpen					LCKDWNDO		//Lockdown Doors Open
+
+Ambient/LoudRoar					LOUDROAR		//A Loud Roar. For Gate.
+Ambient/LoudPain					LOUDPAIN		//A Loud Roar. Note For Gate.
+Ambient/LoudSteps					LOUDSTEP		//Loud Steps. For Gate.
+Ambient/Explosion					EXPLOSIN		//Explosion. For Gate.
+
+Vent/OpenClose						VENTOPCL		//Vent Opening and Closing Sound
+
+Lift/DoorClose						LIFTDRCL		//Lift Door Closing
+Lift/Shake							LIFTSHAK		//Lift Shaking
+Lift/Top							LIFTTOPD		//Lift Topping
+Lift/Beep							LIFTBEEP		//Lift Fancy Ding
+Lift/Raise							LIFTRAIS		//Lift Rising
+Lift/Break							LIFTBRAK		//Lift Topped
+Lift/Ground							LIFTGRND		//Lift Grounded
+Lift/Slender						LIFTSLEN		//Lift Spoooooky
+Lift/Activate						LIFTACTI		//Radio Lift
+
+Light/On 							LIGHTON			//Self Explainitory
+Light/Off 							LIGHTOFF		//Self Explainitory
+Light/Instant 						LIGHTINS		//Self Explainitory  
+
+Ion/Fallout							IONFALLO		//Plays when power goes out
+Ion/Charge							IONCHARG		//Really loud.
+
+Radio/LockDownBeep					RTLDBEEP		//Lockdown Blue Light Beep
+
+Power/Button1						POWERBT1		//Accept Tone
+Power/Button2						POWERBT2		//Warning Tone
+Power/Button3						POWERBT3		//Error Tone
+Power/Button4						POWERBT4		//Display Tone
+Power/Boss							POWERBER		//Power Erupting
+Power/Boss2							POWERFIR		//Power Eruption
+
+Radio/On							RADIOON			//Radio On
+Radio/Off							RADIOOFF		//Radio Off
+Radio/In							RADIOIN			//Radio In
+Radio/Final							RADIOFNL		//Radio Final Static
+
+Event/MB/Gunfight					WLGGFIRE		//Rapid Shooting
+Event/MB/GunfightEnd				WLGGENDF		//End Shooting
+
+Ambient/Gunfire						DSWARZ01		//Distant Shooting
+
+Teleporter/On						MBTPON			//Cool On Sound
+Teleporter/Off						MBTPOFF			//Cool Off Sound
+Teleporter/Blood					MBTPBLUD		//BLOOD EVERYWHERE
+
+$Random Spooky/Crows { CROWS1 CROWS2 }				//Crows
+CROWS1				CROWS1
+CROWS2				CROWS2
+
+Spooky/Rustling						RUSTLING		//Leaves Rustling
+Spooky/Wolf							WOLFHOWL		//Wolf Howling
+Spooky/Twig							TWIGSNAP		//Twig Snap
+Spooky/Heavysteps					HVYFOOTS		//Heavy Footsteps
+
+Spooky/LightBreak					LIGHTBRK		//Light Breaking and Sparking
+Spooky/MetalBend					METALBD1		//Metal Tearing/Bending
+
+Spooky/BigDoorLock					BDRLOCK			//Big Tunnel Doors
+
+$volume Ambient/Gore 3.5
+$volume Lockdown/DoorsOpen 10.0
+$attenuation Lockdown/DoorsOpen 0.2
+$volume Ambient/LoudRoar 4.0
+$volume Ambient/Explosion 6.0
+$volume Ambient/LoudSteps 12.0
+$attenuation Ambient/LoudRoar 0.1
+$attenuation Ambient/Explosion 0.1
+$attenuation Ambient/LoudSteps 0.1
+$volume Light/Instant 10.0
+$volume Ambient/Smash 4.0
+$volume Power/Boss2 8.0
+
+$volume Lift/Slender 100.0 //Remove?
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//VOICE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Voice/Derek01			DEREK01
+Voice/Derek02			DEREK02
+Voice/Derek03			DEREK03
+
+Voice/Dark01			DARK01
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//AMBIENT///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Ambient/Rain	AMBRAIN
+Ambient/RainInside	AMBRAINN
+Ambient/Waterfall	AWATERFL
+Ambient/WaterfallSmall	SWATERFL
+Ambient/HeavyWind	HEAVWIND
+Ambient/Wind1	AMBWIND1
+Ambient/Night	AMBNIGHT
+Ambient/Sewer	AMBSEWER
+Ambient/Fan		AMBFAN
+Compy1	Compy1	// Computer System At Work
+Compy2	Compy2	// Computer System At Work
+Compy3	Compy3	// Computer System Malfunctioning
+Compy4	Compy4	// Computer System Idling
+Compy5	Compy5	// BEEP BOOP.
+FUTR_18 hlamb3
+FUTR_20 q2amb1
+FUTR_21 q2amb9
+FUTR_22 samb01
+FUTR_26 uconsole
+sfxsource/evilbass1 evilbas1
+sfxsource/evilbass2 evilbas2
+sfxsource/evilbass3 evilbas3
+sfxsource/evilbass4 evilbas4
+sfxsource/evilbass5 evilbas5
+$pitchshift sfxsource/evilbass1 0
+$pitchshift sfxsource/evilbass2 0
+$pitchshift sfxsource/evilbass3 0
+$pitchshift sfxsource/evilbass4 0
+$pitchshift sfxsource/evilbass5 0
+$limit sfxsource/evilbass 0
+$limit sfxsource/evilbass1 0
+$limit sfxsource/evilbass2 0
+$limit sfxsource/evilbass3 0
+$limit sfxsource/evilbass4 0
+$limit sfxsource/evilbass5 0
+IntenseHeartBeat "Sounds/intense.ogg" // Taken from DUMP 2's Music/NIL.spc, re-recorded as an OGG.
+$pitchshift IntenseHeartBeat 0
+
+Lockdown/Siren	usiren
+
+Eyes/Static1	EYESTAT1
+Eyes/Static2	EYESTAT2
+Eyes/Static3	EYESTAT3
+Eyes/Static4	EYESTAT4
+Eyes/Static5	EYESTAT5
+Eyes/Static6	EYESTAT6
+Eyes/Static7	EYESTAT7
+Eyes/Static8	EYESTAT8
+Eyes/Static9	EYESTAT9
+Eyes/Static0	EYESTAT0
+
+TV/Static		STATTV
+Quiet/Static	STATTV
+
+Radio/Radio		RADRADIO
+Radio/Death		RADDEATH
+Radio/Loop		RADTLOOP
+Radio/Rings		RADRINGS
+
+Scare/Tech			SCARTECH
+Scare/Grave			SCARGRAV
+Scare/Seagulls 		SCARGULL
+Scare/Pillars		SCARPILL
+Scare/Amnesia 		SCARAMNE
+Scare/Small			SCARSMAL
+Scare/Town 			SCARTOWN
+Scare/WTFCreature	SCARWTFC
+Scare/Mine 			SCARMINE
+Scare/Scary 		SCARSCAR
+Scare/Torture		SCARTORT
+Scare/Sonic			SCARSONC
+
+Power/Generator		POWERGEN
+Power/Electricity	POWERZAP
+Power/Hum			POWERHUM
+Power/Green			POWERGRN
+Power/Blue			POWERBLU
+Power/Red			POWERRED
+
+Ambient/Drone1		DRONE1	
+Ambient/Drone2		DRONE2	
+Ambient/Drone3		DRONE3	
+Ambient/Drone4		DRONE4	
+
+Radio/Ambient1		RADAMB01
+Radio/Ambient2		RADAMB02
+Radio/Ambient3		RADAMB03
+
+Enviro/NukageBlub	NUKEBLUB
+Enviro/NukageFlow	NUKEFLOW
+
+
+
+$ambient 0 Ambient/Wind1 world continuous 0.7
+$ambient 1 Ambient/Night point continuous 0.3
+$Ambient 2 Compy1 POINT CONTINUOUS 0.8
+$Ambient 3 Compy2 POINT CONTINUOUS 0.8
+$Ambient 4 Compy3 POINT CONTINUOUS 0.8
+$Ambient 5 Compy4 POINT CONTINUOUS 0.8
+$AMBIENT 6  FUTR_18 POINT CONTINUOUS 0.5
+$AMBIENT 7  FUTR_20 SURROUND CONTINUOUS 0.8
+$AMBIENT 8  FUTR_21 SURROUND CONTINUOUS 0.8
+$AMBIENT 9  FUTR_22 POINT CONTINUOUS 1.0
+$AMBIENT 10  FUTR_26 POINT CONTINUOUS 1.0
+$ambient 11 Ambient/Wind1 point continuous 0.7
+$AMBIENT 12  FUTR_21 POINT CONTINUOUS 0.8
+$AMBIENT 13  FUTR_20 POINT CONTINUOUS 0.8
+$ambient 14 sfxsource/evilbass1 point continuous 0.8
+$ambient 15 sfxsource/evilbass2 point continuous 0.8
+$ambient 16 sfxsource/evilbass3 point continuous 1.0
+$ambient 17 sfxsource/evilbass4 point continuous 0.8
+$ambient 18 sfxsource/evilbass5 point continuous 1.0
+$ambient 19 sfxsource/evilbass1 Surround continuous 0.5
+$Ambient 20 Compy5 POINT CONTINUOUS 0.8
+$Ambient 21 Ambient/Sewer POINT CONTINUOUS 0.0
+$Ambient 22 Ambient/Fan POINT CONTINUOUS 0.8
+$Ambient 23 Lockdown/Siren POINT CONTINUOUS 0.6
+$Ambient 24 Eyes/Static1 world CONTINUOUS 0.7
+$Ambient 25 Eyes/Static2 world CONTINUOUS 0.7
+$Ambient 26 Eyes/Static3 world CONTINUOUS 0.7
+$Ambient 27 Eyes/Static4 world CONTINUOUS 0.7
+$Ambient 28 Eyes/Static5 world CONTINUOUS 0.7
+$Ambient 29 Eyes/Static6 world CONTINUOUS 0.7
+$Ambient 30 Eyes/Static7 world CONTINUOUS 0.7
+$Ambient 31 Eyes/Static8 world CONTINUOUS 0.7
+$Ambient 32 Eyes/Static9 world CONTINUOUS 0.7
+$Ambient 33 Eyes/Static0 world CONTINUOUS 0.7
+$Ambient 34 TV/Static POINT CONTINUOUS 1.3
+$Ambient 35 Ambient/Rain world CONTINUOUS 0.9
+$Ambient 36 Ambient/HeavyWind POINT CONTINUOUS 0.8
+$Ambient 37 Ambient/Waterfall POINT CONTINUOUS 0.7
+$Ambient 38 Ambient/WaterfallSmall POINT CONTINUOUS 0.7
+$Ambient 39 Radio/Radio POINT CONTINUOUS 3.0
+$Ambient 40 Radio/Death POINT CONTINUOUS 0.7
+$Ambient 41 Radio/Loop POINT CONTINUOUS 0.8
+$Ambient 42 Quiet/Static POINT CONTINUOUS 0.3
+$Ambient 43 Radio/Rings POINT CONTINUOUS 1.0
+
+$Ambient 44 Scare/Tech POINT CONTINUOUS 1.0
+$Ambient 45 Scare/Grave POINT CONTINUOUS 1.0
+$Ambient 46 Scare/Seagulls POINT CONTINUOUS 1.0
+$Ambient 47 Scare/Pillars POINT CONTINUOUS 1.0
+$Ambient 48 Scare/Amnesia POINT CONTINUOUS 1.0
+$Ambient 49 Scare/Small POINT CONTINUOUS 1.0
+$Ambient 50 Scare/Town POINT CONTINUOUS 1.0
+$Ambient 51 Scare/WTFCreature POINT CONTINUOUS 1.0
+$Ambient 52 Scare/Mine POINT CONTINUOUS 1.0
+$Ambient 53 Scare/Scary POINT CONTINUOUS 1.0
+$Ambient 54 Scare/Torture POINT CONTINUOUS 1.0
+$Ambient 59 Scare/Sonic POINT CONTINUOUS 1.0
+
+$Ambient 55 Power/Electricity POINT CONTINUOUS 1.0
+$Ambient 56 Power/Generator POINT CONTINUOUS 1.0
+$Ambient 57 Power/Hum POINT CONTINUOUS 1.0
+$Ambient 58 Power/Green POINT CONTINUOUS 1.0
+$Ambient 60 Power/Blue POINT CONTINUOUS 1.0
+$Ambient 61 Power/Red POINT CONTINUOUS 1.0
+
+$Ambient 62 Ambient/RainInside POINT CONTINUOUS 1.0
+
+$AMBIENT 63 Ambient/Drone1 POINT CONTINUOUS 1.0
+$AMBIENT 64 Ambient/Drone2 POINT CONTINUOUS 1.0
+$AMBIENT 65 Ambient/Drone3 POINT CONTINUOUS 1.0
+$AMBIENT 66 Ambient/Drone4 POINT CONTINUOUS 1.0
+
+$AMBIENT 67 Radio/Ambient1 POINT CONTINUOUS 1.0
+$AMBIENT 68 Radio/Ambient2 POINT CONTINUOUS 1.0
+$AMBIENT 69 Radio/Ambient3 POINT CONTINUOUS 1.0
+
+$AMBIENT 70 Enviro/NukageBlub POINT CONTINUOUS 1.0
+$AMBIENT 71 Enviro/NukageFlow POINT CONTINUOUS 1.0
+
+$attenuation Ambient/Fan 1.8
+$attenuation Quiet/Static 2.5
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//PROPS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+tubes/break TSTTB
+
+BarrelFire/Start	DSFIRSTA
+BarrelFire/Loop		DSFIRLOP
+$limit BarrelFire/Loop	0
+
+TechBarrel/Explode	DSTEKEXP
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////TERRAIN/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//Metal
+$random floor/metal		{ floor/metl01  floor/metl02 floor/metl03 floor/metl04  floor/metl05 floor/metl06 }
+floor/metl01	dsmet01
+floor/metl02	dsmet02
+floor/metl03	dsmet03
+floor/metl04	dsmet04
+floor/metl05	dsmet05
+floor/metl06	dsmet06
+$limit floor/metal 1
+$volume floor/metal 0.1
+
+//Metal2
+$random floor/met2		{ floor/met201  floor/met202 floor/met203 floor/met204 }
+floor/met201	dsmet201
+floor/met202	dsmet202
+floor/met203	dsmet203
+floor/met204	dsmet204
+$limit floor/met2 1
+$volume floor/met2 0.1
+
+//Dirt
+$random floor/dirt		{ floor/dirt01  floor/dirt02 floor/dirt03 floor/dirt04  floor/dirt05 floor/dirt06 }
+floor/dirt01	dsdirt1
+floor/dirt02	dsdirt2
+floor/dirt03	dsdirt3
+floor/dirt04	dsdirt4
+floor/dirt05	dsdirt5
+floor/dirt06	dsdirt6
+$limit floor/dirt 1
+$volume floor/dirt 0.1
+
+//Gravel
+$random floor/gravel		{ floor/grav01  floor/grav02 floor/grav03 floor/grav04 }
+floor/grav01	dsgrav1
+floor/grav02	dsgrav2
+floor/grav03	dsgrav3
+floor/grav04	dsgrav4
+$limit floor/gravel 1
+$volume floor/gravel 0.1
+
+//Tile
+$random floor/tile		{ floor/tile01  floor/tile02 floor/tile03 floor/tile04  floor/tile05 floor/tile06 }
+floor/tile01	dstile01
+floor/tile02	dstile02
+floor/tile03	dstile03
+floor/tile04	dstile04
+floor/tile05	dstile05
+floor/tile06	dstile06
+$limit floor/tile 1
+$volume floor/tile 0.1
+
+//Hard
+$random floor/hard		{ floor/hard01  floor/hard02 floor/hard03 floor/hard04  floor/hard05 floor/hard06 }
+floor/hard01	dshard1
+floor/hard02	dshard2
+floor/hard03	dshard3
+floor/hard04	dshard4
+floor/hard05	dshard5
+floor/hard06	dshard6
+$limit floor/hard 1
+$volume floor/hard 0.1
+
+//Wood
+$random floor/wood		{ floor/wood01  floor/wood02 floor/wood03 floor/wood04 }
+floor/wood01	dswood1
+floor/wood02	dswood2
+floor/wood03	dswood3
+floor/wood04	dswood4
+$limit floor/wood 1
+$volume floor/wood 0.1
+
+//Carpet
+$random floor/carpet		{ floor/carpet01  floor/carpet02 floor/carpet03 }
+floor/carpet01	dscarp1
+floor/carpet02	dscarp2
+floor/carpet03	dscarp3
+$limit floor/carpet 1
+$volume floor/carpet 0.1
+
+//Rock
+$random floor/rock		{ floor/rock01  floor/rock02 floor/rock03 floor/rock04  floor/rock05 floor/rock06 floor/rock07 floor/rock08 }
+floor/rock01	dsrock1
+floor/rock02	dsrock2
+floor/rock03	dsrock3
+floor/rock04	dsrock4
+floor/rock05	dsrock5
+floor/rock06	dsrock6
+floor/rock07	dsrock7
+floor/rock08	dsrock8
+$limit floor/rock 1
+$volume floor/rock 0.1
+
+//Tech
+floor/elec1	dselec1
+$limit floor/elec1 1
+$volume floor/elec1 0.1
+
+//Surface
+$random floor/tile2		{ floor/tile201  floor/tile202 floor/tile203 floor/tile204  floor/tile205 floor/tile206 floor/tile207 floor/tile208 }
+floor/tile201	dstile21
+floor/tile202	dstile22
+floor/tile203	dstile23
+floor/tile204	dstile24
+floor/tile205	dstile25
+floor/tile206	dstile26
+floor/tile207	dstile27
+floor/tile208	dstile28
+$limit floor/tile2 1
+$volume floor/tile2 0.1
+
+//Slimy
+$random floor/slimy		{ floor/slimy01  floor/slimy02 floor/slimy03 floor/slimy04 }
+floor/slimy01	dsslimy1
+floor/slimy02	dsslimy2
+floor/slimy03	dsslimy3
+floor/slimy04	dsslimy4
+$limit floor/slimy 1
+$volume floor/slimy 0.1
+
+
+
+//Splashes
+world/drip			dsdrip
+world/drip1			dsdrip1
+world/watersplash		dssplash
+world/watersplashsmall		dssplsml
+world/sludgegloop		dsploosh
+world/sludgegloopsmall		dsplosml
+world/lavasizzle		dslvsiz
+world/lavsiz2			dslvsiz2
+world/lavasizzlesmall		dslavsml
+$volume world/drip 0.1
+$volume world/drip1 0.1
+$volume world/watersplash 0.1
+$volume world/watersplashsmall 0.1
+$volume world/sludgegloop 0.1
+$volume world/sludgegloopsmall 0.1
+$volume world/lavasizzle 0.1
+$volume world/lavsiz2 0.1
+$volume world/lavasizzlesmall 0.1
+
+$limit world/watersplash 100
+
+
+
+////SFX////
+
+
+
+//TORCH
+
+SFX/TorchStart	TRCHSTRT
+SFX/TorchLoop	TRCHLOOP
+SFX/TorchDie	TRCHDIE
+
+$Limit SFX/TorchStart	0
+$Limit SFX/TorchLoop	0
+$Limit SFX/TorchDie	0
+$volume SFX/TorchStart 0.25
+$volume SFX/TorchLoop 0.25
+$volume SFX/TorchDie 0.25
+
+
+//STEAM
+
+Steam/Loop	STEMLOOP
+Steam/Fire	STEMFIRE
+
+//LIGHTNING
+
+
+$random Thunder/Outdoors
+{ 
+	thunder/hit01 thunder/hit02 thunder/hit03 thunder/hit04 thunder/hit05 thunder/hit06
+	thunder/hit07 thunder/hit08 thunder/hit09
+}
+thunder/hit01 THNDS01
+thunder/hit02 THNDS02
+thunder/hit03 THNDS03
+thunder/hit04	sounds/thunder1.ogg
+thunder/hit05	sounds/thunder2.ogg
+thunder/hit06	sounds/thunder3.ogg
+thunder/hit07	sounds/thunder4.ogg
+thunder/hit08	sounds/thunder5.ogg
+thunder/hit09	sounds/thunder6.ogg
+
+$random Thunder/Indoors
+{
+	thunder/hit11 thunder/hit12 thunder/hit13
+}
+thunder/hit11 THNDS11
+thunder/hit12 THNDS12
+thunder/hit13 THNDS13
+
+$random Thunder/Quiet
+{
+	thunder/hit04 thunder/hit05 thunder/hit06
+	thunder/hit07 thunder/hit08 thunder/hit09
+}
+$volume Thunder/Quiet 0.4
+$limit Thunder/Quiet 0
+$limit Thunder/Indoors 0
+$limit Thunder/Outdoors 0
+
+//THUNDER PORTAL
+
+TPortalLoop tp_loop
+
+
+TPZap1	tp_zap1
+TPZap2	tp_zap2
+
+$random TPortalZap {TPZap1 TPZap2}
+
+
+TPortalFade tp_fade
+
+
+TPortalAppear tp_app
+
+$volume TPortalAppear 1.5
+$volume TPortalFade 1.5
+$volume TPortalLoop 0.3
+$volume TPortalZap 0.3
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MONSTERS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Darkness
+
+DarkRift/Loop				"Sounds/Monsters/Darkness/DRFTLOOP.ogg"
+DarkRift/Loop/Silent		"Sounds/Monsters/Darkness/DRFTLOOP.ogg"
+DarkRift/Arm/Fly			"Sounds/Monsters/Darkness/DARKARMF"
+DarkRift/Arm/Impact			"Sounds/Monsters/Darkness/DARKARMI"
+DarkRift/Arm/Loop			"Sounds/Monsters/Darkness/DARKARML.ogg"
+DarkRift/Arm/Shoot			"Sounds/Monsters/Darkness/DARKARMS.ogg"
+DarkRift/Angry				"Sounds/Monsters/Darkness/DRFTACT.ogg"
+DarkFlame					"Sounds/Monsters/Darkness/DARKFLAM.wav"
+Dark/Teleport				"Sounds/Monsters/Darkness/DarkTeleport.ogg"
+
+$attenuation DarkRift/Loop/Silent 2.2
+
+
+/////////////////////////////////////////////////////////////////////
+
+//Interact
+
+Interact/Enraged/Sight	EINTSEE
+Interact/Enraged/Melee	EINTMELE
+Interact/Enraged/Near	EINTNEAR
+
+$Random Interact/Enraged/Active { EINTACT1 EINTACT2 }
+EINTACT1	EINTACT1
+EINTACT2	EINTACT2
+
+
+/////////////////////////////////////////////////////////////////////
+
+//Avoid
+
+$Random Avoid/See { EAVOSEE1 EAVOSEE2 }
+EAVOSEE1	EAVOSEE1
+EAVOSEE2	EAVOSEE2
+
+$Random Avoid/LooseSee { EAVOLSE1 EAVOLSE2 }
+EAVOLSE1	EAVOLSE1
+EAVOLSE2	EAVOLSE2
+
+$Random Avoid/Chase { EAVOCHS1 EAVOCHS2 }
+EAVOCHS1	EAVOCHS1
+EAVOCHS2	EAVOCHS2
+
+$Random Avoid/Active { EAVOACT1 EAVOACT2 }
+EAVOACT1	EAVOACT1
+EAVOACT2	EAVOACT2
+
+$Random Avoid/Melee { EAVOMEL1 EAVOMEL2 }
+EAVOMEL1	EAVOMEL1
+EAVOMEL2	EAVOMEL2
+
+$Random Avoid/Idle { EAVOIDL1 EAVOIDL2 }
+EAVOIDL1	EAVOIDL1
+EAVOIDL2	EAVOIDL2
+
+Avoid/Near	EAVONEAR
+
+AvoidProxy/Idle	EAVOIDL1
+
+
+/////////////////////////////////////////////////////////////////////
+
+//GRN - 02 : 10,000 Volt Nightmare
+
+//Greg
+10VNGreg/Smash			10VNGRGS
+10VNGreg/Plasma			10VNGRGP
+10VNGreg/ThrowOrb		10VNGRGO
+
+//Craig
+10VNCraig/Fire			10VNCRGF
+10VNCraig/Loop			10VNCRGL
+10VNCraig/Explode		10VNCRGE
+10VNCraig/PlasmaFire	10VNCRGP
+10VNCraig/PlasmaExplode 10VNCRGZ
+
+$attenuation 10VNCraig/PlasmaFire 0.3
+
+$attenuation 10VNCraig/Fire 0.3
+$attenuation 10VNCraig/Loop 0.3
+$attenuation 10VNCraig/Explode 0.3
+
+//zztop
+10VNLightning/Charge	10VNCHRG
+10VNLightning/Strike	10VNSTRK
+
+10VNOrbiter/Activate	10VNORBA
+10VNOrbiter/Death		10VNORBD
+10VNOrbiter/Charge		10VNORBC
+10VNOrbiter/Beam		10VNORBB
+10VNOrbiter/Active		10VNORBZ
+
+
+/////////////////////////////////////////////////////////////////////
+
+//Avriethin and Enythin
+
+Tentacles/Play			LAKEPLAY
+Tentacles/Attack		LAKETTA1
+
+$Random Tentacles/Kill { LAKETTK1 LAKETTK2 }
+LAKETTK1				LAKETTK1
+LAKETTK2				LAKETTK2
+
+
+Marine/Pain	dsplpain
+
+//==============================================================================
+// Ducks
+//==============================================================================
+
+$random Duck/CallSeries { Duck/CallSeries01 Duck/CallSeries02 }
+$limit Duck/CallSeries 0
+Duck/CallSeries01	"Sounds/Monsters/Duck/CallSeries01.ogg"
+Duck/CallSeries02	"Sounds/Monsters/Duck/CallSeries02.ogg"
+
+$random Duck/LowVocal { Duck/LowVocal01 Duck/LowVocal02 Duck/LowVocal03 Duck/LowVocal04 }
+$limit Duck/LowVocal 0
+Duck/LowVocal01		"Sounds/Monsters/Duck/LowVocal01.ogg"
+Duck/LowVocal02		"Sounds/Monsters/Duck/LowVocal02.ogg"
+Duck/LowVocal03		"Sounds/Monsters/Duck/LowVocal03.ogg"
+Duck/LowVocal04		"Sounds/Monsters/Duck/LowVocal04.ogg"
+
+Duck/Pissed			"Sounds/Monsters/Duck/Pissed01.ogg"
+$limit Duck/Pissed 0
+
+$random Duck/Quack { Duck/Quack01 Duck/Quack02 Duck/Quack03 Duck/Quack04 Duck/Quack05
+					Duck/Quack06 Duck/Quack07 Duck/Quack08 Duck/Quack09 Duck/Quack10
+					Duck/Quack11 Duck/Quack12 }
+$limit Duck/Quack 0
+Duck/Quack01	"Sounds/Monsters/Duck/Quack01.ogg"
+Duck/Quack02	"Sounds/Monsters/Duck/Quack02.ogg"
+Duck/Quack03	"Sounds/Monsters/Duck/Quack03.ogg"
+Duck/Quack04	"Sounds/Monsters/Duck/Quack04.ogg"
+Duck/Quack05	"Sounds/Monsters/Duck/Quack05.ogg"
+Duck/Quack06	"Sounds/Monsters/Duck/Quack06.ogg"
+Duck/Quack07	"Sounds/Monsters/Duck/Quack07.ogg"
+Duck/Quack08	"Sounds/Monsters/Duck/Quack08.ogg"
+Duck/Quack09	"Sounds/Monsters/Duck/Quack09.ogg"
+Duck/Quack10	"Sounds/Monsters/Duck/Quack10.ogg"
+Duck/Quack11	"Sounds/Monsters/Duck/Quack11.ogg"
+Duck/Quack12	"Sounds/Monsters/Duck/Quack12.ogg"
+
+$random Duck/VocalQuack { Duck/VocalQuack01	Duck/VocalQuack02 Duck/VocalQuack03
+							Duck/VocalQuack04 Duck/VocalQuack05 Duck/VocalQuack06
+							Duck/VocalQuack07 Duck/VocalQuack08 Duck/VocalQuack09
+							Duck/VocalQuack10 }
+$limit Duck/VocalQuack 0
+Duck/VocalQuack01	"Sounds/Monsters/Duck/VocalQuack01.ogg"
+Duck/VocalQuack02	"Sounds/Monsters/Duck/VocalQuack02.ogg"
+Duck/VocalQuack03	"Sounds/Monsters/Duck/VocalQuack03.ogg"
+Duck/VocalQuack04	"Sounds/Monsters/Duck/VocalQuack04.ogg"
+Duck/VocalQuack05	"Sounds/Monsters/Duck/VocalQuack05.ogg"
+Duck/VocalQuack06	"Sounds/Monsters/Duck/VocalQuack06.ogg"
+Duck/VocalQuack07	"Sounds/Monsters/Duck/VocalQuack07.ogg"
+Duck/VocalQuack08	"Sounds/Monsters/Duck/VocalQuack08.ogg"
+Duck/VocalQuack09	"Sounds/Monsters/Duck/VocalQuack09.ogg"
+Duck/VocalQuack10	"Sounds/Monsters/Duck/VocalQuack10.ogg"
+
+//==============================================================================
+// Smile
+//==============================================================================
+
+smile/laugh		"Sounds/Monsters/Smile/smilelgh.ogg"
+smile/appear	"Sounds/Monsters/Smile/smileapp.ogg"
+smile/ambient	"Sounds/Monsters/Smile/smileamb.ogg"
+
+$volume smile/ambient 3.5
+$volume smile/laugh 1.5
+
+Smile/Horror1		"Sounds/Monsters/Smile/Horror1.ogg"
+Smile/Horror2		"Sounds/Monsters/Smile/Horror2.ogg"
+Smile/Horror3		"Sounds/Monsters/Smile/Horror3.ogg"
+Smile/Horror4		"Sounds/Monsters/Smile/Horror4.ogg"
+Smile/Horror5		"Sounds/Monsters/Smile/Horror5.ogg"
+Smile/Horror6		"Sounds/Monsters/Smile/Horror6.ogg"
+Smile/Horror7		"Sounds/Monsters/Smile/Horror7.ogg"
+Smile/Horror8		"Sounds/Monsters/Smile/Horror8.ogg"
+Smile/Horror9		"Sounds/Monsters/Smile/Horror9.ogg"
+Smile/Horror11		"Sounds/Monsters/Smile/Horror11.ogg"
+Smile/Horror12		"Sounds/Monsters/Smile/Horror12.ogg"
+Smile/Horror13		"Sounds/Monsters/Smile/Horror13.ogg"
+Smile/Horror14		"Sounds/Monsters/Smile/Horror14.ogg"
+Smile/Horror15		"Sounds/Monsters/Smile/Horror15.ogg"
+Smile/Horror16		"Sounds/Monsters/Smile/Horror16.ogg"
+Smile/Attack1			"Sounds/Monsters/Smile/mimic1.ogg"
+Smile/Attack2			"Sounds/Monsters/Smile/mimic2.ogg"
+Smile/Growl			"Sounds/Monsters/Smile/mimicgrowl.ogg"
+Smile/Roar			"Sounds/Monsters/Smile/JoCroar.ogg"
+
+$limit Smile/Roar 0
+$limit Smile/Attack1 0
+$limit Smile/Attack2 0
+$limit Smile/Growl 0
+
+//==============================================================================
+// Misc
+//==============================================================================
+
+SLN/Portal/Smile1		"Sounds/Portal/Smile1"
+SLN/Portal/Smile2		"Sounds/Portal/Smile2"
+SLN/Portal/Active1		"Sounds/Portal/Active1"
+SLN/Portal/Active2		"Sounds/Portal/Active2"
+SLN/Portal/Active3		"Sounds/Portal/Active3"
+SLN/Portal/Active4		"Sounds/Portal/Active4"
+SLN/Portal/Active5		"Sounds/Portal/Active5"
+
+SLN/Portal/On1			"Sounds/Portal/On1"
+SLN/Portal/On2			"Sounds/Portal/On2"
+SLN/Portal/On3			"Sounds/Portal/On3"
+
+SLN/Portal/Off			"Sounds/Portal/Off"
+SLN/Portal/OffGlobal	"Sounds/Portal/OffGlobal"
+
+SLN/Portal/Transport	"Sounds/Portal/Transport"
+SLN/Portal/Teleport1	"Sounds/Portal/Teleport1"
+SLN/Portal/Teleport2	"Sounds/Portal/Teleport2"
+SLN/Portal/Teleport3	"Sounds/Portal/Teleport3"
+SLN/Portal/Teleport4	"Sounds/Portal/Teleport4"
+SLN/Portal/Unstable		"Sounds/Portal/Unstable"
+SLN/Portal/Thunder1		"Sounds/Portal/thunder01"
+SLN/Portal/Thunder2		"Sounds/Portal/thunder02"
+SLN/Portal/Thunder3		"Sounds/Portal/thunder03"
+SLN/Portal/Thunder4		"Sounds/Portal/thunder04"
+SLN/Portal/Thunder5		"Sounds/Portal/thunder05"
+SLN/Portal/Thunder6		"Sounds/Portal/thunder06"
+SLN/Portal/Thunder7		"Sounds/Portal/thunder07"
+SLN/Portal/Warning		"Sounds/Portal/Warning"
+
+$random SLN/Portal/Thunder
+{	SLN/Portal/Thunder1 SLN/Portal/Thunder2 SLN/Portal/Thunder3 SLN/Portal/Thunder4
+	SLN/Portal/Thunder5	SLN/Portal/Thunder6 SLN/Portal/Thunder7 }
+	
+$random SLN/Portal/Teleport
+{	SLN/Portal/Teleport1 SLN/Portal/Teleport2 SLN/Portal/Teleport3 SLN/Portal/Teleport4	}
+
+$limit SLN/Portal/Teleport 0
+$limit SLN/Portal/Thunder 0
+$limit SLN/Portal/Warning 0
+$limit SLN/Portal/On1 0
+$limit SLN/Portal/On2 0
+$limit SLN/Portal/On3 0
+$limit SLN/Portal/Off 0
+$limit SLN/Portal/OffGlobal 0
+
+SLN/NukeBoom	"Sounds/NUKEEX.ogg"
+
+//------------------------------------------------------------------------------
+
+PlasmaRifle/Fire1		"Sounds/Weapons/W_PLASF1.wav"
+PlasmaRifle/Fire2		"Sounds/Weapons/W_PLASF2.wav"
+PlasmaRifle/Fire3		"Sounds/Weapons/W_PLASF3.wav"
+PlasmaRifle/Explode		"Sounds/Weapons/W_PLASI1.wav"
+
+$random PlasmaRifle/Fire { PlasmaRifle/Fire1 PlasmaRifle/Fire2 PlasmaRifle/Fire3 }
+$limit PlasmaRifle/Fire 0
+$limit PlasmaRifle/Explode 0
+
+$alias weapons/plasmaf PlasmaRifle/Fire
+$alias weapons/plasmax PlasmaRifle/Explode
+
+//==============================================================================
+// Marine Voices
+// The choice was obviously Starcraft 2...
+//==============================================================================
+
+SLN/Marine/Attack1			"Sounds/Monsters/Marine/Attack01"
+SLN/Marine/Attack2			"Sounds/Monsters/Marine/Attack02"
+SLN/Marine/Attack3			"Sounds/Monsters/Marine/Attack03"
+SLN/Marine/Attack4			"Sounds/Monsters/Marine/Attack04"
+SLN/Marine/Attack5			"Sounds/Monsters/Marine/Attack05"
+SLN/Marine/Attack6			"Sounds/Monsters/Marine/Attack06"
+SLN/Marine/Attack7			"Sounds/Monsters/Marine/Attack07"
+SLN/Marine/Attack8			"Sounds/Monsters/Marine/Attack08"
+
+
+
+
+SLN/Marine/Kill1			"Sounds/Monsters/Marine/Kill01"
+SLN/Marine/Kill2			"Sounds/Monsters/Marine/Kill02"
+SLN/Marine/Kill3			"Sounds/Monsters/Marine/Kill03"
+SLN/Marine/Kill4			"Sounds/Monsters/Marine/Kill04"
+SLN/Marine/Kill5			"Sounds/Monsters/Marine/Kill05"
+
+
+
+
+SLN/Marine/YesSir1			"Sounds/Monsters/Marine/YesSir01"
+SLN/Marine/YesSir2			"Sounds/Monsters/Marine/YesSir02"
+SLN/Marine/YesSir3			"Sounds/Monsters/Marine/YesSir03"
+SLN/Marine/YesSir4			"Sounds/Monsters/Marine/YesSir04"
+SLN/Marine/YesSir5			"Sounds/Monsters/Marine/YesSir05"
+SLN/Marine/YesSir6			"Sounds/Monsters/Marine/YesSir06"
+SLN/Marine/YesSir7			"Sounds/Monsters/Marine/YesSir07"
+SLN/Marine/YesSir8			"Sounds/Monsters/Marine/YesSir08"
+SLN/Marine/YesSir9			"Sounds/Monsters/Marine/YesSir09"
+SLN/Marine/YesSir10			"Sounds/Monsters/Marine/YesSir10"
+SLN/Marine/YesSir11			"Sounds/Monsters/Marine/YesSir11"
+SLN/Marine/YesSir12			"Sounds/Monsters/Marine/YesSir12"
+
+
+
+
+
+SLN/Marine/AwaitingOrders1	"Sounds/Monsters/Marine/AwaitingOrders1"
+SLN/Marine/AwaitingOrders2	"Sounds/Monsters/Marine/AwaitingOrders2"
+SLN/Marine/AwaitingOrders3	"Sounds/Monsters/Marine/AwaitingOrders3"
+SLN/Marine/AwaitingOrders4	"Sounds/Monsters/Marine/AwaitingOrders4"
+SLN/Marine/AwaitingOrders5	"Sounds/Monsters/Marine/AwaitingOrders5"
+
+
+SLN/Marine/ReadyCheck1		"Sounds/Monsters/Marine/ReadyCheck01"
+SLN/Marine/ReadyCheck2		"Sounds/Monsters/Marine/ReadyCheck02"
+SLN/Marine/ReadyCheck3		"Sounds/Monsters/Marine/ReadyCheck03"
+SLN/Marine/ReadyCheck4		"Sounds/Monsters/Marine/ReadyCheck04"
+
+SLN/Marine/Chatter1			"Sounds/Monsters/Marine/Chatter01"
+SLN/Marine/Chatter2			"Sounds/Monsters/Marine/Chatter02"
+SLN/Marine/Chatter3			"Sounds/Monsters/Marine/Chatter03"
+SLN/Marine/Chatter4			"Sounds/Monsters/Marine/Chatter04"
+SLN/Marine/Chatter5			"Sounds/Monsters/Marine/Chatter05"
+SLN/Marine/Chatter6			"Sounds/Monsters/Marine/Chatter06"
+SLN/Marine/Chatter7			"Sounds/Monsters/Marine/Chatter07"
+SLN/Marine/Chatter8			"Sounds/Monsters/Marine/Chatter08"
+SLN/Marine/Chatter9			"Sounds/Monsters/Marine/Chatter09"
+
+
+
+
+
+SLN/Marine/Helping1			"Sounds/Monsters/Marine/Helping01"
+SLN/Marine/Helping2			"Sounds/Monsters/Marine/Helping02"
+SLN/Marine/Helping3			"Sounds/Monsters/Marine/Helping03"
+
+
+SLN/Marine/Revived1			"Sounds/Monsters/Marine/Revived01"
+SLN/Marine/Revived2			"Sounds/Monsters/Marine/Revived02"
+
+SLN/Marine/HelpMe			"Sounds/Monsters/Marine/HelpMe"
+
+$random SLN/Marine/Attack
+{	
+	SLN/Marine/Attack1 SLN/Marine/Attack2 SLN/Marine/Attack3 SLN/Marine/Attack4
+	SLN/Marine/Attack5 SLN/Marine/Attack6 SLN/Marine/Attack7 SLN/Marine/Attack8
+}
+
+$random SLN/Marine/Kill
+{	SLN/Marine/Kill1 SLN/Marine/Kill2 SLN/Marine/Kill3 SLN/Marine/Kill4 SLN/Marine/Kill5	}
+
+$random SLN/Marine/YesSir
+{	
+	SLN/Marine/YesSir1 SLN/Marine/YesSir2 SLN/Marine/YesSir3 SLN/Marine/YesSir4
+	SLN/Marine/YesSir5 SLN/Marine/YesSir6 SLN/Marine/YesSir7 SLN/Marine/YesSir8
+	SLN/Marine/YesSir9 SLN/Marine/YesSir10 SLN/Marine/YesSir11 SLN/Marine/YesSir12 
+}
+
+$random SLN/Marine/AwaitingOrders
+{	
+	SLN/Marine/AwaitingOrders1 SLN/Marine/AwaitingOrders2 SLN/Marine/AwaitingOrders3
+	SLN/Marine/AwaitingOrders4 SLN/Marine/AwaitingOrders5
+}
+
+$random SLN/Marine/ReadyCheck
+{ SLN/Marine/ReadyCheck1 SLN/Marine/ReadyCheck2 SLN/Marine/ReadyCheck3 SLN/Marine/ReadyCheck4 }
+
+$random SLN/Marine/Chatter
+{	
+	SLN/Marine/Chatter1 SLN/Marine/Chatter2 SLN/Marine/Chatter3 SLN/Marine/Chatter4
+	SLN/Marine/Chatter5 SLN/Marine/Chatter6 SLN/Marine/Chatter7 SLN/Marine/Chatter8
+	SLN/Marine/Chatter9
+}
+
+$random SLN/Marine/Helping
+{	SLN/Marine/Helping1 SLN/Marine/Helping2 SLN/Marine/Helping3 }
+
+$random SLN/Marine/Revived
+{	SLN/Marine/Revived1 SLN/Marine/Revived2 }
+
+$limit SLN/Marine/Attack 0
+$limit SLN/Marine/Kill 0
+$limit SLN/Marine/YesSir 0
+$limit SLN/Marine/AwaitingOrders 0
+$limit SLN/Marine/ReadyCheck 0
+$limit SLN/Marine/Chatter 0
+$limit SLN/Marine/Helping 0
+$limit SLN/Marine/Revived 0
+$limit SLN/Marine/HelpMe 0
+
+$pitchset SLN/Marine/Chatter 1.0
+$pitchset SLN/Marine/Attack 1.0
+$pitchset SLN/Marine/Kill 1.0
+$pitchset SLN/Marine/YesSir 1.0
+$pitchset SLN/Marine/AwaitingOrders 1.0
+$pitchset SLN/Marine/ReadyCheck 1.0
+$pitchset SLN/Marine/Helping 1.0
+$pitchset SLN/Marine/Revived 1.0
+$pitchset SLN/Marine/HelpMe 1.0

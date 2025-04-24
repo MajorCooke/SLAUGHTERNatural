@@ -1,0 +1,1287 @@
+#library "SLN"
+#include "zcommon.acs"
+
+global int 1:StartX;
+global int 2:StartY;
+global int 3:pathdotx[];
+global int 4:pathdoty[];
+global int 5:Lift1;
+global int 6:Lift2;
+
+world int 1:LeaveFrom[];
+world int 2:Dialogue_FontSpacing;
+world str 3:Dialogue_Font;
+world int 4:Dialogue_TypeSpeed;
+
+world int 5:Dialogue_XHud;
+world int 6:Dialogue_YHud;
+
+world str 7:MapDate;
+world str 8:MapTime;
+world str 9:MapLocation;
+world str 10:MapName;
+world int 11:automap;
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// HUD Borders ///////////////////////////////////////
+////////////////// Code by bagheadspidey, carlcyber ////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+// List of aspect ratios.
+#define ASPECT_4_3 (4.0 / 3)
+#define ASPECT_16_9 (16.0 / 9)
+#define ASPECT_16_10 (16.0 / 10)
+#define ASPECT_17_10 (17.0 / 10)
+#define ASPECT_5_4 (5.0 / 4)
+
+Function int GetAspectRatio(void)
+{
+    int noWideScreen = GetCVar("vid_nowidescreen");
+    int tft = GetCVar("vid_tft");
+
+    if (noWideScreen)
+    {
+        if (tft && GetScreenHeight() * 5 / 4 == GetScreenWidth())
+        {
+            return ASPECT_5_4;
+        }
+        return ASPECT_4_3;
+    }
+
+    // If the size is approximately 16:9, consider it so.
+    if (Abs(GetScreenHeight() * 16 / 9 - GetScreenWidth()) < 10)
+    {
+        return ASPECT_16_9;
+    }
+    // Consider 17:10 as well.
+    if (Abs(GetScreenHeight() * 17 / 10 - GetScreenWidth()) < 10)
+    {
+        return ASPECT_17_10;
+    }
+    // 16:10 has more variance in the pixel dimensions. Grr.
+    if (Abs(GetScreenHeight() * 16 / 10 - GetScreenWidth()) < 60)
+    {
+        // 320x200 and 640x400 are always 4:3, not 16:10
+        if ((GetScreenWidth() == 320 && GetScreenHeight() == 200) || (GetScreenWidth() == 640 && GetScreenHeight() == 400))
+        {
+            return ASPECT_4_3;
+        }
+        return ASPECT_16_10;
+    }
+    // Unless vid_tft is set, 1280x1024 is 4:3, not 5:4.
+    if (tft && GetScreenHeight() * 5 / 4 == GetScreenWidth())
+    {
+        return ASPECT_5_4;
+    }
+    // Assume anything else is 4:3. (Which is probably wrong these days...)
+    return ASPECT_4_3;
+}
+
+/*
+ * Gets the borders of the specified HUD size.
+ * width/height: (int)
+ *     Width/Height of the HUD.
+ * [NOTE]:
+ *     1. The HUD borders are written in HudLeft, HudRight, HudTop, and HudBottom variables.
+ *     2. Status bar and small screen blocks (screenblocks < 11) are not supported.
+ * [Credit]
+ *    Original HUD edge positioning functions by bagheadspidey
+ */
+
+int HudLeft,
+    HudRight,
+    HudTop,
+    HudBottom;
+
+Function void GetHudBorders(int width, int height)
+{
+    // HUD is displayed on the middle 4:3 screen section only,
+    // so we have to calculate borders if it is not 4:3.
+
+    int ar = GetAspectRatio();
+    int border;
+
+    if (ar == ASPECT_5_4)
+    {
+        border = height / 30;
+        HudLeft = 0;
+        HudRight = width;
+        HudTop = -border;
+        HudBottom = height + border;
+        return;
+    }
+
+    switch (ar)
+    {
+        case ASPECT_4_3: border = 0; break;
+        case ASPECT_16_9: border = width / 6; break;
+        case ASPECT_16_10: border = width / 10; break;
+        case ASPECT_17_10: border = width * 11 / 80; break;
+    }
+    HudTop = 0;
+    HudBottom = height;
+    HudLeft = -border;
+    HudRight = width + border;
+} 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////// Location Information //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+Function void LocationInfo (str li_loca, str li_date, str li_time)
+{
+	SetHUDSize(640,480,1);
+	GetHudBorders(640,480);
+
+	SetFont("smallfont");
+	hudmessage(s:li_loca; 	HUDMSG_TYPEON | HUDMSG_LOG | HUDMSG_NOTWITHFULLMAP | HUDMSG_NOTWITHOVERLAYMAP, 0, CR_WHITE, (HudRight<<16)+0.6, 0.1, 7.00-(0.03*strlen(li_loca)), 0.03, 1.0);
+	hudmessage(s:li_date; 	HUDMSG_TYPEON | HUDMSG_LOG | HUDMSG_NOTWITHFULLMAP | HUDMSG_NOTWITHOVERLAYMAP, 0, CR_WHITE, (HudRight<<16)+0.6, 10.1, 7.00-(0.03*strlen(li_date)), 0.03, 1.0);
+	hudmessage(s:li_time; 	HUDMSG_TYPEON | HUDMSG_LOG | HUDMSG_NOTWITHFULLMAP | HUDMSG_NOTWITHOVERLAYMAP, 0, CR_WHITE, (HudRight<<16)+0.6, 20.1, 7.00-(0.03*strlen(li_time)), 0.03, 1.0);
+	ActivatorSound("world/text10",127);
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////// Experimental Automap //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+Script "AutoMapManagement" ENTER
+{
+
+	if(GetCVar("vid_aspect") == 1 || 2 || 5 || 0)
+	{
+		SetHudSize(640,480,0);
+	//	SetFont("automap1");
+	//	HudMessage(s:"a";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,49900,CR_UNTRANSLATED,320.0,240.0,0.02857);
+		SetFont("smallfont");
+		SetHudSize(320,240,0);
+		HudMessage(s:"Local Map";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9899,CR_WHITE,25.0,15.0,0.02857);
+		HudMessage(s:mapname;HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9898,CR_WHITE,160.0,230.0,0.02857);
+	//	HudMessage(s:"6th April, 2033";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9897,CR_WHITE,295.0,15.0,0.02857);
+		Acs_NamedExecute("Compass",0);
+		Delay(1);
+		Restart;
+	}
+
+	else
+	{
+		SetHudSize(640,480,0);
+	//	SetFont("automap2");
+	//	HudMessage(s:"a";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,49900,CR_UNTRANSLATED,320.0,240.0,0.02857);
+		SetFont("smallfont");
+		SetHudSize(320,240,0);
+		HudMessage(s:"Local Map";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9899,CR_WHITE,25.0,15.0,0.02857);
+		HudMessage(s:mapname;HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9898,CR_WHITE,160.0,230.0,0.02857);
+	//	HudMessage(s:"6th April, 2033";HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,9897,CR_WHITE,295.0,15.0,0.02857);
+		Acs_NamedExecute("Compass",0);
+		Delay(1);
+		Restart;
+	}
+
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// Compass /////////////////////////////////////////
+///////////////////////// Code by Ed the Bat ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+function int findcos(int a)
+{
+	a%=1.0;
+	if(a<0)
+		a+=1.0;
+	if(a>0.5)
+		a=-a+1.0;
+	return cos(a);
+}
+
+Script "Compass" (VOID)
+{
+	if (GetCvar("am_rotate") == TRUE)
+	{
+		SetHUDSize(640,480,1);
+		int a=GetActorAngle(0);
+		int x=-findcos(a)*160/1.0,y=findcos(a+0.25)*160/1.0;
+		SetFont("BIGFONT");
+		HUDMessage(s:"W"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8896,CR_WHITE,x*1.0+320.0,y*1.0+240.0,0.02857);
+		HUDMessage(s:"E"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8895,CR_WHITE,-x*1.0+320.0,-y*1.0+240.0,0.02857);
+		HUDMessage(s:"N"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8894,CR_WHITE,-y*1.0+320.0,x*1.0+240.0,0.02857);
+		HUDMessage(s:"S"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8893,CR_WHITE,y*1.0+320.0,-x*1.0+240.0,0.02857);
+	}
+	
+	else
+	{
+		SetHUDSize(640,480,1);
+		SetFont("BIGFONT");
+		HUDMessage(s:"W"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8896,CR_WHITE,320.0,80.0,0.02857);
+		HUDMessage(s:"E"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8895,CR_WHITE,320.0,400.0,0.02857);
+		HUDMessage(s:"N"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8894,CR_WHITE,480.0,240.0,0.02857);
+		HUDMessage(s:"S"; HUDMSG_PLAIN | HUDMSG_NOTWITH3DVIEW,8893,CR_WHITE,160.0,240.0,0.02857);
+	}
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// Toggle SFX ///////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//[MC] Torches are now handled by ZScript.
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// Absolute Value ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+function int abs (int x)
+{
+    if (x < 0)
+        return -x;
+
+    return x;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////// General Dialogue /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+str gen_text = "";
+int gen_textcolour = 0;
+int gen_ID = 0;
+int gen_xpos = 0.0;
+int gen_ypos = 0.0;
+int gen_holdtime = 0.0;
+int realtextlength = 0;
+int AutoSkip = 0;
+
+// Has the option to ignore if it's already checked. Mainly used to prevent the
+// cinematic script from double skipping.
+
+
+Function int CheckUseKey(void)
+{
+    int nin = GetPlayerInput(0,MODINPUT_BUTTONS);
+    int oin = GetPlayerInput(0,MODINPUT_OLDBUTTONS);
+	return ((nin & BT_USE) && !(oin & BT_USE));
+}
+
+// Used for skip checking.
+Script "UseKeyTimed" (int timerr)
+{
+	while (timerr-- > 0 && !CheckUseKey())
+		Delay(1);
+}
+
+Function void SetAutoSkip(int a)
+{
+	AutoSkip = a;
+}
+
+// Allows for looking up LANGUAGE strings.
+Function void GeneralDialogueL(str text, int ID, int textcolour, int xpos, int ypos, int holdtime, int specialfunc)
+{
+	GeneralDialogue(StrParam(l:text), ID, textcolour, xpos, ypos, holdtime, specialfunc);
+}
+
+Function void GeneralDialogue(str text, int ID, int textcolour, int xpos, int ypos, int holdtime, int specialfunc)  
+{
+	//Takes all the passed information and makes it available for the other scripts
+	gen_text = text;
+	gen_textcolour = textcolour;
+	gen_ID = ID;
+	gen_xpos = xpos;
+	gen_ypos = ypos;
+	gen_holdtime = holdtime;
+
+	str back_single = "a";
+	str back_final = "";
+
+	//If specialfunc = 0, default settings for general dialogue
+	if (specialfunc == 0)
+	{
+		SetFont("consolefont");
+		sethudsize(740, 580, 1);
+		Dialogue_XHud = 740;
+		Dialogue_YHud = 580;
+	}
+	//If specialfunc = 1, makes the text bigger
+	else
+	{
+		SetFont("consolefont");
+		sethudsize(555, 435, 1);
+		Dialogue_XHud = 555;
+		Dialogue_YHud = 435;
+	}
+		
+	//Regular dialogue
+	realtextlength = CinematicDialogue_New(text,1); //Retuns the length of the text without special symbols
+	int realtextdelay = (realtextlength*Dialogue_TypeSpeed); //Determines the modifier for the delay for the black background
+
+
+	for (int i = 0; i < realtextlength; i++ )
+	{
+		back_final = StrParam(s:back_final,s:back_single);
+	}
+
+	//Black background for readability
+	SetFont("BACKTXTM"); //Middle section
+	hudmessage(s:back_final; HUDMSG_FADEINOUT | HUDMSG_ALPHA, ID+1000000, CR_BLACK, gen_xpos, ypos, gen_holdtime-realtextdelay, 1.0, 1.0, GetCVar("SLN_DialogueShadow"));
+	SetFont("BACKTXTR"); //Right section
+	hudmessage(s:"a"; HUDMSG_FADEINOUT | HUDMSG_ALPHA, ID+2000000, CR_BLACK, xpos+(((realtextlength+1)*4) << 16 ), ypos, gen_holdtime-realtextdelay, 1.0, 1.0, GetCVar("SLN_DialogueShadow"));
+	SetFont("BACKTXTL"); //Left section
+	hudmessage(s:"a"; HUDMSG_FADEINOUT | HUDMSG_ALPHA, ID+3000000, CR_BLACK, xpos-(((realtextlength+1)*4) << 16 ), ypos, gen_holdtime-realtextdelay, 1.0, 1.0, GetCVar("SLN_DialogueShadow"));
+
+	SetFont("consolefont"); //Reset font to normal
+
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////// Cinematic Dialogue ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+str text_array[50][10];
+int text_index = 0;
+
+int cin_camera = 0;
+int cin_startstopvis = 0;
+int cin_charchange = 0;
+str cin_character = "";
+str cin_text = "";
+int cin_textcolour = 0;
+int cin_lineid = 0;
+str cin_nextscript = "";
+
+int Shake_Termination = 0;
+
+// Allows for looking up language strings.
+Function void CinematicDialogueL(int camera, int startstopvis, int charchange, str character, str text, int textcolour, int lineid, str nextscript)
+{
+	CinematicDialogue(camera, startstopvis, charchange, character, StrParam(l:text), textcolour, lineid, nextscript);
+}
+
+Function void CinematicDialogue(int camera, int startstopvis, int charchange, str character, str text, int textcolour, int lineid, str nextscript)
+{
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Takes all the passed information and makes it available for the other scripts
+	cin_camera = camera;
+	cin_startstopvis = startstopvis;
+	cin_charchange = charchange;
+	cin_character = character;
+	cin_text = text;
+	cin_textcolour = textcolour;
+	cin_lineid = lineid;
+	cin_nextscript = nextscript;
+
+	SetLineSpecial(cin_lineid,0,0);
+
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Sets hud and clears previous cinematic dialogue messages.
+	sethudsize(740, 580, 1);
+
+	Shake_Termination = 1; //stops the shaking script from executing.
+	ClearHudMessage(100098); //Character name
+	ClearHudMessage(100050); //Use to continue
+	for (int clearmsg = 0; clearmsg <= text_index ; clearmsg++)
+		{ClearHudMessage(105096-clearmsg);}
+
+	//Changes camera if required.
+	if (camera > 0)
+		{ChangeCamera(camera,0,0);}
+		
+	//If visual mode, removes the black bar.
+	if (startstopvis == 3)
+		{ClearHudMessage(110000);} //Removes black bar
+
+	//If starting up, black bar fades in.
+	if (startstopvis == 1)
+		{SetFont("BLACKBAR");
+		hudmessage(s: "a"; 
+		HUDMSG_FADEINOUT | HUDMSG_ALPHA, 110000, CR_UNTRANSLATED, 370.0, 420.0, 9999.0, 0.5, 0.5, GetCVar("SLN_CinematicShadow"));}
+		
+	//Continuing as normal, black bar instantly appears.
+	if (startstopvis == 0)
+		{SetFont("BLACKBAR");
+		hudmessage(s: "a"; 
+		HUDMSG_PLAIN | HUDMSG_ALPHA, 110000, CR_UNTRANSLATED, 370.0, 420.0, 9999.0, GetCVar("SLN_CinematicShadow"));}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Continue Message
+
+	SetFont("smallfont");
+	hudmessage(s:"Press ", k:"+use", s:" to continue."; 
+	HUDMSG_PLAIN | HUDMSG_ALPHA, 100050, CR_BLACK, 370.0, 570.0, 0, 0.3);
+	//Acs_NamedExecuteAlways("Cinematic_ContinueDelay",0,((strlen(CinematicDialogue_Default(text,1))*0.01)*35) >> 16,continuecheck); //Executes the flashing continue script
+
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Character Name
+
+	if (charchange > 0)
+		{SetFont("BIGFONT");
+		hudmessage(s: character; 
+		HUDMSG_TYPEON, 100098, textcolour, 130.1, 410.0, 9999.0, 0.02, 10.0);}
+	else
+		{SetFont("BIGFONT");
+		hudmessage(s: character; 
+		HUDMSG_PLAIN, 100098, textcolour, 130.1, 410.0, 9999.0);}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Character Dialogue
+
+	SetFont("consolefont");
+	CinematicDialogue_New(cin_text,0);
+	//This function does the text printing, but also returns the number of messages,
+	//in text_index so that the correct amount of messages can be cleared at the start
+	//of this function.
+
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//Sets the next use action
+	if (startstopvis == 2)
+	{
+		SetLineSpecial(lineid,0,0);
+		ClearHudMessage(100097);
+		ClearHudMessage(100098);
+		ClearHudMessage(110000);
+		ClearHudMessage(100050);
+		for (int clearmsg2 = 0; clearmsg2 <= text_index ; clearmsg2++)
+			{ClearHudMessage(105096-clearmsg2);}
+	}
+	//else
+		//{SetLineSpecial(lineid,Acs_NamedExecute,nextscript);}
+
+}
+
+
+
+//TO DO
+//pressing use to continue without pressing a wall?
+
+//Array looks like:
+// text_array = {"text",0,0,0,0,0}, (first message, no modifier, ended by an *)
+//              {"text",1,0,0,0,0}, (second message, ended by a second *)
+//              {"text",0,0,0,0,0}, (third message, ended by a ^)
+//              {"text",0,1,0,1,0}, (fourth message, still modified by ^ but ended by a \n)
+//              {"text",0,1,0,0,0}, (fifth message, ended by a ^)
+//              {"text",0,0,0,0,0}..(sixth message, ended by the end of sentence)
+int shake_skip;
+Function str CinematicDialogue_New(str text, int cinematic_or_general)
+{
+	//Resets types and index items
+	int i = 0;
+	str log_message = "";
+	int type_ast = 0;
+	int type_arr = 0;
+	int type_til = 0;
+	text_index = 0;
+	//Clears the array from the previous loop
+	for (int clearrow = 0; clearrow <= 49; clearrow++)
+	{
+		for (int clearcol = 0; clearcol <= 9; clearcol++)
+			{text_array[clearrow][clearcol] = 0;}
+	}
+
+	for (int f = 0; f <= strlen(text); f++) //Iterates through text
+	{
+		//Searches text for any special character...
+		if (GetChar(text,f) == ('*') || 	//???
+			GetChar(text,f) == ('^') || 	//Font change
+			GetChar(text,f) == ('`') || 	//Typeon time change
+			GetChar(text,f) == ('@') || 	//Break until 'use' pressed
+			GetChar(text,f) == ('\n') ||	//New line
+			GetChar(text,f) == ('|') ||		//Colour change
+			GetChar(text,f) == ('&'))		//Delay
+		{
+			Switch (GetChar(text,f))
+			{
+				case '*': //If it's *, toggle on/off
+					type_ast = type_ast*-1;
+					type_ast = type_ast+1;
+					break;
+				case '^': //If it's ^, toggle on/off
+					type_arr = type_arr*-1;
+					type_arr = type_arr+1;
+					break;
+				case '`': //If it's `, toggle on/off
+					type_til = type_til*-1;
+					type_til = type_til+1;
+					break;
+				case '\n': //If it's an \n, store for the current index only
+					text_array[text_index][4] = 1; break;
+				case '&': //If it's a &, store for the current index only
+					text_array[text_index][5] = 1; break;
+				case '|': //If it's a |\c, store for the next index only
+					text_array[text_index+1][6] = 1; break;
+				case '@': //If it's a @, store for the current index only
+					text_array[text_index][7] = 1; break;
+				default: //It shouldn't happen, but if it's none of them, store all as 0
+					text_array[text_index][1] = 0; 
+					text_array[text_index][2] = 0;
+					text_array[text_index][3] = 0; break;
+			}
+			text_array[text_index][0] = strmid(text,i,f-i); //create the message from everything before the special character
+			text_index++; //Start making changes to the next message
+			text_array[text_index][1] = type_ast; //Set the value of the toggle active for the next message
+			text_array[text_index][2] = type_arr; //Set the value of the toggle active for the next message
+			text_array[text_index][3] = type_til; //Set the value of the toggle active for the next message
+			//print(	s: text_array[text_index-1][0],
+			//		i: text_array[text_index][1],
+			//		i: text_array[text_index][2],
+			//		i: text_array[text_index][3],
+			//		i: text_array[text_index][4],
+			//		i: text_array[text_index][5],
+			//		i: text_array[text_index][6],
+			//		i: text_array[text_index][7]);
+			i = f+1; //skip printing the special character
+			continue;
+		}
+		if (f == strlen(text)) //If it reaches the end, auto store even if nothing found
+		{
+			text_array[text_index][0] = strmid(text,i,f);
+			text_index++;
+		}
+	}
+		
+	//Creates log text
+	for (int d = 0; d <= text_index-1; d++) 
+		{log_message = strparam(s: log_message, s: text_array[d][0]);}
+	if (cinematic_or_general == 0)
+		{hudmessage(s: cin_character, s: "\n", s: log_message; HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_LOG, 0, cin_textcolour, 0, 0, 0.0, 0.0);}
+	else
+		{hudmessage(s: log_message; HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_LOG, 0, gen_textcolour, 0, 0, 0.0, 0.0);}
+		
+	//If the dialogue is for the cinematic text...
+	if (cinematic_or_general == 0)
+	{
+		shake_skip = 0; //Hacky way to get the shaking to only execute again after being cancelled when rebooting the script from scratch.
+		Acs_NamedExecute("CinematicDialogue_New_Print",0,0); //Once information is gathered, executes the display script
+	}
+	else //If not, for general gameplay text...
+		Acs_NamedExecute("GeneralDialogue_New_Print",0);
+		
+	Return strlen(log_message);
+}
+
+
+
+int xpos;
+int ypos;
+int askip;
+
+Script "CinematicDialogue_New_Print" (int skipped)
+{
+	SetActivator(0, AAPTR_PLAYER1);
+	//Remove any existing continue arrows
+	ClearHUDMessage(100097);
+
+	//General HUD setup
+	//int xpos = 370.0;
+	xpos = 130.1; 
+	ypos = 436.1;
+	SetFont("consolefont");
+	sethudsize(740, 580, 1);
+
+	//Gives the player the ability to skip; block shouldn't be necessary but a precaution
+	if (skipped == 0)
+	{	SetLineSpecial(cin_lineid,Acs_NamedExecute,"CinematicDialogue_Skip");	} //Sets use to skip
+	else
+	{	SetLineSpecial(cin_lineid,0,0);	} //If you've already skipped, does nothing until a new stop point
+
+	for (int msg = 0; msg < text_index; msg++)
+	{
+		//If there was a `, change the type time to 0.1
+		Dialogue_TypeSpeed = 0.01;
+		if (text_array[msg][3] == 1) 
+			{Dialogue_TypeSpeed = 0.1;}
+
+		//If there was a ^, change the font size
+		Dialogue_FontSpacing = 8.0;
+		if (text_array[msg][2] == 1) 
+		{
+			SetFont(Dialogue_Font);
+			Dialogue_FontSpacing = 8.0;
+		}
+		else SetFont("consolefont");
+
+		//SetFont(Dialogue_Font);
+		PlaySound(0,"world/text05",CHAN_BODY,1.0,true,ATTN_NONE,false);
+
+		//If there was a *, make the text shaky instead of normal typeon
+		if (text_array[msg][1] == 1) 
+		{	Acs_NamedExecuteAlways("CinematicDialogue_ShakyText",0,msg,xpos,ypos);}	
+		else
+		{
+			if (skipped == 0)
+			{
+				hudmessage(s: text_array[msg][0];
+				HUDMSG_TYPEON, 105096-msg, cin_textcolour, xpos, ypos, 9999.0, Dialogue_TypeSpeed, 10.0);
+			}
+			if (skipped == 1)
+			{
+				hudmessage(s: text_array[msg][0];
+				HUDMSG_PLAIN, 105096-msg, cin_textcolour, xpos, ypos, 9999.0);
+			}
+		}
+		xpos = xpos+((strlen(text_array[msg][0])-(text_array[msg][6]*2))*Dialogue_FontSpacing);
+
+		//If there was a \n, go to new line and reset x pos
+		if (text_array[msg][4] == 1) 
+		{
+			ypos = ypos + 12.0; //Go to new line
+			xpos = 130.1;
+		} //Reset x position of text
+
+		//If there was a &, increase delay by 1 second
+		int typetime = ((strlen(text_array[msg][0])*Dialogue_TypeSpeed)*35) >> 16;
+		int pausetime = 0; //Ensure pause time is reset every message
+		if (text_array[msg][5] == 1) 
+		{
+			pausetime = ((0.5*35) >> 16);
+		}
+
+		//Delays based on the type speed before moving to the next message.
+		//If skipped is active, does not delay.
+		if (skipped == 0)
+		{	Delay(typetime);	}
+
+		StopSound(0,CHAN_BODY); //Typing has finished, so has the sound
+
+		//If there was a @, executes a suspend and waits until the player presses use
+		if (text_array[msg][7] == 1) 
+		{
+			text_array[msg][7] = 0; //Ensures that this will not pause again if skipping
+			skipped = 0; //Stops any skip functions from running until skip is activated again
+			SetLineSpecial(cin_lineid,Acs_NamedExecute,"CinematicDialogue_New_Print",0,0);
+			SetFont("M_SKULL1");
+			hudmessage(s: "a";HUDMSG_PLAIN, 100097, cin_textcolour, xpos, ypos-7.0, 0);
+			Suspend;
+			ClearHUDMessage(100097);
+			shake_skip = 0;
+			SetLineSpecial(cin_lineid,Acs_NamedExecute,"CinematicDialogue_Skip");
+		}
+
+		//Seperated from the typetime delay to put the stop sound inbetween.
+		//If skipped is active, does not pause.
+		if (skipped == 0)
+		{	Delay(pausetime);	}
+	}
+
+	//At the end of the full message, skip is deactivated and use forces you onto the next part
+	skipped = 0;
+	SetLineSpecial(cin_lineid,Acs_NamedExecute,cin_nextscript);
+
+	//Also shows the continue arrow
+	if (cin_startstopvis != 2 && cin_startstopvis != 3)
+	{
+		SetFont("M_SKULL1");
+		hudmessage(s: "a";HUDMSG_PLAIN, 100097, cin_textcolour, 602.0, 470.0, 0);
+	}
+
+}
+Script "pos" (VOID)
+{
+	print(f: floor(fixedmul(130.1,1.5))+0.1);
+}
+
+//executed when a cinematic script needs to do nothing.
+Script "NullScript" (VOID) {Terminate;}
+
+/////Small script to terminate the printing script and execute it again with
+/////the skip variable active.
+Script "CinematicDialogue_Skip" (VOID)
+{
+
+	Acs_NamedTerminate("CinematicDialogue_New_Print",0);
+	shake_skip = 1;
+	Delay(1);
+
+	If(cin_startstopvis == 4) //If set to 4, will skip straight to the next message
+		{Acs_NamedExecute(cin_nextscript,0);Terminate;}
+	Acs_NamedExecute("CinematicDialogue_New_Print",0,1);
+	Terminate;
+
+}
+
+
+
+/////Attempt at shaky text. Remarkably worked better than expected.
+Script "CinematicDialogue_ShakyText" (int currenttext, int xpos_shake, int ypos_shake)
+{
+	Shake_Termination = 0; //Resets the termination varaible upon a new activation of the script.
+	str orig_msg_text = text_array[currenttext][0];
+	//int typespeed_shake = typespeed;
+	sethudsize(740, 580, 1);
+	//setfont(Dialogue_Font);
+	Dialogue_FontSpacing = 8.0;
+	if (text_array[currenttext][2] == 1) 
+		{SetFont(Dialogue_Font);
+		Dialogue_FontSpacing = 8.0;}
+	else {SetFont("consolefont");}
+
+	str text_shake[500];
+
+	//For every letter in the word,
+	for (int a = 0; a < strlen(orig_msg_text); a++)
+	{
+		text_shake[a] = ""; //initialises empty space in the array
+		//combine a number of empty letters equal to the current letter position and save it into an array
+		for (int c = 0; c < a; c++)
+			text_shake[a] = strparam(s: text_shake[a], s: "");
+			
+		text_shake[a] = strparam(s: text_shake[a], c: GetChar(orig_msg_text,a));
+	}
+
+	//The hudmessages will eventually need to update every tic to shake.
+	//Upon their first update, all the ones that are finished typing will need to
+	//become PLAIN instead of TYPEON so they don't disappear on the update and start
+	//typing from scratch again.
+
+	int loops = 0; //How many loops have happened.
+	int loop_count = 0; //Internal loop count for checking when to type a letter.
+	int loop_letters = 0; //Figure out how many letters are typed until 1 tic has passed:
+	int current_letter = 0; //what letter we're currently on, counting for the typeon loop.
+	int shake_id = ((500*(105096-currenttext))-52500000); //Sets an instance of the original ID minus the current message number for the script. Makes a big number to give each individual shake a large amount of character IDs (500).
+
+	while (true)
+	{
+	
+		//If the number of loops is equal to or greater than the length of the
+		//string, it's time to exit the typeon loop.
+		if (current_letter+1 >= strlen(orig_msg_text))  //loops+1 since it starts from 0
+			{break;}
+		
+		if (Dialogue_TypeSpeed > 0.057) //If the typespeed is greater than the biggest amount that will not give a zero result when being the divider of (1/35)...
+		{
+			int loops_until_typeon = (Round(fixeddiv(Dialogue_TypeSpeed,0.02857)) >> 16); //Figures out the new delay.
+			loop_letters = 1; //Since the delay is the constraining factor now, the amount of letters typed per delay is automatically set as 1.
+		}
+		else //If the typespeed will divide (1/35) into a non-zero answer, then the amount of letters typed is determined by...
+		{
+			loops_until_typeon = 0;
+			int characters_in_tic = (Round(fixeddiv(0.02857,Dialogue_TypeSpeed)) >> 16); //...Either the amount of letters typed in one tic...
+			int characters_in_text = strlen(orig_msg_text) - (loop_letters*loops); //...Or if what's left of the word can be done in one tic.
+			if(characters_in_tic >= characters_in_text)
+				{loop_letters = characters_in_text;}
+			else
+				{loop_letters = characters_in_tic;}
+		}
+
+		//Now loop_letters is taken and used as the number of times a loop is done that types the text.
+		for (int d = 0; d < loop_letters; d++)
+		{
+			loop_count++;
+			if (loops_until_typeon > loop_count)
+				{break;}
+			loop_count = 0;
+			hudmessage(s: text_shake[current_letter];
+			HUDMSG_TYPEON, shake_id-current_letter, cin_textcolour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0, Dialogue_TypeSpeed, 10.0);
+			current_letter++;
+		}
+		
+		//At the end of the loop, all the characters that have made it so far will be converted to plain, and the loop set to go through the next values
+		loops++;
+
+			if(shake_skip == 1)
+				{break;}
+			Delay(1);
+			
+		for (int e = 0; e < current_letter; e++)
+		{
+			hudmessage(s: text_shake[e];
+			HUDMSG_PLAIN, shake_id-e, cin_textcolour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0);
+		}
+	
+		//If shake termination has been triggered, remove the messages and end the script.
+		if (Shake_Termination == 1)
+		{
+			//Shake_Termination = 0;
+			for (int id1 = 0; id1 < strlen(orig_msg_text); id1++)
+				{ClearHUDMessage(shake_id-id1);}
+			orig_msg_text = ""; //Clears any remaining string in the script variable
+			Terminate;
+		}
+	}
+	
+//After all letters have been typed on, do nothing but shake.
+	while (true)
+	{
+		for (int f = 0; f < strlen(orig_msg_text); f++)
+		{
+			hudmessage(s: text_shake[f];
+			HUDMSG_PLAIN, shake_id-f, cin_textcolour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0);
+		}
+		Delay(1);
+	
+		//If shake termination has been triggered, remove the messages and end the script.
+		if (Shake_Termination == 1)
+		{
+			//Shake_Termination = 0;
+			for (int id2 = 0; id2 < strlen(orig_msg_text); id2++)
+				{ClearHUDMessage(shake_id-id2);}
+			orig_msg_text = ""; //Clears any remaining string in the script variable
+			Terminate;
+		}
+	}
+
+}
+
+
+
+int typetime_cumulative = 0; //For ensuring all messages fade out all at once
+/////Simple version of the cinematic dialogue printing script meant for the general gameplay dialogue.
+/////I think with enough effort this could have been combined into the same function, but it would
+/////skip 50% of it so I figured it would just make it messy.
+Script "GeneralDialogue_New_Print" (VOID)
+{
+	SetActivator(0,AAPTR_PLAYER1);
+	//General HUD setup
+	SetFont("consolefont");
+	sethudsize(Dialogue_XHud, Dialogue_YHud, 1);
+
+	//xpos calculation
+	Dialogue_FontSpacing = 8.0; //Default for confont
+	gen_xpos = (floor((Dialogue_XHud/2) << 16) +0.1)-((/*strlen(gen_text)*/realtextlength * Dialogue_FontSpacing)/2);
+
+	for (int msg = 0; msg < text_index; msg++)
+	{
+	
+		//If there was a `, change the type time to 0.1
+		Dialogue_TypeSpeed = 0.01;
+		if (text_array[msg][3] == 1) 
+			{Dialogue_TypeSpeed = 0.1;}
+			
+		//If there was a ^, change the font size
+		Dialogue_FontSpacing = 8.0;
+		if (text_array[msg][2] == 1) 
+			{SetFont(Dialogue_Font);
+			Dialogue_FontSpacing = 8.0;}
+		else {SetFont("consolefont");}
+		
+		//Determines the modifier for the hold time for the current message
+		typetime_cumulative = typetime_cumulative + (strlen(text_array[msg][0])*Dialogue_TypeSpeed);
+		
+		//SetFont(Dialogue_Font);
+		PlaySound(0,"world/text05",CHAN_5,1.0,true,ATTN_NONE,false);
+		
+		//If there was a *, make the text shaky instead of normal typeon
+		if (text_array[msg][1] == 1) 
+			{Acs_NamedExecuteAlways("GeneralDialogue_ShakyText",0,msg,gen_xpos,gen_ypos);}	
+		else
+			{hudmessage(s: text_array[msg][0];HUDMSG_TYPEON, (gen_ID*50)+105096-msg, gen_textcolour, gen_xpos, gen_ypos, gen_holdtime-typetime_cumulative, Dialogue_TypeSpeed, 1.0);}
+			gen_xpos = gen_xpos+((strlen(text_array[msg][0])-(text_array[msg][6]*2))*Dialogue_FontSpacing);
+		
+		//If there was a &, increase delay by 1 second
+		int typetime = ((strlen(text_array[msg][0])*Dialogue_TypeSpeed)*35) >> 16;
+		int pausetime = 0; //Ensure pause time is reset every message
+		if (text_array[msg][5] == 1) 
+		{
+			pausetime = ((0.5*35) >> 16);
+			typetime_cumulative = typetime_cumulative + 0.5;
+		}
+		
+		//Delays based on the type speed before moving to the next message.
+		//If skipped is active, does not delay.
+		Delay(typetime);
+			
+		StopSound(0,CHAN_5); //Typing has finished, so has the sound
+		
+		//Seperated from the typetime delay to put the stop sound inbetween.
+		Delay(pausetime);
+	}
+
+	typetime_cumulative = 0; //Resets for each new on screen message
+}
+
+
+
+/////Shaky text for general dialogue. Again, a simplification for readability.
+Script "GeneralDialogue_ShakyText" (int currenttext, int xpos_shake, int ypos_shake)
+{
+	str orig_msg_text = text_array[currenttext][0];
+	int orig_msg_colour = gen_textcolour;
+	int shake_holdtimeinitial = 0.0;
+	int shake_holdtimefinal = ((gen_holdtime-typetime_cumulative)*35);
+	if (text_array[currenttext][5] == 1) 
+		{shake_holdtimefinal = shake_holdtimefinal + 17.5;} //Minus half-second delay if a pause is called in for fade out time.
+
+	sethudsize(Dialogue_XHud, Dialogue_YHud, 1);
+	//setfont(Dialogue_Font);
+	Dialogue_FontSpacing = 8.0;
+	if (text_array[currenttext][2] == 1) 
+	{
+		SetFont(Dialogue_Font);
+		Dialogue_FontSpacing = 8.0;
+	}
+	else SetFont("consolefont");
+
+	str text_shake[500];
+
+	//For every letter in the word,
+	for (int a = 0; a < strlen(orig_msg_text); a++)
+	{
+		text_shake[a] = ""; //initialises empty space in the array
+		//combine a number of empty letters equal to the current letter position and save it into an array
+		for (int c = 0; c < a; c++)
+		{
+			text_shake[a] = strparam(s: text_shake[a], s: "");
+		}
+		text_shake[a] = strparam(s: text_shake[a], c: GetChar(orig_msg_text,a));
+	}
+
+	//The hudmessages will eventually need to update every tic to shake.
+	//Upon their first update, all the ones that are finished typing will need to
+	//become PLAIN instead of TYPEON so they don't disappear on the update and start
+	//typing from scratch again.
+
+	int loops = 0; //How many loops have happened.
+	int loop_count = 0; //Internal loop count for checking when to type a letter.
+	int loop_letters = 0; //Figure out how many letters are typed until 1 tic has passed:
+	int current_letter = 0; //what letter we're currently on, counting for the typeon loop.
+	int shake_id = ((500*(105096+gen_ID-currenttext))-52500000); //Sets an instance of the original ID minus the current message number for the script. Makes a big number to give each individual shake a large amount of character IDs (500).
+	int shake_alpha = 1.0; //Starting alpha of any shake message, eventually reduces to slowly fade out
+
+	while (true)
+	{
+	
+		//If the number of loops is equal to or greater than the length of the
+		//string, it's time to exit the typeon loop.
+		if (current_letter+1 >= strlen(orig_msg_text))  //loops+1 since it starts from 0
+			{break;}
+		
+		if (Dialogue_TypeSpeed > 0.057) //If the typespeed is greater than the biggest amount that will not give a zero result when being the divider of (1/35)...
+		{
+			int loops_until_typeon = (Round(fixeddiv(Dialogue_TypeSpeed,0.02857)) >> 16); //Figures out the new delay.
+			loop_letters = 1; //Since the delay is the constraining factor now, the amount of letters typed per delay is automatically set as 1.
+		}
+		else //If the typespeed will divide (1/35) into a non-zero answer, then the amount of letters typed is determined by...
+		{
+			loops_until_typeon = 0;
+			int characters_in_tic = (Round(fixeddiv(0.02857,Dialogue_TypeSpeed)) >> 16); //...Either the amount of letters typed in one tic...
+			int characters_in_text = strlen(orig_msg_text) - (loop_letters*loops); //...Or if what's left of the word can be done in one tic.
+			if(characters_in_tic >= characters_in_text)
+				{loop_letters = characters_in_text;}
+			else
+				{loop_letters = characters_in_tic;}
+		}
+
+		//Now loop_letters is taken and used as the number of times a loop is done that types the text.
+		for (int d = 0; d < loop_letters; d++)
+		{
+			loop_count++;
+			if (loops_until_typeon > loop_count)
+				break;
+			loop_count = 0;
+			hudmessage(s: text_shake[current_letter];
+			HUDMSG_TYPEON, shake_id-current_letter, orig_msg_colour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0, Dialogue_TypeSpeed, 10.0);
+			current_letter++;
+		}
+		
+		//At the end of the loop, all the characters that have made it so far will be converted to plain, and the loop set to go through the next values
+		loops++;
+
+			Delay(1);
+		for (int e = 0; e < current_letter; e++)
+		{
+			hudmessage(s: text_shake[e];
+			HUDMSG_PLAIN, shake_id-e, orig_msg_colour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0);
+		}
+		
+	}
+		
+		//After all letters have been typed on, do nothing but shake.
+	while (true)
+	{
+		for (int f = 0; f < strlen(orig_msg_text); f++)
+			hudmessage(s: text_shake[f];
+			HUDMSG_PLAIN | HUDMSG_ALPHA, shake_id-f, orig_msg_colour, xpos_shake+Round(Random(-1.0,1.0)), ypos_shake+Round(Random(-1.0,1.0)), 9999.0, shake_alpha);
+		
+		Delay(1);
+		shake_holdtimeinitial = shake_holdtimeinitial + 1.0;
+		//Print(f:shake_holdtimeinitial, s:", ", f:shake_holdtimefinal);
+		
+		//If general shake termination has been triggered, slowly lower the alpha to make them fade out
+		if (shake_alpha <= 0.0)
+			{shake_holdtimeinitial = 0;orig_msg_text = "";Terminate;}
+		if (shake_holdtimeinitial >= shake_holdtimefinal)
+			{shake_alpha = shake_alpha - 0.029;}
+	}
+
+}
+
+
+
+/*
+/////Waits until the message finishes typing on, and then make the continue
+/////message glow at the bottom of the screen.
+Script "Cinematic_ContinueDelay" (int letters, int currentdialogue)
+
+{
+if (letters < 1) //If no dialogue is given, the script automatically terminates.
+	{Terminate;}
+Delay(letters); //Waits for a time based on the type on speed and length of the previous message
+while (continuecheck == currentdialogue) //If the dialogue has already moved on, terminate
+	{
+	sethudsize(740, 580, 1);
+	SetFont("smallfont");
+	hudmessage(s:"Press ", k:"+use", s:" to continue."; 
+	HUDMSG_FADEINOUT, 49, CR_CYAN, 370.0, 570.0, 0.0, 0.5, 0.5);
+	Delay(35);
+	}
+Terminate;
+}
+*/
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////// HUDMessage on Actor ///////////////////////////////////
+//////////////////// Code by Caligari_87 and Isle //////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/*
+function void HUDMessageOnActor(int tid, int range, str text, int zoffset, int colour, int dropshadow)
+{
+	int dist, ang, absang, vang, pitch, x, y;
+	int HUDX = 740;
+	int HUDY = 580;
+	int scale = 1;
+	int alpha = 1.0;
+	int alpha_dropshadow = GetCVar("SLN_DialogueShadow");
+
+	x = getactorx(tid) - getactorx(1000);
+	y = getactory(tid) - getactory(1000);
+
+	vang = vectorangle(x,y);
+	ang = (vang - GetActorAngle(1000) + 1.0) % 1.0;
+	if (ang < 0.0)
+		{absang = FixedMul(ang,-1.0);}
+	else
+		{absang = ang;}
+
+	if(((vang+0.125)%0.5) > 0.25) dist = fixeddiv(y, sin(vang));
+	else dist = fixeddiv(x, cos(vang));
+
+	scale=(dist/(range*2));
+	scale=scale+1.0;
+
+	HUDX=FixedMul (HUDX, scale);
+	HUDY=FixedMul (HUDY, scale);
+
+	//Alpha for the message starts from 0 and reaches max at half the range towards the emitter
+	alpha = FixedDiv(((range*65536)-dist),range*32768);
+
+	//Alpha for the drop shadow is the same, but is multiplied and limited by the CVAR setting
+	alpha_dropshadow = FixedMul(GetCVar("SLN_DialogueShadow"),alpha);
+	if (alpha_dropshadow > GetCVar("SLN_DialogueShadow"))
+		alpha_dropshadow = GetCVar("SLN_DialogueShadow");
+
+	sethudsize(HUDX, HUDY, 1);
+	setfont("consolefont");
+ 
+	if ((absang < 0.2 || absang > 0.8) && dist < range * 65536)
+	{
+		pitch = vectorangle(dist, getactorz(tid) - (getactorz(1000) + (41.0 - zoffset)));
+		pitch = (pitch + GetActorPitch(1000) + 1.0) % 1.0;
+
+		x = HUDX/2 - ((HUDX/2) * sin(ang) / cos(ang));
+		y = HUDY/2 - ((HUDX/2) * sin(pitch) / cos(pitch));
+
+		if (tid!=0 && GetActorProperty(tid,APROP_Health)>0)
+		{
+			hudmessage(s:text; HUDMSG_PLAIN| HUDMSG_NOTWITHFULLMAP | HUDMSG_ALPHA, 900+tid, colour, (x<<16), (y<<16), 0.05, alpha);
+
+			//If drop shadow is on, creates the black background from general dialogue
+			if(dropshadow > 0)
+			{
+				str HMOA_back_single = "a";
+				str HMOA_back_final = "";
+
+				for (int j = 0; j < strlen(text); j++ )
+					HMOA_back_final = StrParam(s:HMOA_back_final,s:HMOA_back_single);
+				
+
+				//Black background for readability
+				SetFont("BACKTXTM"); //Middle section
+				hudmessage(s:HMOA_back_final; HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_NOTWITHFULLMAP, tid+2000000, CR_BLACK, (x<<16), (y<<16), 0.05, alpha_dropshadow);
+				SetFont("BACKTXTR"); //Right section
+				hudmessage(s:"a"; HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_NOTWITHFULLMAP, tid+3000000, CR_BLACK, (x<<16)+(((strlen(text)+1)*4) << 16 ), (y<<16), 0.05, alpha_dropshadow);
+				SetFont("BACKTXTL"); //Left section
+				hudmessage(s:"a"; HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_NOTWITHFULLMAP, tid+4000000, CR_BLACK, (x<<16)-(((strlen(text)+1)*4) << 16 ), (y<<16), 0.05, alpha_dropshadow);
+
+			}
+		}
+	}
+	else
+		hudmessage(s:""; HUDMSG_PLAIN, 900, colour, 0, 0, 0);
+
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Intermission Stats ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+/////Generates the test strings for the intermission stats that display at the end of levels.
+
+Script "Intermission_Stats" (VOID)
+{
+
+	int monsters_total = GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+	int monsters_found = GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
+	int items_total = GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+	int items_found = GetLevelInfo(LEVELINFO_FOUND_ITEMS);
+	int secrets_total = GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
+	int secrets_found = GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+	int time_par = GetLevelInfo(LEVELINFO_PAR_TIME);
+	int time_current = Timer()/35;
+
+	if (GetCVAR("IntermissionStats") == 1)
+	{
+	
+		//Create strings for each statistic
+		str int_monsters = strparam(i:monsters_found, s:"/", i:monsters_total);
+		str int_items = strparam(i:items_found, s:"/", i:items_total);
+		str int_secrets = strparam(i:secrets_found, s:"/", i:secrets_total);
+		str int_time = strparam(d:time_current/60, s:":", d:(time_current%60)/10, d:time_current%10);
+		
+		//Create single string for HUDMessageOnActor Readout
+		level_stats = strparam(
+		s:"\ciLEVEL STATS",
+		s:"\n",
+		s:"\n",
+		s:"\ciMonsters: \cj", s:int_monsters,
+		s:"\n",
+		s:"\ciItems:    \cj", s:int_items,
+		s:"\n",
+		s:"\ciSecrets:  \cj", s:int_secrets,
+		s:"\n",
+		s:"\ciTime:     \cj", s:int_time);
+	}
+	else
+		{level_stats = "";}
+	
+}
+*/
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// Movie Control /////////////////////////////////////
+///////////////////////// Code by Logan MTM ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//=====================================
+// Clears all HUDMessages of a certain ID.
+Function void ClearHudMessages (int from, int to)
+{
+	if (from > to)
+	{
+		int t = from;
+		from = to;
+		to = t;
+	}
+	for (int i = from; i <= to; i++)
+		ClearHudMessage(i);
+}
+
+Function void ClearHudMessage (Int ID)
+{
+	SetFont("SmallFont");
+	HudMessage(s:" ";HUDMSG_PLAIN,ID,CR_WHITE,0,0,1);
+}
+
+//=====================================
+//Adds the movie bars to the screen.
+Function void StartMovie (Int Animated)
+{
+	if (Animated == 0)
+	{
+		SetHudSize(600,600,1);
+		SetFont("MOVIEBOX");
+		HudMessage(s: "a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-100.5,0.0);
+		HudMessage(s: "a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,500.5,0.0);
+		GiveInventory("Hide_HUD",1);
+	}
+	else
+		ACS_NamedExecute("Movie_MoveIn",0);
+	
+}
+
+Script "Movie_MoveIn" (VOID) //Move In
+{
+	SetHudSize(600,600,1);
+	SetFont("MOVIEBOX");
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-200.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,600.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-180.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,580.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-160.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,560.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-140.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,540.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-120.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,520.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-100.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,500.5,0.0);
+	GiveInventory("Hide_HUD",1);
+}
+
+//=====================================
+//Removes the movie bars from the screen.
+Function void StopMovie (Int Animated)
+{
+	TakeInventory("Hide_HUD",1);
+	if (Animated == 0)
+	{
+		ClearHudMessage(10000000);
+		ClearHudMessage(10000001);
+	}
+	else
+		ACS_NamedExecute("Movie_MoveOut",0); 
+	
+}
+
+Script "Movie_MoveOut" (VOID) //Move Out
+{
+	SetHudSize(600,600,1);
+	SetFont("MOVIEBOX");
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-100.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,500.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-120.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,520.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-140.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,540.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-160.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,560.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-180.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,580.5,0.0);
+	Delay(1);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000000,CR_UNTRANSLATED,-255.5,-200.5,0.0);
+	HudMessage(s:"a"; HUDMSG_PLAIN,10000001,CR_UNTRANSLATED,-255.5,600.5,0.0);
+	Delay(1);
+	ClearHudMessage(10000000);
+	ClearHudMessage(10000001);
+}

@@ -1,0 +1,101 @@
+//------------------------------------------------------------------------------
+// 6POWER
+//------------------------------------------------------------------------------
+Model M6POWER_Grass
+{
+	Model 0 "Models/M6POWER_Grass.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M6POWER_Grass_Top
+{
+	Model 0 "Models/M6POWER_Grass_Top.obj"
+	AngleOffset 180
+	Offset 0 -256 0
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+	DONTCULLBACKFACES
+}
+Model M6POWER_Grass_Left
+{
+	Model 0 "Models/M6POWER_Grass_Left.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+	DONTCULLBACKFACES
+}
+Model M6POWER_Grass_Right
+{
+	Model 0 "Models/M6POWER_Grass_Right.obj"
+	AngleOffset 180
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+	DONTCULLBACKFACES
+}
+Model M6POWER_Grass_Mid
+{
+	Model 0 "Models/M6POWER_Grass_Mid.obj"
+	AngleOffset 180
+	Offset 0 -256 0
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+	DONTCULLBACKFACES
+}
+
+Model M6POWER_SB_Corner
+{
+	Model 0 "Models/M6POWER_SB_Corner.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6POWER_SB_CornerGlow
+{
+	Model 0 "Models/M6POWER_SB_CornerGlow.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+
+Model M6POWER_SB_Mid
+{
+	Model 0 "Models/M6POWER_SB_Mid.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6POWER_SB_MidGlow
+{
+	Model 0 "Models/M6POWER_SB_MidGlow.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6POWER_SB_Mountain
+{
+	Model 0 "Models/M6POWER_SB_Mountain.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6POWER_SB_Sides
+{
+	Model 0 "Models/M6POWER_SB_Sides.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6POWER_SB_SidesTop
+{
+	Model 0 "Models/M6POWER_SB_SidesTop.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6Power_Core
+{
+	Model 0 "Models/M6Power_Core.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}
+Model M6Power_CoreLight
+{
+	Model 0 "Models/M6Power_CoreLight.obj"
+	Scale 10.0 10.0 12.0
+	FrameIndex ASDF A 0 0
+}

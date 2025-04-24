@@ -1,0 +1,22 @@
+/*------------------------------------------------------------------------------
+Avoid
+
+An entity that's both blind and deaf, it depends on 'line of taste' to find its
+victims. Hiding behind something that can block its tasting can stop it from
+giving chase. If the target is too late, will pursue it relentlessly with rapid
+attacks.
+------------------------------------------------------------------------------*/
+
+Class SLNAvoid : SLNMonster
+{
+	Default
+	{
+		Tag "Avoid";
+		Obituary "%o couldn't Avoid fate.";
+		Species "Terrorfiend";
+	}
+}
+
+Class SLNAvoidStatic : Actor
+{
+}
